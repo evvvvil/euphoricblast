@@ -19,7 +19,7 @@ Post.add({
 	author: { type: Types.Relationship, ref: 'User', index: true },
 	contentForPage: { type: Types.Select, options: 'home, work, lab, blog, contact', index: true,dependsOn: {type: 'page content' } },
 	featuredProject: { type: Types.Boolean, label: 'Tick to make this a featured project', default: false,dependsOn: {type: ['work'] } },
-	image: { type: Types.CloudinaryImage, publicID: 'slug', autoCleanup : true  },
+	image: { type: Types.CloudinaryImage, publicID: 'slug', autoCleanup: true  },
 	projectImages: {type: Types.CloudinaryImages, index: true },
 	otherImages: {type: Types.CloudinaryImages, index: true },
 	content: {
