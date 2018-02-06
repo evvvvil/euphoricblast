@@ -1,0 +1,21 @@
+{{>page-title}}
+<div class="container">
+	<div class="row">
+		<div class="col-md-9">
+			<!--<h4 class="text-weight-normal">Showing {{ data.posts.results.length}} post.</h4>-->
+			<div class="projects-results">
+				{{# each data.posts}}
+				<div data-ks-editable="{{#if ../user}}{{adminEditableUrl ../../user _id}}{{/if}}" class="post">
+					<h2><a href="{{postUrl slug}}">{{{title}}}</a></h2>
+					
+					{{#if image}}<img src="{{{cloudinaryUrl image width=160 height=160 crop='fit' }}}" class="img pull-right">{{/if}}
+					<p>{{{content.brief}}}</p>
+					{{#if content.extended}}<p class="read-more"><a href="{{postUrl slug}}">Read more...</a></p>{{/if}}
+				</div>
+				{{/each}}
+			</div>
+		</div>
+		
+	</div>
+	<!--{{>pagination}}-->
+</div>
