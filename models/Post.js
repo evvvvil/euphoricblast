@@ -24,7 +24,7 @@ Post.add({
 	    var filenameWithoutExtension = originalname.substring(0, originalname.lastIndexOf('.'));
 	    var timestamp = new Date().getTime();
     return `${filenameWithoutExtension}-${timestamp}`;
-  }
+  },
 }
 	mainImage: { type: Types.CloudinaryImage, folder: 'main/imagebro', autoCleanup: true, use_filename: true },
 	projectImages: {type: Types.CloudinaryImages, index: true },
