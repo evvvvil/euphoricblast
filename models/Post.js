@@ -19,7 +19,12 @@ Post.add({
 	author: { type: Types.Relationship, ref: 'User', index: true },
 	contentForPage: { type: Types.Select, options: 'home, work, lab, blog, contact', index: true,dependsOn: {type: 'page content' } },
 	featuredProject: { type: Types.Boolean, label: 'Tick to make this a featured project', default: false,dependsOn: {type: ['work'] } },
-	image: { type: Types.CloudinaryImage, autoCleanup: true, use_filename: true  },
+	image: { type: Types.CloudinaryImage, autoCleanup: true,generateFilename: function(file, attemptNumber, callback) {
+    var originalname = file.originalname;
+    var filenameWithoutExtension = originalname.substring(0, originalname.lastIndexOf('.'));
+    var timestamp = new Date().getTime();
+    return `${filenameWithoutExtension}-${timestamp}`;
+  }  },
 	mainImage: { type: Types.CloudinaryImage, folder: 'main/imagebro', autoCleanup: true, use_filename: true },
 	projectImages: {type: Types.CloudinaryImages, index: true },
 	otherImages: {type: Types.CloudinaryImages, index: true },
