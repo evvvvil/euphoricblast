@@ -1,5 +1,4 @@
 var keystone = require('keystone');
-var keystoneStorage = require('keystone-storage-namefunctions');
 var Types = keystone.Field.Types;
 
 /**
