@@ -19,8 +19,8 @@ Post.add({
 	author: { type: Types.Relationship, ref: 'User', index: true },
 	contentForPage: { type: Types.Select, options: 'home, work, lab, blog, contact', index: true,dependsOn: {type: 'page content' } },
 	featuredProject: { type: Types.Boolean, label: 'Tick to make this a featured project', default: false,dependsOn: {type: ['work'] } },
-	image: { type: Types.CloudinaryImage, autoCleanup: true  },
-	mainImage: { type: Types.CloudinaryImage, folder: 'main/imagebro', use_filname: true },
+	image: { type: Types.CloudinaryImage, autoCleanup: true, use_filename: true  },
+	mainImage: { type: Types.CloudinaryImage, folder: 'main/imagebro', autoCleanup: true, use_filename: true },
 	projectImages: {type: Types.CloudinaryImages, index: true },
 	otherImages: {type: Types.CloudinaryImages, index: true },
 	content: {
