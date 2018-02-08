@@ -3,14 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
+    "keystone": "https://github.com/evvvvil/keystone/tarball/cloudinaryimages-support-folders",
     "async": "2.1.4",
     "cloudinary": "1.7.0",
     "cloudinary-core": "^2.4.0",
     "dotenv": "4.0.0",
     "express-handlebars": "3.0.0",
     "handlebars": "4.0.6",
-    "keystone": "https://github.com/danielmahon/keystone/tarball/cloudinaryimages-support-folders",    
-    "lodash": "^4.13.1",
+    "lodash": "^4.17.5",
     "moment": "2.17.1",
     "mongodb": "^3.0.2"
   },

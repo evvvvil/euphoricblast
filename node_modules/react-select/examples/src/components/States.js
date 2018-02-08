@@ -1,13 +1,15 @@
 import React from 'react';
+import createClass from 'create-react-class';
+import PropTypes from 'prop-types';
 import Select from 'react-select';
 
 const STATES = require('../data/states');
 
-var StatesField = React.createClass({
+var StatesField = createClass({
 	displayName: 'StatesField',
 	propTypes: {
-		label: React.PropTypes.string,
-		searchable: React.PropTypes.bool,
+		label: PropTypes.string,
+		searchable: PropTypes.bool,
 	},
 	getDefaultProps () {
 		return {
@@ -29,13 +31,13 @@ var StatesField = React.createClass({
 		console.log('Country changed to ' + newCountry);
 		this.setState({
 			country: newCountry,
-			selectValue: null
+			selectValue: null,
 		});
 	},
 	updateValue (newValue) {
 		console.log('State changed to ' + newValue);
 		this.setState({
-			selectValue: newValue
+			selectValue: newValue,
 		});
 	},
 	focusStateSelect () {

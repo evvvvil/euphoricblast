@@ -14,28 +14,28 @@ var Post = new keystone.List('Post', {
 
 Post.add({
 	title: { type: String, required: true },
+	author: { type: Types.Relationship, ref: 'User', index: true },
 	type: { type: Types.Select, options: 'work, lab, blog, page content', index: true },
 	state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true },	
 	publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } },
-	author: { type: Types.Relationship, ref: 'User', index: true },
-	contentForPage: { type: Types.Select, options: 'home, work, lab, blog, contact', index: true,dependsOn: {type: 'page content' } },
-	featuredProject: { type: Types.Boolean, label: 'Tick to make this a featured project', default: false,dependsOn: {type: ['work'] } },
-	image: { type: Types.CloudinaryImage, generateFilename: function(file, attemptNumber, callback) {
-	    var originalname = file.originalname;
-	    var filenameWithoutExtension = originalname.substring(0, originalname.lastIndexOf('.'));
-	    var timestamp = new Date().getTime();
-    return `${filenameWithoutExtension}-${timestamp}`;
-  }
-},
-	mainImage: { type: Types.CloudinaryImage, folder: 'main/imagebro', autoCleanup: true, use_filename: true },
-	projectImages: {type: Types.CloudinaryImages, index: true },
-	otherImages: {type: Types.CloudinaryImages, index: true },
-	content: {
-		brief: { type: Types.Html, wysiwyg: true, height: 150 },
-		extended: { type: Types.Html, wysiwyg: true, height: 400 },
-	},
+	projectDate: { type: Types.Date, index: true, dependsOn: { type: ['work','lab'] } },
 	categories: { type: Types.Relationship, ref: 'PostCategory', many: true, dependsOn: {type: ['work','lab'] } },
-	//pageContent: { type: Types.Relationship, ref: 'PostPageContent', many: true },
+	contentForPage: { type: Types.Select, options: 'home, work, lab, blog, contact', index: true,dependsOn: {type: 'page content' } },
+	video: {type: Types.Text },
+	mainImage: { type: Types.CloudinaryImage, autoCleanup: true },
+	images: {type: Types.CloudinaryImages, autoCleanup: true },		
+	otherImages: {type: Types.CloudinaryImages, autoCleanup: true },
+	otherImagesTitle:{type:Types.Text },
+	featured: { type: Types.Boolean, label: 'Tick to make this a featured post', default: false,dependsOn: {type: 'work' } },
+	relatedPosts: {type: Types.Relationship, ref: 'Post', many: true, dependsOn: {type: ['work','lab','blog'] }},
+	content: {
+		brief: { type: Types.Html, wysiwyg: true, height: 100 },
+		extended: { type: Types.Html, wysiwyg: true, height: 200 },
+		more: { type: Types.Html, wysiwyg: true, height: 200 },
+		extra: { type: Types.Html, wysiwyg: true, height: 50 },
+		end: { type: Types.Html, wysiwyg: true, height: 50 },
+	},
+	
 });
 
 Post.schema.virtual('content.full').get(function () {
