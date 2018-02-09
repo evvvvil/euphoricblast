@@ -28,7 +28,31 @@ module.exports = function () {
 		}
 	};
 
-_helpers.ifgt = function (a, b, options) {
+	_helpers.iflt = function (a, b, options) {
+		if (a < b) { // eslint-disable-line eqeqeq
+			return options.fn(this);
+		} else {
+			return options.inverse(this);
+		}
+	};
+
+	_helpers.iflte = function (a, b, options) {
+		if (a <= b) { // eslint-disable-line eqeqeq
+			return options.fn(this);
+		} else {
+			return options.inverse(this);
+		}
+	};
+
+	_helpers.ifgte = function (a, b, options) {
+		if (a >= b) { // eslint-disable-line eqeqeq
+			return options.fn(this);
+		} else {
+			return options.inverse(this);
+		}
+	};
+
+	_helpers.ifgt = function (a, b, options) {
 		if (a > b) { // eslint-disable-line eqeqeq
 			return options.fn(this);
 		} else {
@@ -51,6 +75,11 @@ _helpers.ifgt = function (a, b, options) {
 	_helpers.sectionURL = function (a) {
 		return ("/"+_.lowerCase(a));
 	};
+
+	_helpers.getColFromImagesLength = function (a) {
+		return Math.max(12/a,4);
+	};
+
 
 	/**
 	 * Port of Ghost helpers to support cross-theming

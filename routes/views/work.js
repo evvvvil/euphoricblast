@@ -20,22 +20,17 @@ exports = module.exports = function (req, res) {
 
 	// Load all categories
 	view.on('init', function (next) {
-
 		keystone.list('PostCategory').model.find().sort('orderno').exec(function (err, results) {
-
 			if (err || !results.length) {
 				return next(err);
 			}
 			locals.data.categories = results;
-
 			// Load the counts for each category
 			async.each(locals.data.categories, function (category, next) {
-
 				keystone.list('Post').model.count().where('categories').in([category.id]).exec(function (err, count) {
 					category.postCount = count;
 					next(err);
 				});
-
 			}, function (err) {
 				next(err);
 			});
@@ -44,7 +39,6 @@ exports = module.exports = function (req, res) {
 
 	// Load the current category filter
 	view.on('init', function (next) {
-
 		if (req.params.category) {
 			keystone.list('PostCategory').model.findOne({ key: locals.filters.category }).exec(function (err, result) {
 				locals.data.category = result;
@@ -57,33 +51,37 @@ exports = module.exports = function (req, res) {
 
 	// Load the posts
 	view.on('init', function (next) {
-
 		var q = keystone.list('Post').model.find({
 				state: 'published',				
 				type: 'work',
 			})
 			.sort('-publishedDate')
 			.populate('categories');
-
 		if (locals.data.category) {
 			q.where('categories').in([locals.data.category]);
 		}
-
 		q.exec(function (err, results) {
 			locals.data.posts = results;
 			next(err);
 		});
 	});
 
-// Load the page post
+	// Load the page post
 	view.on('init', function (next) {
-
-		var q = keystone.list('Post').model.findOne({
-				state: 'published',				
+		var q;
+		console.log(locals.data.category);
+		if(locals.data.category){
+			q = keystone.list('Post').model.findOne({
 				type: 'page content',
-				contentForPage: 'work',				
+				whichSubPage: locals.data.category,				
 			});
-
+		}else{
+			q = keystone.list('Post').model.findOne({
+				type: 'page content',
+				whichMainPage: 'work',				
+			});			
+		}
+		
 		q.exec(function (err, result) {
 			locals.data.post = result;
 			next(err);
