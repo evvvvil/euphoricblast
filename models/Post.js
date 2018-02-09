@@ -34,8 +34,7 @@ Post.add({
 		more: { type: Types.Html, wysiwyg: true, height: 80 },
 		extra: { type: Types.Html, wysiwyg: true, height: 40 },
 		end: { type: Types.Html, wysiwyg: true, height: 40 },
-	},
-	
+	},	
 });
 
 Post.schema.virtual('content.full').get(function () {

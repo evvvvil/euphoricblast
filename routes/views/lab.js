@@ -59,7 +59,6 @@ exports = module.exports = function (req, res) {
 		var q = keystone.list('Post').model.find({
 				state: 'published',				
 				type: 'lab',
-				featuredProject: true,
 			})
 			.sort('-publishedDate')
 			.populate('categories');

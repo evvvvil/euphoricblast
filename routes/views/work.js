@@ -1,6 +1,5 @@
 var keystone = require('keystone');
 var async = require('async');
-var _ = require('lodash');
 
 exports = module.exports = function (req, res) {
 
@@ -13,8 +12,10 @@ exports = module.exports = function (req, res) {
 		category: req.params.category,
 	};
 	locals.data = {
-		posts: [],
+		featuredPosts: [],
 		categories: [],
+		posts: [],
+		post: "",
 	};
 
 	// Load all categories
@@ -25,15 +26,6 @@ exports = module.exports = function (req, res) {
 			if (err || !results.length) {
 				return next(err);
 			}
-
-			/* this is how to modify something in list of result before passing it...
-						async.each(results, function (category, next) {
-							category.name = category.name.slice(2);
-						}, function (err) {
-							next(err);
-						});
-			*/
-
 			locals.data.categories = results;
 
 			// Load the counts for each category
@@ -66,25 +58,9 @@ exports = module.exports = function (req, res) {
 	// Load the posts
 	view.on('init', function (next) {
 
-		/*PAGINATION EXAMPLE
-		WARNING! remember in hbs file change "data.posts" to "data.posts.results"
-		AND add this where you want apgination widget: {{>pagination}}
-
-		var q = keystone.list('Post').paginate({
-			page: req.query.page || 1,
-			perPage: 10,
-			maxPages: 10,
-			filters: {
-				state: 'published',
-				type: 'work',
-			},
-		}).sort('-publishedDate')
-			.populate('author categories');*/
-
 		var q = keystone.list('Post').model.find({
-				state: 'published',
-				type: 'work',				
-				featuredProject: true,
+				state: 'published',				
+				type: 'work',
 			})
 			.sort('-publishedDate')
 			.populate('categories');
@@ -95,11 +71,49 @@ exports = module.exports = function (req, res) {
 
 		q.exec(function (err, results) {
 			locals.data.posts = results;
-			console.log(results);
 			next(err);
 		});
 	});
 
+// Load the page post
+	view.on('init', function (next) {
+
+		var q = keystone.list('Post').model.findOne({
+				state: 'published',				
+				type: 'page content',
+				contentForPage: 'work',				
+			});
+
+		q.exec(function (err, result) {
+			locals.data.post = result;
+			next(err);
+		});
+	});
+
+	if(req.params.category==undefined){
+		// Load the featured posts
+		view.on('init', function (next) {
+			var q = keystone.list('Post').model.find({
+					state: 'published',				
+					type: 'work',
+					featuredProject: true,
+				})
+				.sort('-publishedDate')
+				.populate('categories');
+
+			if (locals.data.category) {
+				q.where('categories').in([locals.data.category]);
+			}
+
+			q.exec(function (err, results) {
+				locals.data.featuredPosts = results;
+				next(err);
+			});
+		});
+	}
+
+
+	
 	// Render the view
 	view.render('work');
 };

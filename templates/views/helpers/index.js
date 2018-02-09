@@ -28,6 +28,30 @@ module.exports = function () {
 		}
 	};
 
+_helpers.ifgt = function (a, b, options) {
+		if (a > b) { // eslint-disable-line eqeqeq
+			return options.fn(this);
+		} else {
+			return options.inverse(this);
+		}
+	};
+
+	_helpers.ifundefined = function (a, options) {		
+		if (a == undefined) { // eslint-disable-line eqeqeq
+			return options.fn(this);
+		} else {
+			return options.inverse(this);
+		}
+	};
+
+	_helpers.categoryTitle = function (a) {
+		return _.capitalize(_.replace(a,'-', ' '));
+	};
+
+	_helpers.sectionURL = function (a) {
+		return ("/"+_.lowerCase(a));
+	};
+
 	/**
 	 * Port of Ghost helpers to support cross-theming
 	 * ==============================================

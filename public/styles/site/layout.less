@@ -4,7 +4,6 @@
     font-family: 'dejavu_sansbold';
     src: url('../fonts/DejaVuSans-Bold-webfont.eot');
     src: url('../fonts/DejaVuSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/DejaVuSans-Bold-webfont.woff2') format('woff2'),
          url('../fonts/DejaVuSans-Bold-webfont.woff') format('woff'),
          url('../fonts/DejaVuSans-Bold-webfont.ttf') format('truetype'),
          url('../fonts/DejaVuSans-Bold-webfont.svg#dejavu_sansbold') format('svg');
@@ -17,7 +16,6 @@
     font-family: 'dejavu_sansbook';
     src: url('../fonts/DejaVuSans-webfont.eot');
     src: url('../fonts/DejaVuSans-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/DejaVuSans-webfont.woff2') format('woff2'),
          url('../fonts/DejaVuSans-webfont.woff') format('woff'),
          url('../fonts/DejaVuSans-webfont.ttf') format('truetype'),
          url('../fonts/DejaVuSans-webfont.svg#dejavu_sansbook') format('svg');
@@ -30,7 +28,6 @@
     font-family: 'dejavu_sansextralight';
     src: url('../fonts/DejaVuSans-ExtraLight-webfont.eot');
     src: url('../fonts/DejaVuSans-ExtraLight-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/DejaVuSans-ExtraLight-webfont.woff2') format('woff2'),
          url('../fonts/DejaVuSans-ExtraLight-webfont.woff') format('woff'),
          url('../fonts/DejaVuSans-ExtraLight-webfont.ttf') format('truetype'),
          url('../fonts/DejaVuSans-ExtraLight-webfont.svg#dejavu_sansextralight') format('svg');
@@ -42,23 +39,23 @@
 /*OVERALL*/
 
 body{
-	font-family: 'dejavu_sansextralight',Arial, Helvetica, sans-serif;
+    font-family: 'dejavu_sansbook',Arial, Helvetica, sans-serif;	
 	background-color:black;
 	color: #EEE;
 }
 
 h1{
-    font-family: 'dejavu_sansbook',Arial, Helvetica, sans-serif;
+    
     font-weight: 700;
     line-height: 0.9;
     margin-top: 0px;
     margin-bottom: 30px;    
 }
-h2{
-   font-size:1.8em;   
-   line-height: 0.9;
+h2,h3{
+    font-family: 'dejavu_sansextralight',Arial, Helvetica, sans-serif;
+    font-size:1.8em;   
+    line-height: 0.9;
     margin-top: 0px;
-    padding-top: 15px;
     margin-bottom: 15px;    
 }
 
@@ -66,6 +63,12 @@ h2{
  background-color:#333;
        
 }
+span.pipe{
+    font-size: 32px;
+    line-height: .1;
+    vertical-align: 2px;
+}
+    
 
 #header {
 	margin-top: 30px;
@@ -137,16 +140,24 @@ h2{
     height:215px;
 margin-top:-15px;
 }
-/* KILL THIS IF NOT NEEDED WHEN BUILDING OTHER PAGES
-.category-title>h2{
-    margin-top: 0px;
-    margin-bottom: 15px;    
-}*/
-.category-title{
-width:100%;
+h1.page-title{
+    display:inline-block;
 }
-
-.category-image{
+h1.page-title>a,h1.page-title>a:hover,h1.page-title>a:visited,h1.page-title>a:active{
+    color:#EEE;
+}
+h3.category-title{
+    width:100%;
+    margin-top: 15px;
+}
+.category-title-container{
+    width:100%;
+}
+h2.category-title{
+    display:inline-block;
+    margin-bottom: 0px;
+}
+.category-image-container{
  overflow:hidden;
 }
 
@@ -176,6 +187,50 @@ a.project-link:hover {
 a.project-link:hover .category-col{
     background-color:#fff;
 }
+
+#carouselbroh{
+    background-color: #909090;
+}
+
+.carousel-image-container{
+    width:100%;
+    /*max-width:2560px;*/
+    height:200px;
+    overflow:hidden;
+}
+
+.carousel-control .icon-prev:before,.carousel-control .icon-next:before {
+    content:none;
+}
+.carousel-control.left,.carousel-control.right{
+    background-image: none;
+}
+
+a.carousel-control.left:hover {
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0.2) 0, rgba(0,0,0,0.0001) 100%);
+    background-image: -o-linear-gradient(left, rgba(0,0,0,0.2) 0, rgba(0,0,0,0.0001) 100%);
+    background-image: linear-gradient(to right, rgba(0,0,0,0.2) 0, rgba(0,0,0,0.0001) 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#40000000', endColorstr='#00000000', GradientType=1);
+}
+a.carousel-control.right:hover {
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0.0001) 0, rgba(0,0,0,0.2) 100%);
+    background-image: -o-linear-gradient(left, rgba(0,0,0,0.0001) 0, rgba(0,0,0,0.2) 100%);
+    background-image: linear-gradient(to right, rgba(0,0,0,0.0001) 0, rgba(0,0,0,0.2) 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#40000000', GradientType=1);
+}
+.carousel-indicators li{
+    border-radius:0px;
+    height:4px;
+    width:20px;
+}
+.carousel-indicators .active {
+    border-radius: 0;
+    width: 20px;
+    height: 6px;
+    background-color: #fff;
+}
 /*MEDIA QUERIES*/
 
 @media (min-width: 768px){
@@ -185,4 +240,8 @@ a.project-link:hover .category-col{
 .navbar-social-mobile {
     display:none;
 }	
+.carousel-indicators{
+    bottom:0px;
+    margin-bottom:5px;
+}
 }

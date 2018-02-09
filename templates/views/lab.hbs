@@ -1,5 +1,6 @@
 {{>page-title}}
-<div class="container-fluid category-container-fluid">
+
+<!--<div class="container-fluid category-container-fluid">
 	<div class="row">
 		<div class="container">
 			<div class="row">
@@ -7,37 +8,37 @@
 			</div>
 		</div>		
 	</div>
-</div>
+</div>-->
+
+{{#ifundefined filters.category}}
+
 <div class="container-fluid category-container-fluid">
 	<div class="row">
-<div class="container category-container">
-	<div class="row">
-		{{#each data.categories }}
-		<a href="{{categoryUrl key 'lab'}}" class="project-link">
-		<div class="col-sm-6 col-md-3 category-col">			
-				<div class="category-title">
-					<h2>{{name}}</h2>
-				</div>
-				{{#each ../data.posts}}
-					{{#ifPostIsInCategory categories ../name}}
-						{{#if image}}
-						
-							<div class="category-image">
-								<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl image width='auto' q='70'}}"/>
-							</div>			
-						
-						{{/if}}	
-					{{/ifPostIsInCategory}}
+		<div class="container category-container">
+			<div class="row">
+				{{#each data.categories }}
+				<a href="{{categoryUrl key 'lab'}}" class="project-link">
+				<div class="col-sm-6 col-md-3 category-col">			
+						<div class="category-title-container">
+							<h3 class="category-title">{{name}}</h3>
+						</div>
+						{{#each ../data.posts}}
+							{{#ifPostIsInCategory categories ../name}}
+								{{#if image}}								
+									<div class="category-image-container">
+										<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl image width='auto' q='70'}}"/>
+									</div>
+								{{/if}}	
+							{{/ifPostIsInCategory}}
+						{{/each}}
+				</div>	
+				</a>
 				{{/each}}
-		</div>	
-		</a>
-		{{/each}}
+			</div>
+		</div>
 	</div>
 </div>
-</div>
-</div>
-
-
+{{/ifundefined}}
 <!--OLD CODE
 <div class="container">
 	<div class="row">

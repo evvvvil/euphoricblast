@@ -1,4 +1,71 @@
 {{>page-title}}
+
+{{#ifundefined filters.category}}
+
+<!--||||||||||||| -->
+<!--CAROUSEL BROH -->
+<!--||||||||||||| -->
+	{{#ifgt data.post.images.length 0}}
+		<div id="carouselbroh" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+			  	{{#each data.post.images}}
+			    <li data-target="#carouselbroh" data-slide-to="{{@index}}" {{#ifeq @index 0}}class="active"{{/ifeq}}></li>
+			    {{/each}}
+			</ol>
+			<div class="carousel-inner">
+				{{#each data.post.images}}
+				<div class="item carousel-image-container {{#ifeq @index 0}}active{{/ifeq}}">
+				  <img class="d-block w-100" src="http://disco90s.com/wp-content/uploads/2015/03/Pat-Sharp.jpg"/>
+				</div>
+				{{/each}}    
+			</div>
+			<a class="carousel-control left" href="#carouselbroh" role="button" data-slide="prev">
+				<span class="icon-prev" aria-hidden="true"><i class="fa fa-chevron-left"></i></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control right" href="#carouselbroh" role="button" data-slide="next">
+				<span class="icon-next" aria-hidden="true"><i class="fa fa-chevron-right"></i></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+	{{/ifgt}}
+
+	<!--<img class="d-block w-100 cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' q='70'}}"/>-->
+
+<!--||||||||||||||| -->
+<!--CATEGORIES BROH -->
+<!--||||||||||||||| -->
+
+	<div class="container-fluid category-container-fluid">
+		<div class="row">
+			<div class="container category-container">
+				<div class="row">
+					{{#each data.categories }}
+					<a href="{{categoryUrl key 'work'}}" class="project-link">
+					<div class="col-sm-6 col-md-3 category-col">			
+							<div class="category-title-container">
+								<h3 class="category-title">{{name}}</h3>
+							</div>
+							{{#each ../data.posts}}
+								{{#ifPostIsInCategory categories ../name}}
+									{{#if image}}								
+										<div class="category-image-container">
+											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl image width='auto' q='70'}}"/>
+										</div>
+									{{/if}}	
+								{{/ifPostIsInCategory}}
+							{{/each}}
+					</div>	
+					</a>
+					{{/each}}
+				</div>
+			</div>
+		</div>
+	</div>
+
+{{/ifundefined}}
+
+<!--OLD CODE
 <div class="container">
 	<div class="row">
 		<div class="col-sm-8 col-md-9">
@@ -6,7 +73,7 @@
 				{{# each data.posts}}
 				<div data-ks-editable="{{#if ../user}}{{adminEditableUrl ../../user _id}}{{/if}}" class="post">
 					<h2><a href="{{postUrl slug}}">{{{title}}}</a></h2>
-					<p class="lead text-muted">{{{categoryList categories 'work' prefix="Posted in "}}}
+					<p class="lead text-muted">{{{categoryList categories 'lab' prefix="Posted in "}}}							
 					</p>
 					{{#if image}}<img src="{{{cloudinaryUrl image width=160 height=160 crop='fit' }}}" class="img pull-right">{{/if}}
 					<p>{{{content.brief}}}</p>
@@ -18,11 +85,11 @@
 		<div class="col-sm-4 col-md-3">
 			<h2>Categories</h2>
 			<div style="margin-top: 70px;" class="list-group">
-				<a href="/work" class="active list-group-item">All Categories</a>
+				<a href="/lab" class="active list-group-item">All Categories</a>
 				{{# each data.categories }}
-				<a href="{{categoryUrl key 'work'}}" class="false list-group-item">{{name}}</a>
+				<a href="{{categoryUrl key 'lab'}}" class="false list-group-item">{{name}}</a>
 				{{/each}}
 			</div>
 		</div>
 	</div>
-</div>
+</div>-->
