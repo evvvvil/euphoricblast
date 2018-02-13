@@ -15,6 +15,7 @@ exports = module.exports = function (req, res) {
 		featuredPosts: [],
 		categories: [],
 		posts: [],
+		paragraphs: [],
 		post: "",
 	};
 
@@ -69,7 +70,6 @@ exports = module.exports = function (req, res) {
 	// Load the page post
 	view.on('init', function (next) {
 		var q;
-		console.log(locals.data.category);
 		if(locals.data.category){
 			q = keystone.list('Post').model.findOne({
 				type: 'page content',
@@ -88,8 +88,9 @@ exports = module.exports = function (req, res) {
 		});
 	});
 
+// Load the featured posts
 	if(req.params.category==undefined){
-		// Load the featured posts
+		
 		view.on('init', function (next) {
 			var q = keystone.list('Post').model.find({
 					state: 'published',				
@@ -110,7 +111,30 @@ exports = module.exports = function (req, res) {
 		});
 	}
 
-
+	// Load the paragraphs
+		
+		view.on('init', function (next) {
+			var q;
+				
+		if(locals.data.category){
+			q = keystone.list('Post').model.find({
+				state: 'published',				
+				type: 'page paragraph',
+				whichMainPage: 'Work',							
+			}).sort('-publishedDate');
+		}else{
+			q = keystone.list('Post').model.find({
+				state: 'published',				
+				type: 'page paragraph',
+				whichSubPage: locals.data.category,					
+			}).sort('-publishedDate');			
+		}
+			q.exec(function (err, results) {
+				console.log(results);
+				locals.data.paragraphs = results;
+				next(err);
+			});
+		});
 	
 	// Render the view
 	view.render('work');

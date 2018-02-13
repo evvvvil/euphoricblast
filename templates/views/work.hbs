@@ -96,6 +96,22 @@
 </div>
 {{/ifgt}}
 
+<!--||||||||||||-->
+<!--PARAGRAPHS-->
+<!--||||||||||||-->
+{{#each data.paragraphs}}
+<div class="container-fluid background {{backgroundColor}}">
+		<div class="row">
+			<div class="container paragraph-container">
+				<div class="row paragraph-content-container">
+					<h4>{{{content.brief}}}</h4>
+					{{{content.extended}}}
+				</div>				
+			</div>
+		</div>
+</div>
+{{/each}}
+
 
 <!--OLD CODE
 <div class="container">
