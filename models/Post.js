@@ -25,13 +25,13 @@ Post.add({
 	whichSubPage: { type: Types.Relationship, ref: 'PostCategory', dependsOn: {pageType: 'sub page' }},
 	backgroundColor: { type: Types.Select, options: 'black, dark-grey, grey, light-grey, white', index: true, dependsOn: {type: 'page paragraph' } },
 	categories: { type: Types.Relationship, ref: 'PostCategory', many: true, dependsOn: {type: ['work','lab'] } },
-	
+	featured: { type: Types.Boolean, label: 'Tick to make this project the poster project for its first category', default: false,dependsOn: {type: ['work','lab'] } },
 	video: {type: Types.Text },
 	mainImage: { type: Types.CloudinaryImage, autoCleanup: true },
 	images: {type: Types.CloudinaryImages, autoCleanup: true },		
 	otherImages: {type: Types.CloudinaryImages, autoCleanup: true,dependsOn: {type: ['work','lab','blog','page content'] }  },
 	otherImagesTitle:{type:Types.Text, dependsOn: {type: ['work','lab','blog'] } },
-	featured: { type: Types.Boolean, label: 'Tick to make this a featured post', default: false,dependsOn: {type: ['work','lab'] } },
+	
 	relatedPosts: {type: Types.Relationship, ref: 'Post', many: true, dependsOn: {type: ['work','lab','blog'] }},
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 80 },

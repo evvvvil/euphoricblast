@@ -80,6 +80,14 @@ module.exports = function () {
 		return Math.max(12/a,4);
 	};
 
+	_helpers.getColFromProjectIndex = function (a) {
+		if(a%5<3){
+			return("col-md-4");
+		}else{
+			return("col-md-6");
+		}
+	};
+
 
 	/**
 	 * Port of Ghost helpers to support cross-theming
