@@ -1,8 +1,6 @@
 {{>page-title}}
 
-{{#ifundefined filters.category}}
-
-	{{#ifgt data.post.images.length 0}}
+{{#ifgt data.post.images.length 0}}
 
 <!--||||||||||||| -->
 <!--CAROUSEL BROH -->
@@ -30,28 +28,92 @@
 				<span class="sr-only">Next</span>
 			</a>
 		</div>
-	{{/ifgt}}
+{{/ifgt}}
 
 	<!--<img class="d-block w-100 cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' q='70'}}"/>-->
+
+{{#if data.post.video}}
+
+<!--||||||||||| -->
+<!--VIDEOH BROH -->
+<!--||||||||||| -->
+
+	<div class="container-fluid background grey">
+		<div class="row">
+			<div class="container video-container">
+				<div class="row">
+					<div class="col-sm-12 col-md-4 video-col">
+						<iframe id="vimeo-video" src="https://player.vimeo.com/video/{{getVimeoNum data.post.video}}" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+					</div>
+					<div class="col-sm-12 col-md-8 video-col">
+						{{#if data.post.content.brief}}<h3>{{{data.post.content.brief}}}</h3>{{/if}}
+						{{#if data.post.content.extended}}{{{data.post.content.extended}}}{{/if}}
+						{{#if data.post.mainImage.exists}}<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height=150 q='70' crop='fill' gravity='center'}}"/>{{/if}}
+					</div>					
+				</div>
+			</div>
+		</div>
+	</div>	
+{{else}}
+	{{#if data.post.content.brief}}
+
+	<!--|||||||||||||||||||||||| -->
+	<!--PAGE TEXT + IMAGE AT TOP -->
+	<!--|||||||||||||||||||||||| -->
+
+	<div class="container-fluid background grey">
+		<div class="row">
+			<div class="container text-container">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 text-col">
+					<h3>{{{data.post.content.brief}}}</h3>
+					{{#if data.post.content.extended}}{{{data.post.content.extended}}}{{/if}}
+					{{#if data.post.mainImage.exists}}<img class="cld-responsive img-responsive bro0h" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height=140 q='70' crop='fill' gravity='center'}}"/>{{/if}}
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{else}}
+		{{#if data.post.mainImage.exists}}
+
+		<!--|||||||||||||||| -->
+		<!--PAGE IMAGE ONLY AT TOP -->
+		<!--|||||||||||||||| -->
+		<div class="container-fluid background grey">
+			<div class="row">
+				<div class="container text-container">
+					<div class="row text-col">				
+						<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height=300 q='70' crop='fill' gravity='center'}}"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{/if}}
+	{{/if}}
+{{/if}}
+
+
+{{#ifundefined filters.category}}
 
 <!--||||||||||||||| -->
 <!--CATEGORIES BROH -->
 <!--||||||||||||||| -->
 
-	<div class="container-fluid category-container-fluid">
+	<div class="container-fluid background dark-grey">
 		<div class="row">
-			<div class="container category-container">
+			<div class="container projects-container">
 				<div class="row">
 					{{#each data.categories }}
 					<a href="{{categoryUrl key 'work'}}" class="project-link">
 					<div class="col-sm-6 col-md-3 category-col">			
-							<div class="category-title-container">
-								<h3 class="category-title">{{name}}</h3>
+							<div class="project-title-container">
+								<h3 class="project-title">{{name}}</h3>
 							</div>
 							{{#each ../data.featuredPosts}}
 								{{#ifPostIsInCategory categories ../name}}
-									{{#if mainImage}}								
-										<div class="category-image-container">
+									{{#if mainImage.exists}}								
+										<div class="project-image-container">
 											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' q='70'}}"/>
 										</div>
 									{{/if}}	
@@ -67,9 +129,11 @@
 {{else}}
 
 {{#ifgt data.posts.length 0}}
+
 <!--||||||||||||||||-->
 <!--PROJECTS LISTING-->
 <!--||||||||||||||||-->
+
 <div class="container-fluid background dark-grey">
 		<div class="row">
 			<div class="container projects-container">
@@ -81,10 +145,11 @@
 							<div class="project-title-container">
 								<h3 class="project-title">{{title}}</h3>
 							</div>
-															
+							{{#if mainImage.exists}}								
 							<div class="project-image-container">
 								<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' q='70'}}"/>
 							</div>
+							{{/if}}
 					</div>	
 					</a>
 					{{/each}}
@@ -92,17 +157,16 @@
 			</div>
 		</div>
 	</div>
-
 {{/ifgt}}
 
-
-
 {{/ifundefined}}
+
+{{#ifgt data.post.otherImages.length 0}}
 
 <!--||||||||||||-->
 <!--OTHER IMAGES-->
 <!--||||||||||||-->
-{{#ifgt data.post.otherImages.length 0}}
+
 <div class="container-fluid page-images-container-fluid">
 		<div class="row">
 			<div class="container page-images-container">
@@ -113,7 +177,7 @@
 					</div>
 					{{else}}					
 						{{#each data.post.otherImages }}
-						<div class="col-sm-6 col-md-{{getColFromImagesLength ../data.post.otherImages.length}} page-images-col">
+						<div class="col-sm-6 col-md-{{getColFromImagesLength ../data.post.otherImages.length 4}} page-images-col">
 							<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' q='70'}}"/>
 						</div>	
 						{{/each}}
@@ -127,45 +191,75 @@
 <!--||||||||||||-->
 <!--PARAGRAPHS-->
 <!--||||||||||||-->
+
 {{#each data.paragraphs}}
+{{#if mainImage.exists}}
+<div class="container-fluid paragragh-image-container-fluid">
+	<div class="row">		
+		<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' height=300 q='80' crop='fill' gravity='north'}}"/>			
+	</div>
+</div>
+{{/if}}
+{{#if content.brief}}
 <div class="container-fluid background {{backgroundColor}}">
+	<div class="row">
+		<div class="container paragraph-container">
+			<div class="row paragraph-content-container">
+				<h4>{{{content.brief}}}</h4>
+				{{#if content.extended}}{{{content.extended}}}{{/if}}
+				{{#if link.destination}}
+					<a href="{{link.destination}}" target="_blank"><button type="button" class="btn btn-paragraph">{{#if link.text}}{{link.text}}{{else}}Click here{{/if}}</button></a>
+				{{/if}}
+				{{#ifgt images.length 0}}
+					<div class="container">
+				<div class="row">
+					{{#ifeq images.length 1}}
+					<div class="col-sm-12 col-md-12">
+						<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.otherImages.[0] width='auto' q='70'}}"/>
+					</div>
+					{{else}}					
+						{{#each images}}
+						<div class="col-sm-6 col-md-{{getColFromImagesLength ../images.length 2}} paragraph-image-col">
+							<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' q='70'}}"/>
+						</div>	
+						{{/each}}
+					{{/ifeq}}
+				</div>
+			</div>
+				{{/ifgt}}
+			</div>				
+		</div>
+	</div>
+</div>
+{{else}}
+
+<!--||||||||||||||||||||||||||-->
+<!--PARAGRAPH WITH IMAGES ONLY-->
+<!--||||||||||||||||||||||||||-->
+	{{#ifgt images.length 0}}
+	<div class="container-fluid background {{backgroundColor}}">
 		<div class="row">
 			<div class="container paragraph-container">
-				<div class="row paragraph-content-container">
-					<h4>{{{content.brief}}}</h4>
-					{{{content.extended}}}
+				<div class="row paragraph-content-container">					
+					<div class="container">
+						<div class="row">
+							{{#ifeq images.length 1}}
+							<div class="col-sm-12 col-md-12">
+								<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.otherImages.[0] width='auto' q='70'}}"/>
+							</div>
+							{{else}}					
+								{{#each images}}
+								<div class="col-sm-6 col-md-{{getColFromImagesLength ../images.length 2}} paragraph-image-col">
+									<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' q='70'}}"/>
+								</div>	
+								{{/each}}
+							{{/ifeq}}
+						</div>
+					</div>					
 				</div>				
 			</div>
 		</div>
-</div>
-{{/each}}
-
-
-<!--OLD CODE
-<div class="container">
-	<div class="row">
-		<div class="col-sm-8 col-md-9">
-			<div class="projects-results">
-				{{# each data.posts}}
-				<div data-ks-editable="{{#if ../user}}{{adminEditableUrl ../../user _id}}{{/if}}" class="post">
-					<h2><a href="{{postUrl slug}}">{{{title}}}</a></h2>
-					<p class="lead text-muted">{{{categoryList categories 'lab' prefix="Posted in "}}}							
-					</p>
-					{{#if image}}<img src="{{{cloudinaryUrl image width=160 height=160 crop='fit' }}}" class="img pull-right">{{/if}}
-					<p>{{{content.brief}}}</p>
-					{{#if content.extended}}<p class="read-more"><a href="{{postUrl slug}}">Read more...</a></p>{{/if}}
-				</div>
-				{{/each}}
-			</div>
-		</div>
-		<div class="col-sm-4 col-md-3">
-			<h2>Categories</h2>
-			<div style="margin-top: 70px;" class="list-group">
-				<a href="/lab" class="active list-group-item">All Categories</a>
-				{{# each data.categories }}
-				<a href="{{categoryUrl key 'lab'}}" class="false list-group-item">{{name}}</a>
-				{{/each}}
-			</div>
-		</div>
 	</div>
-</div>-->
+	{{/ifgt}}
+{{/if}}
+{{/each}}

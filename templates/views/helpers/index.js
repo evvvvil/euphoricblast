@@ -68,6 +68,14 @@ module.exports = function () {
 		}
 	};
 
+	_helpers.ifdefined = function (a, options) {		
+		if (a !== undefined) { // eslint-disable-line eqeqeq
+			return options.fn(this);
+		} else {
+			return options.inverse(this);
+		}
+	};
+
 	_helpers.categoryTitle = function (a) {
 		return _.capitalize(_.replace(a,'-', ' '));
 	};
@@ -76,16 +84,22 @@ module.exports = function () {
 		return ("/"+_.lowerCase(a));
 	};
 
-	_helpers.getColFromImagesLength = function (a) {
-		return Math.max(12/a,4);
+	_helpers.getColFromImagesLength = function (a,b) {
+		return Math.max(Math.floor(12/a),b);
 	};
 
+	
 	_helpers.getColFromProjectIndex = function (a) {
 		if(a%5<3){
 			return("col-md-4");
 		}else{
 			return("col-md-6");
 		}
+	};
+
+	_helpers.getVimeoNum = function (a) {
+		console.log("cunt"+_.split(a,".com/")[1]);
+		return _.split(a,".com/")[1];
 	};
 
 
