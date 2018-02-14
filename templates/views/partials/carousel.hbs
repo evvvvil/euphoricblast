@@ -1,0 +1,31 @@
+{{#ifgt data.post.images.length 0}}
+
+<!--||||||||||||| -->
+<!--CAROUSEL BROH -->
+<!--||||||||||||| -->
+
+		<div id="carouselbroh" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+			  	{{#each data.post.images}}
+			    <li data-target="#carouselbroh" data-slide-to="{{@index}}" {{#ifeq @index 0}}class="active"{{/ifeq}}></li>
+			    {{/each}}
+			</ol>
+			<div class="carousel-inner">
+				{{#each data.post.images}}
+				<div class="item carousel-image-container {{#ifeq @index 0}}active{{/ifeq}}">
+				  <img class="d-block w-100" src="http://disco90s.com/wp-content/uploads/2015/03/Pat-Sharp.jpg"/>
+				</div>
+				{{/each}}    
+			</div>
+			<a class="carousel-control left" href="#carouselbroh" role="button" data-slide="prev">
+				<span class="icon-prev" aria-hidden="true"><i class="fa fa-chevron-left"></i></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control right" href="#carouselbroh" role="button" data-slide="next">
+				<span class="icon-next" aria-hidden="true"><i class="fa fa-chevron-right"></i></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+{{/ifgt}}
+
+	<!--<img class="d-block w-100 cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' q='70'}}"/>-->

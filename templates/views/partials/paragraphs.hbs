@@ -1,0 +1,77 @@
+{{#each data.paragraphs}}
+
+	{{#if mainImage.exists}}
+		<div class="container-fluid paragragh-image-container-fluid">
+			<div class="row">		
+				<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' height=300 q='80' crop='fill' gravity='north'}}"/>			
+			</div>
+		</div>
+	{{/if}}
+	{{#if content.brief}}
+
+	<!--|||||||||-->
+	<!--PARAGRAPH-->
+	<!--|||||||||-->
+
+		<div class="container-fluid background {{backgroundColor}}">
+			<div class="row">
+				<div class="container paragraph-container">
+					<div class="row paragraph-content-container">
+						<h4>{{{content.brief}}}</h4>
+						{{#if content.extended}}{{{content.extended}}}{{/if}}
+						{{#if link.destination}}
+							<a href="{{link.destination}}" target="_blank"><button type="button" class="btn btn-paragraph">{{#if link.text}}{{link.text}}{{else}}Click here{{/if}}</button></a>
+						{{/if}}
+						{{#ifgt images.length 0}}
+							<div class="container">
+						<div class="row">
+							{{#ifeq images.length 1}}
+								<div class="col-sm-12 col-md-12">
+									<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.otherImages.[0] width='auto' q='70'}}"/>
+								</div>
+							{{else}}					
+								{{#each images}}
+									<div class="col-sm-6 col-md-{{getColFromImagesLength ../images.length 2}} paragraph-image-col">
+										<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' q='70'}}"/>
+									</div>	
+								{{/each}}
+							{{/ifeq}}
+						</div>
+					</div>
+						{{/ifgt}}
+					</div>				
+				</div>
+			</div>
+		</div>
+	{{else}}
+
+	<!--||||||||||||||||||||||||||-->
+	<!--PARAGRAPH WITH IMAGES ONLY-->
+	<!--||||||||||||||||||||||||||-->
+		{{#ifgt images.length 0}}
+			<div class="container-fluid background {{backgroundColor}}">
+				<div class="row">
+					<div class="container paragraph-container">
+						<div class="row paragraph-content-container">					
+							<div class="container">
+								<div class="row">
+									{{#ifeq images.length 1}}
+									<div class="col-sm-12 col-md-12">
+										<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.otherImages.[0] width='auto' q='70'}}"/>
+									</div>
+									{{else}}					
+										{{#each images}}
+										<div class="col-sm-6 col-md-{{getColFromImagesLength ../images.length 2}} paragraph-image-col">
+											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' q='70'}}"/>
+										</div>	
+										{{/each}}
+									{{/ifeq}}
+								</div>
+							</div>					
+						</div>				
+					</div>
+				</div>
+			</div>
+		{{/ifgt}}
+	{{/if}}
+{{/each}}

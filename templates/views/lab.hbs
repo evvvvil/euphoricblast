@@ -1,69 +1,11 @@
 {{>page-title}}
 
-<!--<div class="container-fluid category-container-fluid">
-	<div class="row">
-		<div class="container">
-			<div class="row">
-				<iframe id="project-video" src="https://player.vimeo.com/video/251957445" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-			</div>
-		</div>		
-	</div>
-</div>-->
+{{>carousel}}
 
-{{#ifundefined filters.category}}
+{{>page-header}}
 
-<div class="container-fluid category-container-fluid">
-	<div class="row">
-		<div class="container category-container">
-			<div class="row">
-				{{#each data.categories }}
-				<a href="{{categoryUrl key 'lab'}}" class="project-link">
-				<div class="col-sm-6 col-md-3 category-col">			
-						<div class="category-title-container">
-							<h3 class="category-title">{{name}}</h3>
-						</div>
-						{{#each ../data.posts}}
-							{{#ifPostIsInCategory categories ../name}}
-								{{#if image}}								
-									<div class="category-image-container">
-										<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl image width='auto' q='70'}}"/>
-									</div>
-								{{/if}}	
-							{{/ifPostIsInCategory}}
-						{{/each}}
-				</div>	
-				</a>
-				{{/each}}
-			</div>
-		</div>
-	</div>
-</div>
-{{/ifundefined}}
-<!--OLD CODE
-<div class="container">
-	<div class="row">
-		<div class="col-sm-8 col-md-9">
-			<div class="projects-results">
-				{{# each data.posts}}
-				<div data-ks-editable="{{#if ../user}}{{adminEditableUrl ../../user _id}}{{/if}}" class="post">
-					<h2><a href="{{postUrl slug}}">{{{title}}}</a></h2>
-					<p class="lead text-muted">{{{categoryList categories 'lab' prefix="Posted in "}}}							
-					</p>
-					{{#if image}}<img src="{{{cloudinaryUrl image width=160 height=160 crop='fit' }}}" class="img pull-right">{{/if}}
-					<p>{{{content.brief}}}</p>
-					{{#if content.extended}}<p class="read-more"><a href="{{postUrl slug}}">Read more...</a></p>{{/if}}
-				</div>
-				{{/each}}
-			</div>
-		</div>
-		<div class="col-sm-4 col-md-3">
-			<h2>Categories</h2>
-			<div style="margin-top: 70px;" class="list-group">
-				<a href="/lab" class="active list-group-item">All Categories</a>
-				{{# each data.categories }}
-				<a href="{{categoryUrl key 'lab'}}" class="false list-group-item">{{name}}</a>
-				{{/each}}
-			</div>
-		</div>
-	</div>
-</div>-->
+{{>projects-listing}}
+
+{{>page-other-images}}
+
+{{>paragraphs}}

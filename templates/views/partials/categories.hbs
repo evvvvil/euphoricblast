@@ -1,0 +1,30 @@
+<!--||||||||||||||| -->
+<!--CATEGORIES BROH -->
+<!--||||||||||||||| -->
+
+<div class="container-fluid background dark-grey">
+	<div class="row">
+		<div class="container projects-container">
+			<div class="row">
+				{{#each data.categories }}
+				<a href="{{categoryUrl key ../section}}" class="project-link">
+				<div class="col-sm-6 col-md-3 category-col">			
+						<div class="project-title-container">
+							<h3 class="project-title">{{name}}</h3>
+						</div>
+						{{#each ../data.featuredPosts}}
+							{{#ifPostIsInCategory categories ../name}}
+								{{#if mainImage.exists}}								
+									<div class="project-image-container">
+										<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' q='70'}}"/>
+									</div>
+								{{/if}}	
+							{{/ifPostIsInCategory}}
+						{{/each}}
+				</div>	
+				</a>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+</div>	

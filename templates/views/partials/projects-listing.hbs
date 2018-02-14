@@ -1,0 +1,29 @@
+{{#ifgt data.posts.length 0}}
+
+<!--||||||||||||||||-->
+<!--PROJECTS LISTING-->
+<!--||||||||||||||||-->
+
+<div class="container-fluid background dark-grey">
+	<div class="row">
+		<div class="container projects-container">
+			<div class="row">
+				{{#each data.posts }}
+					<a href="{{postUrl slug}}" class="project-link">
+						<div class="col-sm-6 {{getColFromProjectIndex @index}} project-col">			
+							<div class="project-title-container">
+								<h3 class="project-title">{{title}}</h3>
+							</div>
+							{{#if mainImage.exists}}								
+								<div class="project-image-container">
+									<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' q='70'}}"/>
+								</div>
+							{{/if}}
+						</div>	
+					</a>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+</div>
+{{/ifgt}}

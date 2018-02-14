@@ -4,7 +4,11 @@
 	<h1 class="page-title"><a href="{{sectionURL section}}">{{section}}</a></h1>
 	<h2 class="category-title">&nbsp;<span class="pipe">|</span>&nbsp;{{categoryTitle filters.category}}</h2>
 	{{else}}
+	{{#ifeq data.post.type 'page content'}}
 	<h1 class="page-title">{{section}}</h1>
-	{{/if}}
+	{{else}}
+	<h1 class="page-title"><a href="{{sectionURL data.post.type}}">{{data.post.type}}</a></h1><h2 class="category-title">&nbsp;<span class="pipe">|</span>&nbsp;{{data.post.title}}</h2>
+	{{/ifeq}}
 
+	{{/if}}
 </div>
