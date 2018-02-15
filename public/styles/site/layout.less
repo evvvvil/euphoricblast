@@ -9,9 +9,7 @@
          url('../fonts/DejaVuSans-Bold-webfont.svg#dejavu_sansbold') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
-
 @font-face {
     font-family: 'dejavu_sansbook';
     src: url('../fonts/DejaVuSans-webfont.eot');
@@ -21,9 +19,7 @@
          url('../fonts/DejaVuSans-webfont.svg#dejavu_sansbook') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
-
 @font-face {
     font-family: 'dejavu_sansextralight';
     src: url('../fonts/DejaVuSans-ExtraLight-webfont.eot');
@@ -33,24 +29,21 @@
          url('../fonts/DejaVuSans-ExtraLight-webfont.svg#dejavu_sansextralight') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
 
-/*OVERALL*/
+/*OVERALLS*/
 
 body{
     font-family: 'dejavu_sansbook',Arial, Helvetica, sans-serif;	
 	background-color:black;
 	color: #EEE;
 }
-
 h1{    
     font-weight: 700;
     line-height: 0.9;
     margin-top: 0px;
     margin-bottom: 30px;    
 }
-
 h2,h3{
     font-family: 'dejavu_sansextralight',Arial, Helvetica, sans-serif;
     font-size:1.8em;   
@@ -58,7 +51,6 @@ h2,h3{
     margin-top: 0px;
     margin-bottom: 15px;    
 }
-
 .background.black{
     background-color: #000;
     border-bottom-color: #FFF;
@@ -84,7 +76,6 @@ h2,h3{
     color:#333;
     border-bottom-color: #333;
 }
-
 span.pipe{
     font-size: 32px;
     line-height: .1;
@@ -116,8 +107,9 @@ span.pipe{
     max-width: 100%;
     height: auto;
 }
-
-
+.modal-content{
+    border-radius:0px;
+}
 
 /*NAVIGATION*/
 
@@ -126,7 +118,6 @@ span.pipe{
  	border-left:0px;
  	border-right:0px;
  	background-color:#333333;
-
     margin-bottom: 0px;
 }
 
@@ -141,7 +132,6 @@ span.pipe{
     color: #555;
     background-color: #e7e7e7;
 }
-
 .navbar-social{
 	font-size:1.3em;
 	display:none;
@@ -149,7 +139,7 @@ span.pipe{
 .navbar-social-mobile {
 	font-size:1.3em;
     display:block;
-}	
+}
 .navbar-social-mobile .navbar-nav {
     margin:0px;
 }
@@ -178,13 +168,11 @@ h1.page-title{
 h1.page-title>a,h1.page-title>a:hover,h1.page-title>a:visited,h1.page-title>a:active{
     color:#EEE;
 }
-
 h2.category-title{
     display:inline-block;
     margin-bottom: 0px;
     font-size:2.2em;
 }
-
 .page-images-container-fluid{ 
     background-color:#666;
 }
@@ -200,7 +188,6 @@ h2.category-title{
     padding-left: 10px;
     padding-right: 0px;
 }
-
 h3.project-title{
     width:100%;
     margin-top: 0px;
@@ -213,14 +200,11 @@ h3.project-title{
     width: 100%;
     height: 40px;
 }
-
 .project-image-container{
  overflow:hidden;
 }
-
 .projects-container, .video-container, .text-container{
- margin-top:29px;
- 
+ margin-top:29px; 
 }
 .project-col {
     margin-top: -15px;
@@ -228,7 +212,6 @@ h3.project-title{
     margin-bottom: 15px;
     padding-top:15px;
 }
-
 .video-col {
     height: 203px;
     margin-bottom:30px;
@@ -278,7 +261,6 @@ a.project-link:hover .category-col,a.project-link:hover .project-col{
 .paragraph-content-container{
     text-align:center;
 }
-
 .paragraph-content-container h4{
     font-size: 2em;
     font-weight: bold;
@@ -317,21 +299,18 @@ a.project-link:hover .category-col,a.project-link:hover .project-col{
 #carouselbroh{
     background-color: #666;
 }
-
 .carousel-image-container{
     width:100%;
     /*max-width:2560px;*/
     height:200px;
     overflow:hidden;
 }
-
 .carousel-control .icon-prev:before,.carousel-control .icon-next:before {
     content:none;
 }
 .carousel-control.left,.carousel-control.right{
     background-image: none;
 }
-
 a.carousel-control.left:hover {
     background-image: -webkit-linear-gradient(left, rgba(0,0,0,0.2) 0, rgba(0,0,0,0.0001) 100%);
     background-image: -o-linear-gradient(left, rgba(0,0,0,0.2) 0, rgba(0,0,0,0.0001) 100%);
@@ -357,6 +336,7 @@ a.carousel-control.right:hover {
     height: 6px;
     background-color: #fff;
 }
+
 /*MEDIA QUERIES*/
 
 @media (min-width: 768px){

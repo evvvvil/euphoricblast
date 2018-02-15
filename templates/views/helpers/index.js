@@ -28,6 +28,7 @@ module.exports = function () {
 		}
 	};
 
+
 	_helpers.iflt = function (a, b, options) {
 		if (a < b) { // eslint-disable-line eqeqeq
 			return options.fn(this);
@@ -82,6 +83,11 @@ module.exports = function () {
 
 	_helpers.sectionURL = function (a) {
 		return ("/"+_.lowerCase(a));
+	};
+
+	_helpers.fuckIt = function (a) {
+		console.log(a);
+		return (a);
 	};
 
 	_helpers.getColFromImagesLength = function (a,b) {
@@ -281,7 +287,9 @@ module.exports = function () {
 	_helpers.categoryUrl = function (categorySlug, section, options) {
 		return ('/'+_.lowerCase(section)+'/' + categorySlug);
 	};
-	
+	_helpers.capitalise = function (a) {
+		return _.capitalize(a);
+	};
 
 	// ### Pagination Helpers
 	// These are helpers used in rendering a pagination system for content

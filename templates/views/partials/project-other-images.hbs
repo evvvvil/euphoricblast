@@ -1,24 +1,24 @@
-{{#ifgt data.post.otherImages.length 0}}
+{{#ifgt data.post.images.length 0}}
 
-<!--||||||||||||||||||||-->
-<!--PROJECT OTHER IMAGES-->
-<!--||||||||||||||||||||-->
+<!--||||||||||||||||-->
+<!--PROJECT IMAGES  -->
+<!--||||||||||||||||-->
 
-<div class="container-fluid background dark-grey">
-	<div class="row">
-		<div class="container projects-container">
-			<div class="row">
-				{{#each data.post.otherImages }}
-					<a href="{{postUrl slug}}" class="project-link">
-						<div class="col-sm-6 {{getColFromProjectIndex @index}} project-col">			
-								<div class="project-image-container">
-									<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' q='70'}}"/>
-								</div>							
-						</div>	
-					</a>
-				{{/each}}
+	<div class="container-fluid background dark-grey">
+		<div class="row">
+			<div class="container projects-container">
+				<div class="row">
+					{{#each data.post.images }}					
+						<a href="{{postUrl slug}}" class="project-link">
+							<div class="col-sm-6 {{getColFromProjectIndex @index}} project-col">			
+									<div class="project-image-container">
+										<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' q='70'}}"/>
+									</div>							
+							</div>	
+						</a>
+					{{/each}}
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 {{/ifgt}}

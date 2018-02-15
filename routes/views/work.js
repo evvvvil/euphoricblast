@@ -49,6 +49,14 @@ exports = module.exports = function (req, res) {
 			next();
 		}
 	});
+	
+//CLEANUP OTHER POLULATE THAT ARE NOT NEEDED!!!
+//CLEANUP OTHER POLULATE THAT ARE NOT NEEDED!!!
+	//CLEANUP OTHER POLULATE THAT ARE NOT NEEDED!!!
+	//CLEANUP OTHER POLULATE THAT ARE NOT NEEDED!!!
+	//CLEANUP OTHER POLULATE THAT ARE NOT NEEDED!!!
+	
+
 
 	// Load the posts
 	view.on('init', function (next) {

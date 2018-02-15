@@ -1,0 +1,54 @@
+{{#ifgt data.relatedPosts.length 0}}
+
+<!--||||||||||||||||-->
+<!--RELATED PROJECTS-->
+<!--||||||||||||||||-->
+
+	<div class="container-fluid background grey">
+		<div class="row">
+			<div class="container text-container">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 text-col">
+					<h3>Related projects</h3>
+					broski
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid background dark-grey">
+		<div class="row">
+			<div class="container projects-container">
+				<div class="row">					
+					{{#ifeq data.relatedPosts.length 1}}
+						<div class="col-sm-12 col-md-12 project-col">
+							<div class="project-title-container">
+									<h3 class="project-title">RBOH {{data.relatedPosts.[0].title}}</h3>
+								</div>
+								{{#if data.relatedPosts.[0].mainImage.exists}}								
+								<div class="project-image-container">
+									<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.relatedPosts.[0].mainImage width='auto' q='70'}}"/>
+								</div>
+								{{/if}}
+						</div>
+					{{else}}					
+						{{#each data.relatedPosts}}
+							<div class="col-sm-6 col-md-{{getColFromImagesLength ../data.relatedPosts.length 4}} project-col">
+								<div class="project-title-container">
+									<h3 class="project-title">{{title}}</h3>
+								</div>
+								{{#if mainImage.exists}}								
+								<div class="project-image-container">
+									<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' q='70'}}"/>
+								</div>
+								{{/if}}
+						</div>	
+						{{/each}}
+					{{/ifeq}}			
+				</div>
+			</div>
+		</div>
+	</div>
+
+{{/ifgt}}

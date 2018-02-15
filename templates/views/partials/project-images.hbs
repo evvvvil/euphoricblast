@@ -8,8 +8,8 @@
 		<div class="row">
 			<div class="container projects-container">
 				<div class="row">
-					{{#each data.post.images }}
-						<a href="{{postUrl slug}}" class="project-link">
+					{{#each data.post.images }}					
+						<a href="{{cloudinaryUrl width='auto' q='70'}}" class="project-link" data-toggle="lightbox" data-gallery="project-gallery">
 							<div class="col-sm-6 {{getColFromProjectIndex @index}} project-col">			
 									<div class="project-image-container">
 										<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' q='70'}}"/>
