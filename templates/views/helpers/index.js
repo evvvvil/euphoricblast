@@ -77,10 +77,6 @@ module.exports = function () {
 		}
 	};
 
-	_helpers.categoryTitle = function (a) {
-		return _.capitalize(_.replace(a,'-', ' '));
-	};
-
 	_helpers.sectionURL = function (a) {
 		return ("/"+_.lowerCase(a));
 	};
@@ -90,21 +86,57 @@ module.exports = function () {
 		return (a);
 	};
 
-	_helpers.getColFromImagesLength = function (a,b) {
+	_helpers.getColSimple = function (a,b) {
 		return Math.max(Math.floor(12/a),b);
 	};
 
-	
-	_helpers.getColFromProjectIndex = function (a) {
-		if(a%5<3){
-			return("col-md-4");
-		}else{
-			return("col-md-6");
+	_helpers.ifCropLeftOvers = function (a,numOfProjects, options) {	
+		if(numOfProjects==1){
+				return options.fn(this);
+		}else{			
+			if(numOfProjects%5==1 || numOfProjects==4){
+				if(a==numOfProjects-1){
+					return options.fn(this);
+				}				
+			}			
+		}
+		return options.inverse(this);				
+	};
+
+	_helpers.ifSectionOrProject = function (a,b,c,options) {		
+		if(a==b||(a=="Project" && _.lowerCase(b)==c)){
+				return options.fn(this);
+		}else{			
+		return options.inverse(this);									
 		}
 	};
 
+	_helpers.getColAdvanced = function (a,numOfProjects) {	
+		if(numOfProjects<3){
+			if(numOfProjects==2){
+				return ("col-md-6");
+			}else{
+				return ("col-md-12");
+			}			
+		}else{			
+			if(numOfProjects%5==1 || numOfProjects==4){
+				if(a==numOfProjects-1){
+					return ("col-md-12");
+				}				
+			}else if(numOfProjects>6 && numOfProjects-7%5==0){
+				if(numOfProjects-a<3){
+					return ("col-md-6");
+				}
+			}
+			if(a%5<3){
+				return("col-md-4");
+			}else{
+				return("col-md-6");
+			}
+		}					
+	};
+
 	_helpers.getVimeoNum = function (a) {
-		console.log("cunt"+_.split(a,".com/")[1]);
 		return _.split(a,".com/")[1];
 	};
 

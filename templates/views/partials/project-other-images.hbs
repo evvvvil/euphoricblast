@@ -1,18 +1,38 @@
-{{#ifgt data.post.images.length 0}}
+{{#ifgt data.post.otherImages.length 0}}
 
-<!--||||||||||||||||-->
-<!--PROJECT IMAGES  -->
-<!--||||||||||||||||-->
+<!--||||||||||||||||||||-->
+<!--PROJECT OTHER IMAGES-->
+<!--||||||||||||||||||||-->
+	{{#if data.post.otherImagesTitle}}
+
+	<div class="container-fluid background grey">
+		<div class="row">
+			<div class="container text-container">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 text-col">
+					<h3>{{data.post.otherImagesTitle}}</h3>
+					<p>It's all about the process.</p>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{{/if}}
 
 	<div class="container-fluid background dark-grey">
 		<div class="row">
 			<div class="container projects-container">
-				<div class="row">
-					{{#each data.post.images }}					
-						<a href="{{postUrl slug}}" class="project-link">
-							<div class="col-sm-6 {{getColFromProjectIndex @index}} project-col">			
+				<div class="row">					
+					{{#each data.post.otherImages }}					
+						<a href="{{cloudinaryUrl width='auto' q='70'}}" class="project-link" data-toggle="lightbox" data-gallery="other-images-gallery">
+							<div class="col-sm-6 {{getColAdvanced @index ../data.post.otherImages.length}} project-col">			
 									<div class="project-image-container">
-										<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' q='70'}}"/>
+										{{#ifCropLeftOvers @index ../data.post.otherImages.length}}
+											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' height=329 q='70' crop='fill' gravity='center'}}"/>
+										{{else}}
+											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' q='70'}}"/>
+										{{/ifCropLeftOvers}}
 									</div>							
 							</div>	
 						</a>

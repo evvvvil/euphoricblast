@@ -7,12 +7,16 @@
 	<div class="container-fluid background dark-grey">
 		<div class="row">
 			<div class="container projects-container">
-				<div class="row">
+				<div class="row">					
 					{{#each data.post.images }}					
-						<a href="{{cloudinaryUrl width='auto' q='70'}}" class="project-link" data-toggle="lightbox" data-gallery="project-gallery">
-							<div class="col-sm-6 {{getColFromProjectIndex @index}} project-col">			
+						<a href="{{cloudinaryUrl width='auto' q='70'}}" class="project-link" data-toggle="lightbox" data-gallery="images-gallery">
+							<div class="col-sm-6 {{getColAdvanced @index ../data.post.images.length}} project-col">			
 									<div class="project-image-container">
-										<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' q='70'}}"/>
+										{{#ifCropLeftOvers @index ../data.post.images.length}}
+											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' height=329 q='70' crop='fill' gravity='center'}}"/>
+										{{else}}
+											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' q='70'}}"/>
+										{{/ifCropLeftOvers}}
 									</div>							
 							</div>	
 						</a>

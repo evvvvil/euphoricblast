@@ -27,11 +27,11 @@
 						<div class="row">
 							{{#ifeq images.length 1}}
 								<div class="col-sm-12 col-md-12">
-									<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.otherImages.[0] width='auto' q='70'}}"/>
+									<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.otherImages.[0] width='auto' height=329 crop='fill' gravity='center' q='80'}}"/>
 								</div>
 							{{else}}					
 								{{#each images}}
-									<div class="col-sm-6 col-md-{{getColFromImagesLength ../images.length 2}} paragraph-image-col">
+									<div class="col-sm-6 col-md-{{getColSimple ../images.length 2}} paragraph-image-col">
 										<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' q='70'}}"/>
 									</div>	
 								{{/each}}
@@ -52,22 +52,18 @@
 			<div class="container-fluid background {{backgroundColor}}">
 				<div class="row">
 					<div class="container paragraph-container">
-						<div class="row paragraph-content-container">					
-							<div class="container">
-								<div class="row">
+						<div class="row paragraph-content-container">
 									{{#ifeq images.length 1}}
 									<div class="col-sm-12 col-md-12">
-										<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.otherImages.[0] width='auto' q='70'}}"/>
+										<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.otherImages.[0] width='auto' height=329 crop='fill' gravity='center' q='80'}}"/>
 									</div>
 									{{else}}					
 										{{#each images}}
-										<div class="col-sm-6 col-md-{{getColFromImagesLength ../images.length 2}} paragraph-image-col">
+										<div class="col-sm-6 col-md-{{getColSimple ../images.length 2}} paragraph-image-col">
 											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' q='70'}}"/>
 										</div>	
 										{{/each}}
-									{{/ifeq}}
-								</div>
-							</div>					
+									{{/ifeq}}	
 						</div>				
 					</div>
 				</div>

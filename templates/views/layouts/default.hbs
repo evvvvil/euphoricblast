@@ -49,7 +49,7 @@
 						<div class="collapse navbar-collapse">
 							<ul class="nav navbar-nav navbar-left">
 									{{# each navLinks}}
-									<li {{#ifeq ../section key}}class="active"{{else}}{{/ifeq}}>
+									<li {{#ifSectionOrProject ../section key ../data.post.type}}class="active"{{else}}{{/ifSectionOrProject}}>
 										<a href="{{ href }}">{{ label }}</a>
 									</li>
 								{{/each}}

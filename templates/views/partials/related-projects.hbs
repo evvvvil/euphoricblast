@@ -10,7 +10,7 @@
 				<div class="row">
 					<div class="col-sm-12 col-md-12 text-col">
 					<h3>Related projects</h3>
-					broski
+					<p>Same same, but different.</p>
 				</div>
 				</div>
 			</div>
@@ -20,35 +20,28 @@
 	<div class="container-fluid background dark-grey">
 		<div class="row">
 			<div class="container projects-container">
-				<div class="row">					
-					{{#ifeq data.relatedPosts.length 1}}
-						<div class="col-sm-12 col-md-12 project-col">
-							<div class="project-title-container">
-									<h3 class="project-title">RBOH {{data.relatedPosts.[0].title}}</h3>
-								</div>
-								{{#if data.relatedPosts.[0].mainImage.exists}}								
-								<div class="project-image-container">
-									<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.relatedPosts.[0].mainImage width='auto' q='70'}}"/>
-								</div>
-								{{/if}}
-						</div>
-					{{else}}					
-						{{#each data.relatedPosts}}
-							<div class="col-sm-6 col-md-{{getColFromImagesLength ../data.relatedPosts.length 4}} project-col">
-								<div class="project-title-container">
-									<h3 class="project-title">{{title}}</h3>
-								</div>
-								{{#if mainImage.exists}}								
-								<div class="project-image-container">
-									<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' q='70'}}"/>
-								</div>
-								{{/if}}
-						</div>	
+				<div class="row">
+						{{#each data.relatedPosts }}
+							<a href="{{postUrl slug}}" class="project-link">
+								<div class="col-sm-6 {{getColAdvanced @index ../data.relatedPosts.length}} project-col">			
+									<div class="project-title-container">
+										<h3 class="project-title">{{title}}</h3>
+									</div>
+									{{#if mainImage.exists}}								
+										<div class="project-image-container">
+											{{#ifCropLeftOvers @index ../data.relatedPosts.length}}
+												<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' height=329 q='70' crop='fill' gravity='center'}}"/>
+											{{else}}
+												<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' q='70'}}"/>
+											{{/ifCropLeftOvers}}
+										</div>
+									{{/if}}
+								</div>	
+							</a>
 						{{/each}}
-					{{/ifeq}}			
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>	
 
 {{/ifgt}}

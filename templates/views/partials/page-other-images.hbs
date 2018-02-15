@@ -10,11 +10,11 @@
 					<div class="row">
 						{{#ifeq data.post.otherImages.length 1}}
 						<div class="col-sm-12 col-md-12">
-							<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.otherImages.[0] width='auto' q='70'}}"/>
+							<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.otherImages.[0] width='auto' height=329 crop='fill' gravity='center' q='80'}}"/>
 						</div>
 						{{else}}					
 							{{#each data.post.otherImages }}
-							<div class="col-sm-6 col-md-{{getColFromImagesLength ../data.post.otherImages.length 4}} page-images-col">
+							<div class="col-sm-6 col-md-{{getColSimple ../data.post.otherImages.length 4}} page-images-col">
 								<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' q='70'}}"/>
 							</div>	
 							{{/each}}
