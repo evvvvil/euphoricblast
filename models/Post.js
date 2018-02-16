@@ -16,7 +16,7 @@ Post.add({
 	title: { type: String, required: true },
 	author: { type: Types.Relationship, ref: 'User', index: true },
 	type: { type: Types.Select, options: 'work, lab, blog, page content, page paragraph', index: true },
-	state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true, dependsOn: { type: ['work','lab','page paragraph'] }  },	
+	state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true, dependsOn: { type: ['work','lab','blog','page paragraph'] }  },	
 	publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } },
 	projectDate: { type: Types.Date, index: true, dependsOn: { type: ['work','lab'] } },	
 	
