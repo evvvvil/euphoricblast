@@ -20,6 +20,13 @@ module.exports = function () {
 
 	// standard hbs equality check, pass in two values from template
 	// {{#ifeq keyToCheck data.myKey}} [requires an else blockin template regardless]
+
+	_helpers.printName = function (a) {
+		
+			return a["name.full"];
+		
+	};
+
 	_helpers.ifeq = function (a, b, options) {
 		if (a == b) { // eslint-disable-line eqeqeq
 			return options.fn(this);
