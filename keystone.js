@@ -11,8 +11,8 @@ var handlebars = require('express-handlebars');
 // and documentation.
 
 keystone.init({
-	'name': 'polygonzero',
-	'brand': 'polygonzero',
+	'name': 'euphoricblast',
+	'brand': 'euphoricblast',
 
 	'less': 'public',
 	'static': 'public',
