@@ -9,7 +9,11 @@
 
 exports.create = {
 	User: [
+<<<<<<< HEAD
 		{ 'name.first': 'Admin', 'name.last': 'User', 'email': 'evvvvil0@gmail.com', 'password': 'euphoricblast', 'isAdmin': true },
+=======
+		{ 'name.first': 'Admin', 'name.last': 'User', 'email': 'evvvvil0@gmail.com', 'password': 'P', 'isAdmin': true },
+>>>>>>> parent of 0e2209c3... removed update folder
 	],
 };
 
