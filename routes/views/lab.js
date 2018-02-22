@@ -65,7 +65,7 @@ exports = module.exports = function (req, res) {
 		}else{
 			q = keystone.list('Post').model.findOne({
 				type: 'page content',
-				whichMainPage: locals.section,				
+				whichMainPage: _.lowerCase(locals.section),				
 			});			
 		}
 		
