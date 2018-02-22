@@ -14,6 +14,7 @@ exports = module.exports = function (req, res) {
 	locals.data = {
 		posts: [],
 		categories: [],
+		post: "",
 	};
 
 	// Load all categories
@@ -52,6 +53,28 @@ exports = module.exports = function (req, res) {
 			next();
 		}
 	});
+
+	// Load the page post
+	view.on('init', function (next) {
+		var q;
+		if(locals.data.category){
+			q = keystone.list('Post').model.findOne({
+				type: 'page content',
+				whichSubPage: locals.data.category,				
+			});
+		}else{
+			q = keystone.list('Post').model.findOne({
+				type: 'page content',
+				whichMainPage: locals.section,				
+			});			
+		}
+		
+		q.exec(function (err, result) {
+			locals.data.post = result;
+			next(err);
+		});
+	});
+
 
 	// Load the posts
 	view.on('init', function (next) {
