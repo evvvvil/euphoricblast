@@ -14,7 +14,7 @@ exports = module.exports = function (req, res) {
 	locals.validationErrors = {};
 	locals.enquirySubmitted = false;
 	locals.enquiryFailed = false;
-locals.data = {
+	locals.data = {
 		post: "",
 	};
 	// Load the page post
