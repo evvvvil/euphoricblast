@@ -84,6 +84,22 @@ module.exports = function () {
 		}
 	};
 
+	
+helpers.or = function(/* any, any, ..., options */) {
+  var len = arguments.length - 1;
+  var options = arguments[len];
+  var val = false;
+
+  for (var i = 0; i < len; i++) {
+    if (arguments[i]) {
+      val = true;
+      break;
+    }
+  }
+  return util.value(val, this, options);
+};
+
+
 	_helpers.sectionURL = function (a) {
 		return ("/"+_.lowerCase(a));
 	};

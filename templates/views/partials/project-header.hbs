@@ -56,16 +56,19 @@
 		{{/if}}
 	{{/if}}
 {{/if}}
-{{#if data.post.content.extended}}
+{{#or data.post.content.extended data.post.content.more}}
 <div class="container-fluid background light-grey">
 		<div class="row">
 			<div class="container text-container">
 				<div class="row">
-					<div class="col-sm-12 col-md-12 text-col">
+					<div class="col-sm-8 col-md-8 text-col">
 						{{{data.post.content.extended}}}
+					</div>
+					<div class="col-sm-4 col-md-4 text-col">
+						{{{data.post.content.more}}}
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-{{/if}}
+{{/or}}
