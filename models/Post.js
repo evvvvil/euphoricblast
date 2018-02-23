@@ -26,6 +26,8 @@ Post.add({
 	backgroundColor: { type: Types.Select, options: 'black, dark-grey, grey, light-grey, white', index: true, dependsOn: {type: 'page paragraph' } },
 	categories: { type: Types.Relationship, ref: 'PostCategory', many: true, dependsOn: {type: ['work','lab'] } },
 	featured: { type: Types.Boolean, label: 'Tick to make this project the poster project for its first category', default: false,dependsOn: {type: ['work','lab'] } },
+	client: {type: Types.Text, dependsOn: {type: ['work','lab'] } },
+	location: {type: Types.Text, dependsOn: {type: ['work','lab'] } },
 	video: {type: Types.Text },
 	mainImage: { type: Types.CloudinaryImage, autoCleanup: true },
 	images: {type: Types.CloudinaryImages, autoCleanup: true },		
