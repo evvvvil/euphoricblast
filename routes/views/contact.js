@@ -21,7 +21,7 @@ locals.data = {
 	view.on('init', function (next) {
 		var q = keystone.list('Post').model.findOne({
 				type: 'page content',
-				whichMainPage: 'contact',				
+				whichMainPage: locals.section.toLowerCase(),				
 			});			
 		
 		

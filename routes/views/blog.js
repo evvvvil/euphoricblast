@@ -8,7 +8,20 @@ exports = module.exports = function (req, res) {
 	locals.section = 'Blog';	
 	locals.data = {
 		posts: [],
+		post:"",
 	};
+	// Load the page post
+	view.on('init', function (next) {
+		var q = keystone.list('Post').model.findOne({
+				type: 'page content',
+				whichMainPage: locals.section.toLowerCase(),				
+		});	
+		
+		q.exec(function (err, result) {
+			locals.data.post = result;
+			next(err);
+		});
+	});
 
 	// Load the posts
 	view.on('init', function (next) {
