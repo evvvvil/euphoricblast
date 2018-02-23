@@ -234,7 +234,9 @@ h3.project-title{
   transition: .25s ease;
   margin:0px;
 }
-
+.read-more p{
+    margin-bottom:0px;
+}
 .read-more-state:checked +.read-more-wrap .read-more {
   -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
   filter: alpha(opacity=100);
@@ -253,7 +255,7 @@ h3.project-title{
   content: '- Read less';
 }
 
-.read-more-trigger, .btn-post-category {
+.read-more-trigger {
   cursor: pointer;
   background-color: transparent;
   line-height: 1.33333;
@@ -265,7 +267,7 @@ h3.project-title{
   width:100%;
   color:#FFF;
 }
-.read-more-trigger:hover, .btn-post-category:hover {
+.read-more-trigger:hover {
   color: #000;
   text-decoration: underline;
 }
@@ -280,7 +282,7 @@ margin-bottom: 0px;
     overflow:hidden;
 }
 .text-col {
-    max-height: 203px;
+    /*max-height: 203px;*/
     margin-bottom: 30px;
     overflow: hidden;
 }
