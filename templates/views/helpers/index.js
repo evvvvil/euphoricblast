@@ -3,6 +3,7 @@ var _ = require('lodash');
 var hbs = require('handlebars');
 var keystone = require('keystone');
 var cloudinary = require('cloudinary');
+var util = require('handlebars-utils');
 
 // Collection of templates to interpolate
 var linkTemplate = _.template('<a href="<%= url %>"><%= text %></a>');
@@ -85,20 +86,34 @@ module.exports = function () {
 	};
 
 
-_helpers.or = function(/* any, any, ..., options */) {
-  var len = arguments.length - 1;
-  var options = arguments[len];
-  var val = false;
+	_helpers.or = function(/* any, any, ..., options */) {
+	  var len = arguments.length - 1;
+	  var options = arguments[len];
+	  var val = false;
 
-  for (var i = 0; i < len; i++) {
-    if (arguments[i]) {
-      val = true;
-      break;
-    }
-  }
-  return util.value(val, this, options);
-};
+	  for (var i = 0; i < len; i++) {
+	    if (arguments[i]) {
+	      val = true;
+	      break;
+	    }
+	  }
+	  return util.value(val, this, options);
+	};
 
+	_helpers.and = function() {
+	  var len = arguments.length - 1;
+	  var options = arguments[len];
+	  var val = true;
+
+	  for (var i = 0; i < len; i++) {
+	    if (!arguments[i]) {
+	      val = false;
+	      break;
+	    }
+	  }
+
+	  return util.value(val, this, options);
+	};
 
 	_helpers.sectionURL = function (a) {
 		return ("/"+_.lowerCase(a));

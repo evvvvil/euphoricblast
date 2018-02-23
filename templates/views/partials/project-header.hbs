@@ -61,12 +61,24 @@
 		<div class="row">
 			<div class="container text-container">
 				<div class="row">
+					{{#and data.post.content.extended data.post.content.more}}
 					<div class="col-sm-8 col-md-8 text-col">
 						{{{data.post.content.extended}}}
 					</div>
 					<div class="col-sm-4 col-md-4 text-col">
 						{{{data.post.content.more}}}
 					</div>
+					{{else}}
+						{{#if data.post.content.extended}}
+							<div class="col-sm-12 col-md-12 text-col">
+								{{{data.post.content.extended}}}
+							</div>
+						{{else}}
+							<div class="col-sm-12 col-md-12 text-col">
+								{{{data.post.content.more}}}
+							</div>
+						{{/if}}
+					{{/and}}
 				</div>
 			</div>
 		</div>
