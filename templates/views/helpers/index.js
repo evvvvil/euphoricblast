@@ -84,8 +84,8 @@ module.exports = function () {
 		}
 	};
 
-	
-helpers.or = function(/* any, any, ..., options */) {
+
+_helpers.or = function(/* any, any, ..., options */) {
   var len = arguments.length - 1;
   var options = arguments[len];
   var val = false;
