@@ -67,6 +67,7 @@
 					</div>
 					<div class="col-sm-4 col-md-4 text-col">
 						{{{data.post.content.more}}}
+						{{>read-more}}
 					</div>
 					{{else}}
 						{{#if data.post.content.extended}}
@@ -76,9 +77,10 @@
 						{{else}}
 							<div class="col-sm-12 col-md-12 text-col">
 								{{{data.post.content.more}}}
+								{{>read-more}}
 							</div>
 						{{/if}}
-					{{/and}}
+					{{/and}}					
 				</div>
 			</div>
 		</div>
