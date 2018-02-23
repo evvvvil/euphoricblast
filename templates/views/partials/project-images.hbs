@@ -9,15 +9,15 @@
 			<div class="container projects-container">
 				<div class="row">					
 					{{#each data.post.images }}					
-						<a href="{{cloudinaryUrl width='auto' q='70'}}" class="project-link" data-toggle="lightbox" data-gallery="images-gallery">
-							<div class="col-sm-6 {{getColAdvanced @index ../data.post.images.length}} project-col">			
-									<div class="project-image-container">
-										{{#ifCropLeftOvers @index ../data.post.images.length}}
-											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' height=329 q='70' crop='fill' gravity='center'}}"/>
-										{{else}}
-											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' q='70'}}"/>
-										{{/ifCropLeftOvers}}
-									</div>							
+						<a href="{{cloudinaryUrl width='auto' q='90'}}" class="project-link" data-toggle="lightbox" data-gallery="images-gallery">
+							<div class="col-sm-6 {{getColAdvanced @index ../data.post.images.length}} project-col">	
+								<div class="project-image-container">
+									{{#ifCropLeftOvers @index ../data.post.images.length}}
+										<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' height=329 q='70' crop='fill' gravity='center'}}"/>
+									{{else}}
+										<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' q='70'}}"/>
+									{{/ifCropLeftOvers}}
+								</div>							
 							</div>	
 						</a>
 					{{/each}}

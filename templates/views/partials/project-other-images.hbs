@@ -25,7 +25,7 @@
 			<div class="container projects-container">
 				<div class="row">					
 					{{#each data.post.otherImages }}					
-						<a href="{{cloudinaryUrl width='auto' q='70'}}" class="project-link" data-toggle="lightbox" data-gallery="other-images-gallery">
+						<a href="{{cloudinaryUrl width='auto' q='90'}}" class="project-link" data-toggle="lightbox" data-gallery="other-images-gallery">
 							<div class="col-sm-6 {{getColAdvanced @index ../data.post.otherImages.length}} project-col">			
 									<div class="project-image-container">
 										{{#ifCropLeftOvers @index ../data.post.otherImages.length}}
