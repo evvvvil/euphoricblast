@@ -19,6 +19,9 @@ exports = module.exports = function (req, res) {
 		post: "",
 	};
 
+
+
+
 	// Load all categories
 	view.on('init', function (next) {
 		keystone.list('PostCategory').model.find().sort('orderno').exec(function (err, results) {
@@ -96,23 +99,25 @@ exports = module.exports = function (req, res) {
 		});
 	});
 
-	// Load the featured posts
-		view.on('init', function (next) {
-			var q = keystone.list('Post').model.find({
-					state: 'published',				
-					type: 'work',
-					featured: true,
-				})
-				.sort('-publishedDate')
-				.populate('categories');
-			if (locals.data.category) {
-				q.where('categories').in([locals.data.category]);
-			}
-			q.exec(function (err, results) {
-				locals.data.featuredPosts = results;
+	// RESET PASSWORD LIKE THIS!!!!!!!
+	/*view.on('init', function (next) {
+		keystone.list('User').model.findOne({ email: "evvvvil0@gmail.com"}, function(findError, user) {
+		  if (findError) {
+		    // handle error
+		  } else {
+		    user.password = "fuckyou";
+		    user.save(function(saveError) {
+		      if (saveError) {
+		        // handle error
+		        console.log("password change failed");
+		      }else{
+		      	console.log("password CHANGED!!!!");
+		      }
 				next(err);
-			});
+		    });
+		  }
 		});
+	});*/
 
 
 	// Load the paragraphs
@@ -138,6 +143,8 @@ exports = module.exports = function (req, res) {
 				next(err);
 			});
 		});
+
+		
 	
 	// Render the view
 	view.render('work');
