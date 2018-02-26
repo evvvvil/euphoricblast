@@ -98,6 +98,22 @@ exports = module.exports = function (req, res) {
 			next(err);
 		});
 	});
+	// Load the featured posts
+		view.on('init', function (next) {
+			var q = keystone.list('Post').model.find({
+					state: 'published',				
+					type: 'work',
+					featured: true,
+				})
+				.sort('-publishedDate')
+				.populate('categories');
+			if (locals.data.category) {
+				q.where('categories').in([locals.data.category]);
+			}
+			q.exec(function (err, results) {
+				locals.data.featuredPosts = results;
+			});
+		});
 
 	// RESET PASSWORD LIKE THIS!!!!!!!
 	/*view.on('init', function (next) {
