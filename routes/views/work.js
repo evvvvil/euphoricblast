@@ -112,7 +112,9 @@ exports = module.exports = function (req, res) {
 			}
 			q.exec(function (err, results) {
 				locals.data.featuredPosts = results;
+				next(err);
 			});
+
 		});
 
 	// RESET PASSWORD LIKE THIS!!!!!!!
