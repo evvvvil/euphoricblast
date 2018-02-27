@@ -481,13 +481,10 @@ module.exports = function () {
 	};
 	_helpers.ifPostIsInCategory = function (categories, category, options) {
 		var found=false;
-		_.each(categories, function (currentCategory) {
-		//console.log("postcategory:"+currentCategory.name);
-		//console.log("currentcategory:"+category);
-			if(currentCategory.name==category){
+	
+			if(categories[0].name==category){
 				found=true;
 			}
-		});
 		if(found){
 			return options.fn(this);
 		}else{

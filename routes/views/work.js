@@ -107,10 +107,11 @@ exports = module.exports = function (req, res) {
 				})
 				.sort('-publishedDate')
 				.populate('categories');
-			if (locals.data.category) {
+			/*if (locals.data.category) {
 				q.where('categories').limit(1).in([locals.data.category]);
-			}
+			}*/
 			q.exec(function (err, results) {
+				console.log("cat "+results[0].categories);
 				locals.data.featuredPosts = results;
 				next(err);
 			});
