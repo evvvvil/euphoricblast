@@ -108,7 +108,7 @@ exports = module.exports = function (req, res) {
 				.sort('-publishedDate')
 				.populate('categories');
 			if (locals.data.category) {
-				q.where('categories').in([locals.data.category]);
+				q.where('categories').limit(1).in([locals.data.category]);
 			}
 			q.exec(function (err, results) {
 				locals.data.featuredPosts = results;
