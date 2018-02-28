@@ -174,8 +174,14 @@ module.exports = function () {
 		}					
 	};
 
-	_helpers.getVimeoNum = function (a) {
-		return _.split(a,".com/")[1];
+	_helpers.getVideoURL = function (a) {
+		if(_.contains("vimeo")){
+			return "https://player.vimeo.com/video/"+_.split(a,".com/")[1];
+		}else{
+			return "https://www.youtube.com/embed/"+_.split(a,"v=")[1];
+		}
+		
+		
 	};
 
 
@@ -380,6 +386,8 @@ module.exports = function () {
 		}
 		return options.inverse(this);
 	};
+
+
 
 	_helpers.paginationNavigation = function (pages, currentPage, totalPages, options) {
 		var html = '';
