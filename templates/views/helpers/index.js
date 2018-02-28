@@ -175,7 +175,7 @@ module.exports = function () {
 	};
 
 	_helpers.getVideoURL = function (a) {
-		if(_.contains("vimeo")){
+		if(a.includes("vimeo")){
 			return "https://player.vimeo.com/video/"+_.split(a,".com/")[1];
 		}else{
 			return "https://www.youtube.com/embed/"+_.split(a,"v=")[1];
