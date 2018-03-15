@@ -1,16 +1,7 @@
 {{#ifLocationIsWeb data.post.location}}
-<div style="position:absolute;
-					    z-index=1000;
-					    top:22px;
-					    left:0px;
-					    width: 97.5%;
-					    height: 82%;
-					    display: flex;
-					    align-items: center;
-					    justify-content: center;
-					    background-color: rgba(0,0,0,.5);
-					    margin: 15px;
-					    ">
-<a href="{{data.post.location}}" target="_blank"><button type="button" class="btn btn-weblink">Visit Website</button>
-</div></a>
+<div class="weblink-container">
+	<a href="{{data.post.location}}" target="_blank">
+		<button type="button" class="btn btn-weblink">Visit Website</button>
+	</a>
+</div>
 {{/ifLocationIsWeb}}
