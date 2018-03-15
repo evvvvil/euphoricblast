@@ -8,6 +8,24 @@
 	<div class="row">
 		<div class="container projects-container">
 			<div class="row">
+					{{#each data.featuredCategoryPosts }}
+						<a href="{{postUrl slug}}" class="project-link">
+							<div class="col-sm-6 {{getColAdvanced @index ../data.posts.length}} project-col">			
+								<div class="project-title-container">
+									<h3 class="project-title">{{title}}</h3>
+								</div>
+								{{#if mainImage.exists}}								
+									<div class="project-image-container">
+										{{#ifCropLeftOvers @index ../data.posts.length}}
+											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' height=329 q='70' crop='fill' gravity='center'}}"/>
+										{{else}}
+											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' q='70'}}"/>
+										{{/ifCropLeftOvers}}
+									</div>
+								{{/if}}
+							</div>	
+						</a>
+					{{/each}}
 					{{#each data.posts }}
 						<a href="{{postUrl slug}}" class="project-link">
 							<div class="col-sm-6 {{getColAdvanced @index ../data.posts.length}} project-col">			

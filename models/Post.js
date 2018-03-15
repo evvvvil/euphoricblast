@@ -18,7 +18,6 @@ Post.add({
 	type: { type: Types.Select, options: 'work, lab, blog, page content, page paragraph', index: true },
 	state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true, dependsOn: { type: ['work','lab','blog','page paragraph'] }  },	
 	publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } },
-	projectDate: { type: Types.Date, index: true, dependsOn: { type: ['work','lab'] } },	
 	
 	pageType: { type: Types.Select, options: 'main page, sub page', index: true, dependsOn: { type: ['page content','page paragraph'] }   },
 	whichMainPage: { type: Types.Select, options: 'home, work, lab, blog, contact', index: true, dependsOn: {pageType: 'main page' } },
@@ -30,11 +29,13 @@ Post.add({
 	location: {type: Types.Text, dependsOn: {type: ['work','lab'] } },
 	video: {type: Types.Text },
 	mainImage: { type: Types.CloudinaryImage, autoCleanup: true },
+	mainImageCrop: { type: Types.Select, options: 'north, center, south', default: 'center', index: true },
 	images: {type: Types.CloudinaryImages, autoCleanup: true },		
 	otherImages: {type: Types.CloudinaryImages, autoCleanup: true,dependsOn: {type: ['work','lab','blog','page content'] }  },
 	otherImagesTitle:{type:Types.Text, dependsOn: {type: ['work','lab','blog'] } },
-	
-	relatedPosts: {type: Types.Relationship, ref: 'Post', many: true, dependsOn: {type: ['work','lab','blog'] }},
+
+	postsOrder: {type: Types.Relationship, ref: 'Post', filters: {categories: ':whichSubPage'},many: true, dependsOn: {pageType: ['sub page'] }},
+	relatedPosts: {type: Types.Relationship, ref: 'Post', filters: {type: ':type'}, many: true, dependsOn: {type: ['work','lab','blog'] }},
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 80 },
 		extended: { type: Types.Html, wysiwyg: true, height: 200 },

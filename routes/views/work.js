@@ -1,6 +1,6 @@
 var keystone = require('keystone');
 var async = require('async');
-
+var _ = require('lodash');
 exports = module.exports = function (req, res) {
 
 	var view = new keystone.View(req, res);
@@ -13,6 +13,7 @@ exports = module.exports = function (req, res) {
 	};
 	locals.data = {
 		featuredPosts: [],
+		featuredCategoryPosts: [],
 		categories: [],
 		posts: [],
 		paragraphs: [],
@@ -61,22 +62,8 @@ exports = module.exports = function (req, res) {
 	
 
 
-	// Load the posts
-	view.on('init', function (next) {
-		var q = keystone.list('Post').model.find({
-				state: 'published',				
-				type: 'work',
-			})
-			.sort('-publishedDate')
-			.populate('categories');
-		if (locals.data.category) {
-			q.where('categories').in([locals.data.category]);
-		}
-		q.exec(function (err, results) {
-			locals.data.posts = results;
-			next(err);
-		});
-	});
+
+	
 
 	// Load the page post
 	view.on('init', function (next) {
@@ -85,18 +72,28 @@ exports = module.exports = function (req, res) {
 			q = keystone.list('Post').model.findOne({
 				type: 'page content',
 				whichSubPage: locals.data.category,				
+			}).populate('featuredPosts');
+
+			q.exec(function (err, result) {
+				locals.data.post = result;
+				if(result!=null){
+					locals.data.featuredCategoryPosts = result.featuredPosts;	
+				}				
+				next(err);
 			});
+
 		}else{
 			q = keystone.list('Post').model.findOne({
 				type: 'page content',
 				whichMainPage: locals.section.toLowerCase(),				
 			});			
+			q.exec(function (err, result) {
+				locals.data.post = result;				
+				next(err);
+			});
 		}
 		
-		q.exec(function (err, result) {
-			locals.data.post = result;
-			next(err);
-		});
+		
 	});
 	// Load the featured posts
 		view.on('init', function (next) {
@@ -111,7 +108,7 @@ exports = module.exports = function (req, res) {
 				q.where('categories').limit(1).in([locals.data.category]);
 			}*/
 			q.exec(function (err, results) {
-				console.log("cat "+results[0].categories);
+				//console.log("cat "+results[0].categories);
 				locals.data.featuredPosts = results;
 				next(err);
 			});
@@ -137,6 +134,28 @@ exports = module.exports = function (req, res) {
 		  }
 		});
 	});*/
+
+
+// Load the posts
+	view.on('init', function (next) {
+		if(locals.data.category){
+			var q= keystone.list('Post').model.find({
+				state: 'published',				
+				type: 'work',
+			}).sort('-publishedDate').populate('categories');		
+			q.where('categories').in([locals.data.category]);
+
+			q.exec(function (err, results) {	
+				//remove posts which are already shown as featured posts			
+				var inter = _.intersectionBy(results, locals.data.featuredCategoryPosts, "slug");
+				var diff = _.difference(results,inter);					
+				locals.data.posts = diff;
+				next(err);
+			});
+		}else{
+			next();
+		}		
+	});
 
 
 	// Load the paragraphs
