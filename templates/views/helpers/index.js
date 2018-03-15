@@ -183,6 +183,15 @@ module.exports = function () {
 		
 		
 	};
+	_helpers.ifLocationIsWeb = function (a,options) {
+		if(a.includes("www")){
+			return options.fn(this);
+		} else {
+			return options.inverse(this);
+		}
+		
+		
+	};
 
 
 	/**

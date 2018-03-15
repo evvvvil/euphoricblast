@@ -14,6 +14,7 @@
 					<div class="col-sm-12 col-md-8 video-col">
 						{{#if data.post.content.brief}}<h3>{{{data.post.content.brief}}}</h3>{{/if}}						
 						{{#if data.post.mainImage.exists}}<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height=177 q='70' crop='fill' gravity='center'}}"/>{{/if}}
+						{{>project-header-button}}
 					</div>					
 				</div>
 			</div>
@@ -33,6 +34,7 @@
 					<div class="col-sm-12 col-md-12 text-col">
 					<h3>{{{data.post.content.brief}}}</h3>
 					{{#if data.post.mainImage.exists}}<img class="cld-responsive img-responsive bro0h" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height=177 q='70' crop='fill' gravity='center'}}"/>{{/if}}
+					{{>project-header-button}}
 				</div>
 				</div>
 			</div>
@@ -49,6 +51,7 @@
 				<div class="container text-container">
 					<div class="row text-col">				
 						<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height=300 q='70' crop='fill' gravity='center'}}"/>
+						{{>project-header-button}}
 					</div>
 				</div>
 			</div>
