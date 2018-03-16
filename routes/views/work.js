@@ -78,7 +78,8 @@ exports = module.exports = function (req, res) {
 				locals.data.post = result;
 				if(result!=null){
 					locals.data.featuredCategoryPosts = result.featuredPosts;	
-				}				
+				}	
+				console.log("featyured category posts: "+locals.data.featuredCategoryPosts)			
 				next(err);
 			});
 

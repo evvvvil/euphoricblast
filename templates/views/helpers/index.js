@@ -34,17 +34,17 @@ module.exports = function () {
 		
 	};
 	_helpers.addLength = function (a, b) {
-		var countA=0;var countB=0
+		var countA=0;var countB=0;
 		if(a!==undefined) countA=a.length;
 		if(b!==undefined) countB=b.length;
+		console.log("addlength "+(countA+countB))
 			return  (countA+countB);
 		
 	};
 	_helpers.getLength = function (a) {
 		var countA=0;
 		if(a!==undefined) countA=a.length;
-			return  (countA);
-		
+			return  (countA);		
 	};
 	_helpers.ifeq = function (a, b, options) {
 		if (a == b) { // eslint-disable-line eqeqeq

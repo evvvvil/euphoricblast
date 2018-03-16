@@ -9,6 +9,7 @@
 		<div class="container projects-container">
 			<div class="row">
 					{{#each data.featuredCategoryPosts }}
+					<!--FEATURED-->
 						<a href="{{postUrl slug}}" class="project-link">
 							<div class="col-sm-6 {{getColAdvanced @index (addLength ../data.posts ../data.featuredCategoryPosts) 0}} project-col">			
 								<div class="project-title-container">
@@ -27,6 +28,7 @@
 						</a>
 					{{/each}}
 					{{#each data.posts }}
+					<!--NOT FEATUREDT THOUGH-->
 						<a href="{{postUrl slug}}" class="project-link">
 							<div class="col-sm-6 {{getColAdvanced @index (addLength ../data.posts ../data.featuredCategoryPosts) (getLength ../data.featuredCategoryPosts.length)}} project-col">			
 								<div class="project-title-container">
