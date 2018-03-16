@@ -17,7 +17,7 @@
 								</div>
 								{{#if mainImage.exists}}								
 									<div class="project-image-container">
-										{{#ifCropLeftOvers @index ../data.posts.length}}
+										{{#ifCropLeftOvers @index (addLength ../data.posts ../data.featuredCategoryPosts) 0}}
 											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' height=329 q='70' crop='fill' gravity='center'}}"/>
 										{{else}}
 											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' q='70'}}"/>
@@ -36,7 +36,7 @@
 								</div>
 								{{#if mainImage.exists}}								
 									<div class="project-image-container">
-										{{#ifCropLeftOvers @index ../data.posts.length}}
+										{{#ifCropLeftOvers @index (addLength ../data.posts ../data.featuredCategoryPosts) (getLength ../data.featuredCategoryPosts)}}
 											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' height=329 q='70' crop='fill' gravity='center'}}"/>
 										{{else}}
 											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' q='70'}}"/>

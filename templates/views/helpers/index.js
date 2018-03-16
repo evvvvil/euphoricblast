@@ -146,7 +146,8 @@ module.exports = function () {
 		return Math.max(Math.floor(12/a),b);
 	};
 
-	_helpers.ifCropLeftOvers = function (a,numOfProjects, options) {	
+	_helpers.ifCropLeftOvers = function (a,numOfProjects,offset, options) {
+	a+=offset;	
 		if(numOfProjects==1){
 				return options.fn(this);
 		}else{			
