@@ -37,7 +37,6 @@ module.exports = function () {
 		var countA=0;var countB=0;
 		if(a!==undefined) countA=a.length;
 		if(b!==undefined) countB=b.length;
-		console.log("addlength "+(countA+countB))
 			return  (countA+countB);
 		
 	};
@@ -46,6 +45,7 @@ module.exports = function () {
 		if(a!==undefined) countA=a.length;
 			return  (countA);		
 	};
+
 	_helpers.ifeq = function (a, b, options) {
 		if (a == b) { // eslint-disable-line eqeqeq
 			return options.fn(this);
@@ -168,10 +168,7 @@ module.exports = function () {
 	};
 
 	_helpers.getColAdvanced = function (a,numOfProjects,offset) {	
-		console.log("numOfProjects "+numOfProjects);
-		
 		a+=offset;
-		console.log("a "+a);
 		if(numOfProjects<5){
 			if(numOfProjects==2||numOfProjects==4){
 				return ("col-md-6");
@@ -182,11 +179,9 @@ module.exports = function () {
 		}else{			
 			if(numOfProjects%5==1||numOfProjects%5==4){				
 				if(a==(numOfProjects-1)){
-					console.log("we here last project making it big");
 					return ("col-md-12");
 				}				
 			}else if(numOfProjects>6 && (numOfProjects-7)%5==0){
-				console.log("yeah seven projects");
 				if(numOfProjects-a<3){
 					return ("col-md-6");
 				}

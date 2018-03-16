@@ -29,12 +29,12 @@ Post.add({
 	location: {type: Types.Text, dependsOn: {type: ['work','lab'] } },
 	video: {type: Types.Text },
 	mainImage: { type: Types.CloudinaryImage, autoCleanup: true },
-	mainImageCrop: { type: Types.Select, options: 'north, center, south', default: 'center', index: true },
+	mainImageCrop: { type: Types.Select, options: 'north, center, south', default: 'center', index: true, note: 'When image is cropped, set where crop starts: North shows top part, center the middle & south the bottom of picture.'},
 	images: {type: Types.CloudinaryImages, autoCleanup: true },		
 	otherImages: {type: Types.CloudinaryImages, autoCleanup: true,dependsOn: {type: ['work','lab','blog','page content'] }  },
 	otherImagesTitle:{type:Types.Text, dependsOn: {type: ['work','lab','blog'] } },
 
-	postsOrder: {type: Types.Relationship, ref: 'Post', filters: {categories: ':whichSubPage'},many: true, dependsOn: {pageType: ['sub page'] }},
+	postsOrder: {type: Types.Relationship, ref: 'Post', filters: {categories: ':whichSubPage'},many: true, dependsOn: {pageType: ['sub page'] },note: 'By default, posts are ordered by date. Use this list to feature important posts first. Posts in this list will appear first and in the order they are in the list, then any posts not in this list will be shown after, ordered by date.'},
 	relatedPosts: {type: Types.Relationship, ref: 'Post', filters: {type: ':type'}, many: true, dependsOn: {type: ['work','lab','blog'] }},
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 80 },

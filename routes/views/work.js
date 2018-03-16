@@ -61,10 +61,6 @@ exports = module.exports = function (req, res) {
 //CLEANUP OTHER POLULATE THAT ARE NOT NEEDED!!!
 	
 
-
-
-	
-
 	// Load the page post
 	view.on('init', function (next) {
 		var q;
@@ -78,8 +74,7 @@ exports = module.exports = function (req, res) {
 				locals.data.post = result;
 				if(result!=null){
 					locals.data.featuredCategoryPosts = result.featuredPosts;	
-				}	
-				console.log("featyured category posts: "+locals.data.featuredCategoryPosts)			
+				}			
 				next(err);
 			});
 
@@ -109,7 +104,6 @@ exports = module.exports = function (req, res) {
 				q.where('categories').limit(1).in([locals.data.category]);
 			}*/
 			q.exec(function (err, results) {
-				//console.log("cat "+results[0].categories);
 				locals.data.featuredPosts = results;
 				next(err);
 			});
