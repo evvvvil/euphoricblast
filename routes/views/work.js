@@ -13,7 +13,7 @@ exports = module.exports = function (req, res) {
 	};
 	locals.data = {
 		featuredPosts: [],
-		featuredCategoryPosts: [],
+		orderedPosts: [],
 		categories: [],
 		posts: [],
 		paragraphs: [],
@@ -73,7 +73,7 @@ exports = module.exports = function (req, res) {
 			q.exec(function (err, result) {
 				locals.data.post = result;
 				if(result!=null){
-					locals.data.featuredCategoryPosts = result.featuredPosts;	
+					locals.data.orderedPosts = result.featuredPosts;	
 				}			
 				next(err);
 			});
@@ -142,7 +142,7 @@ exports = module.exports = function (req, res) {
 
 			q.exec(function (err, results) {	
 				//remove posts which are already shown as featured posts			
-				var inter = _.intersectionBy(results, locals.data.featuredCategoryPosts, "slug");
+				var inter = _.intersectionBy(results, locals.data.orderedPosts, "slug");
 				var diff = _.difference(results,inter);					
 				locals.data.posts = diff;
 				next(err);

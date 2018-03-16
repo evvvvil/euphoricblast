@@ -8,16 +8,16 @@
 	<div class="row">
 		<div class="container projects-container">
 			<div class="row">
-					{{#each data.featuredCategoryPosts }}
+					{{#each data.orderedPosts }}
 					<!--ORDERED POST-->
 						<a href="{{postUrl slug}}" class="project-link">
-							<div class="col-sm-6 {{getColAdvanced @index (addLength ../data.posts ../data.featuredCategoryPosts) 0}} project-col">			
+							<div class="col-sm-6 {{getColAdvanced @index (addLength ../data.posts ../data.orderedPosts) 0}} project-col">			
 								<div class="project-title-container">
 									<h3 class="project-title">{{title}}</h3>
 								</div>
 								{{#if mainImage.exists}}								
 									<div class="project-image-container">
-										{{#ifCropLeftOvers @index (addLength ../data.posts ../data.featuredCategoryPosts) 0}}
+										{{#ifCropLeftOvers @index (addLength ../data.posts ../data.orderedPosts) 0}}
 											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' height=329 q='70' crop='fill' gravity='center'}}"/>
 										{{else}}
 											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' q='70'}}"/>
@@ -30,13 +30,13 @@
 					{{#each data.posts }}
 					<!--NORMAL NOT ORDERED POST-->
 						<a href="{{postUrl slug}}" class="project-link">
-							<div class="col-sm-6 {{getColAdvanced @index (addLength ../data.posts ../data.featuredCategoryPosts) (getLength ../data.featuredCategoryPosts)}} project-col">			
+							<div class="col-sm-6 {{getColAdvanced @index (addLength ../data.posts ../data.orderedPosts) (getLength ../data.orderedPosts)}} project-col">			
 								<div class="project-title-container">
 									<h3 class="project-title">{{title}}</h3>
 								</div>
 								{{#if mainImage.exists}}								
 									<div class="project-image-container">
-										{{#ifCropLeftOvers @index (addLength ../data.posts ../data.featuredCategoryPosts) (getLength ../data.featuredCategoryPosts)}}
+										{{#ifCropLeftOvers @index (addLength ../data.posts ../data.orderedPosts) (getLength ../data.orderedPosts)}}
 											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' height=329 q='70' crop='fill' gravity='center'}}"/>
 										{{else}}
 											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' q='70'}}"/>
