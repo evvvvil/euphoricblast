@@ -27,12 +27,12 @@
 							</div>	
 						</a>
 					{{/each}}
-					{{getLength ../data.posts}}
+					{{getLength data.posts}}
 					{{#each data.posts }}
 					<!--NOT FEATUREDT THOUGH-->
 
 						<a href="{{postUrl slug}}" class="project-link">
-							<div class="col-sm-6 {{getColAdvanced @index (addLength ../data.posts ../data.featuredCategoryPosts) (getLength ../data.featuredCategoryPosts.length)}} project-col">			
+							<div class="col-sm-6 {{getColAdvanced @index (addLength ../data.posts ../data.featuredCategoryPosts) (getLength ../data.featuredCategoryPosts)}} project-col">			
 								<div class="project-title-container">
 									<h3 class="project-title">{{title}}</h3>
 								</div>
