@@ -68,12 +68,12 @@ exports = module.exports = function (req, res) {
 			q = keystone.list('Post').model.findOne({
 				type: 'page content',
 				whichSubPage: locals.data.category,				
-			}).populate('featuredPosts');
+			}).populate('postsOrder');
 
 			q.exec(function (err, result) {
 				locals.data.post = result;
 				if(result!=null){
-					locals.data.orderedPosts = result.featuredPosts;	
+					locals.data.orderedPosts = result.postsOrder;	
 				}			
 				next(err);
 			});
