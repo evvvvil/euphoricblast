@@ -75,7 +75,6 @@ exports = module.exports = function (req, res) {
 		});
 	});
 
-
 	// Load the posts
 	view.on('init', function (next) {
 
@@ -97,5 +96,5 @@ exports = module.exports = function (req, res) {
 	});
 
 	// Render the view
-	view.render('lab', { bodyId: 'lab-page', video:'whatever', carousel:'whatever', cloudinaryResponsive: 'whatever'});
+	view.render('lab', { bodyId: 'lab-page', carousel:'whatever', cloudinaryResponsive: 'whatever'});
 };

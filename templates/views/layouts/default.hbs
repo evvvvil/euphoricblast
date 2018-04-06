@@ -131,20 +131,22 @@
 			<!--////////-->
 			<script src="/js/carousel-control.js" type="text/javascript"></script>
 		{{/if}}
-
-		{{#if video}}
+		{{#if data.post.video}}
+			{{#ifcontains data.post.video 'youtu'}}
 			<!--//////////////////-->
 			<!--YOUTUBE AUTOPLAYER-->
 			<!--//////////////////-->
 			<script src="/js/youtube-control.js" type="text/javascript"></script>
-
-			<!--////////////////-->
-			<!--VIMEO AUTOPLAYER-->
-			<!--////////////////-->			
-			<script src="https://player.vimeo.com/api/player.js"></script>
-			<script src="/js/vimeo-control.js"></script>
-		{{/if}}		
-
+			{{else}}
+				{{#ifcontains data.post.video 'vimeo'}}
+				<!--////////////////-->
+				<!--VIMEO AUTOPLAYER-->
+				<!--////////////////-->			
+				<script src="https://player.vimeo.com/api/player.js"></script>
+				<script src="/js/vimeo-control.js"></script>
+				{{/ifcontains}}
+			{{/ifcontains}}				
+		{{/if}}
 		{{{isAdminEditorJS user}}}
 	</body>
 </html>

@@ -20,9 +20,6 @@ exports = module.exports = function (req, res) {
 		post: "",
 	};
 
-
-
-
 	// Load all categories
 	view.on('init', function (next) {
 		keystone.list('PostCategory').model.find().sort('orderno').exec(function (err, results) {
@@ -84,13 +81,14 @@ exports = module.exports = function (req, res) {
 				whichMainPage: locals.section.toLowerCase(),				
 			});			
 			q.exec(function (err, result) {
-				locals.data.post = result;				
+				locals.data.post = result;		
 				next(err);
 			});
 		}
 		
 		
 	});
+
 	// Load the featured posts
 		view.on('init', function (next) {
 			var q = keystone.list('Post').model.find({
@@ -152,7 +150,6 @@ exports = module.exports = function (req, res) {
 		}		
 	});
 
-
 	// Load the paragraphs
 		
 		view.on('init', function (next) {
@@ -176,9 +173,7 @@ exports = module.exports = function (req, res) {
 				next(err);
 			});
 		});
-
-		
 	
 	// Render the view
-	view.render('work', { bodyId: 'work-page', video:'whatever', carousel:'whatever', cloudinaryResponsive: 'whatever'});
+	view.render('work', { bodyId: 'work-page', carousel:'whatever', cloudinaryResponsive: 'whatever'});
 };

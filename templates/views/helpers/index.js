@@ -44,19 +44,28 @@ module.exports = function () {
 		var countA=0;
 		if(a!==undefined) countA=a.length;
 			return  (countA);		
-	};
+	};	
 
 	_helpers.ifeq = function (a, b, options) {
-		if (a == b) { // eslint-disable-line eqeqeq
+		if (a == b) { 
 			return options.fn(this);
 		} else {
 			return options.inverse(this);
 		}
 	};
 
+	_helpers.ifcontains = function (a, b, options) {
+		console.log("a fuck sake "+a);console.log("b fuck sake "+b);
+		
+		if (a.includes(b)) { 
+			return options.fn(this);
+		} else {
+			return options.inverse(this);
+		}
+	};
 
 	_helpers.iflt = function (a, b, options) {
-		if (a < b) { // eslint-disable-line eqeqeq
+		if (a < b) { 
 			return options.fn(this);
 		} else {
 			return options.inverse(this);
@@ -197,7 +206,7 @@ module.exports = function () {
 
 	_helpers.getVideoURL = function (a) {
 		if(a.includes("vimeo")){
-			return "https://player.vimeo.com/video/"+_.split(a,".com/")[1]+"?title=0&byline=0&api=1&portrait=0&color=000000";
+			return "https://player.vimeo.com/video/"+_.split(a,".com/")[1]+"?title=0&byline=0&portrait=0&color=000000";
 		}else{
 			return "https://www.youtube.com/embed/"+_.split(a,"v=")[1]+"?enablejsapi=1&showinfo=0";
 		}

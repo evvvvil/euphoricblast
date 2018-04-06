@@ -1,5 +1,4 @@
 var keystone = require('keystone');
-
 exports = module.exports = function (req, res) {
 
 	var view = new keystone.View(req, res);
@@ -14,14 +13,7 @@ exports = module.exports = function (req, res) {
 		post:"",
 		relatedPosts: [],
 	};
-
-	//CLEANUP OTHER POLULATE THAT ARE NOT NEEDED!!!
-//CLEANUP OTHER POLULATE THAT ARE NOT NEEDED!!!
-	//CLEANUP OTHER POLULATE THAT ARE NOT NEEDED!!!
-	//CLEANUP OTHER POLULATE THAT ARE NOT NEEDED!!!
-	//CLEANUP OTHER POLULATE THAT ARE NOT NEEDED!!!
-
-
+	
 	// Load the current post
 	view.on('init', function (next) {
 		var q = keystone.list('Post').model.findOne({
@@ -35,7 +27,6 @@ exports = module.exports = function (req, res) {
 			next(err);
 		});
 	});
-
 	// Render the view
-	view.render('post', { bodyId: 'project-page', video:'whatever', lightbox:'whatever', cloudinaryResponsive: 'whatever'});
+	view.render('post', { bodyId: 'project-page', lightbox:'whatever', cloudinaryResponsive: 'whatever'});
 };
