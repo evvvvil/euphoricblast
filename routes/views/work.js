@@ -180,5 +180,5 @@ exports = module.exports = function (req, res) {
 		
 	
 	// Render the view
-	view.render('work');
+	view.render('work', { bodyId: 'work-page', video:'whatever', carousel:'whatever', cloudinaryResponsive: 'whatever'});
 };

@@ -26,5 +26,5 @@ exports = module.exports = function (req, res) {
 	});
 
 	// Render the view
-	view.render('index');
+	view.render('index', { bodyId: 'home-page', video:'whatever', carousel:'whatever', cloudinaryResponsive: 'whatever'});
 };

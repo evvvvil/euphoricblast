@@ -85,5 +85,5 @@ new Email('./templates/views/partials/email-enquiry.hbs', {
 	});
 });		
 
-	view.render('contact');
+	view.render('contact', { bodyId: 'contact-page', carousel:'whatever', cloudinaryResponsive: 'whatever'});
 };

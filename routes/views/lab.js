@@ -97,5 +97,5 @@ exports = module.exports = function (req, res) {
 	});
 
 	// Render the view
-	view.render('lab');
+	view.render('lab', { bodyId: 'lab-page', video:'whatever', carousel:'whatever', cloudinaryResponsive: 'whatever'});
 };

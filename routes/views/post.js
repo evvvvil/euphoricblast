@@ -37,5 +37,5 @@ exports = module.exports = function (req, res) {
 	});
 
 	// Render the view
-	view.render('post');
+	view.render('post', { bodyId: 'project-page', video:'whatever', lightbox:'whatever', cloudinaryResponsive: 'whatever'});
 };
