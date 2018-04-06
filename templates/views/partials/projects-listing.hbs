@@ -1,4 +1,4 @@
-{{#ifgt data.posts.length 0}}
+{{#ifgt (or data.posts.length data.orderedPosts.length) 0}}
 
 <!--||||||||||||||||-->
 <!--PROJECTS LISTING-->
