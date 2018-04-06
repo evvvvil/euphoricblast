@@ -197,12 +197,10 @@ module.exports = function () {
 
 	_helpers.getVideoURL = function (a) {
 		if(a.includes("vimeo")){
-			return "https://player.vimeo.com/video/"+_.split(a,".com/")[1]+"?title=false&byline=false&api=true&portrait=false&color=black";
+			return "https://player.vimeo.com/video/"+_.split(a,".com/")[1]+"?title=false&byline=false&api=true&portrait=false&color=000000";
 		}else{
 			return "https://www.youtube.com/embed/"+_.split(a,"v=")[1]+"?enablejsapi=1&showinfo=0";
 		}
-		
-		
 	};
 	_helpers.ifLocationIsWeb = function (a,options) {
 		if(a.includes("www")){
