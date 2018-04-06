@@ -13,8 +13,10 @@ function startVimeoPlayer(iframeName){
 $(window).on("load", function() {
 
 	var vplayer = new Vimeo.Player($("#euphoric-video"));
-    vplayer.on('play', function() {
-        vplayer.setVolume(0)
-    });
+	vplayer.setVolume(0);
+	vplayer.play();
+    /*vplayer.on('play', function() {
+        vplayer.setVolume(0);
+    });*/
 
 	});
