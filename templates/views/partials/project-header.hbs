@@ -26,7 +26,7 @@
 				{{else}}
 					{{#ifcontains data.post.video 'vimeo'}}
 					<div class="col-sm-12 col-md-4 video-col vimeo-fix">
-						<iframe id="euphoric-video" src="{{getVideoURL data.post.video}}" width="105%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+						<iframe id="euphoric-video" src="{{getVideoURL data.post.video}}" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 					</div>
 					<div class="col-sm-12 col-md-8 video-col vimeo-fix">
 						{{#if data.post.content.brief}}<h3>{{{data.post.content.brief}}}</h3>{{/if}}						
