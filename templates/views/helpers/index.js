@@ -406,7 +406,8 @@ module.exports = function () {
 	};
 
 	_helpers.tidyAndCapitalise = function (a) {
-		return _.capitalize(_.lowerCase(a));
+		//This is a messy but any other way lodash falls over with category starting with numbers like "3d graphics"
+		return _.replace(_.replace(_.toLower(a),'-and-', ' & '),'-',' ');
 	};
 	// ### Pagination Helpers
 	// These are helpers used in rendering a pagination system for content
