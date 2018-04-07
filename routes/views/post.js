@@ -8,6 +8,7 @@ exports = module.exports = function (req, res) {
 	locals.section = 'Project';
 	locals.filters = {
 		post: req.params.post,
+		category: req.params.category,
 	};
 	locals.data = {
 		post:"",

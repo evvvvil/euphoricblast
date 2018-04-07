@@ -386,8 +386,8 @@ module.exports = function () {
 	// the routes by keynames to reduce the maintenance of changing urls
 
 	// Direct url link to a specific post
-	_helpers.postUrl = function (postSlug, options) {
-		return ('/project/' + postSlug);
+	_helpers.postUrl = function (postSlug, category, options) {
+		return ('/work/'+ category +'/'+ postSlug);
 	};
 
 	// might be a ghost helper
@@ -400,10 +400,14 @@ module.exports = function () {
 	_helpers.categoryUrl = function (categorySlug, section, options) {
 		return ('/'+_.lowerCase(section)+'/' + categorySlug);
 	};
+
 	_helpers.capitalise = function (a) {
 		return _.capitalize(a);
 	};
 
+	_helpers.tidyAndCapitalise = function (a) {
+		return _.capitalize(_.lowerCase(a));
+	};
 	// ### Pagination Helpers
 	// These are helpers used in rendering a pagination system for content
 	// Mostly generalized and with a small adjust to `_helper.pageUrl` could be universal for content types

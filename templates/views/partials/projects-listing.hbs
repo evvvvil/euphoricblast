@@ -10,7 +10,7 @@
 			<div class="row">
 					{{#each data.orderedPosts }}
 					<!--ORDERED POST-->
-						<a href="{{postUrl slug}}" class="project-link">
+						<a href="{{postUrl slug ../filters.category}}" class="project-link">
 							<div class="col-sm-6 {{getColAdvanced @index (addLength ../data.posts ../data.orderedPosts) 0}} project-col">			
 								<div class="project-title-container">
 									<h3 class="project-title">{{title}}</h3>
@@ -29,7 +29,7 @@
 					{{/each}}
 					{{#each data.posts }}
 					<!--NORMAL NOT ORDERED POST-->
-						<a href="{{postUrl slug}}" class="project-link">
+						<a href="{{postUrl slug ../filters.category}}" class="project-link">
 							<div class="col-sm-6 {{getColAdvanced @index (addLength ../data.posts ../data.orderedPosts) (getLength ../data.orderedPosts)}} project-col">			
 								<div class="project-title-container">
 									<h3 class="project-title">{{title}}</h3>
