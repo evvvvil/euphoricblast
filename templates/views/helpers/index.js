@@ -206,7 +206,7 @@ module.exports = function () {
 
 	_helpers.getVideoURL = function (a) {
 		if(a.includes("vimeo")){
-			return "https://player.vimeo.com/video/"+_.split(a,".com/")[1]+"?title=0&byline=0&portrait=0&color=000000";
+			return "https://player.vimeo.com/video/"+_.split(a,".com/")[1]+"?title=0&byline=0&portrait=0&color=000000&muted=1";
 		}else{
 			return "https://www.youtube.com/embed/"+_.split(a,"v=")[1]+"?enablejsapi=1&showinfo=0";
 		}
