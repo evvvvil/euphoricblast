@@ -390,7 +390,7 @@ module.exports = function () {
 		}else{
 			category+='/';
 		}
-		return ('/'+section+'/'+ postSlug);
+		return ('/'+section+'/'+ category + postSlug);
 	};
 
 	// might be a ghost helper
