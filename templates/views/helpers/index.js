@@ -55,8 +55,6 @@ module.exports = function () {
 	};
 
 	_helpers.ifcontains = function (a, b, options) {
-		console.log("a fuck sake "+a);console.log("b fuck sake "+b);
-		
 		if (a.includes(b)) { 
 			return options.fn(this);
 		} else {
@@ -386,8 +384,13 @@ module.exports = function () {
 	// the routes by keynames to reduce the maintenance of changing urls
 
 	// Direct url link to a specific post
-	_helpers.postUrl = function (postSlug, category, options) {
-		return ('/work/'+ category +'/'+ postSlug);
+	_helpers.postUrl = function (postSlug, category, section, options) {
+		if(category===undefined) {
+			category='';
+		}else{
+			category+='/';
+		}
+		return ('/'+section+'/'+ postSlug);
 	};
 
 	// might be a ghost helper
