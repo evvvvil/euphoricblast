@@ -8,12 +8,13 @@
 		<div class="row">
 			<div class="container video-container">
 				<div class="row">
+				{{#ifcontains data.post.video 'youtu'}}
 					<div class="col-sm-12 col-md-4 video-col">
-						<iframe id="euphoric-video" src="{{getVideoURL data.post.video}}" width="105%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+						<iframe id="euphoric-video" src="{{getVideoURL data.post.video}}" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 					</div>
 					<div class="col-sm-12 col-md-8 video-col">
 						{{#if data.post.content.brief}}<h3>{{{data.post.content.brief}}}</h3>{{/if}}						
-						{{#if data.post.mainImage.exists}}<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='185' q='80' crop='fill' gravity=data.post.mainImageCrop}}"/>{{/if}}
+						{{#if data.post.mainImage.exists}}<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='177' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>{{/if}}
 						{{#ifLocationIsWeb data.post.location}}
 							<div class="weblink-container weblink-with-video">
 								<a href="{{data.post.location}}" target="_blank">
@@ -21,7 +22,25 @@
 								</a>
 							</div>
 						{{/ifLocationIsWeb}}
-					</div>					
+					</div>
+				{{else}}
+					{{#ifcontains data.post.video 'vimeo'}}
+					<div class="col-sm-12 col-md-4 video-col vimeo-fix">
+						<iframe id="euphoric-video" src="{{getVideoURL data.post.video}}" width="105%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+					</div>
+					<div class="col-sm-12 col-md-8 video-col vimeo-fix">
+						{{#if data.post.content.brief}}<h3>{{{data.post.content.brief}}}</h3>{{/if}}						
+						{{#if data.post.mainImage.exists}}<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='187' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>{{/if}}
+						{{#ifLocationIsWeb data.post.location}}
+							<div class="weblink-container weblink-with-video">
+								<a href="{{data.post.location}}" target="_blank">
+									<button type="button" class="btn btn-weblink">Visit Website</button>
+								</a>
+							</div>
+						{{/ifLocationIsWeb}}
+					</div>
+					{{/ifcontains}}
+				{{/ifcontains}}	
 				</div>
 			</div>
 		</div>
