@@ -390,6 +390,8 @@ module.exports = function () {
 		}else{
 			category+='/';
 		}
+		console.log("category "+category);
+		console.log("section "+section);
 		return ('/'+section+'/'+ category + postSlug);
 	};
 
