@@ -386,13 +386,9 @@ module.exports = function () {
 	// Direct url link to a specific post
 	_helpers.postUrl = function (postSlug, category, section, options) {
 		if(category===undefined) {
-			category='';
-		}else{
-			category+='/';
+			category='projects';
 		}
-		console.log("category "+category);
-		console.log("section "+section);
-		return ('/'+section+'/'+ category + postSlug);
+		return ('/'+_.toLower(section)+'/'+ category +'/'+ postSlug);
 	};
 
 	// might be a ghost helper
