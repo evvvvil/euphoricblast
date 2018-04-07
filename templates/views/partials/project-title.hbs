@@ -2,6 +2,8 @@
 	<i class="glyphicon glyphicon-stop title-square"></i>
 	<!-- USE tidyAndCapitalise data.post.type instead in line below if your data.post.type can be two words -->
 	<h1 class="page-title"><a href="{{sectionURL data.post.type}}">{{capitalise data.post.type}}</a></h1>
+	{{#if filters.category}}
 	<h2 class="category-title">&nbsp;<span class="pipe">|</span>&nbsp;<a href="{{categoryUrl filters.category data.post.type}}">{{tidyAndCapitalise filters.category}}</a></h2>
+	{{/if}}
 	<h2 class="category-title">&nbsp;<span class="pipe">|</span>&nbsp;{{data.post.title}}</h2>	
 </div>
