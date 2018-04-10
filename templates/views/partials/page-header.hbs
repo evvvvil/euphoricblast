@@ -32,9 +32,9 @@
 		<div class="container text-container">
 			<div class="row">
 				<div class="col-sm-12 col-md-12 text-col">
-				{{#if data.post.content.brief}}<h3>{{{data.post.content.brief}}}</h3>{{/if}}
+				<h3>{{{data.post.content.brief}}}</h3>
 				{{#if data.post.content.extended}}{{{data.post.content.extended}}}{{/if}}
-				{{#and data.post.mainImage.exists data.post.mainImageShow}}<img class="cld-responsive img-responsive bro0h" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height=202 q='70' crop='fill' gravity='center'}}"/>{{/and}}
+				{{#if data.post.mainImage.exists}}<img class="cld-responsive img-responsive bro0h" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height=202 q='70' crop='fill' gravity='center'}}"/>{{/if}}
 				</div>
 			</div>
 		</div>
