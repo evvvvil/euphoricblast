@@ -1,0 +1,7 @@
+{{#ifLocationIsWeb data.post.location}}
+	<div class="weblink-container {{#if data.post.video}}weblink-with-video{{/if}}">
+		<a href="{{data.post.location}}" target="_blank">
+			<button type="button" class="btn btn-weblink">Visit Website</button>
+		</a>
+	</div>
+{{/ifLocationIsWeb}}
