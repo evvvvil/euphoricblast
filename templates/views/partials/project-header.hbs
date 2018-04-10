@@ -47,7 +47,7 @@
 	</div>	
 {{else}}
 	
-
+{{#or data.post.content.brief (and data.post.mainImage.exists data.post.mainImageShow)}}
 	<!--|||||||||||||||||||||||| -->
 	<!--PAGE TEXT + IMAGE AT TOP -->
 	<!--|||||||||||||||||||||||| -->
@@ -71,6 +71,7 @@
 			</div>
 		</div>
 	</div>
+	{{/or}}
 {{/if}}
 {{#or data.post.content.extended data.post.content.more}}
 <div class="container-fluid background light-grey">
