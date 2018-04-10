@@ -29,6 +29,7 @@ Post.add({
 	video: {type: Types.Text },
 	mainImage: { type: Types.CloudinaryImage, autoCleanup: true, index: true },
 	mainImageCrop: { type: Types.Select, options: 'north, center, south', index: true, default: 'center', note: 'When image is cropped, set where crop starts: North shows top part, center the middle & south the bottom of picture.'},
+	mainImageShow: { type: Types.Boolean, label: 'Tick to show main image in the project page when there is no video', default: true, dependsOn: {type: ['work','lab','blog'] } },
 	images: {type: Types.CloudinaryImages, autoCleanup: true },		
 	otherImages: {type: Types.CloudinaryImages, autoCleanup: true,dependsOn: {type: ['work','lab','blog','page content'] }  },
 	otherImagesTitle:{type:Types.Text, dependsOn: {type: ['work','lab','blog'] } },
