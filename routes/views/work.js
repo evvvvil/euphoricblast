@@ -86,7 +86,6 @@ exports = module.exports = function (req, res) {
 			});
 		}
 		
-		
 	});
 
 	// Load the featured posts

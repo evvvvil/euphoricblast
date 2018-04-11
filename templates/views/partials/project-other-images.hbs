@@ -29,7 +29,7 @@
 							<div class="col-sm-6 {{getColAdvanced @index ../data.post.otherImages.length 0}} project-col">			
 									<div class="project-image-container">
 										{{#ifCropLeftOvers @index ../data.post.otherImages.length 0}}
-											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' height=329 q='70' crop='fill' gravity='center'}}"/>
+											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' height=311 q='70' crop='fill' gravity='center'}}"/>
 										{{else}}
 											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' q='70'}}"/>
 										{{/ifCropLeftOvers}}

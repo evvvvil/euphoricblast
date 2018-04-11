@@ -154,12 +154,14 @@ module.exports = function () {
 	};
 
 	_helpers.ifCropLeftOvers = function (a,numOfProjects,offset, options) {
+
 	a+=offset;	
 		if(numOfProjects==1){
 				return options.fn(this);
 		}else{			
-			if(numOfProjects%5==1 || numOfProjects==4){
-				if(a==numOfProjects-1){
+			if(numOfProjects%5==4||numOfProjects%5==1){
+
+				if(numOfProjects-a<2|| numOfProjects==4){
 					return options.fn(this);
 				}				
 			}			
@@ -385,7 +387,7 @@ module.exports = function () {
 
 	// Direct url link to a specific post
 	_helpers.postUrl = function (postSlug, category, section, options) {
-		console.log(category);
+		
 		if(category===undefined) {
 			category='projects';
 		}
