@@ -35,7 +35,7 @@ Post.add({
 	otherImagesTitle:{type:Types.Text, dependsOn: {type: ['work','lab','blog'] } },
 
 	postsOrder: {type: Types.Relationship, ref: 'Post', filters: {categories: ':whichSubPage'},many: true, dependsOn: {pageType: ['sub page'] },note: 'By default, posts are ordered by date. Use this list to feature important posts first. Posts in this list will appear first and in the order they are in the list, then any posts not in this list will be shown after, ordered by date.'},
-	relatedPosts: {type: Types.Relationship, ref: 'Post', filters: {type: ':type'}, many: true, dependsOn: {type: ['work','lab','blog'] }},
+	relatedPosts: {type: Types.Relationship, ref: 'Post', filters: {type: ':type'}, many: true, note: 'Only relate projects in the same 1st category, because no way to filter per category, only categories.',dependsOn: {type: ['work','lab','blog'] }},
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 80 },
 		extended: { type: Types.Html, wysiwyg: true, height: 200 },
