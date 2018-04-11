@@ -385,6 +385,7 @@ module.exports = function () {
 
 	// Direct url link to a specific post
 	_helpers.postUrl = function (postSlug, category, section, options) {
+		console.log(category);
 		if(category===undefined) {
 			category='projects';
 		}
