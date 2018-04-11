@@ -25,6 +25,7 @@ exports = module.exports = function (req, res) {
 		q.exec(function (err, result) {
 			locals.data.post = result;
 			locals.data.relatedPosts=result.relatedPosts;
+			locals.section=result.type;
 			next(err);
 		});
 	});
