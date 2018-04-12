@@ -389,7 +389,7 @@ module.exports = function () {
 	_helpers.postUrl = function (postSlug, category, section, options) {
 		if(category===undefined) {
 			if(section=='Lab'){
-				category='Lab/';	
+				category='lab/';	
 			}else{
 				category='';	
 			}			
