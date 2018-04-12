@@ -1,15 +1,23 @@
 var keystone = require('keystone');
 var async = require('async');
 var _ = require('lodash');
+var MobileDetect = require('mobile-detect');
+//var useragent = require('useragent');
+//useragent(true);
 exports = module.exports = function (req, res) {
 
 	var view = new keystone.View(req, res);
 	var locals = res.locals;
+	var md = new MobileDetect(req.headers['user-agent']);
+//var agent = useragent.parse(req.headers['user-agent']);
+//console.log(agent);
 
+    
 	// Init locals
 	locals.section = 'Work';
 	locals.filters = {
 		category: req.params.category,
+		mobile:md.mobile(),
 	};
 	locals.data = {
 		featuredPosts: [],
@@ -19,6 +27,12 @@ exports = module.exports = function (req, res) {
 		paragraphs: [],
 		post: "",
 	};
+
+	/* RECEIVE AJAX
+	view.on('post', function (next,result) { 
+ 		locals.filters.widtho=JSON.stringify(Number(req.body.width));
+		next();
+	});*/
 
 	// Load all categories
 	view.on('init', function (next) {

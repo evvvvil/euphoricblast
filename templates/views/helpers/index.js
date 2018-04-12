@@ -169,6 +169,14 @@ module.exports = function () {
 		return options.inverse(this);				
 	};
 
+	_helpers.ifSmallDevice = function (a, options) {
+		if(a<=768){
+				return options.fn(this);
+		}else{			
+			return options.inverse(this);				
+		}
+	};
+
 	_helpers.ifSectionOrProject = function (a,b,c,options) {		
 		if(a==b||(a=="Project" && _.lowerCase(b)==c)){
 				return options.fn(this);
