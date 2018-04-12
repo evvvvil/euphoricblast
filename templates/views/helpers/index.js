@@ -386,9 +386,13 @@ module.exports = function () {
 	// the routes by keynames to reduce the maintenance of changing urls
 
 	// Direct url link to a specific post
-	_helpers.postUrl = function (postSlug, category, options) {
+	_helpers.postUrl = function (postSlug, category, section, options) {
 		if(category===undefined) {
-			category='';
+			if(section=='Lab'){
+				category='Lab/';	
+			}else{
+				category='';	
+			}			
 		}else{
 			category+='/';
 		}
