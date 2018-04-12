@@ -36,10 +36,10 @@ exports = module.exports = function (app) {
 	// Views
 	app.get('/', routes.views.index);
 	app.get('/work/:category?', routes.views.work);
-	app.get('/lab/:category?', routes.views.lab);
-	app.get('/blog/', routes.views.blog);
+	app.get('/lab/:category?', routes.views.lab);	
 	app.get('/work/:category?/:post', routes.views.post);
 	app.get('/lab/projects/:post', routes.views.post);
+	//app.get('/blog/', routes.views.blog);
 	//app.get('/gallery', routes.views.gallery);
 	app.all('/contact', routes.views.contact);
 
