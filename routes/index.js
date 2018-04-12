@@ -35,28 +35,16 @@ var routes = {
 exports = module.exports = function (app) {
 	// Views
 	app.get('/', routes.views.index);
+	app.get('/work/', routes.views.work);	
+	//app.get('/lab/:category?', routes.views.lab);
+	app.get('/lab/', routes.views.lab);
+	app.get('/lab/:post', routes.views.post);	
+	app.all('/contact', routes.views.contact);
 	app.get('/:category?', routes.views.work);
-	app.get('/work/', routes.views.work);
-	app.get('/lab/:category?', routes.views.lab);	
 	app.get('/:category?/:post', routes.views.post);
-	app.get('/lab/projects/:post', routes.views.post);
 	//app.get('/blog/', routes.views.blog);
 	//app.get('/gallery', routes.views.gallery);
-	app.all('/contact', routes.views.contact);
 
-/*
-	app.all('/bloomedwall', routes.views.bloomedwall);
-	app.get('/', routes.views.index);
-	app.get('/process', routes.views.process);
-	app.get('/:category?/projects', routes.views.projects);
-	app.get('/:category?/projects/:post', routes.views.post);
-	app.all('/:category?/contact', routes.views.contact);
-	app.get('/about/recruitment', routes.views.recruitment);
-	app.get('/about', routes.views.about);
-	app.get('/about/ourteam', routes.views.ourteam);
-	app.get('/:category?/essays', routes.views.essays);
-	app.get('/:category?/:post', routes.views.pagecontent);
-*/
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
 

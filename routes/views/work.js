@@ -76,6 +76,7 @@ exports = module.exports = function (req, res) {
 			});
 
 		}else{
+			console.log("here no cate"+locals.section.toLowerCase());
 			q = keystone.list('Post').model.findOne({
 				type: 'page content',
 				whichMainPage: locals.section.toLowerCase(),				
@@ -101,6 +102,7 @@ exports = module.exports = function (req, res) {
 				q.where('categories').limit(1).in([locals.data.category]);
 			}*/
 			q.exec(function (err, results) {
+				console.log("featured posts: "+results.length);
 				locals.data.featuredPosts = results;
 				next(err);
 			});
@@ -142,6 +144,8 @@ exports = module.exports = function (req, res) {
 				var inter = _.intersectionBy(results, locals.data.orderedPosts, "slug");
 				var diff = _.difference(results,inter);					
 				locals.data.posts = diff;
+				console.log("posts: "+diff.length);
+				
 				next(err);
 			});
 		}else{
@@ -150,7 +154,9 @@ exports = module.exports = function (req, res) {
 	});
 
 	// Load the paragraphs
-		
+		//SHOULDNT THIS BE SWAPPED AROUND THE IF STATEMENT
+		//?????????????????????????????????????????
+		//?????????????????
 		view.on('init', function (next) {
 			var q;
 				

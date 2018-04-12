@@ -386,17 +386,14 @@ module.exports = function () {
 	// the routes by keynames to reduce the maintenance of changing urls
 
 	// Direct url link to a specific post
-	_helpers.postUrl = function (postSlug, category, section, options) {
-		
+	_helpers.postUrl = function (postSlug, category, options) {
 		if(category===undefined) {
-			category='projects';
-		}
-		if(section=="Work"){
-			section='/';
+			category='';
 		}else{
-			section='/'+_.toLower(section)+'/';
+			category+='/';
 		}
-		return (section + category +'/'+ postSlug);
+	console.log('/'+ category + postSlug);
+		return ('/'+ category + postSlug);
 	};
 
 	// might be a ghost helper
@@ -407,7 +404,7 @@ module.exports = function () {
 
 	// create the category url for a blog-category page
 	_helpers.categoryUrl = function (categorySlug, section, options) {
-		return ('/'+_.lowerCase(section)+'/' + categorySlug);
+		return ('/' + categorySlug);
 	};
 
 	_helpers.capitalise = function (a) {
