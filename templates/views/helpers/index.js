@@ -391,7 +391,12 @@ module.exports = function () {
 		if(category===undefined) {
 			category='projects';
 		}
-		return ('/'+_.toLower(section)+'/'+ category +'/'+ postSlug);
+		if(section=="Work"){
+			section='/';
+		}else{
+			section='/'+_.toLower(section)+'/';
+		}
+		return (section + category +'/'+ postSlug);
 	};
 
 	// might be a ghost helper
