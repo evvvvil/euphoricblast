@@ -73,7 +73,9 @@ h2,h3{
 .background.grey .text-col a:hover,.background.light-grey .text-col a,.background.light-grey .text-col a:visited,.background.light-grey .text-col a:active{    
     color: #FFF;
 }
-
+span.pipe.kink{
+  display:none;
+}
 .ekko-lightbox-nav-overlay a span{
   text-shadow: 0px 0px 10px rgba(0,0,0,0.5);
 }
@@ -539,6 +541,12 @@ a.carousel-control.right:hover {
   }
 }
 @media (max-width: 768px){
+  h1.page-title{
+    font-size:1.8em;
+  }
+  h2.category-title {
+    font-size:1.3em;
+  }
   .category-col .project-image-container {
       height: 200px;
   }
@@ -553,11 +561,27 @@ a.carousel-control.right:hover {
   }
 }
 @media (max-width: 600px){ 
+  h1.page-title{
+   margin-bottom:5px;
+    display:block;
+  }
+  h2.category-title {
+    display: block;
+  }
+  span.pipe {
+    font-size: 36px;
+    vertical-align: 3px;
+  }
+  span.pipe.kink{
+    display:inline;
+    margin-left:2px;
+  }
   .category-col .project-image-container img {
       margin-top:-10%;
   } 
 }
 @media (max-width: 480px){
+
  .category-col .project-image-container {
       height: 100px;
   }
