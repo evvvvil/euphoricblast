@@ -14,7 +14,7 @@
 							<iframe id="euphoric-video" src="{{getVideoURL data.post.video}}" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 					</div>				
 					<div class="col-sm-12 col-md-6 col-lg-8 video-col">
-						{{#if data.post.content.brief}}<h3>{{{data.post.content.brief}}}</h3>{{/if}}						
+						{{#if data.post.content.brief}}<h3 class="content-brief">{{{data.post.content.brief}}}</h3>{{/if}}						
 						{{#if data.post.mainImage.exists}}<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='177' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>{{/if}}
 						{{>visit-website-header}}
 					</div>
@@ -24,7 +24,7 @@
 							<iframe id="euphoric-video" src="{{getVideoURL data.post.video}}" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 					</div>
 					<div class="col-sm-12 col-md-6 col-lg-8 video-col vimeo-fix">
-						{{#if data.post.content.brief}}<h3>{{{data.post.content.brief}}}</h3>{{/if}}						
+						{{#if data.post.content.brief}}<h3 class="content-brief">{{{data.post.content.brief}}}</h3>{{/if}}						
 						{{#if data.post.mainImage.exists}}<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='202' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>{{/if}}
 						{{>visit-website-header}}
 					</div>
@@ -46,7 +46,7 @@
 			<div class="container text-container">
 				<div class="row">
 					<div class="col-sm-12 col-md-12 text-col">
-					{{#if data.post.content.brief}}<h3>{{{data.post.content.brief}}}</h3>{{/if}}
+					{{#if data.post.content.brief}}<h3 class="content-brief">{{{data.post.content.brief}}}</h3>{{/if}}
 					{{#and data.post.mainImage.exists data.post.mainImageShow}}<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='202' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>{{/and}}
 					{{>visit-website-header}}
 				</div>
