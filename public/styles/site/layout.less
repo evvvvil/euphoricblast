@@ -73,9 +73,7 @@ h2,h3{
 .background.grey .text-col a:hover,.background.light-grey .text-col a,.background.light-grey .text-col a:visited,.background.light-grey .text-col a:active{    
     color: #FFF;
 }
-span.pipe.kink,span.pipe.right{
-  display:none;
-}
+
 .ekko-lightbox-nav-overlay a span{
   text-shadow: 0px 0px 10px rgba(0,0,0,0.5);
 }
@@ -96,7 +94,14 @@ a:focus{
 span.pipe{
     font-size: 32px;
     line-height: .1;
-    vertical-align: 2px;
+    vertical-align: 3px;
+    margin-left: 3px;
+    margin-right: 7px;
+}
+span.pipe.kink,span.pipe.right{
+ display:none;
+  margin-left: 0px;
+    margin-right: 0px;
 }
 .title-square{
     font-size: 2.9em;
@@ -538,6 +543,7 @@ a.carousel-control.right:hover {
   }
    span.pipe {
     font-size: 28px;
+    vertical-align: 1px;
   }
   .col-sm-6.col-md-4.project-col .project-image-container,.col-md-6.project-col .project-image-container,.col-md-12.project-col .project-image-container {
       max-height: 195px;
@@ -551,7 +557,8 @@ a.carousel-control.right:hover {
     font-size:1.2em;
   }
   span.pipe {
-    font-size: 23px;
+   font-size: 22px;
+    vertical-align: 2px;
   }
   .category-col .project-image-container {
       height: 200px;
@@ -604,7 +611,6 @@ a.carousel-control.right:hover {
   }
   span.pipe {
     font-size: 50px;
-    vertical-align: 2px;
     letter-spacing: -11px;
   }
   span.post-title {
@@ -632,7 +638,6 @@ a.carousel-control.right:hover {
   }
 }
 @media (max-width: 480px){
-
  .category-col .project-image-container {
       height: 100px;
   }
