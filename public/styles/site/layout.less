@@ -144,10 +144,21 @@ span.pipe.kink,span.pipe.right{
     overflow: hidden;
     border-bottom: none;
 }
-.close {
+.close, .close:focus {
     font-size: 45px;
+    color:#fff;
+        text-shadow: 0 0 10px rgba(0,0,0,0.5);
+        -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=.5);
+  opacity:.5;
+  transition: .25s ease;
 }
-
+.close:hover{
+color:#fff;
+-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: alpha(opacity=1);
+  opacity: 1;
+}
 /*NAVIGATION*/
 
 .navbar-nav{
