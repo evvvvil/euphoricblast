@@ -600,11 +600,7 @@ a.carousel-control.right:hover {
 @media (max-width: 768px){
   .paragragh-image-container-fluid {
     max-height: 150px;
-  }
-  .paragragh-image-container-fluid img{
-    margin-top:-19%;
-  }
-   
+  }  
   .paragraph-content-container h4 {
     font-size: 1.8em;
     width: 80%;
@@ -616,9 +612,7 @@ a.carousel-control.right:hover {
       height: 150px;
     overflow: hidden;
  }
- .paragraph-image-col img{
-    margin-top:-19%;
- }
+ 
   .paragraph-container {
       margin-top: 14px;
   }
@@ -666,10 +660,10 @@ a.carousel-control.right:hover {
   .category-col .project-image-container {
       height: 200px;
   }
-  .category-col .project-image-container img {
-      margin-top:-20%;
+  .category-col .project-image-container img,.paragraph-image-col img  {
+      margin-top:-18%;
   }
-  .category-col .project-image-container img.mobo {
+  .category-col .project-image-container img.mobo,.paragraph-image-col img {
       margin-top:0px;
   }
   .category-col {
@@ -744,8 +738,6 @@ a.carousel-control.right:hover {
     margin-top: 1px;
     margin-left: 3px;
   }
-  
-
   h2.category-title a{
     margin-left: 13px;
   }
@@ -771,16 +763,15 @@ a.carousel-control.right:hover {
     display: inline;    
     margin-left: -7px;
   }
-  .category-col .project-image-container img {
+  .category-col .project-image-container img,.paragraph-image-col img  {
       margin-top:-10%;
   } 
   #footer{
     font-size: 0.7em;
-  }
-  
+  }  
   span.footer-blurb{
     display: none;
-  }
+  }  
 }
 @media (max-width: 480px){
  .category-col .project-image-container {
@@ -789,10 +780,17 @@ a.carousel-control.right:hover {
  .category-col {
     height: 166px;
   } 
-  .category-col .project-image-container img {
-      margin-top:0px;
-  }
+  
   #footer{
     font-size: 0.6em;
   } 
+  .category-col .project-image-container img,.paragraph-image-col img  {
+      margin-top:-8%;
+  } 
 }
+@media (max-width: 390px){
+.category-col .project-image-container img,.paragraph-image-col img  {
+      margin-top:-5%;
+  } 
+}
+
