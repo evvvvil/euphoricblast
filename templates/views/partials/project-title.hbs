@@ -3,9 +3,9 @@
 	<!-- USE tidyAndCapitalise data.post.type instead in line below if your data.post.type can be two words -->
 	<h1 class="page-title"><a href="{{sectionURL data.post.type}}">{{capitalise data.post.type}}</a></h1>
 	{{#if filters.category}}
-	<h2 class="category-title"><span class="pipe">|</span><span class="pipe right">--</span><a class="category" href="{{categoryUrl filters.category data.post.type}}">{{tidyAndCapitalise filters.category}}</a></h2>
+	<h2 class="category-title"><span class="pipe">|</span><span class="pipe right">--</span><a href="{{categoryUrl filters.category data.post.type}}">{{tidyAndCapitalise filters.category}}</a></h2>
 	{{else}}
 	<h2 class="category-title"><span class="pipe">|</span></h2>
 	{{/if}}	
-	<h2 class="category-title post-title"><span class="pipe">|</span><span class="pipe kink">¬¬¬¬¬¬¬¬</span><span class="post-title">{{data.post.title}}</span></h2>	
+	<h2 class="category-title post-title"><span class="pipe">|</span><span class="pipe kink">¬¬</span><span class="post-title">{{data.post.title}}</span></h2>	
 </div>
