@@ -534,7 +534,7 @@ a.carousel-control.right:hover {
   h2.category-title {
     font-size:1.6em;
   }
-  .col-sm-6.project-col .project-image-container, .col-md-12.project-col .project-image-container {
+  .project-col .project-image-container{
       max-height: 195px;
   }
 }
@@ -562,7 +562,12 @@ a.carousel-control.right:hover {
   }
 }
 @media (max-width: 480px){
- 
+ .category-col .project-image-container {
+      height: 100px;
+  }
+ .category-col {
+    height: 166px;
+  } 
   .category-col .project-image-container img {
       margin-top:0px;
   }
