@@ -392,6 +392,12 @@ margin-bottom: 0px;
 .video-col>.img-responsive.lonely, .text-col>.img-responsive.lonely{ 
     margin-top:0px;
 }
+.weblink-container+.img-responsive{
+  filter: blur(2px) brightness(60%);
+}
+.weblink-container:hover+.img-responsive{
+  filter: blur(0px) brightness(100%);
+}
 a.project-link img{
   transition: all 0.5s;
 }
@@ -477,7 +483,6 @@ color: #fff;
               display: flex;
               align-items: center;
               justify-content: center;
-              background-color: rgba(0,0,0,.2);
               margin: 15px;
 }
 .weblink-alone{

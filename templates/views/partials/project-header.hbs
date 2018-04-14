@@ -15,8 +15,8 @@
 					</div>				
 					<div class="col-sm-12 col-md-6 col-lg-8 video-col">
 						{{#if data.post.content.brief}}<h3 class="content-brief">{{{data.post.content.brief}}}</h3>{{/if}}						
-						{{#if data.post.mainImage.exists}}<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='177' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>{{/if}}
 						{{>visit-website-header}}
+						{{#if data.post.mainImage.exists}}<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='177' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>{{/if}}						
 					</div>
 				{{else}}
 					{{#ifcontains data.post.video 'vimeo'}}
@@ -25,8 +25,9 @@
 					</div>
 					<div class="col-sm-12 col-md-6 col-lg-8 video-col vimeo-fix">
 						{{#if data.post.content.brief}}<h3 class="content-brief">{{{data.post.content.brief}}}</h3>{{/if}}						
-						{{#if data.post.mainImage.exists}}<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='202' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>{{/if}}
 						{{>visit-website-header}}
+						{{#if data.post.mainImage.exists}}<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='202' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>{{/if}}
+						
 					</div>
 					{{/ifcontains}}
 				{{/ifcontains}}	
