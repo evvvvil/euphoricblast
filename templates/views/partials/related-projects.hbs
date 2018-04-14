@@ -21,24 +21,24 @@
 		<div class="row">
 			<div class="container projects-container">
 				<div class="row related-projects">
-						{{#each data.relatedPosts }}
-							<a href="{{postUrl slug ../filters.category ../section}}" class="project-link">
-								<div class="col-sm-6 {{getColAdvanced @index ../data.relatedPosts.length 0}} project-col">			
-									<div class="project-title-container">
-										<h3 class="project-title">{{title}}</h3>
+					{{#each data.relatedPosts }}
+						<a href="{{postUrl slug ../filters.category ../section}}" class="project-link">
+							<div class="col-sm-6 {{getColAdvanced @index ../data.relatedPosts.length 0}} project-col related-col">			
+								<div class="project-title-container">
+									<h3 class="project-title">{{title}}</h3>
+								</div>
+								{{#if mainImage.exists}}								
+									<div class="project-image-container">
+										{{#ifCropLeftOvers @index ../data.relatedPosts.length 0}}
+											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' height=329 q='70' crop='fill' gravity='center'}}"/>
+										{{else}}
+											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' q='70'}}"/>
+										{{/ifCropLeftOvers}}
 									</div>
-									{{#if mainImage.exists}}								
-										<div class="project-image-container">
-											{{#ifCropLeftOvers @index ../data.relatedPosts.length 0}}
-												<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' height=329 q='70' crop='fill' gravity='center'}}"/>
-											{{else}}
-												<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' q='70'}}"/>
-											{{/ifCropLeftOvers}}
-										</div>
-									{{/if}}
-								</div>	
-							</a>
-						{{/each}}
+								{{/if}}
+							</div>	
+						</a>
+					{{/each}}
 				</div>
 			</div>
 		</div>
