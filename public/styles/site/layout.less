@@ -596,9 +596,7 @@ a.carousel-control.right:hover {
     font-size: 28px;
     vertical-align: 1px;
   } 
-  span.pipe.category {
-     transform: scale(0.5);
-  }
+
  
   .col-sm-6.col-md-4.project-col .project-image-container,.col-md-6.project-col .project-image-container,.col-md-12.project-col .project-image-container {
       max-height: 195px;
@@ -614,6 +612,11 @@ a.carousel-control.right:hover {
   }
   .paragraph-content-container {
     width: 100%;
+  }
+  span.pipe.category {
+     transform: scaleY(.5);
+    display: inline-block;
+       transform: translate(0px,12px);
   }
   .paragraph-content-container h4 {
     font-size: 1.8em;
@@ -665,8 +668,9 @@ a.carousel-control.right:hover {
     margin-left: 14px;
   }
   h2.category-title .category-title-text{
-    margin-bottom: 15px;
-  }
+      margin-bottom: 10px;
+    display: inline-block;
+}
   span.pipe {
    font-size: 22px;
     vertical-align: 2px;
