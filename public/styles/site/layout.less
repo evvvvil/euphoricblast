@@ -411,10 +411,16 @@ margin-bottom: 0px;
     margin-top:0px;
 }
 .weblink-container+.img-responsive{
+  -webkit-filter: blur(2px) brightness(60%);
   filter: blur(2px) brightness(60%);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Blur(PixelRadius='2')";
+  filter: blur(PixelRadius='2');
 }
 .weblink-container:hover+.img-responsive{
+  -webkit-filter: blur(0px) brightness(100%);
   filter: blur(0px) brightness(100%);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Blur(PixelRadius='0')";
+  filter: blur(PixelRadius='0');
 }
 a.project-link img{
   transition: all 0.5s;
