@@ -30,5 +30,5 @@ exports = module.exports = function (req, res) {
 		});
 	});
 	// Render the view
-	view.render('post', { bodyId: 'project-page', lightbox:'whatever', cloudinaryResponsive: 'whatever'});
+	view.render('post', { bodyId: 'project-page', lightbox:'whatever', cloudinaryResponsive: 'whatever', pageReloader:'whatever'});
 };
