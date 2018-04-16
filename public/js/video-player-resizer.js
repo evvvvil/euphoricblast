@@ -8,6 +8,7 @@ $( window ).resize(function() {
 
 function checkSize(){
 var wid=$(".col-lg-4.video-col").outerWidth();
+console.log("width: "+wid);
 	if(wid<=768){
 		$(".col-lg-4.video-col").height(Math.ceil((wid-30)*(9/16)));		
 	}
