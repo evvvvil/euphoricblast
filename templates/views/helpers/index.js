@@ -425,6 +425,8 @@ module.exports = function () {
 
 	_helpers.tidyAndCapitalise = function (a) {
 		//This is a messy but any other way lodash falls over with category starting with numbers like "3d graphics"
+		//also i have to make special case for VFX and VJing to be in caps, not elegant but easy,
+		//make your cuse case here if you want caps
 		return _.replace(_.replace(_.replace(_.replace(_.capitalize(a),'-and-', ' & '),'-',' '),'vfx','VFX'),'vjin','VJin');
 	};
 	// ### Pagination Helpers
