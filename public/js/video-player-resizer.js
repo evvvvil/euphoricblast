@@ -1,16 +1,21 @@
-/*$(document).ready(function(){
+$(document).ready(function(){
 	checkSize();
-});*/
+});
 
 $( window ).resize(function() {
+	checkSize();
+});
+
+function checkSize(){
 var wid=$(".col-lg-4.video-col").outerWidth();
-console.log("wdith "+wid);
+	console.log("wdith "+wid);
 	if(wid<768){
 		console.log("resizing video container!");
 		$(".col-lg-4.video-col").height(Math.floor((wid-30)/(9/16)));
-		console.log("resized to: "+Math.floor((wid-30)/(9/16)));
+		console.log("resized to: "+Math.floor((wid-30)*(9/16)));
 	}
-});
+}
+
 /*var bro;
 function checkHeight(bro){
 
