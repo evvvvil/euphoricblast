@@ -11,7 +11,7 @@ var wid=$(".col-lg-4.video-col").outerWidth();
 	console.log("wdith "+wid);
 	if(wid<768){
 		console.log("resizing video container!");
-		$(".col-lg-4.video-col").height(Math.floor((wid-30)/(9/16)));
+		$(".col-lg-4.video-col").height(Math.floor((wid-30)*(9/16)));
 		console.log("resized to: "+Math.floor((wid-30)*(9/16)));
 	}
 }
