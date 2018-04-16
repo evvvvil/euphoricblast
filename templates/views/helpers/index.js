@@ -425,7 +425,7 @@ module.exports = function () {
 
 	_helpers.tidyAndCapitalise = function (a) {
 		//This is a messy but any other way lodash falls over with category starting with numbers like "3d graphics"
-		return _.replace(_.replace(_.capitalize(a),'-and-', ' & '),'-',' ');
+		return _.replace(_.replace(_.replace(_.replace(_.capitalize(a),'-and-', ' & '),'-',' '),'vfx','VFX'),'vjin','VJin');
 	};
 	// ### Pagination Helpers
 	// These are helpers used in rendering a pagination system for content
