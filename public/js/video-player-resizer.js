@@ -1,6 +1,6 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
 	checkSize();
-});
+});*/
 
 $( window ).resize(function() {
 var wid=$(".col-lg-4.video-col").outerWidth();
