@@ -9,7 +9,11 @@ var prev;
 function checkForReload(){
 	if(prev>992 || prev<768)
 	{
-		location.reload();
+		var curWidth=$(window).outerWidth();
+		if(curWidth<992&&curWidth>769)
+		{
+		location.reload();	
+		}		
 	}
 	prev=$(window).outerWidth();
 }
