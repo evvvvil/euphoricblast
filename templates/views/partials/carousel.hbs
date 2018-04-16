@@ -13,7 +13,7 @@
 			<div class="carousel-inner">
 				{{#each data.post.images}}
 				<div class="item carousel-image-container {{#ifeq @index 0}}active{{/ifeq}}">
-				  <img class="d-block w-100" src="http://disco90s.com/wp-content/uploads/2015/03/Pat-Sharp.jpg"/>
+				  <img class="d-block w-100" src="{{cloudinaryUrl width='auto' q='70'}}"/>
 				</div>
 				{{/each}}    
 			</div>
