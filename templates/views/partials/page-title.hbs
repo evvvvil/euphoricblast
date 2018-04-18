@@ -1,5 +1,6 @@
 <div class="container post-title-container">	
-	<i class="glyphicon glyphicon-stop title-square"></i>
+	<!--<i class="glyphicon glyphicon-stop title-square"></i>-->
+	{{>drop-cap-svg}}
 	{{#if filters.category}}
 	<h1 class="page-title"><a href="{{sectionURL section}}">{{section}}</a></h1>
 	<h2 class="category-title"><span class="pipe category">|</span><span class="pipe right">--</span><span class="category-title-text">{{data.category.name}}</span></h2>

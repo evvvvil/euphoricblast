@@ -1,5 +1,6 @@
 <div class="container page-title-container">	
-	<i class="glyphicon glyphicon-stop title-square"></i>
+	<!--<i class="glyphicon glyphicon-stop title-square"></i>-->
+	{{>drop-cap-svg}}
 	<!-- USE tidyAndCapitalise data.post.type instead in line below if your data.post.type can be two words -->
 	<h1 class="page-title"><a href="{{sectionURL data.post.type}}">{{capitalise data.post.type}}</a></h1>
 	{{#if filters.category}}
