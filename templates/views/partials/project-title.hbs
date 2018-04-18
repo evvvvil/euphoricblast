@@ -1,12 +1,4 @@
-<div class="container page-title-container">	
-	<!--<i class="glyphicon glyphicon-stop title-square"></i>-->
-	{{>drop-cap-svg}}
-	<!-- USE tidyAndCapitalise data.post.type instead in line below if your data.post.type can be two words -->
-	<h1 class="page-title"><a href="{{sectionURL data.post.type}}">{{capitalise data.post.type}}</a></h1>
-	{{#if filters.category}}
-	<h2 class="category-title"><span class="pipe">|</span><span class="pipe right">--</span><a href="{{categoryUrl filters.category data.post.type}}">{{tidyAndCapitalise filters.category}}</a></h2>
-	{{else}}
-	<h2 class="category-title no-category"><span class="pipe small">|</span></h2>
-	{{/if}}	
-	<h2 class="category-title post-title"><span class="pipe">|</span><span class="pipe kink">¬¬</span><span class="post-title">{{data.post.title}}</span></h2>	
+<div class="container page-title-container">
+	{{>drop-cap-svg}}<h1 class="page-title"><a href="{{sectionURL data.post.type}}">{{capitalise data.post.type}}</a></h1>
+	{{#if filters.category}}<h2 class="category-title"><div class="spacer"></div><div class="category-title-text"><a href="{{categoryUrl filters.category data.post.type}}">{{tidyAndCapitalise filters.category}}</a></div></h2>{{else}}<h2 class="category-title no-category"><span class="pipe small">|</span></h2>{{/if}}<h2 class="category-title post-title"><div class="spacer"></div><div class="category-title-text">{{data.post.title}}</div></h2>	
 </div>
