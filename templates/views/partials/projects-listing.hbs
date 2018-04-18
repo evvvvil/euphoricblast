@@ -16,7 +16,7 @@
 									<h3 class="project-title">{{title}}</h3>
 								</div>
 								{{#if mainImage.exists}}								
-									<div class="project-image-container bro{{../data.posts.length}} sky{{../data.orderedPosts.length}}">
+									<div class="project-image-container">
 										{{#ifCropLeftOvers @index (addLength ../data.posts ../data.orderedPosts) 0}}
 											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' height=311 q='70' crop='fill' gravity=mainImageCrop}}"/>
 										{{else}}
