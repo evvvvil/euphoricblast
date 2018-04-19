@@ -78,7 +78,8 @@ h2,h3{
     position:absolute;
     top: 25px;
     left: 26px;
-    z-index: 1000;  
+    z-index: 1000; 
+    pointer-events: none; 
 }
 
 .content-extended,.content-more{    
@@ -278,6 +279,13 @@ color:#fff;
     margin-left: -3px;
     margin-right: 13px;
     margin-top: 3px;
+
+}
+.navbar-logo-container-rotate{
+    width: 44px;
+    height: 44px;
+    padding:0px;
+    margin:0px;
     transform: rotateZ(0deg);
     transition: .25s ease;
 }
@@ -308,7 +316,7 @@ color:#fff;
 .navbar-default a.navbar-double-link:hover .navbar-brand,.navbar-default a.navbar-double-link:focus .navbar-brand,.navbar-default a.navbar-double-link:hover, .navbar-default a.navbar-double-link:focus,.navbar-default a.navbar-double-link:hover .brand-bold, .navbar-default a.navbar-double-link:focus .brand-bold{
   color: #fff;
 }
-.navbar-default a.navbar-double-link:hover .navbar-logo-container #logo_whole{
+.navbar-default a.navbar-double-link:hover .navbar-logo-container .navbar-logo-container-rotate{
     transform: rotateZ(90deg) scale(.75);
 }
 /*WORK LAB BLOG CONTACT PROJECT PAGES*/
