@@ -1,21 +1,4 @@
 <div class="container post-title-container">
-	{{>drop-cap-svg}}<h1 class="page-title"><a href="{{sectionURL data.post.type}}">{{capitalise data.post.type}}</a></h1>
-	{{#if filters.category}}
-	<h2 class="category-title">
-		<div class="spacer mobile-hide"></div>
-		<div class="category-title-text">
-			<a href="{{categoryUrl filters.category data.post.type}}">{{tidyAndCapitalise filters.category}}</a>
-		</div>
-	</h2>
-	<h2 class="category-title post-title">
-		<div class="spacer mobile-hide"></div>
-		<div class="category-title-text">{{data.post.title}}</div>
-	</h2>{{>drop-cap-mobile-svg}}
-	{{else}}
-	<h2 class="category-title post-title">
-		<div class="spacer mobile-hide"></div>
-		<div class="category-title-text">{{data.post.title}}</div>
-	</h2>{{>drop-cap-mobile-simple-svg}}
-	{{/if}}
-		
+	{{>drop-cap-svg}}<h1 class="page-title"><a href="{{sectionURL data.post.type}}">{{capitalise data.post.type}}</a></h1>{{#if filters.category}}<h2 class="category-title">
+		<div class="spacer mobile-hide"></div><div class="category-title-text"><a href="{{categoryUrl filters.category data.post.type}}">{{tidyAndCapitalise filters.category}}</a></div></h2><h2 class="category-title post-title"><div class="spacer mobile-hide"></div><div class="category-title-text">{{data.post.title}}</div></h2>{{>drop-cap-mobile-svg}}{{else}}<h2 class="category-title post-title"><div class="spacer mobile-hide"></div><div class="category-title-text">{{data.post.title}}</div></h2>{{>drop-cap-mobile-simple-svg}}{{/if}}		
 </div>
