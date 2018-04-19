@@ -31,70 +31,76 @@
 
 	</head>
 	<body>
+		<header>
 		<div id="header">
+			<nav>
 			<div class="container-fluid">
 				<div class="row">
-				<div role="navigation" class="navbar navbar-default navbar-polygon">
-					<div class="container">
-						<div class="navbar-header">
-							<button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-							</button>
-							<a href="/" class="navbar-double-link">
-							<div class="navbar-logo-container"><div class="navbar-logo-container-rotate">{{>logo-svg}}</div></div>
-							<div class="navbar-brand-container"><div class="navbar-brand">Euphoric <span class="brand-bold">Blast</span></div></div>
-							</a>
-						</div>
+					<div role="navigation" class="navbar navbar-default navbar-polygon">
+						<div class="container">
+							<div class="navbar-header">
+								<button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+								</button>
+								<a href="/" class="navbar-double-link">
+								<div class="navbar-logo-container"><div class="navbar-logo-container-rotate">{{>logo-svg}}</div></div>
+								<div class="navbar-brand-container"><div class="navbar-brand">Euphoric <span class="brand-bold">Blast</span></div></div>
+								</a>
+							</div>
 						
-						<div class="collapse navbar-collapse">
-							<ul class="nav navbar-nav navbar-left">
-									{{# each navLinks}}
-									<li {{#ifSectionOrProject ../section key ../data.post.type}}class="active"{{/ifSectionOrProject}}>
-										<a href="{{ href }}">{{ label }}</a>
-									</li>
-								{{/each}}
-							</ul>
-							<!--<ul class="nav navbar-nav navbar-right navbar-social navbar-collapse">
-								<li><a href="#" title="Follow Us On Facebook"><i class="fa fa-facebook"></i></a></li>
-      							<li><a href="#" title="Follow Us On Google Plus"><i class="fa fa-twitter"></i></a></li>
-      							<li><a href="https://www.youtube.com/channel/UCQKU0AE0r8wPtbwTFh846Hw" target="_blank" title="Follow Us On YouTube"><i class="fa fa-youtube"></i></a></li>
-      							<li><a href="#" title="Follow Us On Linked In"><i class="fa fa-vimeo"></i></a></li>
-							</ul>-->
+							<div class="collapse navbar-collapse">
+								<ul class="nav navbar-nav navbar-left">
+										{{# each navLinks}}
+										<li {{#ifSectionOrProject ../section key ../data.post.type}}class="active"{{/ifSectionOrProject}}>
+											<a href="{{ href }}">{{ label }}</a>
+										</li>
+									{{/each}}
+								</ul>
+								<!--<ul class="nav navbar-nav navbar-right navbar-social navbar-collapse">
+									<li><a href="#" title="Follow Us On Facebook"><i class="fa fa-facebook"></i></a></li>
+	      							<li><a href="#" title="Follow Us On Google Plus"><i class="fa fa-twitter"></i></a></li>
+	      							<li><a href="https://www.youtube.com/channel/UCQKU0AE0r8wPtbwTFh846Hw" target="_blank" title="Follow Us On YouTube"><i class="fa fa-youtube"></i></a></li>
+	      							<li><a href="#" title="Follow Us On Linked In"><i class="fa fa-vimeo"></i></a></li>
+								</ul>-->
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		</div>
+		</nav>
+	</div>
+	</header>
 		<div id="{{bodyId}}">
+			{{#if messages}}
 			<!--
 				Flash messages allow you to display once-off status messages to users, e.g. form
 				validation errors, success messages, etc
 			-->
-			{{#if messages}}
-			<div id="flash-messages" class="container">
-				{{#if messages.info}}
-				<div class="alert alert-info">
-						{{{flashMessages messages.info}}}
+			<section id="section-flash-messages">
+				<div id="flash-messages" class="container">
+					{{#if messages.info}}
+					<div class="alert alert-info">
+							{{{flashMessages messages.info}}}
+					</div>
+					{{/if}}
+					{{#if messages.success}}
+					<div class="alert alert-success">
+							{{{flashMessages messages.success}}}
+					</div>
+					{{/if}}
+					{{#if messages.warning}}
+					<div class="alert alert-warning">
+							{{{flashMessages messages.warning}}}
+					</div>
+					{{/if}}
+					{{#if messages.error}}
+					<div class="alert alert-danger">
+							{{{flashMessages messages.error}}}
+					</div>
+					{{/if}}
 				</div>
-				{{/if}}
-				{{#if messages.success}}
-				<div class="alert alert-success">
-						{{{flashMessages messages.success}}}
-				</div>
-				{{/if}}
-				{{#if messages.warning}}
-				<div class="alert alert-warning">
-						{{{flashMessages messages.warning}}}
-				</div>
-				{{/if}}
-				{{#if messages.error}}
-				<div class="alert alert-danger">
-						{{{flashMessages messages.error}}}
-				</div>
-				{{/if}}
-			</div>
+			</section>
 			{{/if}}
 			<!-- The content block should contain the body of your template's content-->
 			{{{body}}}
