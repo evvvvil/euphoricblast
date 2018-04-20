@@ -70,12 +70,18 @@ h2,h3{
 .category-col:after, .project-col:after {
     content: '';
     position: absolute;
-    top: 49px;
+    top: 42px;
     left: 7px;
     border-left: 1px solid #ffc800;
-    height: 75%;
+    height: 162px;
     width: 1px;
 }
+.col-sm-6.col-md-4.project-col:after{
+  height: 162px;
+ }
+ .col-sm-6.col-md-3.project-col:after{
+  height: 162px;
+ }
 .post-title-container,.page-title-container{
   position:relative;
 }
@@ -686,8 +692,15 @@ a.carousel-control.right:hover {
   .category-col {
     height: 181px;
   }
-  
- 
+  .category-col:after, .project-col:after {   
+    height: 162px;
+  }
+ .col-sm-6.col-md-4.project-col:after{
+  height: 162px;
+ }
+ .col-sm-6.col-md-3.project-col:after{
+  height: 162px;
+ }
 }
 
 @media (max-width: 992px){
