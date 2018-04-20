@@ -1,12 +1,12 @@
 $(document).ready(function(){
-	checkSize();
+	checkVideoSize();
 });
 
 $( window ).resize(function() {
-	checkSize();
+	checkVideoSize();
 });
 
-function checkSize(){
+function checkVideoSize(){
 var wid=$(window).outerWidth();
 //console.log("width: "+wid);
 	if(wid<=768){
