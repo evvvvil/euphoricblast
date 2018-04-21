@@ -12,7 +12,7 @@ function checkLineSize(){
 	if(wid<=390){
 		$(".side-line").each(function( index, value ){
 			var curHeight=$(this).closest().children('.project-image-container').outerHeight();
-			console.log("curHeight: "+curHeight);
+			console.log("curHeight: "+$(this).closest());
 			$(this).height(curHeight+8);
 		});
 	}
