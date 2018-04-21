@@ -57,24 +57,7 @@ h2,h3{
     margin-top: 0px;
     margin-bottom: 15px;
 }
-.category-col:before, .project-col:before {
-    content: '';
-    position: absolute;
-    top: 7px;
-    right: 7px;
-    border-right: 1px solid #ffc800;
-    border-top: 1px solid #ffc800;
-    height: 8px;
-    width: 8px;
-}
-.category-col .side-line, .project-col .side-line {
-    position: absolute;
-    top: 49px;
-    left: 7px;
-    border-left: 1px solid #ffc800;
-    height: 155px;
-    width: 1px;
-}
+
 .project-col.image-col .side-line {
     top:15px;
 }
@@ -338,6 +321,24 @@ color:#fff;
     margin-bottom: 15px;
     padding-top: 16px;
 }
+.category-col:before, .project-col:before {
+    content: '';
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    border-right: 1px solid #ffc800;
+    border-top: 1px solid #ffc800;
+    height: 8px;
+    width: 8px;
+}
+.category-col .side-line, .project-col .side-line {
+    position: absolute;
+    top: 49px;
+    left: 7px;
+    border-left: 1px solid #ffc800;
+    height: 155px;
+    width: 1px;
+}
 h1.page-title,h2.category-title{
     display:inline-block; 
 }
@@ -395,10 +396,10 @@ h3.project-title{
     overflow:hidden;
 }
 .col-md-6.project-col .project-image-container,.col-md-12.project-col .project-image-container {
-    max-height: 311px;
+   height: 311px;
 }
 .col-sm-6.col-md-4.project-col .project-image-container{
-    max-height: 203px;
+    height: 203px;
 }
 .read-more-state {
   display: none;
@@ -678,11 +679,12 @@ a.carousel-control.right:hover {
       width: 41.8%;
       height: 212px;
   }
-
-  
-  .col-sm-6.col-md-4.project-col .project-image-container,.col-md-6.project-col .project-image-container,.col-md-12.project-col .project-image-container {
-    max-height: 255px;
-  }
+.col-md-6.project-col .project-image-container,.col-md-12.project-col .project-image-container {
+    height: 255px;
+}
+.col-sm-6.col-md-4.project-col .project-image-container{
+    height: 165px;
+}
   .category-col {
     height: 181px;
   }
@@ -699,10 +701,7 @@ a.carousel-control.right:hover {
  .col-sm-6.col-md-4.project-col .side-line{
   height: 172px;
  }
- .col-sm-6.col-md-6.project-col .side-line{
-  height: 262px;
- }
-  .col-sm-6.col-md-12.project-col .side-line{
+ .col-sm-6.col-md-6.project-col .side-line,.col-sm-6.col-md-12.project-col .side-line{
   height: 262px;
  }
 }
@@ -759,8 +758,8 @@ a.carousel-control.right:hover {
   #header {
     margin-bottom: 30px;
   }  
-  .col-sm-6.col-md-4.project-col .project-image-container,.col-md-6.project-col .project-image-container,.col-md-12.project-col .project-image-container {
-    max-height: 193px;
+  .project-image-container{
+    height: 194px;
   }
   .weblink-container{
     top:25px;
