@@ -9,11 +9,12 @@ $( window ).resize(function() {
 function checkVideoSize(){
 var wid=$(window).outerWidth();
 //console.log("width: "+wid);
-	if(wid<=768){
+	if(wid<=768 && wid>480){
 		var curWid=$(".col-lg-4.video-col").outerWidth();
-		$(".col-lg-4.video-col").outerHeight(Math.floor((wid-30)*(9/16)));		
+		$(".col-lg-4.video-col").height(Math.floor((wid-30)*(9/16)));		
 	}
-	/*else{
-		$(".col-lg-4.video-col").height("100%");		
-	}*/
+	else if(wid<=480){
+		var curWid=$(".col-lg-4.video-col").outerWidth();
+		$(".col-lg-4.video-col").height(Math.ceil((wid-30)*(9/16)));
+	}
 }
