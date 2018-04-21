@@ -396,10 +396,10 @@ h3.project-title{
     overflow:hidden;
 }
 .col-md-6.project-col .project-image-container,.col-md-12.project-col .project-image-container {
-   height: 311px;
+    max-height: 311px;
 }
 .col-sm-6.col-md-4.project-col .project-image-container{
-    height: 203px;
+    max-height: 203px;
 }
 .read-more-state {
   display: none;
@@ -453,8 +453,6 @@ h3.project-title{
 label.read-more-trigger{
 margin-bottom: 0px;
 }
-
-
 .video-col {
     height: 203px;
     margin-bottom:30px;
@@ -680,10 +678,10 @@ a.carousel-control.right:hover {
       height: 212px;
   }
 .col-md-6.project-col .project-image-container,.col-md-12.project-col .project-image-container {
-    height: 255px;
+    max-height: 255px;
 }
 .col-sm-6.col-md-4.project-col .project-image-container{
-    height: 165px;
+    max-height: 165px;
 }
   .category-col {
     height: 181px;
@@ -706,7 +704,16 @@ a.carousel-control.right:hover {
  }
 }
 @media (max-width: 992px){
-  .side-line {   
+  .category-col .side-line {   
+    height: 201px;
+  }
+ .col-sm-6.col-md-4.project-col .side-line{
+    height: 200px;
+ }
+ .col-sm-6.col-md-6.project-col .side-line{
+    height: 200px;
+ }
+  .col-sm-6.col-md-12.project-col .side-line{
     height: 200px;
   }
   .title-square {
@@ -724,9 +731,9 @@ a.carousel-control.right:hover {
   .col-lg-4.vimeo-fix {
     width: 54%;
   }
-  /*.category-col {
+  .category-col {
     height: 255px;
-  }*/
+  }
   .video-col h3, .text-col h3 {
     font-size: 1.5em;
   }
@@ -749,8 +756,8 @@ a.carousel-control.right:hover {
   #header {
     margin-bottom: 30px;
   }  
-  .project-image-container{
-    height: 194px;
+  .col-sm-6.col-md-4.project-col .project-image-container,.col-md-6.project-col .project-image-container,.col-md-12.project-col .project-image-container {
+    max-height: 194px;
   }
   .weblink-container{
     top:25px;
