@@ -8,7 +8,7 @@
 				<h3 class="project-title small-category-title">{{name}}</h3>
 				{{#each ../data.featuredPosts}}
 							{{#ifPostIsInCategory categories ../name}}
-								{{#if mainImage.exists}}<div class="small-category-image-container"><img class="cld-responsive img-responsive mobo" data-src="{{cloudinaryUrl mainImage width='auto' height=40 q='70' crop='fill' gravity=mainImageCrop}}"/></div>{{/if}}	
+								{{#if mainImage.exists}}<div class="small-category-image-container"><img class="cld-responsive img-responsive mobo" data-src="{{cloudinaryUrl mainImage width='auto' height=45 q='70' crop='fill' gravity=mainImageCrop}}"/></div>{{/if}}	
 							{{/ifPostIsInCategory}}
 				{{/each}}
 			</div>	
