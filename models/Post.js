@@ -40,7 +40,7 @@ Post.add({
 		brief: { type: Types.Html, wysiwyg: true, height: 50 },
 		extended: { type: Types.Html, wysiwyg: true, height: 200 },
 		more: { type: Types.Html, wysiwyg: true, height: 80 ,dependsOn: {type: ['work','lab','blog','page content']}},
-		extra: { type: Types.Html, wysiwyg: true, height: 40, collapse:true, dependsOn: {type: ['work','lab','blog'] } },
+		extra: { type: Types.Html, wysiwyg: true, height: 40, collapse:true, dependsOn: {type: ['work','lab','blog','page content'] } },
 		end: { type: Types.Html, wysiwyg: true, height: 40, collapse:true, dependsOn: {type: ['work','lab','blog'] } },
 	},	
 	link: {
