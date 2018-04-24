@@ -1,4 +1,3 @@
-
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('euphoric-video', {
         events: {
