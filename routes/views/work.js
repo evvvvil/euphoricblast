@@ -116,7 +116,6 @@ exports = module.exports = function (req, res) {
 				q.where('categories').limit(1).in([locals.data.category]);
 			}*/
 			q.exec(function (err, results) {
-				console.log("featured posts: "+results.length);
 				locals.data.featuredPosts = results;
 				next(err);
 			});
