@@ -29,10 +29,10 @@
 		<div class="row">
 			<div class="container large-video-container">
 				<div class="row">					
-					<div class="col-sm-12 col-md-6 col-lg-8 large-video-col">
+					<div class="col-sm-12 col-md-8 col-lg-8 large-video-col">
 							<iframe id="euphoric-video" src="{{getVideoURL data.post.video}}" width="100%" height="100%" frameborder="0" loop="1" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 					</div>				
-					<div class="col-sm-12 col-md-6 col-lg-4 large-video-col">
+					<div class="col-sm-12 col-md-4 col-lg-4 large-video-col">
 						{{#if data.post.content.more}}<h3 class="content-brief">{{{data.post.content.more}}}</h3>{{/if}}
 						{{#if data.post.content.extra}}<span class="content-extra">{{{data.post.content.extra}}}</span>{{/if}}
 						{{>categories-small}}
