@@ -32,10 +32,7 @@ exports = module.exports = function (req, res) {
 				return next(err);
 			}
 			locals.data.categories = results;
-			
-			}, function (err) {
-				next(err);
-			});
+			next(err);			
 		});
 	});
 
