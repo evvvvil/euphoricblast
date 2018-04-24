@@ -18,7 +18,6 @@
 						{{#if data.post.content.brief}}<h3>{{{data.post.content.brief}}}</h3>{{/if}}
 						{{#if data.post.content.extended}}{{{data.post.content.extended}}}{{/if}}						
 						{{#if data.post.mainImage.exists}}<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='177' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>{{/if}}
-						{{>visit-website-header}}
 					</div>
 				{{else}}
 					{{#ifcontains data.post.video 'vimeo'}}
@@ -29,7 +28,6 @@
 						{{#if data.post.content.brief}}<h3>{{{data.post.content.brief}}}</h3>{{/if}}	
 						{{#if data.post.content.extended}}{{{data.post.content.extended}}}{{/if}}					
 						{{#if data.post.mainImage.exists}}<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='202' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>{{/if}}
-						{{>visit-website-header}}
 					</div>
 					{{/ifcontains}}
 				{{/ifcontains}}								
