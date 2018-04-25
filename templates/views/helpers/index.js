@@ -22,24 +22,21 @@ module.exports = function () {
 	// standard hbs equality check, pass in two values from template
 	// {{#ifeq keyToCheck data.myKey}} [requires an else blockin template regardless]
 
-	_helpers.printName = function (a) {
-		
-			return a["name.full"];
-		
+	_helpers.printName = function (a) {		
+			return a["name.full"];		
 	};
 
-	_helpers.add = function (a, b) {
-		
-			return  (a+b);
-		
+	_helpers.add = function (a, b) {		
+			return  (a+b);		
 	};
+
 	_helpers.addLength = function (a, b) {
 		var countA=0;var countB=0;
 		if(a!==undefined) countA=a.length;
 		if(b!==undefined) countB=b.length;
-			return  (countA+countB);
-		
+			return  (countA+countB);		
 	};
+
 	_helpers.getLength = function (a) {
 		var countA=0;
 		if(a!==undefined) countA=a.length;
@@ -110,6 +107,13 @@ module.exports = function () {
 		}
 	};
 
+	_helpers.ifdefined = function (a, options) {		
+		if (a !== undefined) { // eslint-disable-line eqeqeq
+			return options.fn(this);
+		} else {
+			return options.inverse(this);
+		}
+	};
 
 	_helpers.or = function(/* any, any, ..., options */) {
 	  var len = arguments.length - 1;
@@ -217,6 +221,13 @@ module.exports = function () {
 			return "https://player.vimeo.com/video/"+_.split(a,".com/")[1]+"?title=0&byline=0&portrait=0&color=000000&muted=1";
 		}else{
 			return "https://www.youtube.com/embed/"+_.split(a,"v=")[1]+"?enablejsapi=1&showinfo=0";
+		}
+	};
+	_helpers.getHomeVideoURL = function (a) {
+		if(a.includes("vimeo")){
+			return "https://player.vimeo.com/video/"+_.split(a,".com/")[1]+"?title=0&byline=0&portrait=0&color=000000&muted=1";
+		}else{
+			return "https://www.youtube.com/embed/"+_.split(a,"v=")[1]+"?enablejsapi=1&showinfo=0&loop=1&modestbranding=1";
 		}
 	};
 	_helpers.ifLocationIsWeb = function (a,options) {
