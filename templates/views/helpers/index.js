@@ -227,7 +227,8 @@ module.exports = function () {
 		if(a.includes("vimeo")){
 			return "https://player.vimeo.com/video/"+_.split(a,".com/")[1]+"?title=0&byline=0&portrait=0&color=000000&muted=1";
 		}else{
-			return "https://www.youtube.com/embed/"+_.split(a,"v=")[1]+"?enablejsapi=1&showinfo=0&loop=1&modestbranding=1";
+			var ytID=_.split(a,"v=")[1];
+			return "https://www.youtube.com/embed/"+ytID+"?enablejsapi=1&showinfo=0&loop=1&playlist="+ytID;
 		}
 	};
 	_helpers.ifLocationIsWeb = function (a,options) {
