@@ -223,12 +223,12 @@ module.exports = function () {
 			return "https://www.youtube.com/embed/"+_.split(a,"v=")[1]+"?enablejsapi=1&showinfo=0";
 		}
 	};
-	_helpers.getHomeVideoURL = function (a) {
+	_helpers.getLoopVideoURL = function (a) {
 		if(a.includes("vimeo")){
-			return "https://player.vimeo.com/video/"+_.split(a,".com/")[1]+"?title=0&byline=0&portrait=0&color=000000&muted=1";
+			return "https://player.vimeo.com/video/"+_.split(a,".com/")[1]+"?title=0&byline=0&portrait=0&color=000000&muted=1&loop=1";
 		}else{
 			var ytID=_.split(a,"v=")[1];
-			return "https://www.youtube.com/embed/"+ytID+"?enablejsapi=1&showinfo=0&loop=1&playlist="+ytID;
+			return "https://www.youtube.com/embed/"+ytID+"?enablejsapi=1&showinfo=0&autoplay=1&loop=1&playlist="+ytID;
 		}
 	};
 	_helpers.ifLocationIsWeb = function (a,options) {
