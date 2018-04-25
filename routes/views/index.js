@@ -10,7 +10,6 @@ exports = module.exports = function (req, res) {
 	locals.section = 'Home';
 	locals.data = {
 		categories: [],
-		featuredPosts: [],
 		post: "",
 	};
 	// Load the page post
@@ -36,21 +35,6 @@ exports = module.exports = function (req, res) {
 			next(err);			
 		});
 	});
-
-view.on('init', function (next) {
-			var q = keystone.list('Post').model.find({
-					state: 'published',				
-					type: 'work',
-					featured: true,
-				})
-				.sort('-publishedDate')
-				.populate('categories');			
-			q.exec(function (err, results) {
-				locals.data.featuredPosts = results;
-				next(err);
-			});
-
-		});
 
 	// Render the view
 	view.render('index', { bodyId: 'home-page', video:'whatever', carousel:'whatever', cloudinaryResponsive: 'whatever'});
