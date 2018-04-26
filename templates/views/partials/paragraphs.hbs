@@ -3,7 +3,7 @@
 	{{#if mainImage.exists}}
 		<div class="container-fluid paragragh-image-container-fluid">
 			<div class="row">		
-				<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' height=300 q='80' crop='fill' gravity='north'}}"/>			
+				<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' height=300 q='80' crop='fill' gravity=mainImageCrop}}"/>			
 			</div>
 		</div>
 	{{/if}}
@@ -55,7 +55,7 @@
 						<div class="row paragraph-content-container">
 									{{#ifeq images.length 1}}
 									<div class="col-sm-12 col-md-12">
-										<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.otherImages.[0] width='auto' height=329 crop='fill' gravity='center' q='80'}}"/>
+										<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.otherImages.[0] width='auto' height=329 crop='fill' gravity=mainImageCrop q='80'}}"/>
 									</div>
 									{{else}}					
 										{{#each images}}
