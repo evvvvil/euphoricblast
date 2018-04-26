@@ -25,7 +25,7 @@ function isMobile() {
 function checkVideoSize(){
 	var offset=0;
 	if(!isMobile){
-		offset=-20;
+		offset=-10;
 	}
 	var wid=$(window).outerWidth();
 	if(wid<=768 && wid>480){
