@@ -10,9 +10,9 @@ function isMobile() {
     return true;
   }
   
-  if ('screen' in window && window.screen.width < 1366) {
+  /*if ('screen' in window && window.screen.width < 1366) {
     return true;
-  }
+  }*/
 
   var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
   if (connection && connection.type === 'cellular') {
@@ -25,7 +25,7 @@ function isMobile() {
 function checkVideoSize(){
 	var offset=0;
 	if(!isMobile){
-		offset=-10;
+		offset=-20;
 	}
 	var wid=$(window).outerWidth();
 	if(wid<=768 && wid>480){
