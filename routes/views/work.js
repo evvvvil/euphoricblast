@@ -90,7 +90,6 @@ exports = module.exports = function (req, res) {
 			});
 
 		}else{
-			console.log("here no cate"+locals.section.toLowerCase());
 			q = keystone.list('Post').model.findOne({
 				type: 'page content',
 				whichMainPage: locals.section.toLowerCase(),				
@@ -156,9 +155,7 @@ exports = module.exports = function (req, res) {
 				//remove posts which are already shown as featured posts			
 				var inter = _.intersectionBy(results, locals.data.orderedPosts, "slug");
 				var diff = _.difference(results,inter);					
-				locals.data.posts = diff;
-				console.log("posts: "+diff.length);
-				
+				locals.data.posts = diff;				
 				next(err);
 			});
 		}else{
@@ -167,9 +164,6 @@ exports = module.exports = function (req, res) {
 	});
 
 	// Load the paragraphs
-		//SHOULDNT THIS BE SWAPPED AROUND THE IF STATEMENT
-		//?????????????????????????????????????????
-		//?????????????????
 		view.on('init', function (next) {
 			var q;
 				
@@ -177,14 +171,14 @@ exports = module.exports = function (req, res) {
 			q = keystone.list('Post').model.find({
 				state: 'published',				
 				type: 'page paragraph',
-				whichMainPage: 'Work',							
-			}).sort('-publishedDate');
-		}else{
+				whichSubPage: locals.data.category,					
+			}).sort('-publishedDate');	
+		}else{			
 			q = keystone.list('Post').model.find({
 				state: 'published',				
 				type: 'page paragraph',
-				whichSubPage: locals.data.category,					
-			}).sort('-publishedDate');			
+				whichMainPage: 'work',							
+			}).sort('-publishedDate');
 		}
 			q.exec(function (err, results) {
 				locals.data.paragraphs = results;

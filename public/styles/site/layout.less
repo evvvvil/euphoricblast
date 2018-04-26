@@ -797,6 +797,8 @@ h3.project-title.small-category-title {
     height: 212px;
   }
   .category-col {
+    width: 50%;
+    float: left;
     height: 255px;
   }
   .category-col .project-image-container {
@@ -833,7 +835,6 @@ h3.project-title.small-category-title {
   .col-sm-6.col-md-4.project-col .project-image-container,.col-md-6.project-col .project-image-container,.col-md-12.project-col .project-image-container {
     height: 194px;
   }
-
   .weblink-container{
     top:25px;
   }  
@@ -894,13 +895,13 @@ h3.project-title.small-category-title {
     margin-right: auto;
   }
  .paragraph-image-col{
-  margin-bottom:15px;  
-      height: 150px;
+    margin-bottom:15px;  
+    height: 150px;
     overflow: hidden;
     padding: 0px;
   } 
   .paragraph-container {
-      margin-top: 14px;
+    margin-top: 14px;
   }   
   #header {
     margin-top: 15px;
@@ -1043,7 +1044,6 @@ h3.project-title.small-category-title {
     float: left;
   }
 }
-
 @media (max-width: 700px){ 
   .project-image-container img,.paragraph-image-col img  {
       margin-top:-12%;
@@ -1052,14 +1052,13 @@ h3.project-title.small-category-title {
     margin-top: -3%;
   }
   .logo-container {
-      top: -91px;
+    top: -91px;
     right: 90px;
     width: 138px;
     height: 79px;
   }
 }
-@media (max-width: 600px){   
- 
+@media (max-width: 600px){ 
   h2.category-title {
     font-size: 20px;
     display: block; 
@@ -1127,6 +1126,10 @@ h3.project-title.small-category-title {
   }
   .category-col,.project-col{
     padding-top: 17px;
+  }
+  .category-col {
+    width: 100%;
+    clear:both;
   }
   #footer{
     font-size: 0.7em;

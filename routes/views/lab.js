@@ -14,6 +14,7 @@ exports = module.exports = function (req, res) {
 	locals.data = {
 		posts: [],
 		categories: [],
+		paragraphs: [],
 		post: "",
 	};
 
@@ -90,6 +91,20 @@ exports = module.exports = function (req, res) {
 			next(err);
 		});
 	});
+
+	// Load the paragraphs
+		view.on('init', function (next) {
+			var q = keystone.list('Post').model.find({
+				state: 'published',				
+				type: 'page paragraph',
+				whichMainPage: 'lab',							
+			}).sort('-publishedDate');
+		
+			q.exec(function (err, results) {
+				locals.data.paragraphs = results;
+				next(err);
+			});
+		});
 
 	// Render the view
 	view.render('lab', { bodyId: 'lab-page', carousel:'whatever', cloudinaryResponsive: 'whatever'});
