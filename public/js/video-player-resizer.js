@@ -18,15 +18,16 @@ function isMobile() {
   if (connection && connection.type === 'cellular') {
     return true;
   }
-
+  console.log("is not mobile!");
   return false;
 }
 
 function checkVideoSize(){
 	var offset=0;
-	if(!isMobile){
+	if(!isMobile()){
 		offset=-10;
 	}
+	console.log("offset "+offset);
 	var wid=$(window).outerWidth();
 	if(wid<=768 && wid>480){
 		var curWid=$(".video-resize").outerWidth();
