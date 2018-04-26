@@ -11,7 +11,7 @@
 				<div class="row">
 					
 				{{#ifcontains data.post.video 'youtu'}}	
-					<div class="col-sm-12 col-md-6 col-lg-4 video-col">
+					<div class="col-sm-12 col-md-6 col-lg-4 video-col video-resize">
 							<iframe id="euphoric-video" src="{{getVideoURL data.post.video}}" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 					</div>				
 					<div class="col-sm-12 col-md-6 col-lg-8 video-col">
@@ -21,7 +21,7 @@
 					</div>
 				{{else}}
 					{{#ifcontains data.post.video 'vimeo'}}
-					<div class="col-sm-12 col-md-6 col-lg-4 video-col vimeo-fix">
+					<div class="col-sm-12 col-md-6 col-lg-4 video-col vimeo-fix video-resize">
 							<iframe id="euphoric-video" src="{{getVideoURL data.post.video}}" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 					</div>
 					<div class="col-sm-12 col-md-6 col-lg-8 video-col vimeo-fix">
