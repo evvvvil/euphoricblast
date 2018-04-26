@@ -8,6 +8,7 @@ exports = module.exports = function (req, res) {
 	locals.section = 'Home';
 	locals.data = {
 		categories: [],
+		paragraphs: [],
 		post: "",
 	};
 	// Load the page post
@@ -33,6 +34,22 @@ exports = module.exports = function (req, res) {
 			next(err);			
 		});
 	});
+
+	
+		view.on('init', function (next) {
+			var q= keystone.list('Post').model.find({
+				state: 'published',				
+				type: 'page paragraph',
+				whichMainPage: 'Home',							
+			}).sort('-publishedDate');
+		
+			q.exec(function (err, results) {
+				locals.data.paragraphs = results;
+				next(err);
+			});
+		});
+
+
 	// Render the view
 	view.render('index', { bodyId: 'home-page', video:'whatever', carousel:'whatever', cloudinaryResponsive: 'whatever'});
 };
