@@ -38,8 +38,6 @@ module.exports = function () {
 				}else{
 					if(section=="Lab"){
 						description=" - Lab";
-					}else{
-						description=" - "+section;	
 					}
 				}
 				if(postType=="work"||postType=="lab"||postType=="blog"){
@@ -48,9 +46,7 @@ module.exports = function () {
 				return description;
 			}
 	};
-
-
-
+	
 	_helpers.add = function (a, b) {		
 			return  (a+b);		
 	};
