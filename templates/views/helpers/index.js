@@ -77,7 +77,7 @@ module.exports = function () {
 			if(section=="Home"){
 				return intro+" "+whatWeDo;
 			}else if(section=="Contact"){
-				return "Euphoric Blast contact page. "+intro;
+				return "Euphoric Blast contact page. Faster than drones & piegon mail."+intro;
 			}else{
 				var description;
 				section=_.startCase(section);
