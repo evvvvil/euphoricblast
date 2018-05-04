@@ -26,6 +26,33 @@ module.exports = function () {
 			return a["name.full"];		
 	};
 
+	_helpers.pageTitle = function (section, category, postTitle, postType) {	
+		var intro=" - London Creative Studio";	
+			if(section=="Home"){
+				return intro;
+			}else{
+				var description;
+				section=_.startCase(section);
+				if(category!==undefined){
+					description=" - "+_.startCase(category);
+				}else{
+					if(section=="Lab"){
+						description=" - Lab";
+					}else{
+						description=" - "+section;	
+					}
+				}
+				if(postType=="work"||postType=="lab"||postType=="blog"){
+					description+=" - "+postTitle;
+					if(postContentBrief!==undefined){
+						description+=" - "+postContentBrief.replace(/<\/?[^>]+(>|$)/g, "");
+					}
+				}		
+				return description;
+			}
+	};
+
+
 
 	_helpers.add = function (a, b) {		
 			return  (a+b);		
