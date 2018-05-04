@@ -110,31 +110,32 @@ module.exports = function () {
 	};
 
 	_helpers.getMetaKeywords = function (section, category, postTitle, postType, postContentBrief) {	
-		var generalKeywords="interactive design,virtual reality,3d,vfx,motion graphics,projection mapping,graphic design,web development,video games,vjing,london";	
+		var generalKeywords="interactive design,virtual reality,3d,vfx,motion graphics,projection mapping,graphic design,web development,video games,vjing,london,projection,motion,virtual,reality,design,interactive";	
 		if(section=="Home"){
 			return generalKeywords;
 		}else if(section=="Contact"){
 			return "contact,form,"+generalKeywords;
 		}else{
 			var keywords;
+			section=section.toLowerCase();
 			if(category!==undefined){
 				category=tidyShitUp(category,1)
-				keywords=_.lowerCase(section)+","+category+","+category.replace("&","").replace(/[\s,]+/g,",");
+				keywords=section+","+category+","+category.replace("&","").replace(/[\s,]+/g,",");
 			}else{
 				if(section=="Lab"){
-					keywords="lab,digital,experiments";
+					keywords="lab,experiments,";
 				}else{
-					keywords=_.lowerCase(section)+","+generalKeywords;	
+					keywords=section;	
 				}
 			}
 			if(postType=="work"||postType=="lab"||postType=="blog"){
 				keywords+=","+postTitle.replace(/[\s,]+/g,",").toLowerCase();
-			}		
+			}else{
+				keywords+=","+generalKeywords;
+			}
 			return keywords;
 		}
-	};
-
-	
+	};	
 
 	_helpers.addLength = function (a, b) {
 		var countA=0;var countB=0;
