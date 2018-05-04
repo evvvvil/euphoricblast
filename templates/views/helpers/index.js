@@ -9,9 +9,11 @@ var util = require('handlebars-utils');
 var linkTemplate = _.template('<a href="<%= url %>"><%= text %></a>');
 var scriptTemplate = _.template('<script src="<%= src %>"></script>');
 var cssLinkTemplate = _.template('<link href="<%= href %>" rel="stylesheet">');
-var toTidy;
-var lower;
+var toTidy, lower;
 function tidyShitUp(toTidy,lower){
+	//This is a messy but any other way lodash falls over with category starting with numbers like "3d graphics"
+	//also i have to make special case for VFX and VJing to be in caps, not elegant but easy,
+	//make your use case here if you want caps
 	if(lower>0){
 		return _.replace(_.replace(_.replace(_.replace(toTidy.toLowerCase(),'-and-', ' & '),'-',' '),'vfx','VFX'),'vjin','VJin');
 	}else{
@@ -537,11 +539,8 @@ module.exports = function () {
 	_helpers.capitalise = function (a) {
 		return _.capitalize(a);
 	};
-	_helpers.tidyAndCapitalise = function (a) {
-		//This is a messy but any other way lodash falls over with category starting with numbers like "3d graphics"
-		//also i have to make special case for VFX and VJing to be in caps, not elegant but easy,
-		//make your cuse case here if you want caps
-		tidyShitUp(a);
+	_helpers.tidyAndCapitalise = function (a) {		
+		tidyShitUp(a,0);
 	};
 
 	// ### Pagination Helpers
