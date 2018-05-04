@@ -30,6 +30,20 @@ module.exports = function () {
 			return  (a+b);		
 	};
 
+	_helpers.getMetaContent = function (a, b) {		
+			if(a=="Home"){
+				return "We're amazing and we never spill our tea. We laugh at rocket science. Interactive design, virtual reality, 3d VFX, video games, motion graphics, web development, projection, VJing, graphic design.";
+			}else{
+				if(b!==undefined){
+				return a+", "+b;
+				}else{
+					return a;
+				}
+			}
+	};
+
+	
+
 	_helpers.addLength = function (a, b) {
 		var countA=0;var countB=0;
 		if(a!==undefined) countA=a.length;
