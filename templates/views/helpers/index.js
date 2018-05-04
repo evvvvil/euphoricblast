@@ -110,7 +110,7 @@ module.exports = function () {
 		}else{
 			var keywords;
 			if(category!==undefined){
-				keywords=_.lowerCase(section)+","+tidyShitUp(category).replace(/[\s,]+/g,",");
+				keywords=_.lowerCase(section)+","+tidyShitUp(category).replace("&","").replace(/[\s,]+/g,",");
 			}else{
 				if(section=="Lab"){
 					keywords="lab,digital,experiments";
