@@ -18,6 +18,7 @@ exports = module.exports = function (req, res) {
 	
 	// Load the current post
 	view.on('init', function (next) {
+		
 		var q = keystone.list('Post').model.findOne({
 			state: 'published',
 			slug: locals.filters.post,
@@ -25,8 +26,11 @@ exports = module.exports = function (req, res) {
 		
 		q.exec(function (err, result) {
 			locals.data.post = result;
-			locals.data.relatedPosts=result.relatedPosts;
-			locals.section=result.type;
+			if(result!=null){	
+				locals.data.relatedPosts=result.relatedPosts;
+				locals.section=result.type;				
+			}			
+			
 			next(err);
 		});
 	});

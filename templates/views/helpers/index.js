@@ -35,20 +35,21 @@ module.exports = function () {
 				section=_.startCase(section);
 				if(category!==undefined){
 					if(postType=="work"||postType=="lab"||postType=="blog"){
-						description+=" - "+postTitle;
+						description=" - "+postTitle;
 					}else{
 						description=" - "+_.startCase(category);
 					}					
 				}else{
 					if(section=="Lab"){
-						description=" - Lab";
+						if(postType=="work"||postType=="lab"||postType=="blog"){
+							description=" - "+postTitle;
+						}else{
+							description=" - Lab";
+						}						
 					}else{
-						description=" - "+section;	
-					}
-				}
-				if(postType=="work"||postType=="lab"||postType=="blog"){
-					description+=" - "+postTitle;
-				}		
+						description=" - "+section;						
+					}					
+				}						
 				return description;
 			}
 	};
