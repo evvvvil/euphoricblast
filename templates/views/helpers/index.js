@@ -676,6 +676,18 @@ module.exports = function () {
 		}
 		
 	};
+	_helpers.ifPostIsInCategoryKey = function (categories, category, options) {
+		var found=false;	
+			if(categories[0].key==category){
+				found=true;
+			}
+		if(found){
+			return options.fn(this);
+		}else{
+			return options.inverse(this);	
+		}
+		
+	};
 
 
 
