@@ -43,10 +43,11 @@ module.exports = function () {
 				if(postType=="work"||postType=="lab"||postType=="blog"){
 					description+=" - "+postTitle;
 				}		
+				console.log("descri "+description);
 				return description;
 			}
 	};
-	
+
 	_helpers.add = function (a, b) {		
 			return  (a+b);		
 	};
