@@ -131,7 +131,9 @@ module.exports = function () {
 			if(postType=="work"||postType=="lab"||postType=="blog"){
 				keywords+=","+postTitle.replace(/[\s,]+/g,",").toLowerCase();
 			}else{
-				keywords+=","+generalKeywords;
+				if(category==undefined){
+					keywords+=","+generalKeywords;
+				}
 			}
 			return keywords;
 		}
