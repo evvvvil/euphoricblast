@@ -71,20 +71,21 @@ module.exports = function () {
 				var description;
 				section=_.startCase(section);
 				if(category!==undefined){
-					description=section+" - "+_.startCase(category);
+					if(postType=="work"||postType=="lab"||postType=="blog"){
+						//description=postTitle;
+						if(postContentBrief!==undefined){
+							description=postContentBrief.replace(/<\/?[^>]+(>|$)/g, "");
+						}
+					}else{
+						description="Euphoric Blast "+_.startCase(category)+" projects.";
+					}					
 				}else{
 					if(section=="Lab"){
-						description="Lab - Our digital experiments - ";
+						description="Euphoric Blast digital experiments.";
 					}else{
-						description=section+" - "+whatWeDo+" "+intro;	
+						description=whatWeDo+" "+intro+" "+section;	
 					}
-				}
-				if(postType=="work"||postType=="lab"||postType=="blog"){
-					description+=" - "+postTitle;
-					if(postContentBrief!==undefined){
-						description+=" - "+postContentBrief.replace(/<\/?[^>]+(>|$)/g, "");
-					}
-				}		
+				}						
 				return description;
 			}
 	};
