@@ -122,12 +122,13 @@ module.exports = function () {
 			if(category!==undefined){
 				category=tidyShitUp(category,1)
 				keywords+=","+category+","+category.replace("&","").replace(/[\s,]+/g,",");				
-				return keywords;
 			}
 			if(postType=="work"||postType=="lab"||postType=="blog"){
 				keywords+=","+postTitle.replace(/[\s,]+/g,",").toLowerCase();
 			}else{
-				keywords+=","+generalKeywords;				
+				if(category==undefined){
+					keywords+=","+generalKeywords;				
+				}
 			}
 			return keywords;
 		}
