@@ -117,6 +117,7 @@ exports = module.exports = function (req, res) {
 			}*/
 			q.exec(function (err, results) {
 				locals.data.featuredPosts = results;
+				console.log("featured posts "+results);
 				next(err);
 			});
 
