@@ -60,6 +60,14 @@ module.exports = function () {
 			}
 	};
 
+	_helpers.getFacebookOGImage = function (section, image) {	
+			if(section!="Project"){
+				return "http://www.euphoricblast.com/images/og-image.jpg";
+			}else{
+				return image;
+			}
+	};
+
 	_helpers.getMetaKeywords = function (section, category, postTitle, postType, postContentBrief) {	
 		var generalKeywords="interactive design,virtual reality,3d,vfx,motion graphics,projection mapping,graphic design,web development,video games,vjing,london";	
 		if(section=="Home"){
