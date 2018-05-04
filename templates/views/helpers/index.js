@@ -9,7 +9,10 @@ var util = require('handlebars-utils');
 var linkTemplate = _.template('<a href="<%= url %>"><%= text %></a>');
 var scriptTemplate = _.template('<script src="<%= src %>"></script>');
 var cssLinkTemplate = _.template('<link href="<%= href %>" rel="stylesheet">');
-
+var toTidy;
+function tidyShitUp(toTidy){
+	return _.replace(_.replace(_.replace(_.replace(_.capitalize(toTidy),'-and-', ' & '),'-',' '),'vfx','VFX'),'vjin','VJin');
+}
 module.exports = function () {
 
 	var _helpers = {};
@@ -37,7 +40,7 @@ module.exports = function () {
 					if(postType=="work"||postType=="lab"||postType=="blog"){
 						description=" - "+postTitle;
 					}else{
-						description=" - "+_.startCase(category);
+						description=" - "+tidyShitUp(category);
 					}					
 				}else{
 					if(section=="Lab"){
@@ -77,7 +80,7 @@ module.exports = function () {
 							description=_.unescape(postContentBrief.replace(/<\/?[^>]+(>|$)/g, ""));
 						}
 					}else{
-						description="Euphoric Blast "+_.startCase(category)+" projects.";
+						description="Euphoric Blast "+tidyShitUp(category)+" projects.";
 					}					
 				}else{
 					if(section=="Lab"){
@@ -107,7 +110,7 @@ module.exports = function () {
 		}else{
 			var keywords;
 			if(category!==undefined){
-				keywords=_.lowerCase(section)+","+_.lowerCase(category);
+				keywords=_.lowerCase(section)+","+tidyShitUp(category).replace(/[\s,]+/g,",");
 			}else{
 				if(section=="Lab"){
 					keywords="lab,digital,experiments";
@@ -116,7 +119,7 @@ module.exports = function () {
 				}
 			}
 			if(postType=="work"||postType=="lab"||postType=="blog"){
-				keywords+=","+postTitle.replace(/[\s,]+/g,",");;
+				keywords+=","+postTitle.replace(/[\s,]+/g,",");
 			}		
 			return keywords;
 		}
@@ -510,7 +513,6 @@ module.exports = function () {
 		}else{
 			category+='/';
 		}
-	console.log('/'+ category + postSlug);
 		return ('/'+ category + postSlug);
 	};
 
@@ -528,13 +530,13 @@ module.exports = function () {
 	_helpers.capitalise = function (a) {
 		return _.capitalize(a);
 	};
-
 	_helpers.tidyAndCapitalise = function (a) {
 		//This is a messy but any other way lodash falls over with category starting with numbers like "3d graphics"
 		//also i have to make special case for VFX and VJing to be in caps, not elegant but easy,
 		//make your cuse case here if you want caps
-		return _.replace(_.replace(_.replace(_.replace(_.capitalize(a),'-and-', ' & '),'-',' '),'vfx','VFX'),'vjin','VJin');
+		tidyShitUp(a);
 	};
+
 	// ### Pagination Helpers
 	// These are helpers used in rendering a pagination system for content
 	// Mostly generalized and with a small adjust to `_helper.pageUrl` could be universal for content types
