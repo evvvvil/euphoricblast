@@ -60,8 +60,8 @@ module.exports = function () {
 			}
 	};
 
-	_helpers.getFacebookOGImage = function (section, image) {	
-			if(section!="Project"){
+	_helpers.getFacebookOGImage = function (postTitle, image) {
+			if(postTitle==undefined){
 				return "http://www.euphoricblast.com/images/og-image.jpg";
 			}else{
 				return image;
