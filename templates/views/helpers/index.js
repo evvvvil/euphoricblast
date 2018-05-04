@@ -40,19 +40,20 @@ module.exports = function () {
 				return "Contact us. "+intro;
 			}else{
 				var description;
+				section=_.startCase(section);
 				if(category!==undefined){
-					description=section+", "+_.lowerCase(category);
+					description=section+" - "+_.startCase(category);
 				}else{
 					if(section=="Lab"){
-						description="Lab, our digital experiments. "+intro;
+						description="Lab - Our digital experiments - ";
 					}else{
-						description=section+": "+whatWeDo+" "+intro;	
+						description=section+" - "+whatWeDo+" "+intro;	
 					}
 				}
 				if(postType=="work"||postType=="lab"||postType=="blog"){
-					description+=", "+postTitle;
+					description+=" - "+postTitle;
 					if(postContentBrief!==undefined){
-						description+=", "+postContentBrief.replace(/<\/?[^>]+(>|$)/g, "");
+						description+=" - "+postContentBrief.replace(/<\/?[^>]+(>|$)/g, "");
 					}
 				}		
 				return description;
