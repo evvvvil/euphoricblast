@@ -34,19 +34,26 @@ module.exports = function () {
 				var description;
 				section=_.startCase(section);
 				if(category!==undefined){
-					description=" - "+_.startCase(category);
+					if(postType=="work"||postType=="lab"||postType=="blog"){
+						description+=" - "+postTitle;
+					}else{
+						description=" - "+_.startCase(category);
+					}					
 				}else{
 					if(section=="Lab"){
 						description=" - Lab";
+					}else{
+						description=" - "+section;	
 					}
 				}
 				if(postType=="work"||postType=="lab"||postType=="blog"){
 					description+=" - "+postTitle;
 				}		
-				console.log("descri "+description);
 				return description;
 			}
 	};
+
+
 
 	_helpers.add = function (a, b) {		
 			return  (a+b);		
