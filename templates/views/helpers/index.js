@@ -77,7 +77,7 @@ module.exports = function () {
 			if(section=="Home"){
 				return intro+" "+whatWeDo;
 			}else if(section=="Contact"){
-				return "Contact us. "+intro;
+				return "Euphoric Blast contact page. "+intro;
 			}else{
 				var description;
 				section=_.startCase(section);
@@ -94,7 +94,7 @@ module.exports = function () {
 					if(section=="Lab"){
 						description="Euphoric Blast digital experiments.";
 					}else{
-						description=whatWeDo+" "+intro+" "+section;	
+						description=section+" page. "+whatWeDo+" "+intro;	
 					}
 				}						
 				return description;
@@ -128,7 +128,7 @@ module.exports = function () {
 				}
 			}
 			if(postType=="work"||postType=="lab"||postType=="blog"){
-				keywords+=","+postTitle.replace(/[\s,]+/g,",");
+				keywords+=","+postTitle.replace(/[\s,]+/g,",").toLowerCase();
 			}		
 			return keywords;
 		}
