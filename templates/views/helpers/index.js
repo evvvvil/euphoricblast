@@ -74,7 +74,7 @@ module.exports = function () {
 					if(postType=="work"||postType=="lab"||postType=="blog"){
 						//description=postTitle;
 						if(postContentBrief!==undefined){
-							description=postContentBrief.replace(/<\/?[^>]+(>|$)/g, "");
+							description=_.escape(postContentBrief.replace(/<\/?[^>]+(>|$)/g, ""));
 						}
 					}else{
 						description="Euphoric Blast "+_.startCase(category)+" projects.";
