@@ -540,7 +540,7 @@ module.exports = function () {
 		return _.capitalize(a);
 	};
 	_helpers.tidyAndCapitalise = function (a) {		
-		tidyShitUp(a,0);
+		return tidyShitUp(a,0);
 	};
 
 	// ### Pagination Helpers
