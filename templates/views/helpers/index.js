@@ -44,9 +44,6 @@ module.exports = function () {
 				}
 				if(postType=="work"||postType=="lab"||postType=="blog"){
 					description+=" - "+postTitle;
-					if(postContentBrief!==undefined){
-						description+=" - "+postContentBrief.replace(/<\/?[^>]+(>|$)/g, "");
-					}
 				}		
 				return description;
 			}
