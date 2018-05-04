@@ -68,12 +68,12 @@ module.exports = function () {
 		}else{
 			var keywords;
 			if(category!==undefined){
-				keywords=section+","+_.lowerCase(category);
+				keywords=_.lowerCase(section)+","+_.lowerCase(category);
 			}else{
 				if(section=="Lab"){
 					keywords="lab,digital,experiments";
 				}else{
-					keywords=section+": "+whatWeDo;	
+					keywords=_.lowerCase(section)+","+generalKeywords;	
 				}
 			}
 			if(postType=="work"||postType=="lab"||postType=="blog"){
