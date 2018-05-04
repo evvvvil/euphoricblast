@@ -77,7 +77,7 @@ module.exports = function () {
 				}
 			}
 			if(postType=="work"||postType=="lab"||postType=="blog"){
-				keywords+=","+_.replace(postTitle," ",",");
+				keywords+=","+postTitle.replace(/[\s,]+/g,",");;
 			}		
 			return keywords;
 		}
