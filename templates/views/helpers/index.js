@@ -10,8 +10,14 @@ var linkTemplate = _.template('<a href="<%= url %>"><%= text %></a>');
 var scriptTemplate = _.template('<script src="<%= src %>"></script>');
 var cssLinkTemplate = _.template('<link href="<%= href %>" rel="stylesheet">');
 var toTidy;
-function tidyShitUp(toTidy){
-	return _.replace(_.replace(_.replace(_.replace(_.capitalize(toTidy),'-and-', ' & '),'-',' '),'vfx','VFX'),'vjin','VJin');
+var lower;
+function tidyShitUp(toTidy,lower){
+	if(lower>0){
+		return _.replace(_.replace(_.replace(_.replace(_.lowerCase(toTidy),'-and-', ' & '),'-',' '),'vfx','VFX'),'vjin','VJin');
+	}else{
+		return _.replace(_.replace(_.replace(_.replace(_.capitalize(toTidy),'-and-', ' & '),'-',' '),'vfx','VFX'),'vjin','VJin');	
+	}
+	
 }
 module.exports = function () {
 
@@ -40,7 +46,7 @@ module.exports = function () {
 					if(postType=="work"||postType=="lab"||postType=="blog"){
 						description=" - "+postTitle;
 					}else{
-						description=" - "+tidyShitUp(category);
+						description=" - "+tidyShitUp(category,0);
 					}					
 				}else{
 					if(section=="Lab"){
@@ -80,7 +86,7 @@ module.exports = function () {
 							description=_.unescape(postContentBrief.replace(/<\/?[^>]+(>|$)/g, ""));
 						}
 					}else{
-						description="Euphoric Blast "+tidyShitUp(category)+" projects.";
+						description="Euphoric Blast "+tidyShitUp(category,1)+" projects.";
 					}					
 				}else{
 					if(section=="Lab"){
@@ -110,7 +116,8 @@ module.exports = function () {
 		}else{
 			var keywords;
 			if(category!==undefined){
-				keywords=_.lowerCase(section)+","+tidyShitUp(category).replace("&","").replace(/[\s,]+/g,",");
+				category=tidyShitUp(category,1)
+				keywords=_.lowerCase(section)+","+category+","+category.replace("&","").replace(/[\s,]+/g,",");
 			}else{
 				if(section=="Lab"){
 					keywords="lab,digital,experiments";
