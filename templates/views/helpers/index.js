@@ -26,20 +26,61 @@ module.exports = function () {
 			return a["name.full"];		
 	};
 
+
 	_helpers.add = function (a, b) {		
 			return  (a+b);		
 	};
 
-	_helpers.getMetaContent = function (a, b) {		
-			if(a=="Home"){
-				return "We're amazing and we never spill our tea. We laugh at rocket science. Interactive design, virtual reality, 3d VFX, video games, motion graphics, web development, projection, VJing, graphic design.";
+	_helpers.getMetaDescription = function (section, category, postTitle, postType, postContentBrief) {	
+		var intro="We're amazing and we never spill our tea. We laugh at rocket science.";	
+		var whatWeDo="Interactive design, virtual reality, 3d VFX, video games, motion graphics, web development, projection, VJing, graphic design.";	
+			if(section=="Home"){
+				return intro+" "+whatWeDo;
+			}else if(section=="Contact"){
+				return "Contact us. "+intro;
 			}else{
-				if(b!==undefined){
-				return a+", "+b;
+				var description;
+				if(category!==undefined){
+					description=section+", "+_.lowerCase(category);
 				}else{
-					return a;
+					if(section=="Lab"){
+						description="Lab, our digital experiments. "+intro;
+					}else{
+						description=section+": "+whatWeDo+" "+intro;	
+					}
+				}
+				if(postType=="work"||postType=="lab"||postType=="blog"){
+					description+=", "+postTitle;
+					if(postContentBrief!==undefined){
+						description+=", "+postContentBrief.replace(/<\/?[^>]+(>|$)/g, "");
+					}
+				}		
+				return description;
+			}
+	};
+
+	_helpers.getMetaKeywords = function (section, category, postTitle, postType, postContentBrief) {	
+		var generalKeywords="interactive design,virtual reality,3d,vfx,motion graphics,projection mapping,graphic design,web development,video games,vjing,london";	
+		if(section=="Home"){
+			return generalKeywords;
+		}else if(section=="Contact"){
+			return "contact,form,"+generalKeywords;
+		}else{
+			var keywords;
+			if(category!==undefined){
+				keywords=section+","+_.lowerCase(category);
+			}else{
+				if(section=="Lab"){
+					keywords="lab,digital,experiments";
+				}else{
+					keywords=section+": "+whatWeDo;	
 				}
 			}
+			if(postType=="work"||postType=="lab"||postType=="blog"){
+				keywords+=","+_.replace(postTitle," ",",");
+			}		
+			return keywords;
+		}
 	};
 
 	
