@@ -112,28 +112,21 @@ module.exports = function () {
 	_helpers.getMetaKeywords = function (section, category, postTitle, postType, postContentBrief) {	
 		var generalKeywords="interactive design,virtual reality,3d,vfx,motion graphics,projection mapping,graphic design,web development,video games,vjing,london,projection,motion,virtual,reality,design,interactive";	
 		if(section=="Home"){
-			return generalKeywords;
+			return "euphoric,blast,"+generalKeywords;
 		}else if(section=="Contact"){
 			return "contact,form,"+generalKeywords;
 		}else{
 			var keywords;
 			section=section.toLowerCase();
+			keywords=section;
 			if(category!==undefined){
 				category=tidyShitUp(category,1)
-				keywords=section+","+category+","+category.replace("&","").replace(/[\s,]+/g,",");
-			}else{
-				if(section=="Lab"){
-					keywords="lab,experiments,";
-				}else{
-					keywords=section;	
-				}
+				keywords+=","+category+","+category.replace("&","").replace(/[\s,]+/g,",");				
 			}
 			if(postType=="work"||postType=="lab"||postType=="blog"){
 				keywords+=","+postTitle.replace(/[\s,]+/g,",").toLowerCase();
 			}else{
-				if(category==undefined){
-					keywords+=","+generalKeywords;
-				}
+				keywords+=","+generalKeywords;				
 			}
 			return keywords;
 		}
