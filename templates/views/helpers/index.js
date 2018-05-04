@@ -13,7 +13,7 @@ var toTidy;
 var lower;
 function tidyShitUp(toTidy,lower){
 	if(lower>0){
-		return _.replace(_.replace(_.replace(_.replace(_.lowerCase(toTidy),'-and-', ' & '),'-',' '),'vfx','VFX'),'vjin','VJin');
+		return _.replace(_.replace(_.replace(_.replace(toTidy.toLowerCase(),'-and-', ' & '),'-',' '),'vfx','VFX'),'vjin','VJin');
 	}else{
 		return _.replace(_.replace(_.replace(_.replace(_.capitalize(toTidy),'-and-', ' & '),'-',' '),'vfx','VFX'),'vjin','VJin');	
 	}
