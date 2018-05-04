@@ -6,6 +6,7 @@ exports = module.exports = function (req, res) {
 	// locals.section is used to set the currently selected
 	// item in the header navigation.
 	locals.section = 'Home';
+	locals.orginalURL="http://www.euphoricblast.com"+req.originalUrl;
 	locals.data = {
 		categories: [],
 		paragraphs: [],

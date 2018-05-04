@@ -8,6 +8,7 @@ exports = module.exports = function (req, res) {
 
 	// Init locals
 	locals.section = 'Lab';
+	locals.orginalURL="http://www.euphoricblast.com"+req.originalUrl;
 	locals.filters = {
 		category: req.params.category,
 	};

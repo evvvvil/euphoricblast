@@ -6,6 +6,7 @@ exports = module.exports = function (req, res) {
 
 	// Set locals
 	locals.section = 'Project';
+	locals.orginalURL="http://www.euphoricblast.com"+req.originalUrl;
 	locals.filters = {
 		post: req.params.post,
 		category: req.params.category,

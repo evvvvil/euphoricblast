@@ -9,6 +9,7 @@ exports = module.exports = function (req, res) {
 
 	// Set locals
 	locals.section = 'Contact';
+	locals.orginalURL="http://www.euphoricblast.com"+req.originalUrl;
 	//locals.enquiryTypes = Enquiry.fields.enquiryType.ops;
 	locals.formData = req.body || {};
 	locals.validationErrors = {};

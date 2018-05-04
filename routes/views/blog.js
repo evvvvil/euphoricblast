@@ -5,7 +5,8 @@ exports = module.exports = function (req, res) {
 	var locals = res.locals;
 
 	// Init locals
-	locals.section = 'Blog';	
+	locals.section = 'Blog';
+	locals.orginalURL="http://www.euphoricblast.com"+req.originalUrl;	
 	locals.data = {
 		posts: [],
 		post:"",

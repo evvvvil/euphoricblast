@@ -7,6 +7,7 @@ exports = module.exports = function (req, res) {
 
 	// Set locals
 	locals.section = 'Gallery';
+	locals.orginalURL="http://www.euphoricblast.com"+req.originalUrl;
 
 	// Load the galleries by sortOrder
 	view.query('galleries', keystone.list('Gallery').model.find().sort('sortOrder'));

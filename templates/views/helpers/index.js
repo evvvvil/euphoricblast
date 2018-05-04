@@ -60,11 +60,11 @@ module.exports = function () {
 			}
 	};
 
-	_helpers.getFacebookOGImage = function (postTitle, image) {
-			if(postTitle==undefined){
-				return "http://www.euphoricblast.com/images/og-image.jpg";
+	_helpers.getFacebookOGImage = function (postType, image) {
+			if(postType=="work"||postType=="lab"||postType=="blog"){
+				return image;				
 			}else{
-				return image;
+				return "http://www.euphoricblast.com/images/og-image.jpg";
 			}
 	};
 
