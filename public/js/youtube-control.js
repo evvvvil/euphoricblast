@@ -1,6 +1,9 @@
 var player;
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('euphoric-video', {
+    	playerVars: {
+                      'autoplay': 1
+                  },
         events: {
 		   'onReady': onPlayerReady
         }
