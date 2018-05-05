@@ -3,7 +3,7 @@ var Enquiry = keystone.list('Enquiry');
 var Email = require('keystone-email');
 var handlebars=require('express-handlebars');
 exports = module.exports = function (req, res) {
-
+res.setHeader('Cache-Control', 'max-age=86400, public');
 	var view = new keystone.View(req, res);
 	var locals = res.locals;
 

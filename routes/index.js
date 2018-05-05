@@ -38,7 +38,6 @@ exports = module.exports = function (app) {
 	app.use(compression());
 	app.get('/', routes.views.index);
 	app.all('/work/', routes.views.work);	
-	//app.get('/lab/:category?', routes.views.lab);
 	app.get('/lab/', routes.views.lab);
 	app.get('/lab/:post', routes.views.post);	
 	app.all('/contact', routes.views.contact);
