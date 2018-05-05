@@ -14,8 +14,8 @@ function onPlayerReady(event) {
 	//event.target.playVideo();
 }
 $(window).on("load", function() {
-var tag = document.createElement('script');
+/*var tag = document.createElement('script');
 tag.src = "/js/youtube-player.js";
 var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);*/
 });
