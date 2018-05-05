@@ -7,15 +7,12 @@ function onYouTubeIframeAPIReady() {
     });
 }
 function onPlayerReady(event) {
-	console.log("broski loaded youtube player!");
-	/*event.target.setVolume(0);*/
-	var fn = function(){console.log("broski playing!!!");event.target.playVideo(); }
-        setTimeout(fn, 5000);
-	//event.target.playVideo();
+	var fn = function(){event.target.playVideo(); }
+    setTimeout(fn, 50);
 }
 $(window).on("load", function() {
-var tag = document.createElement('script');
-tag.src = "/js/youtube-player.js";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+	var tag = document.createElement('script');
+	tag.src = "/js/youtube-player.js";
+	var firstScriptTag = document.getElementsByTagName('script')[0];
+	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 });

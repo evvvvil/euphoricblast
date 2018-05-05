@@ -136,7 +136,7 @@
 		</div>
 			{{>footer}}
 		<script src="/js/jquery/jquery-3.3.1.slim.min.js"></script>		
-		<script src="/js/bootstrap/bootstrap-3.3.5.min.js"></script>
+		<script async src="/js/bootstrap/bootstrap-3.3.5.min.js"></script>
 		{{#if cloudinaryResponsive}}
 			<!--/////////////////////-->
 			<!--CLOUDINARY RESPONSIVE-->
@@ -149,15 +149,15 @@
 			<!--////////-->
 			<!--LIGHTBOX-->
 			<!--////////-->
-			<script src="/js/ekko-lightbox.min.js" type="text/javascript"></script>		
-			<script src="/js/lightbox-control.js" type="text/javascript"></script>
+			<script async src="/js/ekko-lightbox.min.js" type="text/javascript"></script>		
+			<script async src="/js/lightbox-control.js" type="text/javascript"></script>
 		{{/if}}
 
 		{{#if carousel}}
 			<!--////////-->
 			<!--CAROUSEL-->
 			<!--////////-->
-			<script src="/js/carousel-control.js" type="text/javascript"></script>
+			<script async src="/js/carousel-control.js" type="text/javascript"></script>
 		{{/if}}
 		{{#if pageReloader}}
 			<!--/////////////-->
@@ -170,17 +170,17 @@
 			<!--//////////////////-->
 			<!--YOUTUBE AUTOPLAYER-->
 			<!--//////////////////-->
-			<script src="/js/youtube-control.js" type="text/javascript"></script>
+			<script async src="/js/youtube-control.js" type="text/javascript"></script>
 			{{else}}
 				{{#ifcontains data.post.video 'vimeo'}}
 				<!--////////////////-->
 				<!--VIMEO AUTOPLAYER-->
 				<!--////////////////-->			
-				<script src="/js/vimeo-player.js"></script>
-				<script src="/js/vimeo-control.js"></script>
+				<script async src="/js/vimeo-player.js"></script>
+				<script async src="/js/vimeo-control.js"></script>
 				{{/ifcontains}}
 			{{/ifcontains}}	
-			<script src="/js/video-player-resizer.min.js" type="text/javascript"></script>
+			<script async src="/js/video-player-resizer.min.js" type="text/javascript"></script>
 		{{/if}}
 		{{{isAdminEditorJS user}}}
 	</body>
