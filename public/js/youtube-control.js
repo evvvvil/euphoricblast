@@ -7,6 +7,8 @@ function onYouTubeIframeAPIReady() {
     });
 }
 function onPlayerReady(event) {
+
+	//event.target.mute();
 	var fn = function(){event.target.playVideo(); }
     setTimeout(fn, 50);
 }
