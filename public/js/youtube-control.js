@@ -9,6 +9,8 @@ function onYouTubeIframeAPIReady() {
 function onPlayerReady(event) {
 	console.log("broski loaded youtube player!");
 	event.target.setVolume(50);
+	var fn = function(){event.target.playVideo(); }
+        setTimeout(fn, 1000);
 	event.target.playVideo();
 }
 $(window).on("load", function() {
