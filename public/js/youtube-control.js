@@ -1,17 +1,12 @@
 var player;
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('euphoric-video', {
-    	playerVars: {
-                      'autoplay': 1
-                  },
-        events: {
-		   'onReady': onPlayerReady
-        }
+    	playerVars: { 'autoplay': 1 }
     });
 }
 function onPlayerReady(event) {
 	console.log("broski loaded youtube player!");
-	event.target.setVolume(50);
+	event.target.setVolume(0);
 	var fn = function(){console.log("broski playing!!!");event.target.playVideo(); }
         setTimeout(fn, 5000);
 	//event.target.playVideo();
