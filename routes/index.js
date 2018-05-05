@@ -19,6 +19,7 @@
  */
 
 var keystone = require('keystone');
+var compression = require('compression');
 var middleware = require('./middleware');
 var importRoutes = keystone.importer(__dirname);
 
@@ -34,6 +35,7 @@ var routes = {
 // Setup Route Bindings
 exports = module.exports = function (app) {
 	// Views
+	app.use(compression());
 	app.get('/', routes.views.index);
 	app.all('/work/', routes.views.work);	
 	//app.get('/lab/:category?', routes.views.lab);
