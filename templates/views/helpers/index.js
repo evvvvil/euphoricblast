@@ -326,7 +326,7 @@ module.exports = function () {
 			var result;
 			result="https://player.vimeo.com/video/"+_.split(a,".com/")[1]+"?title=0&byline=0&portrait=0&color=000000&muted=1";
 			if(b!="auto"){
-				result+="&quality=1080p";
+				result+="&quality="+b;
 			}
 			return result;
 		}else{
