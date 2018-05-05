@@ -2,7 +2,7 @@ var keystone = require('keystone');
 var async = require('async');
 
 exports = module.exports = function (req, res) {
-
+res.setHeader('Cache-Control', 'max-age=86400, public');
 	var view = new keystone.View(req, res);
 	var locals = res.locals;
 
