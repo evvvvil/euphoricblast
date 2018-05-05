@@ -27,6 +27,8 @@ Post.add({
 	client: {type: Types.Text, dependsOn: {type: ['work','lab'] } },
 	location: {type: Types.Text, dependsOn: {type: ['work','lab'] } },
 	video: {type: Types.Text },
+	videoQuality: { type: Types.Select, options: 'auto, 4K, 2K, 1080p, 720p, 540p, 360p', default: 'auto', index: true },
+	
 	mainImage: { type: Types.CloudinaryImage, autoCleanup: true, index: true },
 	mainImageCrop: { type: Types.Select, options: 'north, center, south', index: true, default: 'center', note: 'When image is cropped, set where crop starts: North shows top part, center the middle & south the bottom of picture.'},
 	mainImageShow: { type: Types.Boolean, label: 'Tick to show main image in the project page when there is no video', default: true, dependsOn: {type: ['work','lab','blog'] } },

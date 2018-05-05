@@ -9,6 +9,7 @@ var util = require('handlebars-utils');
 var linkTemplate = _.template('<a href="<%= url %>"><%= text %></a>');
 var scriptTemplate = _.template('<script src="<%= src %>"></script>');
 var cssLinkTemplate = _.template('<link href="<%= href %>" rel="stylesheet">');
+
 var toTidy, lower;
 function tidyShitUp(toTidy,lower){
 	//This is a messy but any other way lodash falls over with category starting with numbers like "3d graphics"
@@ -320,9 +321,14 @@ module.exports = function () {
 		}					
 	};
 
-	_helpers.getVideoURL = function (a) {
+	_helpers.getVideoURL = function (a,b) {
 		if(a.includes("vimeo")){
-			return "https://player.vimeo.com/video/"+_.split(a,".com/")[1]+"?title=0&byline=0&portrait=0&color=000000&muted=1";
+			var result;
+			result="https://player.vimeo.com/video/"+_.split(a,".com/")[1]+"?title=0&byline=0&portrait=0&color=000000&muted=1";
+			if(b!="auto"){
+				result+="&quality=1080p";
+			}
+			return result;
 		}else{
 			return "https://www.youtube.com/embed/"+_.split(a,"v=")[1]+"?enablejsapi=1&showinfo=0";
 		}
