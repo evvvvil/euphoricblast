@@ -35,7 +35,7 @@ var routes = {
 // Setup Route Bindings
 exports = module.exports = function (app) {
 	// Views
-	app.use(compression());
+	//app.use(compression());
 	app.get('/', routes.views.index);
 	app.all('/work/', routes.views.work);	
 	app.get('/lab/', routes.views.lab);
