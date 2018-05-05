@@ -330,7 +330,7 @@ module.exports = function () {
 			}
 			return result;
 		}else{
-			return "https://www.youtube.com/embed/"+_.split(a,"v=")[1]+"?enablejsapi=1&showinfo=0?autoplay=1";
+			return "https://www.youtube.com/embed/"+_.split(a,"v=")[1]+"?enablejsapi=1&showinfo=0&autoplay=1";
 		}
 	};
 	_helpers.getLoopVideoURL = function (a) {
