@@ -56,8 +56,12 @@
 			<script src="//cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.js"></script>
 			<script src="//cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
-		<link href="/styles/font-awesome.min.css" rel="stylesheet">
-		<link href="/styles/ekko-lightbox.min.css" rel="stylesheet">
+		{{#if fontAwesome}}
+			<link href="/styles/font-awesome.min.css" rel="stylesheet">	
+		{{/if}}
+		{{#if lightbox}}
+			<link href="/styles/ekko-lightbox.min.css" rel="stylesheet">
+		{{/if}}		
 	</head>
 	<body>
 		<header>
@@ -84,7 +88,7 @@
 										<li {{#ifSectionOrProject ../section key ../data.post.type}}class="active"{{/ifSectionOrProject}}>
 											<a href="{{ href }}">{{ label }}</a>
 										</li>
-									{{/each}}
+										{{/each}}
 								</ul>
 								<!--<ul class="nav navbar-nav navbar-right navbar-social navbar-collapse">
 									<li><a href="#" title="Follow Us On Facebook"><i class="fa fa-facebook"></i></a></li>
