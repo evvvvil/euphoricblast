@@ -1,3 +1,4 @@
+var player;
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('euphoric-video', {
         events: {
@@ -10,7 +11,6 @@ function onPlayerReady(event) {
 	event.target.setVolume(0);
 	event.target.playVideo();
 }
-var player;
 $(window).on("load", function() {
 var tag = document.createElement('script');
 tag.src = "/js/youtube-player.js";
