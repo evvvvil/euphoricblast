@@ -68,7 +68,7 @@ new Email('./templates/views/partials/email-enquiry.hbs', {
 		extname: '.hbs',
 	}).engine,
 }).send(locals, {
-  to: 'evvvvil0@gmail.com',
+  to: 'info@euphoricblast.com',
   from: {
     name: 'EB WEB: '+locals.formData["name.full"],
     email: locals.formData.email,
@@ -76,10 +76,10 @@ new Email('./templates/views/partials/email-enquiry.hbs', {
   subject: 'Enquiry from EUPHORIC BLAST',
 	}, function (err, result) {
 	  if (err) {
-	    console.error('Mailgun send failed with error:\n', err);
+	    //console.error('Mailgun send failed with error:\n', err);
 	    locals.enquiryFailed = true;
 	  } else {
-	    console.log('Successfully sent Mailgun email with result:\n', result);
+	    //console.log('Successfully sent Mailgun email with result:\n', result);
 		locals.enquirySubmitted = true;
 		next();
 	  }
