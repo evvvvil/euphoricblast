@@ -68,7 +68,7 @@ new Email('./templates/views/partials/email-enquiry.hbs', {
 		extname: '.hbs',
 	}).engine,
 }).send(locals, {
-  to: 'evvvvil0@gmail.com',
+  to: 'info@euphoricblast.com',
   from: {
     name: 'EB WEB: '+locals.formData["name.full"],
     email: locals.formData.email,
