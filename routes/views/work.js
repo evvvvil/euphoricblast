@@ -1,24 +1,19 @@
 var keystone = require('keystone');
 var async = require('async');
 var _ = require('lodash');
-var MobileDetect = require('mobile-detect');
-//var useragent = require('useragent');
-//useragent(true);
+//var MobileDetect = require('mobile-detect');
 exports = module.exports = function (req, res) {
 	//res.setHeader('Cache-Control', 'max-age=86400, public');
 	var view = new keystone.View(req, res);
 	var locals = res.locals;
-	var md = new MobileDetect(req.headers['user-agent']);
-//var agent = useragent.parse(req.headers['user-agent']);
-//console.log(agent);
-
+	//var md = new MobileDetect(req.headers['user-agent']);
     
 	// Init locals
 	locals.section = 'Work';
 	locals.orginalURL="http://www.euphoricblast.com"+req.originalUrl;
 	locals.filters = {
 		category: req.params.category,
-		mobile:md.mobile(),
+		//mobile:md.mobile(),
 	};
 	locals.data = {
 		featuredPosts: [],
@@ -153,7 +148,7 @@ exports = module.exports = function (req, res) {
 			q.where('categories').in([locals.data.category]);
 
 			q.exec(function (err, results) {	
-				//remove posts which are already shown as featured posts			
+				//remove posts which are already shown as ordered posts			
 				var inter = _.intersectionBy(results, locals.data.orderedPosts, "slug");
 				var diff = _.difference(results,inter);					
 				locals.data.posts = diff;				
