@@ -16,13 +16,7 @@
 							{{#ifPostIsInCategory categories ../name}}
 								{{#if mainImage.exists}}								
 									<div class="project-image-container">
-										{{#if filters.mobile}}
-										MOBILE!!!
-										<img class="cld-responsive img-responsive mobo" data-src="{{cloudinaryUrl mainImage width='auto' height=200 q='70' crop='fill' gravity=mainImageCrop}}"/>
-										{{else}}
 										<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl mainImage width='auto' q='70'}}"/>
-										{{/if}}
-										
 									</div>
 								{{/if}}	
 							{{/ifPostIsInCategory}}
