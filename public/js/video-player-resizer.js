@@ -35,9 +35,13 @@ function isMobile() {
 
 function checkVideoSize(){
 	var offset=0;
-	if(!isMobile()&&aspectX>aspectY){
+	if(!isMobile()){
 		offset=-10;
+		if(aspectX<aspectY){
+			offset=10;
+		}
 	}
+	
 	var wid=$(window).outerWidth();
 	if(wid<=768 && wid>480){
 		var curWid=$(".video-resize").outerWidth();
