@@ -7,9 +7,8 @@
 
 <div class="container-fluid background grey">
 	<div class="row">
-		<div class="container video-container">							
-					
-				<div class="row {{getVideoAspectClasses data.post.video data.post.videoAspectRatio}}">
+		<div class="container video-container">
+			<div class="row {{getVideoAspectClasses data.post.video data.post.videoAspectRatio}}">					
 					<div class="col-sm-12 col-md-6 col-lg-4 video-col video-resize">
 						<iframe id="euphoric-video" src="{{{getVideoURL data.post.video data.post.videoQuality}}}" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 					</div>				
@@ -17,10 +16,14 @@
 						{{#if data.post.content.brief}}<h3>{{{data.post.content.brief}}}</h3>{{/if}}
 						{{#if data.post.content.extended}}{{{data.post.content.extended}}}{{/if}}						
 						{{#if data.post.mainImage.exists}}
-							{{#ifcontains data.post.video 'youtu'}}
-								<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='177' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>
+							{{#ifcontains data.post.videoAspectRatio 'portrait'}}
+								<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='614' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>
 							{{else}}
-								<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='202' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>
+								{{#ifcontains data.post.video 'youtu'}}
+									<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='177' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>
+								{{else}}
+									<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='202' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>
+								{{/ifcontains}}
 							{{/ifcontains}}	
 						{{/if}}
 					</div>
@@ -29,9 +32,7 @@
 		</div>
 	</div>
 </div>
-
-{{else}}
-	
+{{else}}	
 <!--|||||||||||||||||||||||| -->
 <!--PAGE TEXT + IMAGE AT TOP -->
 <!--|||||||||||||||||||||||| -->

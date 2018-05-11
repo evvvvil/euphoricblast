@@ -16,12 +16,16 @@
 						{{#if data.post.content.brief}}<h3 class="content-brief">{{{data.post.content.brief}}}</h3>{{/if}}						
 						{{>visit-website-header}}
 						{{#if data.post.mainImage.exists}}
-							{{#ifcontains data.post.video 'youtu'}}	
-								<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='177' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>
+							{{#ifcontains data.post.videoAspectRatio 'portrait'}}
+								<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='614' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>
 							{{else}}
-								<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='202' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>
-							{{/ifcontains}}
-						{{/if}}						
+								{{#ifcontains data.post.video 'youtu'}}
+									<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='177' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>
+								{{else}}
+									<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='202' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>
+								{{/ifcontains}}
+							{{/ifcontains}}	
+						{{/if}}					
 					</div>				
 				</div>
 			</div>
