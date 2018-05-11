@@ -18,7 +18,7 @@
 		<meta name="keywords" content="{{{getMetaKeywords section filters.category data.post.title data.post.type data.post.content.brief}}}" />
 		<meta name="author" content="Mangosh Prunier">
 		<meta name="robots" content="index, follow">
-		<meta name="revisit-after" content="2 days">
+		<meta name="revisit-after" content="7 days">
 		<title>Euphoric Blast{{{pageTitle section filters.category data.post.title data.post.type}}}</title>
 		<!-- interactive design,virtual reality,3d -->
 
@@ -74,7 +74,7 @@
 	<body>
 		<header>
 		<div id="header">
-			<nav>
+			
 			<div class="container-fluid">
 				<div class="row">
 					<div role="navigation" class="navbar navbar-default navbar-polygon">
@@ -91,6 +91,7 @@
 							</div>
 						
 							<div class="collapse navbar-collapse">
+								<nav>
 								<ul class="nav navbar-nav navbar-left">
 										{{# each navLinks}}
 										<li {{#ifSectionOrProject ../section key ../data.post.type}}class="active"{{/ifSectionOrProject}}>
@@ -98,6 +99,7 @@
 										</li>
 										{{/each}}
 								</ul>
+								</nav>
 								<!--<ul class="nav navbar-nav navbar-right navbar-social navbar-collapse">
 									<li><a href="#" title="Follow Us On Facebook"><i class="fa fa-facebook"></i></a></li>
 	      							<li><a href="#" title="Follow Us On Google Plus"><i class="fa fa-twitter"></i></a></li>
@@ -109,7 +111,7 @@
 					</div>
 				</div>
 			</div>
-		</nav>
+		
 	</div>
 	</header>
 		<div id="{{bodyId}}">
@@ -188,7 +190,8 @@
 				<script async src="/js/vimeo-control.js"></script>
 				{{/ifcontains}}
 			{{/ifcontains}}	
-			<script async src="/js/video-player-resizer.min.js" type="text/javascript"></script>
+			<script>var aspect="{{data.post.videoAspectRatio}}";</script>
+			<script async src="/js/video-player-resizer.js" type="text/javascript"></script>
 		{{/if}}
 		{{{isAdminEditorJS user}}}
 	</body>

@@ -1,8 +1,20 @@
+var aspectX=16, aspectY=9;
 $(document).ready(function(){
+	if(aspect!==undefined){
+		var aspectArr=aspect.split("/");
+		aspectX=aspectArr[0];		
+		if(aspectArr[1].length>1 && !Number.isNaN(aspectArr[1].charAt(1))){
+			aspectY=Number(aspectArr[1].substring(0, 2));
+		}else{
+			aspectY=Number(aspectArr[1].charAt(0));
+		}
+		console.log("loaded aspectX from data.post.videoAspectRatio: "+aspectX);
+		console.log("loaded aspectY from data.post.videoAspectRatio: "+aspectY);
+	}
 	checkVideoSize();
 });
 
-$( window ).resize(function() {
+$(window).resize(function() {
 	checkVideoSize();
 });
 function isMobile() {
@@ -29,10 +41,10 @@ function checkVideoSize(){
 	var wid=$(window).outerWidth();
 	if(wid<=768 && wid>480){
 		var curWid=$(".video-resize").outerWidth();
-		$(".video-resize").height(offset+Math.floor((wid-30)*(9/16)));		
+		$(".video-resize").height(offset+Math.floor((wid-30)*(aspectY/aspectX)));		
 	}
 	else if(wid<=480){
 		var curWid=$(".video-resize").outerWidth();
-		$(".video-resize").height(offset+Math.ceil((wid-30)*(9/16)));
+		$(".video-resize").height(offset+Math.ceil((wid-30)*(aspectY/aspectX)));
 	}
 }

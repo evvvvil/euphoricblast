@@ -19,9 +19,9 @@ function tidyShitUp(toTidy,lower){
 		return _.replace(_.replace(_.replace(_.replace(toTidy.toLowerCase(),'-and-', ' & '),'-',' '),'vfx','VFX'),'vjin','VJin');
 	}else{
 		return _.replace(_.replace(_.replace(_.replace(_.capitalize(toTidy),'-and-', ' & '),'-',' '),'vfx','VFX'),'vjin','VJin');	
-	}
-	
+	}	
 }
+
 module.exports = function () {
 
 	var _helpers = {};
@@ -36,6 +36,23 @@ module.exports = function () {
 
 	_helpers.printName = function (a) {		
 			return a["name.full"];		
+	};
+
+	_helpers.getVideoAspectClasses = function (a,b) {
+		var result;
+		if(a.includes("youtu")){
+			result="youtube-video ";
+		}else{
+			result="vimeo-video "
+		}
+		if(b.includes("portrait")){
+			result+="portrait";
+		}else if(b.includes("landscape")){
+			result+="landscape";
+		}else{
+			result+="4by3";
+		}
+		return result;
 	};
 
 	_helpers.pageTitle = function (section, category, postTitle, postType) {	
