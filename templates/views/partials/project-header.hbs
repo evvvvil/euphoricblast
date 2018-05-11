@@ -15,9 +15,9 @@
 					<div class="col-sm-12 col-md-6 col-lg-8 video-col">
 						{{#if data.post.content.brief}}<h3 class="content-brief">{{{data.post.content.brief}}}</h3>{{/if}}						
 						{{>visit-website-header}}
-						{{#if data.post.mainImage.exists}}
+						{{#if data.post.mainImage.exists}}						
 							{{#ifcontains data.post.videoAspectRatio 'portrait'}}
-								<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='614' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>
+								<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='640' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>
 							{{else}}
 								{{#ifcontains data.post.video 'youtu'}}
 									<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='177' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>

@@ -26,7 +26,7 @@
 				<div class="row">					
 					{{#each data.post.otherImages }}					
 						<a href="{{cloudinaryUrl width='auto' q='90'}}" class="project-link" data-toggle="lightbox" data-gallery="other-images-gallery">
-							<div class="col-sm-6 {{getColAdvanced @index ../data.post.otherImages.length 0}} project-col image-col">			
+							<div class="col-sm-6 {{getColAdvanced @index ../data.post.otherImages.length 0}} project-col image-col {{getImageAspectClasses width height ../data.post.mainImageCrop}}">			
 									<div class="project-image-container">
 										{{#ifCropLeftOvers @index ../data.post.otherImages.length 0}}
 											<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl width='auto' height=328 q='70' crop='fill' gravity='center'}}"/>

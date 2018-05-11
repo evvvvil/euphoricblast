@@ -55,6 +55,14 @@ module.exports = function () {
 		return result;
 	};
 
+	_helpers.getImageAspectClasses = function (a,b,c) {
+		if(a<b){
+			return "portrait "+c;
+		}else{
+			return "landscape "+c;
+		}
+	};
+
 	_helpers.pageTitle = function (section, category, postTitle, postType) {	
 		var intro=" - London Creative Studio";	
 			if(section=="Home"){
