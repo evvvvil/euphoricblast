@@ -17,12 +17,12 @@
 						{{>visit-website-header}}
 						{{#if data.post.mainImage.exists}}						
 							{{#ifcontains data.post.videoAspectRatio 'portrait'}}
-								<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='640' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>
+								<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='625' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>
 							{{else}}
 								{{#ifcontains data.post.video 'youtu'}}
-									<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='167' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>
+									<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='162' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>
 								{{else}}
-									<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='202' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>
+									<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='187' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>
 								{{/ifcontains}}
 							{{/ifcontains}}	
 						{{/if}}					
