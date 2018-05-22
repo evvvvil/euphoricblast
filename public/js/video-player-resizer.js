@@ -8,8 +8,6 @@ $(document).ready(function(){
 		}else{
 			aspectY=Number(aspectArr[1].charAt(0));
 		}
-		console.log("loaded aspectX from data.post.videoAspectRatio: "+aspectX);
-		console.log("loaded aspectY from data.post.videoAspectRatio: "+aspectY);
 	}
 	checkVideoSize();
 });

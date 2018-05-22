@@ -31,9 +31,49 @@ module.exports = function () {
 	 * ===================
 	 */
 
-	// standard hbs equality check, pass in two values from template
-	// {{#ifeq keyToCheck data.myKey}} [requires an else blockin template regardless]
+	_helpers.AFgetCategoriesPos = function (index,yOffset,zOffset) {		
+		var modIndex=index%4,odd=index%2,x=-1.14,y=2.706,z=.355;		
+		if(modIndex>0&&modIndex<3) {x=-.397;z=.085;}
+		if(modIndex>1) x*=-1;
+		if(index>3) y-=.6;
+		y+=yOffset;
+		z+=zOffset;
+		return x+" "+y+" "+z;		
+	};
 
+	_helpers.AFgetCategoriesRot = function (index,z) {		
+		var modIndex=index%4,y=30;
+		if(modIndex>0&&modIndex<3) y=10;
+		if(modIndex>1) y*=-1;
+		return 0+" "+y+" "+z;		
+	};
+
+	var categoriesScreenX=[-1.4463,-.7382,.0587,.8487 ];
+	var categoriesScreenZ=[.5134,.1282,.0084,.1684];
+	_helpers.AFgetCategoriesScreenPos = function (index,reverse) {
+		var modIndex=index%4,y=2.9562;
+		if(reverse<0) {modIndex=3-modIndex;y-=.5;}
+		x=categoriesScreenX[modIndex]*reverse,z=categoriesScreenZ[modIndex];
+		if(index>3) y-=.6;
+		return x+" "+y+" "+z;
+	};
+	_helpers.AFgetCategoriesImagePos = function (index,numPerRow) {		
+		var x=(index%numPerRow)*1.5-2;
+		var y=Math.floor(index/numPerRow)+1.12;
+		var z=-1.9995;
+			return x+" "+y+" "+z;		
+	};
+	//TODO:first value of both array correct, find next 3 manually
+
+	var categoriesTextX=[-.69,.112,.9,1.588 ];
+	var categoriesTextZ=[.1,-.005,.174,.613];	
+	_helpers.AFgetCategoriesTextPos = function (index) {		
+		var modIndex=index%4,y=2.9;
+		x=categoriesTextX[modIndex],z=categoriesTextZ[modIndex];
+		if(index>3) y-=.6;
+		return x+" "+y+" "+z;	
+	};
+	
 	_helpers.printName = function (a) {		
 			return a["name.full"];		
 	};
@@ -91,8 +131,6 @@ module.exports = function () {
 			}
 	};
 
-
-
 	_helpers.add = function (a, b) {		
 			return  (a+b);		
 	};
@@ -128,11 +166,11 @@ module.exports = function () {
 	};
 
 	_helpers.getFacebookOGImage = function (postType, image) {
-			if(postType=="work"||postType=="lab"||postType=="blog"){
-				return image;				
-			}else{
-				return "http://www.euphoricblast.com/images/og-image.jpg";
-			}
+		if(postType=="work"||postType=="lab"||postType=="blog"){
+			return image;				
+		}else{
+			return "http://www.euphoricblast.com/images/og-image.jpg";
+		}
 	};
 
 	_helpers.getMetaKeywords = function (section, category, postTitle, postType, postContentBrief) {	

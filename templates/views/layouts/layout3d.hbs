@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>		
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118755208-2"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'UA-118755208-2');
+		</script>
+		<script src="/js/aframe.min.js"></script>
+		<script src="/js/aframe-effects.min.js"></script>
+		<script src="/js/aframe-html-shader.min.js"></script>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!--<meta http-equiv="Cache-control" content="max-age=86400, public">-->
+		
+		<meta name="description" content="Welcome to our 3d website, which also works in VR." />
+		<meta name="keywords" content="3d,website,aframe,a,frame,london,creative,studio,vr,virtual,reality,virtual reality,on,the,web" />
+		<meta name="author" content="Mangosh Prunier">
+		<meta name="robots" content="index, follow">
+		<meta name="revisit-after" content="7 days">
+		<title>Euphoric Blast{{{pageTitle section filters.category data.post.title data.post.type}}}</title>
+		<!-- interactive design,virtual reality,3d -->
+
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=wAOJMa9XLG">
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=wAOJMa9XLG">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=wAOJMa9XLG">
+		<link rel="manifest" href="/site.webmanifest?v=wAOJMa9XLG">
+		<link rel="mask-icon" href="/safari-pinned-tab.svg?v=wAOJMa9XLG" color="#333333">
+		<link rel="shortcut icon" href="/favicon.ico?v=wAOJMa9XLG">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="theme-color" content="#ffffff">
+
+		<meta property="og:image:width" content="1200">
+		<meta property="og:image:height" content="628">
+		<meta property="og:title" content="Euphoric Blast{{{pageTitle section filters.category data.post.title data.post.type}}}">
+		<meta property="og:description" content="{{{getMetaDescription section filters.category data.post.title data.post.type data.post.content.brief}}}">
+		<meta property="og:url" content="{{orginalURL}}">
+		{{#if filters.category}}
+			{{#ifgt data.featuredPosts.length 0}}
+				{{#each data.featuredPosts}}
+					{{#ifPostIsInCategoryKey categories ../filters.category}}
+						{{#if mainImage.exists}}			
+		<meta property="og:image" content="{{{cloudinaryUrl mainImage width='1200' height='628' q='70' crop='fill' gravity=mainImageCrop}}}">
+						{{else}}
+		<meta property="og:image" content="http://www.euphoricblast.com/images/og-image.jpg">
+						{{/if}}	
+					{{/ifPostIsInCategoryKey}}
+				{{/each}}
+			{{else}}
+		<meta property="og:image" content="{{{getFacebookOGImage data.post.type (cloudinaryUrl data.post.mainImage width='1200' height='628' q='70' crop='fill' gravity=data.post.mainImageCrop)}}}">			
+			{{/ifgt}}
+		{{else}}
+		<meta property="og:image" content="{{{getFacebookOGImage data.post.type (cloudinaryUrl data.post.mainImage width='1200' height='628' q='70' crop='fill' gravity=data.post.mainImageCrop)}}}">	
+		{{/if}}
+		<link href="/styles/site.min.css" rel="stylesheet">
+
+		{{!-- This file provides the default styling for the KeystoneJS Content Editor
+			- only renders when user is logged in and admin--}}
+		{{{isAdminEditorCSS user}}}
+		{{!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+		//- Safely remove this block if you are not targeting IE8 --}}
+		<!--[if lt IE 9]>
+			<script src="//cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.js"></script>
+			<script src="//cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		{{#if fontAwesome}}
+			<link href="/styles/font-awesome.min.css" rel="stylesheet">	
+		{{/if}}
+		{{#if lightbox}}
+			<link href="/styles/ekko-lightbox.min.css" rel="stylesheet">
+		{{/if}}		
+	</head>
+	<body>
+		<header></header>
+		<div id="{{bodyId}}">
+			{{{body}}}
+		</div>
+		<script src="/js/jquery/jquery-3.3.1.slim.min.js"></script>		
+		<script async src="/js/bootstrap/bootstrap-3.3.5.min.js"></script>
+		{{#if cloudinaryResponsive}}
+			<!--/////////////////////-->
+			<!--CLOUDINARY RESPONSIVE-->
+			<!--/////////////////////-->
+			<script src="/js/cloudinary-core-shrinkwrap.min.js" type="text/javascript"></script>
+			<script src="/js/cloudinary-responsive.js" type="text/javascript"></script>
+		{{/if}}				
+		
+		{{#if lightbox}}
+			<!--////////-->
+			<!--LIGHTBOX-->
+			<!--////////-->
+			<script async src="/js/ekko-lightbox.min.js" type="text/javascript"></script>		
+			<script async src="/js/lightbox-control.js" type="text/javascript"></script>
+		{{/if}}
+		{{{isAdminEditorJS user}}}
+	</body>
+</html>

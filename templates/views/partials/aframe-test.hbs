@@ -1,0 +1,110 @@
+<script>
+AFRAME.registerComponent('log', {
+  schema: {type: 'string'},
+
+  init: function () {
+    var stringToLog = this.data;
+    console.log(stringToLog);
+  }
+});
+
+AFRAME.registerComponent('cursor-listener', {
+  init: function () {
+    var COLORS = ['red', 'green', 'blue'];
+    var outterRing = document.querySelector('#outter-ring');
+    var outterRingReveal = document.querySelector('#outter-ring #circle-reveal');
+    var mainScene = document.querySelector('#main-scene');
+    this.el.addEventListener('mouseenter', function (evt) {
+    	var par=this.parentElement;
+    	par.querySelector('.category-background').setAttribute('material', 'color', COLORS[1]);  
+    	outterRing.emit('circle-reveal');
+    	var imageChild=par.querySelector('.category-image');
+    	par.querySelector('.category').emit('hover');
+    	if(imageChild!==null){
+    		imageChild.emit('hover');    		
+    	}    	  
+    });
+    this.el.addEventListener('mouseleave', function (evt) {
+    	var par=this.parentElement;
+      par.querySelector('.category-background').setAttribute('material', 'color', null);  
+      outterRing.emit('circle-stop');
+      outterRing.setAttribute('theta-length', 0);
+      var imageChild=par.querySelector('.category-image');
+      par.querySelector('.category').emit('hover-stop');
+	  if(imageChild!==null){
+	  	imageChild.emit('hover-stop');  		
+	  	imageChild.setAttribute('scale', '1 1 1');
+	  }   
+	  par.querySelector('.category').setAttribute('scale', '1 1 1');
+    });
+    this.el.addEventListener('click', function (evt) {
+      this.setAttribute('material', 'color', '#fcc800');
+      outterRing.emit('circle-stop');
+      outterRing.setAttribute('theta-length', 0);
+      console.log('I was clicked at: ', evt.detail.intersection.point);
+    });
+  }
+});
+</script>
+<section id="a-frame">	
+	<a-scene stats log="Hello, Scene!" light="defaultLightsEnabled: false" effects="ssao,fxaa,film" 
+			ssao="samples:32;rings:7;radius:.5; ratio:1; intensity: 1.5; maxDepth:.99;bias: 0.05;scale: 0.5; blurRadius: 4;depthCutoff: 1000" 
+			fxaa="true"	film="sIntensity: 0.3; nIntensity: 0.1"
+			fog="type: linear; color: #ECECEC;near:0;far:8;">
+		<a-assets>
+	    	<a-asset-item id="main-scene" src="/models/EB_main_scene.glb"></a-asset-item>
+	    	<a-asset-item id="screen" src="/models/EB_screen.glb"></a-asset-item>
+		</a-assets>		
+		<!--CAMERA-->
+		<a-entity position="-1 2.4 3" id="player">			
+			<a-camera wasd-controls-enabled="true" near=".1">
+				<a-entity cursor="fuse: true; fuseTimeout: 2000" position="0 0 -1"
+            	geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
+            	material="color: black; shader: flat" 
+            	raycaster="far: 20; interval: 100; objects: .clickable"></a-entity>
+            	<a-ring id="outter-ring" position="0 0 -1" color="white" radius-inner="0.04" radius-outer="0.06" material="shader: flat" theta-length="0">
+            		<a-animation id="circle-reveal" attribute="theta-length" begin="circle-reveal" end="circle-stop" to="360" dur="2000" easing="linear"></a-animation>
+            	</a-ring>
+			</a-camera>
+		</a-entity>		
+		{{#each data.categories }}
+		<a-entity class="category-container">
+			<!--CATEGORY PLANE-->	
+			<a-entity cursor-listener class="clickable" geometry="primitive:plane;width:.69;height:.5" position="{{AFgetCategoriesPos @index 0 0}}" rotation="{{AFgetCategoriesRot @index 0}}" visible="false"></a-entity>
+			<a-entity class="category" scale="1 1 1">
+				<a-entity geometry="primitive:plane;width:.69;height:.5" position="{{AFgetCategoriesPos @index 0 0}}" rotation="{{AFgetCategoriesRot @index 0}}" material="shader:html;target:#category-back;fps:1;" class="category-background"></a-entity>
+				<!--CATEGORY SCREENS-->	
+				<a-entity class="screens" position="{{AFgetCategoriesScreenPos @index 1}}" rotation="{{AFgetCategoriesRot @index 0}}" gltf-model="#screen" material="roughness: 1; metalness: 0"></a-entity>
+				<a-entity class="screens" position="{{AFgetCategoriesScreenPos @index -1}}" rotation="{{AFgetCategoriesRot @index 180}}" gltf-model="#screen" material="roughness: 1; metalness: 0"></a-entity>
+				<!--CATEGORY TITLE-->	
+				<a-entity position="{{AFgetCategoriesTextPos @index}}" rotation="{{AFgetCategoriesRot @index 0}}" text="value: {{name}}; width: 1.7; height: auto"></a-entity>			
+				{{#each ../data.featuredPosts}}
+					{{#ifPostIsInCategory categories ../name}}
+						{{#if mainImage.exists}}	
+							<!--CATEGORY IMAGE-->
+							<a-image src="{{cloudinaryUrl mainImage width='960' height='540' q='70' crop='fill' gravity='center'}}" width=".6" height=".3375" position="{{AFgetCategoriesPos @index -0.035 0.001}}" rotation="{{AFgetCategoriesRot @index 0}}" class="category-image">
+								<a-animation class="hover" attribute="scale" begin="hover" end="hover-stop" from="1 1 1" to="1.1 1.18 1.1" dur="1000" easing="linear"></a-animation>
+							</a-image>
+						{{/if}}	
+					{{/ifPostIsInCategory}}
+				{{/each}}
+				<a-animation class="hover" attribute="scale" begin="hover" end="hover-stop" from="1 1 1" to=".9 .95 .9" dur="1000" easing="linear"></a-animation>
+			</a-entity>
+		</a-entity>
+		{{/each}}
+		<!--SECTION TITLES-->
+		<a-entity rotation="-45 0 0" position=".89 .99 1.365" text="value: Work; width: 2; height: auto"></a-entity>
+		<!--MAIN SCENE-->
+		<a-entity id="main-scene" position="0 0 0" gltf-model="#main-scene" material="roughness: 1; metalness: 0"></a-entity>
+		<!--SKY-->
+		<a-sky color="#ECECEC"></a-sky>		
+		<!--LIGHTS-->
+		<a-entity light="type: ambient; color: #BBB; intensity: 0.6"></a-entity>
+		<a-entity light="type: directional; color: #FFF; intensity: 0.6" position="-0.5 1 1"></a-entity>
+    </a-scene>   
+	<div id="category-back" style="width: 293px; height: 212px; position: fixed; left: 0; top: 0; z-index: -1; overflow: hidden;background-color:#333;">
+		<div class="category-col">
+				<div class="side-line"></div>
+		</div>	
+	</div>
+</section>

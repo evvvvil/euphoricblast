@@ -17,7 +17,7 @@
 						{{>visit-website-header}}
 						{{#if data.post.mainImage.exists}}						
 							{{#ifcontains data.post.videoAspectRatio 'portrait'}}
-								<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='630' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>
+							<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='630' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>
 							{{else}}
 								{{#ifcontains data.post.video 'youtu'}}
 									<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post.mainImage width='auto' height='164' q='70' crop='fill' gravity=data.post.mainImageCrop}}"/>
