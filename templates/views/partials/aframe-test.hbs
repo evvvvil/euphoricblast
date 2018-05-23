@@ -6,6 +6,7 @@ AFRAME.registerComponent('log', {
     console.log(stringToLog);
   }
 });
+//TODO:replace window.onload with this should work
 /*AFRAME.registerComponent('anim-listener', {
 	init: function () {  
   		this.el.addEventListener('animationend', function (evt) {
@@ -13,10 +14,11 @@ AFRAME.registerComponent('log', {
 		}); 
 	}
 });*/
-var category=0,outterRing;
+var category=0,outterRing,player;
 window.onload = function () {
 	var imagesAnimsArr=document.querySelectorAll('.clicked-image');
 	outterRing=document.querySelector('#outter-ring');
+	player=document.querySelector('#player');
 	for(var i=0;i<imagesAnimsArr.length;i++){
 		imagesAnimsArr[i].addEventListener('animationend', function (evt) {
 			this.parentElement.parentElement.querySelector('.category-background-container').emit('clicked');
@@ -44,7 +46,6 @@ function handleCatEnter () {
 	}
 }
 function handleCatLeave () {
-    console.log("fired mouse leave");
 	var par=this.parentElement;
 	par.querySelector('.category-background').setAttribute('material','src','#category-back');
 	par.querySelector('.category-title').setAttribute('text','color','white');
@@ -58,7 +59,8 @@ function handleCatLeave () {
 }
 function handleCatClicked (event) {
     var par=this.parentElement;
-	category=Number(par.id.charAt(4));    	
+    console.log('I was clicked at: ', event.detail.intersection.point);
+	category=Number(par.id.charAt(4));
 	par.querySelector('.category-background').setAttribute('material','src','#category-back-hover');
 	//TODO: Reset this
 	par.querySelector('.category-background').setAttribute('material', 'color', '#fcc800');
@@ -71,23 +73,32 @@ function handleCatClicked (event) {
 	}
 	var allButtons=document.querySelectorAll('.category-button')
 	for(var i=0;i<allButtons.length;i++){
-		allButtons[i].removeAttribute('cursor-listener');
+		allButtons[i].removeAttribute('category-listener');
 		allButtons[i].classList.remove("clickable");
 	}	
 	outterRing.emit('circle-stop');
 	outterRing.setAttribute('theta-length', 0);
-	console.log('I was clicked at: ', event.detail.intersection.point);
+
+	var playerTo=par.getAttribute('position'),
+	//TODO: find more elegant way of doing this... maybe
+	playerToString=playerTo.x+" "+playerTo.y+" "+playerTo.z;
+	var animation = document.createElement("a-animation");
+        animation.setAttribute("attribute","position");            
+        animation.setAttribute("to",playerToString);
+        animation.setAttribute("dur","4000");
+        animation.setAttribute("begin","move-cat");
+        animation.setAttribute("easing","linear");
+    player.appendChild(animation);
+	player.emit('move-cat');
 }	  
-AFRAME.registerComponent('cursor-listener',{
+AFRAME.registerComponent('category-listener',{
 	remove: function () {
-		console.log("removing mouse leave");   	  
 		this.el.removeEventListener('mouseenter', handleCatEnter);
 	    this.el.removeEventListener('mouseleave', handleCatLeave);
     	this.el.removeEventListener('click', handleCatClicked);
 	},
-  	init: function () {  	
-	  	console.log("init!!!!!");
-	    this.el.addEventListener('mouseenter', handleCatEnter);
+  	init: function () {
+  		this.el.addEventListener('mouseenter', handleCatEnter);
 	    this.el.addEventListener('mouseleave', handleCatLeave);
     	this.el.addEventListener('click', handleCatClicked);
 	}
@@ -114,14 +125,12 @@ AFRAME.registerComponent('cursor-listener',{
             	<a-ring id="outter-ring" position="0 0 -1" color="white" radius-inner="0.04" radius-outer="0.06" material="shader: flat" theta-length="0">
             		<a-animation id="circle-reveal" attribute="theta-length" begin="circle-reveal" end="circle-stop" to="360" dur="2000" easing="linear"></a-animation>
             	</a-ring>
-			</a-camera>
-		</a-entity>
-		<!-- RENDER HTML AS TEXTURE EXAMPLE
-		<a-entity geometry="primitive:plane;width:.69;height:.5" position="0 0 0.003" material="shader:html;target:#category-back;fps:1;" class="category-background"></a-entity>-->
+			</a-camera>			
+		</a-entity>		
 		{{#each data.categories}}
 		<a-entity class="category-container" id="cat-{{add @index 1}}" position="{{AFgetCategoriesPos @index 0 0}}" rotation="{{AFgetCategoriesRot @index 0}}">
 			<!--CATEGORY PLANE-->	
-			<a-entity cursor-listener class="category-button clickable" geometry="primitive:plane;width:.69;height:.5" position="0 0 0.003" visible="false"></a-entity>
+			<a-entity category-listener class="category-button clickable" geometry="primitive:plane;width:.69;height:.5" position="0 0 0.003" visible="false"></a-entity>
 			<a-entity class="category-background-container" position="0 -.25 0.003">
 				<a-entity class="category-background" geometry="primitive:plane;width:.69;height:.5" position="0 .25 0" material="src:#category-back"></a-entity>
 				<a-animation class="clicked-background" attribute="scale" begin="clicked" end="clicked-stop" from="1 1 1" to="1 0 1" dur="400" easing="linear"></a-animation>
@@ -159,6 +168,8 @@ AFRAME.registerComponent('cursor-listener',{
 		<!--LIGHTS-->
 		<a-entity light="type: ambient; color: #BBB; intensity: 0.6"></a-entity>
 		<a-entity light="type: directional; color: #FFF; intensity: 0.6" position="-0.5 1 1"></a-entity>
+		<!-- RENDER HTML AS TEXTURE EXAMPLE
+		<a-entity geometry="primitive:plane;width:.69;height:.5" position="0 0 0.003" material="shader:html;target:#category-back;fps:1;" class="category-background"></a-entity>-->
     </a-scene>
     <!-- RENDER HTML AS TEXTURE EXAMPLE   
 	<div id="category-back" style="width: 293px; height: 212px; position: fixed; left: 0; top: 0; z-index: -1; overflow: hidden;background-color:#333;">
