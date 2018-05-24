@@ -1,42 +1,34 @@
 <script>
-AFRAME.registerComponent('log', {
-  schema: {type: 'string'},
-  init: function () {
-    var stringToLog = this.data;
-    console.log(stringToLog);
-  }
-});
-//TODO:replace window.onload with this should work
-/*AFRAME.registerComponent('anim-listener', {
-	init: function () {  
-  		this.el.addEventListener('animationend', function (evt) {
-			console.log("end of animation");
-		}); 
-	}
-});*/
-var category=0,outterRing,player;
-window.onload = function () {
-	var imagesAnimsArr=document.querySelectorAll('.clicked-image');
+var category=0,outterRing,player,playerToString,par;
+window.onload = function () {	
 	outterRing=document.querySelector('#outter-ring');
 	player=document.querySelector('#player');
-	for(var i=0;i<imagesAnimsArr.length;i++){
-		imagesAnimsArr[i].addEventListener('animationend', function (evt) {
-			this.parentElement.parentElement.querySelector('.category-background-container').emit('clicked');
-			this.parentElement.parentElement.querySelector('.category-title').setAttribute('visible','false');
-		}); 
-	}
-	var backgroundAnimsArr=document.querySelectorAll('.clicked-background');
-	for(var i=0;i<backgroundAnimsArr.length;i++){
-		backgroundAnimsArr[i].addEventListener('animationend', function (evt) {
-			var screensArr=this.parentElement.parentElement.querySelectorAll('.category-screens');
-	    	for(var i=0;i<screensArr.length;i++){
-	    		screensArr[i].emit('clicked');
-			}
-		}); 
-	}
+}
+function createMoveAnim(id,playerToString,dur,begin,ease,listener){
+	var animation = document.createElement("a-animation");
+		animation.setAttribute("id",id);
+    	player.setAttribute('anim-listener','listener',listener);
+        animation.setAttribute("attribute","position");            
+        animation.setAttribute("to",playerToString);
+        animation.setAttribute("dur",dur);
+        animation.setAttribute("begin",begin);
+        animation.setAttribute("easing",ease); 
+    	player.appendChild(animation);
+}
+function wrangleDestination(x1,y1,z1,x2,y2,z2){
+		var x=x1,y=y1,z=z1,modCat=(category-1)%4;
+		if(category>5) y=y2;
+		if(modCat>0&&modCat<3) {x=x2;z=z2;}
+		if(modCat>1)x*=-1;
+		return x+" "+y+" "+z+" ";
+}
+function killPreviousAnimation(animation){
+	var prevAnim=player.querySelector(animation);    	
+ 	player.removeChild(prevAnim);
+ 	player.removeAttribute('anim-listener');
 }
 function handleCatEnter () {
-	var par=this.parentElement;
+	par=this.parentElement;
 	par.querySelector('.category-background').setAttribute('material','src','#category-back-hover');
 	par.querySelector('.category-title').setAttribute('text','color','black');
 	outterRing.emit('circle-reveal');    	
@@ -46,7 +38,7 @@ function handleCatEnter () {
 	}
 }
 function handleCatLeave () {
-	var par=this.parentElement;
+	par=this.parentElement;
 	par.querySelector('.category-background').setAttribute('material','src','#category-back');
 	par.querySelector('.category-title').setAttribute('text','color','white');
 	outterRing.emit('circle-stop');
@@ -58,8 +50,9 @@ function handleCatLeave () {
 	}
 }
 function handleCatClicked (event) {
-    var par=this.parentElement;
+    par=this.parentElement;
     console.log('I was clicked at: ', event.detail.intersection.point);
+    //TODO: only works with up to 9 CATEGORIES!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	category=Number(par.id.charAt(4));
 	par.querySelector('.category-background').setAttribute('material','src','#category-back-hover');
 	//TODO: Reset this
@@ -78,19 +71,59 @@ function handleCatClicked (event) {
 	}	
 	outterRing.emit('circle-stop');
 	outterRing.setAttribute('theta-length', 0);
-
-	var playerTo=par.getAttribute('position'),
+	var playerTo=par.getAttribute('position');
 	//TODO: find more elegant way of doing this... maybe
 	playerToString=playerTo.x+" "+playerTo.y+" "+playerTo.z;
-	var animation = document.createElement("a-animation");
-        animation.setAttribute("attribute","position");            
-        animation.setAttribute("to",playerToString);
-        animation.setAttribute("dur","4000");
-        animation.setAttribute("begin","move-cat");
-        animation.setAttribute("easing","linear");
-    player.appendChild(animation);
+	createMoveAnim('move-cat-anim',playerToString,4000,'move-cat','linear','handleCatFly');
 	player.emit('move-cat');
-}	  
+}
+function handleCatAnim (event) {
+	par=this.parentElement;	var classes=event.target.classList;
+	if(classes.contains("clicked-image")){		
+		par.querySelector('.category-background-container').emit('clicked');
+		par.querySelector('.category-title').setAttribute('visible','false');
+	}  else if(classes.contains("clicked-background")){		
+		var screensArr=par.querySelectorAll('.category-screens');
+    	for(var i=0;i<screensArr.length;i++){
+    		screensArr[i].emit('clicked');
+		}
+	} 
+} 
+function handleCatFly (event) {
+	console.log("finished cat flying ");	
+    killPreviousAnimation('#move-cat-anim');
+    player.querySelector('#main-camera').setAttribute('near', 0.01);
+    playerToString=wrangleDestination(-3.33,4.386,-3.439,-1.156,.426,-4.230);
+    createMoveAnim('move-tunnel-anim',playerToString,4000,'move-tunnel','linear','handleTunnelFly');
+    player.emit('move-tunnel');
+}	
+function handleTunnelFly (event) {
+	console.log("finished flying the tunnel");    
+    killPreviousAnimation('#move-tunnel-anim');
+    playerToString=wrangleDestination(-5.088,4.386,-6.485,-1.749,.426,-7.592);
+    createMoveAnim('move-corridor-anim',playerToString,4000,'move-corridor','linear','handleCorridorFly');
+    player.emit('move-corridor');
+}
+function handleCorridorFly (event) {
+	console.log("finished flying the corridor");
+	killPreviousAnimation('#move-corridor-anim'); 
+}	
+AFRAME.registerComponent('log', {
+  schema: {type: 'string'},
+  init: function () {
+    var stringToLog = this.data;
+    console.log(stringToLog);
+  }
+});
+AFRAME.registerComponent('anim-listener', {
+	schema: {listener:{type: 'string'}},
+	remove: function () {
+		this.el.removeEventListener('animationend',eval(this.data.listener)); 
+	},
+	init: function () {		
+		this.el.addEventListener('animationend',eval(this.data.listener)); 
+	}
+});  
 AFRAME.registerComponent('category-listener',{
 	remove: function () {
 		this.el.removeEventListener('mouseenter', handleCatEnter);
@@ -102,7 +135,7 @@ AFRAME.registerComponent('category-listener',{
 	    this.el.addEventListener('mouseleave', handleCatLeave);
     	this.el.addEventListener('click', handleCatClicked);
 	}
-});       
+});     
 </script>
 <section id="a-frame">	
 	<a-scene stats log="Hello, Scene!" light="defaultLightsEnabled: false" effects="ssao,fxaa,film" 
@@ -117,7 +150,7 @@ AFRAME.registerComponent('category-listener',{
 		</a-assets>		
 		<!--CAMERA-->
 		<a-entity position="-1 2.4 3" id="player">			
-			<a-camera wasd-controls-enabled="true" near=".1">
+			<a-camera id="main-camera" wasd-controls-enabled="true" near=".1">
 				<a-entity cursor="fuse: true; fuseTimeout: 2000" position="0 0 -1"
             	geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
             	material="color: black; shader: flat" 
@@ -131,7 +164,7 @@ AFRAME.registerComponent('category-listener',{
 		<a-entity class="category-container" id="cat-{{add @index 1}}" position="{{AFgetCategoriesPos @index 0 0}}" rotation="{{AFgetCategoriesRot @index 0}}">
 			<!--CATEGORY PLANE-->	
 			<a-entity category-listener class="category-button clickable" geometry="primitive:plane;width:.69;height:.5" position="0 0 0.003" visible="false"></a-entity>
-			<a-entity class="category-background-container" position="0 -.25 0.003">
+			<a-entity anim-listener="listener:handleCatAnim" class="category-background-container" position="0 -.25 0.003">
 				<a-entity class="category-background" geometry="primitive:plane;width:.69;height:.5" position="0 .25 0" material="src:#category-back"></a-entity>
 				<a-animation class="clicked-background" attribute="scale" begin="clicked" end="clicked-stop" from="1 1 1" to="1 0 1" dur="400" easing="linear"></a-animation>
 			</a-entity>			
@@ -148,11 +181,11 @@ AFRAME.registerComponent('category-listener',{
 				{{#ifPostIsInCategory categories ../name}}
 					{{#if mainImage.exists}}	
 						<!--CATEGORY IMAGE-->
-						<a-entity class="category-image-container" position="0 .1355 0.0031" material="src:#category-back">
+						<a-entity anim-listener="listener:handleCatAnim" class="category-image-container" position="0 .1355 0.0031" material="src:#category-back">
 							<a-image class="category-image" src="{{cloudinaryUrl mainImage width='960' height='540' q='70' crop='fill' gravity='center'}}" width=".6" height=".3375" position="0 -.1755 0">
 							<a-animation class="hover" attribute="scale" begin="hover" end="hover-stop" from="1 1 1" to="1.07 1.04 1.07" dur="400" easing="linear"></a-animation>
 							</a-image>
-							<a-animation anim-listener class="clicked-image" attribute="scale" begin="clicked" end="clicked-stop" to="1 0 1" dur="500" easing="linear"></a-animation>
+							<a-animation class="clicked-image" attribute="scale" begin="clicked" end="clicked-stop" to="1 0 1" dur="500" easing="linear"></a-animation>
 						</a-entity>
 					{{/if}}	
 				{{/ifPostIsInCategory}}
