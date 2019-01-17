@@ -46,18 +46,12 @@ module.exports = function () {
 		for(var i=0;i<featuredProj.length;i++){
 			var item = featuredProj[i].categories;
 			console.log("catname: "+catName+" item: "+item);
-		   	if (item.length >1)
-		    {
-		        foundIndex=_.findIndex(_.map(item,'name'),catName);
-		    }
-		    else
-		    {
+		   	
 		    	if(featuredProj[i].categories[0].name==catName){
 					foundIndex=0;
 				}	else{
 					foundIndex=-1;
-				}	        
-		    }
+				}
 			if(foundIndex>=0){
 				var found=featuredProj[i];
 
