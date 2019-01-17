@@ -32,7 +32,7 @@ module.exports = function () {
 	 */
 
 	_helpers.AFgetCategoriesPos = function (index,yOffset,zOffset) {		
-		var modIndex=index%4,odd=index%2,x=-1.14,y=2.706,z=.355;		
+		var modIndex=index%4,x=-1.14,y=2.706,z=.355;		
 		if(modIndex>0&&modIndex<3) {x=-.397;z=.085;}
 		if(modIndex>1) x*=-1;
 		if(index>3) y-=.6;
@@ -41,15 +41,60 @@ module.exports = function () {
 		return x+" "+y+" "+z;		
 	};
 
-	_helpers.AFgetCategoriesRot = function (index,z) {		
-		var modIndex=index%4,y=30;
+	_helpers.AFgetCategoriesImage = function (featuredProj,catName) {
+		var res;
+		for(var i=0;i<featuredProj.length;i++){
+			var item = featuredProj[i].categories;
+		   	if (item.length >1)
+		    {
+		        foundIndex=_.findIndex(_.map(item,'name'),catName)
+		    }
+		    else
+		    {
+		    	if(featuredProj[i].categories[0].name==catName){
+					foundIndex=0;
+				}	else{
+					foundIndex=-1;
+				}	        
+		    }
+			if(foundIndex>=0){
+				var found=featuredProj[i];
+
+				if(found.mainImage!==null&&found.mainImage!==undefined){
+					res= found.mainImage; break;
+				}else{
+					res=''; 
+				}
+			}else{
+				res= '';
+			}			
+		}
+		return res;
+	};
+
+	_helpers.AFgetCorridorsPos = function (index,x1,y1,z1,x2,y2,z2) {		
+		var modIndex=index%4,x=x1,y=y1,z=z1;		
+		if(modIndex>0&&modIndex<3) {x=x2;z=z2;}
+		if(modIndex>1) x*=-1;
+		if(index>3) y=y2;
+		return x+" "+y+" "+z;		
+	};
+
+	_helpers.AFgetCategoriesRot = function (index,z1,z2) {		
+		var modIndex=index%4,y=30,z=z1;
 		if(modIndex>0&&modIndex<3) y=10;
-		if(modIndex>1) y*=-1;
+		if(modIndex>1){ y*=-1;z=z2;}
 		return 0+" "+y+" "+z;		
 	};
 	
 	_helpers.printName = function (a) {		
 			return a["name.full"];		
+	};
+
+	_helpers.jsonView = function (a) {		
+		//console.log(_.map(a, 'name'));
+			return JSON.stringify(a);
+			//_.map(a, 'name');
 	};
 
 	_helpers.getVideoAspectClasses = function (a,b) {

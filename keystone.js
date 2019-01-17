@@ -66,6 +66,19 @@ keystone.set('nav', {
 
 // Start Keystone to connect to your database and initialise the web server
 
+var sock = require('socket.io'); 
 
-
-keystone.start();
+keystone.start({
+        onStart: function() {
+            var hserver = keystone.httpServer;                 
+            var io = keystone.set('io', sock.listen(hserver)).get('io');
+            // Socket function
+            io.on('connection', function (socket) {
+                console.log('Socket connected.')
+                socket.emit('news', 'Socket connected!');
+			  	socket.on('fromClient', function (data) {
+			    console.log(data);
+			  });
+            });
+        }
+    });

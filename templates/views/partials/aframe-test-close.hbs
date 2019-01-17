@@ -1,0 +1,321 @@
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/components/evil.js" type="text/javascript"></script>
+<script src="/js/components/frame.js" type="text/javascript"></script>
+<script src="/js/components/exit_frame.js" type="text/javascript"></script>
+<script src="/js/components/chamber.js" type="text/javascript"></script>
+<script src="/js/components/chamber_sign.js" type="text/javascript"></script>
+<script src="/js/components/chamber_exit.js" type="text/javascript"></script>
+<script src="/js/components/chamber_title.js" type="text/javascript"></script>
+<script src="/js/components/chamber_video.js" type="text/javascript"></script>
+<script src="/js/components/chamber_image.js" type="text/javascript"></script>
+<script src="/js/components/text_plane.js" type="text/javascript"></script>
+<script>
+//TODO: remove all playertostring replace with "var pos"
+//TODO: remove all animations once they are done and remove listeners associated with it like in killAllAnimations function
+//TODO: check how it works if you select category then while it flies cut off internet so the post fails, it sohuld retry every 10 seconds the post //while in chamber
+var evil,category=0,outterRing,player,playerToString,par,projectIndex=-1,projects,projectVideo,numOfChamberSigns,numOfProjects,numOfImages,catLoad,projectHasVideo=false,animCounter=0,categories={{{jsonView data.categoriesNames}}},numOfCategories=categories.length;
+
+var speedMult=0.02;
+
+/////////////////////////////////////
+//SOCKET.IO Bullshit
+var socket = io();
+socket.on('news', function (data) {
+console.log("web socket says: "+data);});
+socket.on('projectsData', function (data) {
+	projects=data;
+	numOfProjects=projects.length;	
+});
+socket.on('projectVideo', function (data) {
+	projectVideo=data.toString();
+	createVideoShit();
+	projectHasVideo=true;
+});
+
+/////////////////////////////////////
+//ONLOAD Init function broh
+function initfunc() {	
+	outterRing=document.querySelector('#outter-ring');
+	player=document.querySelector('#player');
+	assets=document.querySelector('a-assets');
+	evil=document.querySelector('[evil]');
+	if(evil!==null){
+		evil=document.querySelector('[evil]').components.evil;	
+	}else{
+		setTimeout(initfunc,200);
+	}	
+}
+window.onload = initfunc;
+
+/////////////////////////////////////
+//MAIN functions
+/////////////////////////////////////
+function createVideoShit(){
+	var videoEl=document.querySelector("#project-video-file");
+	videoEl.pause();
+	videoEl.removeAttribute('src');
+	videoEl.load();
+	videoEl.setAttribute("src",projectVideo);
+	videoEl.load();
+	videoEl.pause();
+}
+function createMoveAnim(id,to,dur,begin,ease,listener){
+	var animation = document.createElement("a-animation");
+		animation.setAttribute("id",id);
+    	player.setAttribute('anim-listener','listener',listener);
+        animation.setAttribute("attribute","position");            
+        animation.setAttribute("to",to);
+        animation.setAttribute("dur",dur*speedMult);
+        animation.setAttribute("begin",begin);
+        animation.setAttribute("easing",ease); 
+    	player.appendChild(animation);
+}
+function createCorridorAnim(obj,id,to,dur,begin,ease,listener){
+	var broh="0 0 "+to;
+	var animation = document.createElement("a-animation");
+		animation.setAttribute("id",id);
+    	obj.setAttribute('anim-listener','listener',listener);
+        animation.setAttribute("attribute","rotation");            
+        animation.setAttribute("to",broh);
+        animation.setAttribute("dur",dur);
+        animation.setAttribute("begin",begin);
+        animation.setAttribute("easing",ease); 
+    	obj.appendChild(animation);
+}
+function createCorridors(event){
+	var sce=event.target.sceneEl;
+	sce.removeChild(sce.querySelector('#corridor-0'+category));
+	var cors = document.createElement("a-entity");
+		cors.setAttribute("id","corridors");
+		playerToString=evil.wrangleDestination(-4.16,4.386,-4.877,-1.445,.426,-5.865);		
+		var playerRotation=evil.wrangleRotation(-135,-135);		
+    	cors.setAttribute("position",playerToString);
+    	cors.setAttribute("rotation",playerRotation);          
+        event.target.sceneEl.appendChild(cors);
+        for(var i=0;i<2;i++){
+	        var co = document.createElement("a-entity");
+			co.setAttribute("id","chamber-corridor-0"+(i+1));
+			co.setAttribute("position","0 0 "+(-1.125+(i+2)*.75));            
+	        co.setAttribute("gltf-model","#corridor");
+	        createCorridorAnim(co,'corridor-anim-0'+(i+1),180,1000,'go-corridor-anim-0'+(i+1),'linear','handleCorridorRotation');			
+	        cors.appendChild(co);	        
+        }        
+}
+function killPreviousAnimation(animation){
+	var prevAnim=player.querySelector(animation);    	
+ 	player.removeChild(prevAnim);
+ 	player.removeAttribute('anim-listener');
+}
+
+/////////////////////////////////////
+//EVENT Handlers
+/////////////////////////////////////
+function handleCatEnter () {
+	par=this.parentElement;
+	par.querySelector('.category-background').setAttribute('material','src','#category-background-hover');
+	par.querySelector('.category-title').setAttribute('text','color','black');
+	outterRing.emit('circle-reveal',null,false);    	
+	var imageChild=par.querySelector('.category-image');
+	if(imageChild!==null){
+		imageChild.emit('hover',null,false);    		
+	}
+}
+function handleCatLeave () {
+	par=this.parentElement;
+	par.querySelector('.category-background').setAttribute('material','src','#category-background-mat');
+	par.querySelector('.category-title').setAttribute('text','color','white');
+	outterRing.emit('circle-stop',null,false);
+	outterRing.setAttribute('theta-length', 0);
+	var imageChild=par.querySelector('.category-image');
+	if(imageChild!==null){
+  		imageChild.emit('hover-stop',null,false);  		
+  		imageChild.setAttribute('scale', '1 1 1');
+	}
+}
+function handleCorridorRotation () {
+	//console.log("finished rotating the corridor");
+}
+function handleCatClicked (event) {
+    par=this.parentElement;
+    //console.log('I was clicked at: ', event.detail.intersection.point);
+    //TODO: only works with up to 9 CATEGORIES!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	category=Number(par.id.charAt(4));
+	evil.getCategoryData(event);
+	par.querySelector('.category-background').setAttribute('material','src','#category-background-hover');
+	//TODO: Reset this
+	par.querySelector('.category-background').setAttribute('material', 'color', '#fcc800');
+	var imageContainer = par.querySelector('.category-image-container');
+	if(imageContainer!==null){
+		par.querySelector('.category-image-container').emit('clicked');	
+	}else{
+		par.querySelector('.category-background-container').emit('clicked');
+		par.querySelector('.category-title').setAttribute('visible','false');
+	}
+	var allButtons=document.querySelectorAll('.category-button')
+	for(var i=0;i<allButtons.length;i++){
+		allButtons[i].removeAttribute('category-listener');
+		allButtons[i].classList.remove("clickable");
+	}	
+	outterRing.emit('circle-stop');
+	outterRing.setAttribute('theta-length', 0);
+	var playerTo=par.getAttribute('position');
+	//TODO: find more elegant way of doing this... maybe
+	playerToString=playerTo.x+" "+playerTo.y+" "+playerTo.z;
+	createMoveAnim('move-cat-anim',playerToString,2000,'move-cat','linear','handleCatFly');
+	player.emit('move-cat');
+}
+function handleCatAnim (event) {
+	par=this.parentElement;	var classes=event.target.classList;
+	if(classes.contains("clicked-image")){		
+		par.querySelector('.category-background-container').emit('clicked',null,false);
+		par.querySelector('.category-title').setAttribute('visible','false');
+	}  else if(classes.contains("clicked-background")){		
+		var screensArr=par.querySelectorAll('.category-screens');
+    	for(var i=0;i<screensArr.length;i++){
+    		screensArr[i].emit('clicked',null,false);
+		}
+	} 
+}
+function handleCatFly (event) {
+	//console.log("finished cat flying ");	
+    killPreviousAnimation('#move-cat-anim');
+    player.querySelector('#main-camera').setAttribute('near', 0.03);
+    playerToString=evil.wrangleDestination(-3.33,4.386,-3.439,-1.156,.426,-4.230);
+    createMoveAnim('move-tunnel-anim',playerToString,3000,'move-tunnel','linear','handleTunnelFly');
+    createCorridors(event);
+    player.emit('move-tunnel',null,false);
+}	
+function handleTunnelFly (event) {
+	//console.log("finished flying the tunnel");   
+    killPreviousAnimation('#move-tunnel-anim');
+    playerToString=evil.wrangleDestination(-4.525,4.386,-5.508,-1.571,.426,-6.581);
+    createMoveAnim('move-corridor-anim',playerToString,3000,'move-corridor','linear','handleCorridorFly');
+    //createChamber(event);
+    var pos=evil.wrangleDestination(-4.22,3.95,-4.97,-1.46,0.0,-5.95),
+	rot=evil.wrangleRotation(0,0);
+    evil.createEntityWithComponent("chamber", event.target.sceneEl,{'id':'chamber','projects':projects,'position':pos,'rotation':rot,'title':categories[category-1]});    
+    player.emit('move-corridor',null,false);
+    document.querySelector('#chamber-corridor-01').emit('go-corridor-anim-01',null,false);
+    //document.querySelector('#chamber-corridor-02').emit('go-corridor-anim-02');
+}
+function handleCorridorFly (event) {
+	//console.log("finished flying the corridor");
+	killPreviousAnimation('#move-corridor-anim');
+	if(projects==undefined){
+		catLoad=document.querySelector("#chamber-loading");
+		catLoad.emit("fade-in");			
+	}
+	evil.waitForProjects();
+}
+AFRAME.registerComponent('anim-listener', {
+	schema: {listener:{type: 'string'}},
+	remove: function () {
+		this.el.removeEventListener('animationend',eval(this.data.listener)); 
+	},
+	init: function () {		
+		this.el.addEventListener('animationend',eval(this.data.listener)); 
+	}
+}); 
+AFRAME.registerComponent('category-listener',{
+	dependencies: ['evil'],
+	remove: function () {
+		this.el.removeEventListener('mouseenter', handleCatEnter);
+	    this.el.removeEventListener('mouseleave', handleCatLeave);
+    	this.el.removeEventListener('click', handleCatClicked);
+	},
+  	init: function () {
+  		this.el.addEventListener('mouseenter', handleCatEnter);
+	    this.el.addEventListener('mouseleave', handleCatLeave);
+    	this.el.addEventListener('click', handleCatClicked);
+	}
+});
+</script>
+<section id="a-frame">
+	<a-scene stats light="defaultLightsEnabled: false" effects="ssao,fxaa,film" 
+			ssao="samples:32;rings:7;radius:.03; ratio:1; intensity: 0.5; maxDepth:.99;bias:.05;scale:1; blurRadius:5;depthCutoff: 1000"
+			fxaa="true"	film="sIntensity: 0.3; nIntensity: 0.1"
+			fog="type:linear; color:#ECECEC; near:0; far:8;">
+		<a-assets>
+	    	<a-asset-item id="main-scene" src="/models/EB_main_scene.glb"></a-asset-item>
+	    	<a-asset-item id="screen" src="/models/EB_screen.glb"></a-asset-item>	    	
+	    	<a-asset-item id="chamber-stage-model" src="/models/EB_chamber_stage.glb"></a-asset-item>
+	    	<a-asset-item id="chamber-walls-model" src="/models/EB_chamber_walls.glb"></a-asset-item>
+	    	<a-asset-item id="chamber-exit-model" src="/models/EB_chamber_exit.glb"></a-asset-item>
+	    	<a-asset-item id="chamber-door-model" src="/models/EB_chamber_door.glb"></a-asset-item>
+	    	<a-asset-item id="corridor" src="/models/EB_corridor.glb"></a-asset-item>
+	    	<img id="category-background-mat" src="/images/category_back.jpg">    	
+	    	<img id="category-background-hover" src="/images/category_back_hover.jpg">
+	    	<img id="images-background-mat" src="/images/images_back_512x256.jpg">
+	    	<img id="images-background-hover" src="/images/images_back_512x256.jpg">
+	    	<img id="back-background-mat" src="/images/back_background_512x256.jpg">
+	    	<img id="back-background-hover" src="/images/back_background_hover_512x256.jpg">
+	    	<img id="exit-background-mat" src="/images/exit_background_1024x256.jpg">
+	    	<img id="exit-background-hover" src="/images/exit_background_hover_1024x256.jpg">	    	
+	    	<img id="video-placeholder-image" src="/images/loading_video.jpg">	    	
+	    	<!--<video id="project-video-file" mute autoplay loop><source src="/videos/small_video.mp4" "type"="video/mp4"></source></video>-->
+		</a-assets>		
+		<!--CAMERA-->
+		<a-entity position="-1 2.4 3" id="player">
+			<a-camera id="main-camera" wasd-controls-enabled="true" near=".1" fov="70">
+				<a-entity id="curso" cursor="fuse: true; fuseTimeout: 500" position="0 0 -1"
+            	geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
+            	material="color: black; shader: flat" 
+            	raycaster="far: 20; interval: 100; objects: .clickable"></a-entity>
+            	<a-ring id="outter-ring" position="0 0 -1" color="white" radius-inner="0.04" radius-outer="0.06" material="shader: flat" theta-length="0">
+            		<a-animation id="circle-reveal" attribute="theta-length" begin="circle-reveal" end="circle-stop" to="360" dur="500" easing="linear"></a-animation>
+            	</a-ring>
+			</a-camera>			
+		</a-entity>		
+		<!--CATEGORIES-->	
+		{{#each data.categories}}
+		<a-entity class="category-container" id="cat-{{add @index 1}}" position="{{AFgetCategoriesPos @index 0 0}}" rotation="{{AFgetCategoriesRot @index 0 0}}">
+			<!--CATEGORY PLANE-->	
+			<a-entity category-listener class="category-button clickable" geometry="primitive:plane;width:.69;height:.5" position="0 0 0.003" visible="false"></a-entity>
+			<a-entity anim-listener="listener:handleCatAnim" class="category-background-container" position="0 -.25 0.003">
+				<a-entity class="category-background" geometry="primitive:plane;width:.69;height:.5" position="0 .25 0" material="src:#category-background-mat"></a-entity>
+				<a-animation class="clicked-background" attribute="scale" begin="clicked" end="clicked-stop" from="1 1 1" to="1 0 1" dur="400" easing="linear"></a-animation>
+			</a-entity>			
+			<!--CATEGORY SCREENS-->	
+			<a-entity class="category-screens" position="-.345 0.25 -0.014" gltf-model="#screen" material="roughness: 1; metalness: 0">
+				<a-animation class="clicked-screen" attribute="scale" begin="clicked" end="clicked-stop" from="1 1 1" to="0 0 1" dur="500" easing="linear"></a-animation>
+			</a-entity>
+			<a-entity class="category-screens" position=".345 -0.25 -0.014" rotation="0 0 180" gltf-model="#screen" material="roughness: 1; metalness: 0">
+				<a-animation class="clicked-screen" attribute="scale" begin="clicked" end="clicked-stop" from="1 1 1" to="0 0 1" dur="500" easing="linear"></a-animation>
+			</a-entity>
+			<!--CATEGORY TITLE-->	
+			<a-entity class="category-title" position=".54 0.18 0.005" text="value: {{name}}; width: 1.7; height: auto; color: white;"></a-entity>			
+			{{#each ../data.featuredPosts}}
+				{{#ifPostIsInCategory categories ../name}}
+					{{#if mainImage.exists}}	
+						<!--CATEGORY IMAGE-->
+						<a-entity anim-listener="listener:handleCatAnim" class="category-image-container" position="0 .1355 0.0031" material="src:#category-background-mat">
+							<a-image class="category-image" src="{{cloudinaryUrl mainImage width='960' height='540' q='70' crop='fill' gravity='center'}}" width=".6" height=".3375" position="0 -.1755 0">
+							<a-animation class="hover" attribute="scale" begin="hover" end="hover-stop" from="1 1 1" to="1.07 1.04 1.07" dur="400" easing="linear"></a-animation>
+							</a-image>
+							<a-animation class="clicked-image" attribute="scale" begin="clicked" end="clicked-stop" to="1 0 1" dur="500" easing="linear"></a-animation>
+						</a-entity>
+					{{/if}}	
+				{{/ifPostIsInCategory}}
+			{{/each}}					
+		</a-entity>
+		<a-box id="corridor-0{{add @index 1}}" depth="3" width=".4" height=".4" position="{{AFgetCorridorsPos @index -4.16 4.386 -4.877 -1.445 0.426 -5.865}}" rotation="{{AFgetCategoriesRot @index -144 -126}}" material="color: white"></a-box>
+		{{/each}}
+		<!--SECTION TITLES-->
+		<a-entity rotation="-45 0 0" position=".89 .99 1.365" text="value: Work; width: 2; height: auto"></a-entity>
+		<!--MAIN SCENE-->
+		<a-entity id="main-scene" position="0 0 0" gltf-model="#main-scene" material="roughness: 1; metalness: 0"></a-entity>		
+		<!--SKY-->
+		<a-sky color="#ECECEC"></a-sky>		
+		<!--LIGHTS-->
+		<a-entity light="type: ambient; color: #BBB; intensity: 0.6"></a-entity>
+		<a-entity light="type: directional; color: #FFF; intensity: 0.6" position="-0.5 1 1"></a-entity>
+		<!-- RENDER HTML AS TEXTURE EXAMPLE
+		<a-entity geometry="primitive:plane;width:.69;height:.5" position="0 0 0.003" material="shader:html;target:#category-back;fps:1;" class="category-background"></a-entity>-->
+    </a-scene>
+    <!-- RENDER HTML AS TEXTURE EXAMPLE		
+	<div id="category-back" style="width: 512px; height: 256px; position: fixed; left: 500px; top: 0; z-index: -1; overflow: hidden;background-color:#333;">
+		<div class="category-col">
+				<div class="side-line"></div>
+		</div>	
+	</div>-->
+</section>

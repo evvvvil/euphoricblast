@@ -260,9 +260,17 @@ color:#fff;
  	background-color:#333333;
     margin-bottom: 0px;
 }
-
-.navbar-polygon .navbar-nav>li>a {
+.navbar-nav>li>a {
     color: #CCC;
+}
+.navbar-social.navbar-nav>li>a {
+    color: #CCC;
+    font-size:1.5em;
+    padding-top:10px;
+    padding-bottom:10px;
+    padding-left:0px;
+    padding-right:0px;
+    width:35px;
 }
 .navbar-polygon .navbar-nav>li>a:hover, .navbar-polygon .navbar-nav>li>a:focus {
     color: #FFF;
@@ -272,7 +280,12 @@ color:#fff;
     color: #555;
     background-color: #e7e7e7;
 }
-
+.navbar-social {
+  margin:0px;    
+}
+.nav.navbar-social>li>a:hover,.nav.navbar-social>li>a:focus{
+  color: #333;
+}
 
 .navbar-logo-container{
     width: 44px;
@@ -320,6 +333,10 @@ color:#fff;
 }
 .navbar-default a.navbar-double-link:hover .navbar-logo-container .navbar-logo-container-rotate{
     transform: rotateZ(180deg) scale(.9);
+}
+.navbar-collapse {
+    border-top: 0px solid transparent;
+    box-shadow: none;
 }
 /*WORK LAB BLOG CONTACT PROJECT PAGES*/
 #section-categories>.container-fluid,#section-post-related-projects>.container-fluid.related-projects-fluid,#section-projects-listings>.container-fluid,#section-post-images>.container-fluid,#section-post-other-images>.container-fluid{
@@ -713,6 +730,13 @@ a.carousel-control.right:hover {
 .no-video-container .text-col{
   margin-top:-7px;
 }
+.navbar-social{
+  width:100%;
+}
+#footer .navbar-nav>li{
+  display:inline-block;
+  float:none;
+}
 
 /* MEDIA QUERIES */
 
@@ -1102,10 +1126,13 @@ h3.project-title.small-category-title {
   }
 
   #footer{
-    margin: 15px 0;
+    margin: 15px 0 0 0;
   }
   #footer p {
     margin: 0 0 5px;
+  }
+  #footer p:nth-child(even) {
+    margin: 0 0 0px;
   }
   .navbar-logo-container {
     margin-left: 13px;

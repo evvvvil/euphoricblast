@@ -4,11 +4,11 @@
  * Extend or replace these functions as your application requires.
  *
  * This structure is not enforced, and just a starting point. If
- * you have more middleware you may want to group it as separate
+ * you have more middleware you may want to group it as separate 	
  * modules in your project's /lib directory.
  */
 var _ = require('lodash');
-
+var keystone=require('keystone');
 
 /**
 	Initialises the standard view locals
@@ -26,6 +26,7 @@ exports.initLocals = function (req, res, next) {
 		//{ label: 'Gallery', key: 'gallery', href: '/gallery' },
 		{ label: 'Contact', key: 'Contact', href: '/contact' },
 	];
+	res.locals.io=keystone.get('io');
 	res.locals.user = req.user;
 	next();
 };

@@ -1,211 +1,207 @@
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/components/evil.js" type="text/javascript"></script>
+<script src="/js/components/homecategory.js" type="text/javascript"></script>
+<script src="/js/components/frame.js" type="text/javascript"></script>
+<script src="/js/components/exit_frame.js" type="text/javascript"></script>
+<script src="/js/components/chamber.js" type="text/javascript"></script>
+<script src="/js/components/chamber_sign.js" type="text/javascript"></script>
+<script src="/js/components/chamber_exit.js" type="text/javascript"></script>
+<script src="/js/components/chamber_title.js" type="text/javascript"></script>
+<script src="/js/components/chamber_video.js" type="text/javascript"></script>
+<script src="/js/components/chamber_image.js" type="text/javascript"></script>
+<script src="/js/components/text_plane.js" type="text/javascript"></script>
 <script>
-var category=0,outterRing,player,playerToString,par;
-window.onload = function () {	
+//TODO: check how it works if you select category then while it flies cut off internet so the post fails, it sohuld retry every 10 seconds the post //while in chamber
+var socket,evil,outterRing,player,chamber,projects,projectVideo,numOfProjects,numOfImages,catLoad,projectHasVideo=false,animCounter=0,category=0,projectIndex=-1,categories={{{jsonView data.categoriesNames}}},exiting=false,projectShown=false,
+
+speedMult=0.01;
+
+var socket = io();
+socket.on('news', function (data) {
+console.log("web socket says: "+data);});
+socket.on('projectsData', function (data) {
+	projects=data;
+	chamber.setAttribute("chamber","projects",projects);
+	numOfProjects=projects.length;	
+});
+socket.on('projectVideo', function (data) {
+	projectVideo=data.toString();
+	evil.changeVideo(projectVideo);
+	projectHasVideo=true;
+});
+
+function initfunc() {	
 	outterRing=document.querySelector('#outter-ring');
 	player=document.querySelector('#player');
-}
-function createMoveAnim(id,playerToString,dur,begin,ease,listener){
-	var animation = document.createElement("a-animation");
-		animation.setAttribute("id",id);
-    	player.setAttribute('anim-listener','listener',listener);
-        animation.setAttribute("attribute","position");            
-        animation.setAttribute("to",playerToString);
-        animation.setAttribute("dur",dur);
-        animation.setAttribute("begin",begin);
-        animation.setAttribute("easing",ease); 
-    	player.appendChild(animation);
-}
-function wrangleDestination(x1,y1,z1,x2,y2,z2){
-		var x=x1,y=y1,z=z1,modCat=(category-1)%4;
-		if(category>5) y=y2;
-		if(modCat>0&&modCat<3) {x=x2;z=z2;}
-		if(modCat>1)x*=-1;
-		return x+" "+y+" "+z+" ";
-}
-function killPreviousAnimation(animation){
-	var prevAnim=player.querySelector(animation);    	
- 	player.removeChild(prevAnim);
- 	player.removeAttribute('anim-listener');
-}
-function handleCatEnter () {
-	par=this.parentElement;
-	par.querySelector('.category-background').setAttribute('material','src','#category-back-hover');
-	par.querySelector('.category-title').setAttribute('text','color','black');
-	outterRing.emit('circle-reveal');    	
-	var imageChild=par.querySelector('.category-image');
-	if(imageChild!==null){
-		imageChild.emit('hover');    		
-	}
-}
-function handleCatLeave () {
-	par=this.parentElement;
-	par.querySelector('.category-background').setAttribute('material','src','#category-back');
-	par.querySelector('.category-title').setAttribute('text','color','white');
-	outterRing.emit('circle-stop');
-	outterRing.setAttribute('theta-length', 0);
-	var imageChild=par.querySelector('.category-image');
-	if(imageChild!==null){
-  		imageChild.emit('hover-stop');  		
-  		imageChild.setAttribute('scale', '1 1 1');
-	}
-}
-function handleCatClicked (event) {
-    par=this.parentElement;
-    console.log('I was clicked at: ', event.detail.intersection.point);
-    //TODO: only works with up to 9 CATEGORIES!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	category=Number(par.id.charAt(4));
-	par.querySelector('.category-background').setAttribute('material','src','#category-back-hover');
-	//TODO: Reset this
-	par.querySelector('.category-background').setAttribute('material', 'color', '#fcc800');
-	var imageContainer = par.querySelector('.category-image-container');
-	if(imageContainer!==null){
-		par.querySelector('.category-image-container').emit('clicked');	
+	assets=document.querySelector('a-assets');
+	evil=document.querySelector('[evil]');
+	chamber=document.querySelector("#chamber");
+	if(evil!==null){
+		evil=document.querySelector('[evil]').components.evil;	
 	}else{
-		par.querySelector('.category-background-container').emit('clicked');
-		par.querySelector('.category-title').setAttribute('visible','false');
+		setTimeout(initfunc,200);
 	}
-	var allButtons=document.querySelectorAll('.category-button')
-	for(var i=0;i<allButtons.length;i++){
-		allButtons[i].removeAttribute('category-listener');
-		allButtons[i].classList.remove("clickable");
-	}	
-	outterRing.emit('circle-stop');
-	outterRing.setAttribute('theta-length', 0);
-	var playerTo=par.getAttribute('position');
-	//TODO: find more elegant way of doing this... maybe
-	playerToString=playerTo.x+" "+playerTo.y+" "+playerTo.z;
-	createMoveAnim('move-cat-anim',playerToString,4000,'move-cat','linear','handleCatFly');
-	player.emit('move-cat');
+	player.addEventListener('animationend', handlePlayerAnimations);	
 }
-function handleCatAnim (event) {
-	par=this.parentElement;	var classes=event.target.classList;
-	if(classes.contains("clicked-image")){		
-		par.querySelector('.category-background-container').emit('clicked');
-		par.querySelector('.category-title').setAttribute('visible','false');
-	}  else if(classes.contains("clicked-background")){		
-		var screensArr=par.querySelectorAll('.category-screens');
-    	for(var i=0;i<screensArr.length;i++){
-    		screensArr[i].emit('clicked');
+window.onload = initfunc;
+
+function handlePlayerAnimations(event){
+	var animID=event.target.id,pos;
+	if(animID=="move-cat-anim"){
+		player.querySelector('#main-camera').setAttribute('near', 0.03);
+	    pos=evil.wrangleDestination(-3.33,4.386,-3.439,-1.156,.426,-4.230);
+	    evil.createAnimation("move-tunnel-anim",player,"position","move-tunnel","move-tunnel-stop",pos,2000*speedMult,'linear');			
+	    //Create Corridors
+	    var sce=document.querySelector('a-scene');
+		sce.querySelector('#box-corridor-0'+category).object3D.visible=false;
+
+		var cors = document.querySelector("#corridors");
+			var pos=evil.wrangleDestination(-4.16,4.386,-4.877,-1.445,.426,-5.865),
+			rot=evil.wrangleRotation(-135,-135);		
+	    	cors.setAttribute("position",pos);
+	    	cors.setAttribute("rotation",rot);
+			cors.object3D.visible = true;
+
+	    player.emit('move-tunnel',null,false);
+	}else if(animID=="move-tunnel-anim"){
+		pos=evil.wrangleDestination(-4.525,4.386,-5.508,-1.571,.426,-6.581);
+		evil.createAnimation("move-corridor-anim",player,"position","move-corridor","move-corridor-stop",pos,3000*speedMult,'linear');	    
+	    var pos=evil.wrangleDestination(-4.22,3.95,-4.97,-1.46,0.0,-5.95),
+			rot=evil.wrangleRotation(0,0);
+			chamber.object3D.visible = true;
+			///chamber.setAttribute("chamber","title",categories[category-1]);			
+			chamber.setAttribute("chamber","position",pos);
+			chamber.setAttribute("chamber","rotation",rot);	
+			player.emit('move-corridor',null,false);
+			document.querySelector('#corridor-01').emit('spin-corridor',null,false);
+			document.querySelector('#corridor-02').emit('spin-corridor',null,false);
+	}else if(animID=="move-corridor-anim"){
+		if(projects==undefined){
+			catLoad=document.querySelector("#chamber-loading");
+			catLoad.emit("fade-in");			
 		}
-	} 
-} 
-function handleCatFly (event) {
-	console.log("finished cat flying ");	
-    killPreviousAnimation('#move-cat-anim');
-    player.querySelector('#main-camera').setAttribute('near', 0.01);
-    playerToString=wrangleDestination(-3.33,4.386,-3.439,-1.156,.426,-4.230);
-    createMoveAnim('move-tunnel-anim',playerToString,4000,'move-tunnel','linear','handleTunnelFly');
-    player.emit('move-tunnel');
-}	
-function handleTunnelFly (event) {
-	console.log("finished flying the tunnel");    
-    killPreviousAnimation('#move-tunnel-anim');
-    playerToString=wrangleDestination(-5.088,4.386,-6.485,-1.749,.426,-7.592);
-    createMoveAnim('move-corridor-anim',playerToString,4000,'move-corridor','linear','handleCorridorFly');
-    player.emit('move-corridor');
+		evil.waitForProjects();
+	}else if(animID=="move-exit-anim"){
+		player.emit('move-vert',null,false);
+	}else if(animID=="move-co-vert-anim"){
+		player.emit('move-horz',null,false);
+	}else if(animID=="move-co-horz-anim"){
+		player.object3D.position.set(-1, 5.4, 3);
+		//player.object3D.rotation.set(THREE.Math.degToRad(0),THREE.Math.degToRad(0),THREE.Math.degToRad(0));
+		var kink=document.querySelector("#kink"),
+		corridorEnd=document.querySelector("#corridor-end"),
+		kink2=chamber.querySelector("#chamber-kink-02"),
+		cor2=chamber.querySelector("#chamber-corridor-02"),
+		kink2Rot=kink2.getAttribute("rotation"),
+		corRot=cor2.getAttribute("rotation"),
+		chamberRot=chamber.getAttribute("rotation"),
+		rotX=kink2Rot.x+chamberRot.x,
+		rotY=kink2Rot.y+chamberRot.y,
+		rotZ=kink2Rot.z+chamberRot.z,
+		rotCorX=corRot.x+chamberRot.x,
+		rotCorY=corRot.y+chamberRot.y,
+		rotCorZ=corRot.z+chamberRot.z;
+		
+		kink.object3D.rotation.set(
+		  THREE.Math.degToRad(rotX),
+		  THREE.Math.degToRad(rotY),
+		  THREE.Math.degToRad(rotZ)
+		);	
+		corridorEnd.object3D.rotation.set(
+		  THREE.Math.degToRad(rotCorX),
+		  THREE.Math.degToRad(rotCorY),
+		  THREE.Math.degToRad(rotCorZ)
+		);				
+		kink.object3D.visible = true;
+		corridorEnd.object3D.visible = true;
+		
+		var cam=player.querySelector('#main-camera');
+		evil.createAnimation("change-near",cam,"near","adjust-near","adjust-near-stop","0.1",2000,'linear');	    
+	    cam.emit('adjust-near',null,false);
+		player.emit('move-down',null,false);
+		evil.removeProjectsAndCategories();		
+	}else if(animID=="move-co-down-anim"){
+		evil.removePlayerAnimations();
+		evil.resetChamber();
+	}
 }
-function handleCorridorFly (event) {
-	console.log("finished flying the corridor");
-	killPreviousAnimation('#move-corridor-anim'); 
-}	
-AFRAME.registerComponent('log', {
-  schema: {type: 'string'},
-  init: function () {
-    var stringToLog = this.data;
-    console.log(stringToLog);
-  }
-});
-AFRAME.registerComponent('anim-listener', {
-	schema: {listener:{type: 'string'}},
-	remove: function () {
-		this.el.removeEventListener('animationend',eval(this.data.listener)); 
-	},
-	init: function () {		
-		this.el.addEventListener('animationend',eval(this.data.listener)); 
-	}
-});  
-AFRAME.registerComponent('category-listener',{
-	remove: function () {
-		this.el.removeEventListener('mouseenter', handleCatEnter);
-	    this.el.removeEventListener('mouseleave', handleCatLeave);
-    	this.el.removeEventListener('click', handleCatClicked);
-	},
-  	init: function () {
-  		this.el.addEventListener('mouseenter', handleCatEnter);
-	    this.el.addEventListener('mouseleave', handleCatLeave);
-    	this.el.addEventListener('click', handleCatClicked);
-	}
-});     
 </script>
-<section id="a-frame">	
-	<a-scene stats log="Hello, Scene!" light="defaultLightsEnabled: false" effects="ssao,fxaa,film" 
-			ssao="samples:32;rings:7;radius:.5; ratio:1; intensity: 1.5; maxDepth:.99;bias: 0.05;scale: 0.5; blurRadius: 4;depthCutoff: 1000" 
+<section id="a-frame">
+	<a-scene stats light="defaultLightsEnabled: false" effects="ssao,fxaa,film" 
+			ssao="samples:32;rings:7;radius:.03; ratio:1; intensity: 0.5; maxDepth:.99;bias:.05;scale:1; blurRadius:5;depthCutoff: 1000"
 			fxaa="true"	film="sIntensity: 0.3; nIntensity: 0.1"
-			fog="type: linear; color: #ECECEC;near:0;far:8;">
+			fog="type:linear; color:#ECECEC; near:0; far:8;">
 		<a-assets>
 	    	<a-asset-item id="main-scene" src="/models/EB_main_scene.glb"></a-asset-item>
-	    	<a-asset-item id="screen" src="/models/EB_screen.glb"></a-asset-item>
-	    	<img id="category-back" src="/images/category_back.jpg"></a-asset-item>
-	    	<img id="category-back-hover" src="/images/category_back_hover.jpg"></a-asset-item>
+	    	<a-asset-item id="screen" src="/models/EB_screen.glb"></a-asset-item>	    	
+	    	<a-asset-item id="chamber-stage-model" src="/models/EB_chamber_stage.glb"></a-asset-item>
+	    	<a-asset-item id="chamber-walls-model" src="/models/EB_chamber_walls.glb"></a-asset-item>
+	    	<a-asset-item id="chamber-exit-model" src="/models/EB_chamber_exit.glb"></a-asset-item>
+	    	<a-asset-item id="chamber-door-model" src="/models/EB_chamber_door.glb"></a-asset-item>
+	    	<a-asset-item id="corridor" src="/models/EB_corridor.glb"></a-asset-item>
+	    	<a-asset-item id="kink-model" src="/models/EB_kink.glb"></a-asset-item>
+	    	<img id="category-background-mat" src="/images/category_back.jpg">    	
+	    	<img id="category-background-hover" src="/images/category_back_hover.jpg">
+	    	<img id="images-background-mat" src="/images/images_back_512x256.jpg">
+	    	<img id="images-background-hover" src="/images/images_back_512x256.jpg">
+	    	<img id="back-background-mat" src="/images/back_background_512x256.jpg">
+	    	<img id="back-background-hover" src="/images/back_background_hover_512x256.jpg">
+	    	<img id="exit-background-mat" src="/images/exit_background_1024x1024.jpg">
+	    	<img id="exit-background-hover" src="/images/exit_background_hover_1024x1024.jpg">	    	
+	    	<img id="video-placeholder-image" src="/images/loading_video.jpg">
+	    	<img id="eb-logo" src="/images/eb_logo_512x512.jpg">	    	
+	    	<!--<video id="project-video-file" mute autoplay loop><source src="/videos/small_video.mp4" "type"="video/mp4"></source></video>-->
 		</a-assets>		
 		<!--CAMERA-->
-		<a-entity position="-1 2.4 3" id="player">			
-			<a-camera id="main-camera" wasd-controls-enabled="true" near=".1">
-				<a-entity cursor="fuse: true; fuseTimeout: 2000" position="0 0 -1"
+		<a-entity position="-1 2.4 3" id="player">
+			<a-camera id="main-camera" wasd-controls-enabled="true" near=".1" fov="70">
+				<a-entity id="curso" cursor="fuse: true; fuseTimeout: 500" position="0 0 -1"
             	geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
             	material="color: black; shader: flat" 
             	raycaster="far: 20; interval: 100; objects: .clickable"></a-entity>
             	<a-ring id="outter-ring" position="0 0 -1" color="white" radius-inner="0.04" radius-outer="0.06" material="shader: flat" theta-length="0">
-            		<a-animation id="circle-reveal" attribute="theta-length" begin="circle-reveal" end="circle-stop" to="360" dur="2000" easing="linear"></a-animation>
+            		<a-animation id="circle-reveal" attribute="theta-length" begin="circle-reveal" end="circle-stop" to="360" dur="500" easing="linear"></a-animation>
             	</a-ring>
-			</a-camera>			
+            </a-camera>
 		</a-entity>		
+		<!--CATEGORIES-->	
 		{{#each data.categories}}
-		<a-entity class="category-container" id="cat-{{add @index 1}}" position="{{AFgetCategoriesPos @index 0 0}}" rotation="{{AFgetCategoriesRot @index 0}}">
-			<!--CATEGORY PLANE-->	
-			<a-entity category-listener class="category-button clickable" geometry="primitive:plane;width:.69;height:.5" position="0 0 0.003" visible="false"></a-entity>
-			<a-entity anim-listener="listener:handleCatAnim" class="category-background-container" position="0 -.25 0.003">
-				<a-entity class="category-background" geometry="primitive:plane;width:.69;height:.5" position="0 .25 0" material="src:#category-back"></a-entity>
-				<a-animation class="clicked-background" attribute="scale" begin="clicked" end="clicked-stop" from="1 1 1" to="1 0 1" dur="400" easing="linear"></a-animation>
-			</a-entity>			
-			<!--CATEGORY SCREENS-->	
-			<a-entity class="category-screens" position="-.345 0.25 -0.014" gltf-model="#screen" material="roughness: 1; metalness: 0">
-				<a-animation class="clicked-screen" attribute="scale" begin="clicked" end="clicked-stop" from="1 1 1" to="0 0 1" dur="500" easing="linear"></a-animation>
-			</a-entity>
-			<a-entity class="category-screens" position=".345 -0.25 -0.014" rotation="0 0 180" gltf-model="#screen" material="roughness: 1; metalness: 0">
-				<a-animation class="clicked-screen" attribute="scale" begin="clicked" end="clicked-stop" from="1 1 1" to="0 0 1" dur="500" easing="linear"></a-animation>
-			</a-entity>
-			<!--CATEGORY TITLE-->	
-			<a-entity class="category-title" position=".54 0.18 0.005" text="value: {{name}}; width: 1.7; height: auto; color: white;"></a-entity>			
-			{{#each ../data.featuredPosts}}
-				{{#ifPostIsInCategory categories ../name}}
-					{{#if mainImage.exists}}	
-						<!--CATEGORY IMAGE-->
-						<a-entity anim-listener="listener:handleCatAnim" class="category-image-container" position="0 .1355 0.0031" material="src:#category-back">
-							<a-image class="category-image" src="{{cloudinaryUrl mainImage width='960' height='540' q='70' crop='fill' gravity='center'}}" width=".6" height=".3375" position="0 -.1755 0">
-							<a-animation class="hover" attribute="scale" begin="hover" end="hover-stop" from="1 1 1" to="1.07 1.04 1.07" dur="400" easing="linear"></a-animation>
-							</a-image>
-							<a-animation class="clicked-image" attribute="scale" begin="clicked" end="clicked-stop" to="1 0 1" dur="500" easing="linear"></a-animation>
-						</a-entity>
-					{{/if}}	
-				{{/ifPostIsInCategory}}
-			{{/each}}					
-		</a-entity>
+		<a-entity class="category-container" homecategory="id:cat-{{add @index 1}};position:{{AFgetCategoriesPos @index 0 0}};rotation:{{AFgetCategoriesRot @index 0 0}};width:.69;height:.5;title:{{name}};index:{{add @index 1}};image:{{cloudinaryUrl (AFgetCategoriesImage ../data.featuredPosts name) width='512' height='256' q='70' crop='fill' gravity='center'}}"></a-entity>
+		<a-box id="box-corridor-0{{add @index 1}}" class="box-corridors" depth="3" width=".4" height=".4" position="{{AFgetCorridorsPos @index -4.16 4.386 -4.877 -1.445 0.426 -5.865}}" rotation="{{AFgetCategoriesRot @index -144 -126}}" material="color: white"></a-box>
 		{{/each}}
 		<!--SECTION TITLES-->
 		<a-entity rotation="-45 0 0" position=".89 .99 1.365" text="value: Work; width: 2; height: auto"></a-entity>
 		<!--MAIN SCENE-->
-		<a-entity id="main-scene" position="0 0 0" gltf-model="#main-scene" material="roughness: 1; metalness: 0"></a-entity>
+		<a-entity id="main-scene" position="0 0 0" gltf-model="#main-scene" material="roughness: 1; metalness: 0"></a-entity>		
+		<!--CORRIDORS-->
+		<a-entity id="corridors" visible="false">
+			<a-entity id="corridor-01" position="0 0 0.375" gltf-model="#corridor" material="roughness: 1; metalness: 0">
+				<a-animation id="corridor-01-anim" attribute="rotation" begin="spin-corridor" end="spin-stop" to="0 0 -180" dur="2000"></a-animation>
+			</a-entity>
+			<a-entity id="corridor-02" position="0 0 1.125" gltf-model="#corridor" material="roughness: 1; metalness: 0">
+				<a-animation id="corridor-02-anim" attribute="rotation" begin="spin-corridor" end="spin-stop" to="0 0 90" dur="1000"></a-animation>
+			</a-entity>				
+		</a-entity>
 		<!--SKY-->
 		<a-sky color="#ECECEC"></a-sky>		
 		<!--LIGHTS-->
 		<a-entity light="type: ambient; color: #BBB; intensity: 0.6"></a-entity>
 		<a-entity light="type: directional; color: #FFF; intensity: 0.6" position="-0.5 1 1"></a-entity>
+
+		<!--CHAMBER-->
+		<a-entity chamber="id:chamber" id="chamber" visible="false"></a-entity>
+		<a-entity id="kink" position="-1 5.4 3" gltf-model="#kink-model" material="roughness: 1; metalness: 0" visible="false">
+			<a-entity id="poster" position="0 0 0.12" rotation ="0 180 0" geometry="primitive:plane;width:0.2;height:0.2;" material="src:#eb-logo;shader:flat"></a-entity>
+		</a-entity>	
+		<a-entity id="corridor-end" position="-1 4.876 3" gltf-model="#corridor" material="roughness: 1; metalness: 0" visible="false"></a-entity>
+
+		<a-box id="floor" depth="40" width="40" height=".4" position="0 -0.25 0" material="color: #666666;roughness: 1; metalness: 0"></a-box>
+
 		<!-- RENDER HTML AS TEXTURE EXAMPLE
 		<a-entity geometry="primitive:plane;width:.69;height:.5" position="0 0 0.003" material="shader:html;target:#category-back;fps:1;" class="category-background"></a-entity>-->
     </a-scene>
-    <!-- RENDER HTML AS TEXTURE EXAMPLE   
-	<div id="category-back" style="width: 293px; height: 212px; position: fixed; left: 0; top: 0; z-index: -1; overflow: hidden;background-color:#333;">
+    <!-- RENDER HTML AS TEXTURE EXAMPLE		
+	<div id="category-back" style="width: 512px; height: 256px; position: fixed; left: 500px; top: 0; z-index: -1; overflow: hidden;background-color:#333;">
 		<div class="category-col">
 				<div class="side-line"></div>
 		</div>	
