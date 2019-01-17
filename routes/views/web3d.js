@@ -11,7 +11,7 @@ exports = module.exports = function (req, res) {
 	//console.log(res.locals.io);
 
 	// Init locals
-	locals.section = 'Work';
+	locals.section = '3d VR website';
 	locals.orginalURL="http://www.euphoricblast.com"+req.originalUrl;
 	locals.filters = {
 		category: req.params.category,
