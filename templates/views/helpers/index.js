@@ -45,13 +45,11 @@ module.exports = function () {
 		var res;
 		for(var i=0;i<featuredProj.length;i++){
 			var item = featuredProj[i].categories;
-			console.log("catname: "+catName+" item: "+item);
-		   	
-		    	if(featuredProj[i].categories[0].name==catName){
-					foundIndex=0;
-				}	else{
-					foundIndex=-1;
-				}
+		   	if(featuredProj[i].categories[0].name==catName){
+				foundIndex=0;
+			}	else{
+				foundIndex=-1;
+			}
 			if(foundIndex>=0){
 				var found=featuredProj[i];
 
