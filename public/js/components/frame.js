@@ -56,8 +56,8 @@ AFRAME.registerComponent('frame', {
 			ba.addEventListener('animationend', evil.stopAnimationEndPropagation);	
 			this.backgroundEl=ba;
 
-		var te=evil.createEntity(el,{'id':data.id+'-title','geometry':"value:"+data.title+"; width: 1.0; height: auto; color: white;",
-			'position':'.29 0.1 0.01','class':data.class+'-titles'});
+		var te=evil.createEntity(el,{'id':data.id+'-title','geometry':"value:"+data.title+"; width: .8; height: auto; color: white;",
+			'position':'.19 0.1 0.01','class':data.class+'-titles'});
 			evil.createAnimation("reveal-te-"+data.id,te,"position","project-clicked","project-stop","0.45 0.2 0.05","2000");		
 			evil.createAnimation("clicked-te-sca-"+data.id,te,"scale","project-clicked","project-stop","2.0 2.0 1.0","2000");
 			evil.createAnimation("clicked-te-rot-"+data.id,te,"rotation","project-clicked","project-stop","0 360 0","2000");
