@@ -28,17 +28,17 @@ AFRAME.registerComponent('chamber_video', {
 			'position':'0 0 0.002','material':'src:#video-placeholder-image;shader:flat'});
 		//evil.createAnimation("fadein-overlay"+data.id,ov,"scale","fade-in","fade-stop","1 1 1","500");	
 		evil.createAnimation("fadeout-overlay"+data.id,ov,"scale","overlay-out","overlay-stop","1 0 1","500");
-		ov.addEventListener('animationend', evil.stopAnimationEndPropagation);
+		ov.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);
 
 		//VIDEO BACKGROUND
 		evil.createEntity(el,{'id':data.id+'-background',
 			'geometry':'primitive:plane;width:'+(data.width+0.04)+';height:'+(data.height+0.025),
 			'position':'0 0 -0.005','material':'color:#333'});		
 
-		//this.handleVideoAnimationEnd = AFRAME.utils.bind(this.handleVideoAnimationEnd, this);
-		el.addEventListener('animationend', this.handleVideoAnimationEnd);			
+		//this.handleVideoanimationcomplete = AFRAME.utils.bind(this.handleVideoanimationcomplete, this);
+		el.addEventListener('animationcomplete', this.handleVideoanimationcomplete);			
 	},
-	handleVideoAnimationEnd: function(event){	
+	handleVideoanimationcomplete: function(event){	
 		if(event.target.getAttribute("begin")=="fade-out"){
 			//console.log("removing project video file as we clicked back");
 			document.querySelector("#project-video-file").pause();

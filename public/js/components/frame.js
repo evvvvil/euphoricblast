@@ -26,10 +26,10 @@ AFRAME.registerComponent('frame', {
 		el.addEventListener('mouseenter',this.handleFrameEnter);
 		el.addEventListener('mouseleave',this.handleFrameLeave);
 
-		this.handleFrameAnimationEnd = eval("this.handle"+data.class+"AnimationEnd");
-		if(this.handleFrameAnimationEnd!==undefined) {
-			this.handleFrameAnimationEnd = AFRAME.utils.bind(this.handleFrameAnimationEnd, this);
-			el.addEventListener('animationend', this.handleFrameAnimationEnd);	
+		this.handleFrameanimationcomplete = eval("this.handle"+data.class+"animationcomplete");
+		if(this.handleFrameanimationcomplete!==undefined) {
+			this.handleFrameanimationcomplete = AFRAME.utils.bind(this.handleFrameanimationcomplete, this);
+			el.addEventListener('animationcomplete', this.handleFrameanimationcomplete);	
 		}
 
 		this.handleFrameClick =eval("this.handle"+data.class+"Click");
@@ -53,7 +53,7 @@ AFRAME.registerComponent('frame', {
 			evil.createAnimation("back-ba-sca-"+data.id,ba,"scale","back-clicked","back-stop","1 1 1","1000");		
 			evil.createAnimation("back-ba-pos-"+data.id,ba,"position","back-clicked","back-stop","0 0 0","2000");
 			evil.createAnimation("back-ba-rot-"+data.id,ba,"rotation","back-clicked","back-stop","0 0 0","2000");
-			ba.addEventListener('animationend', evil.stopAnimationEndPropagation);	
+			ba.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);	
 			this.backgroundEl=ba;
 
 		var te=evil.createEntity(el,{'id':data.id+'-title','geometry':"value:"+data.title+"; width: .8; height: auto; color: white;",
@@ -67,7 +67,7 @@ AFRAME.registerComponent('frame', {
 			evil.createAnimation("reverse-te-"+data.id,te,"position","back-clicked","back-stop",".18 0.1 0.01","2000");			
 			evil.createAnimation("back-te-rot-"+data.id,te,"rotation","back-clicked","back-stop","0 0 0","2000");
 			evil.createAnimation("back-te-sca-"+data.id,te,"scale","back-clicked","back-stop","1 1 1","2000");	
-			te.addEventListener('animationend', evil.stopAnimationEndPropagation);
+			te.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);
 			this.titleEl=te;	
 			
 
@@ -79,24 +79,27 @@ AFRAME.registerComponent('frame', {
 			evil.createAnimation("back-im-"+data.id,im,"position","back-clicked","back-stop","0 -0.022 0.005","2000");
 			evil.createAnimation("back-im-sca-"+data.id,im,"scale","back-clicked","back-stop","1 1 1","2000");
 			evil.createAnimation("back-im-rot-"+data.id,im,"rotation","back-clicked","back-stop","0 0 0","2000");	
-			im.addEventListener('animationend', evil.stopAnimationEndPropagation);
+			im.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);
 			this.imageEl=im;
 		}
 	},
 	handleFrameEnter: function (){
 		this.backgroundEl.setAttribute('material','src',this.data.hover);
-		outterRing.emit('circle-reveal',null,false);	
+		outterRing.object3D.visible=true;
+		outterRing.emit('circle-reveal',null,false);
 	},
 	handleFrameLeave: function () {		
 		this.backgroundEl.setAttribute('material','src',this.data.material);
 		outterRing.emit('circle-stop',null,false);
-		outterRing.setAttribute('theta-length', 0);	
+		outterRing.setAttribute('theta-length', 0.1);			
+		outterRing.object3D.visible=false;
 	},
 	handleProjectsClick: function (event) {
 		var data = this.data, el = this.el,evil=this.evil,par=this.el.parentNode;
 		projectIndex=data.index;
-	    outterRing.emit('circle-stop');
-		outterRing.setAttribute('theta-length', 0);
+	    outterRing.emit('circle-stop',null,false);
+		outterRing.setAttribute('theta-length', 0.1);			
+		outterRing.object3D.visible=false;
 		
 		var projos=par.querySelectorAll(".Projects");
 			for (var i=0;i<projos.length;i++){
@@ -206,7 +209,7 @@ AFRAME.registerComponent('frame', {
 		chamber.querySelector("#chamber-exit-frame").emit("fade-out",null,false);
 		
 	},
-	handleCategoriesAnimationEnd: function (event) {
+	handleCategoriesanimationcomplete: function (event) {
 		var animStartedBy=event.target.getAttribute("begin"),data = this.data, el = this.el,evil=this.evil;
 		if(animStartedBy=="fade-in"){
 			if(data.index==data.amount-1 || data.index===null){
@@ -218,8 +221,9 @@ AFRAME.registerComponent('frame', {
 			}
 		}
 	},
-	handleProjectsAnimationEnd: function (event) {		
-		var animID=event.target.id,data = this.data, el = this.el,evil=this.evil,par=this.el.parentNode;
+	handleProjectsanimationcomplete: function (event) {		
+		var data = this.data, el = this.el,evil=this.evil,par=this.el.parentNode,
+		animID=event.detail.name;animID=animID.substring(11,animID.length);
 		if(animID.startsWith("H_back")){		
 			//console.log("handleProjectTitleAnimations reverse");	
 			var projos=par.querySelectorAll(".Projects");

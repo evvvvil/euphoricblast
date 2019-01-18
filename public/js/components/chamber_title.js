@@ -21,13 +21,13 @@ AFRAME.registerComponent('chamber_title', {
 			
 			evil.createAnimation("fadein-"+data.id,el,"scale","fade-in","fade-stop","1 1 1",data.speed);
 			evil.createAnimation("fadeout-"+data.id,el,"scale","fade-out","fade-stop","0 0 0",data.speed);
-			//this.handleTitleAnimationEnd = AFRAME.utils.bind(this.handleTitleAnimationEnd, this);
-			el.addEventListener('animationend',this.handleTitleAnimationEnd);
+			//this.handleTitleanimationcomplete = AFRAME.utils.bind(this.handleTitleanimationcomplete, this);
+			el.addEventListener('animationcomplete',this.handleTitleanimationcomplete);
 			if(data.autostart) el.emit("fade-in",null,false);
 			
 		//console.log("after ");
 	},
-	handleTitleAnimationEnd: function (event){
+	handleTitleanimationcomplete: function (event){
 		event.stopPropagation();	
 	}
 }); 

@@ -14,8 +14,8 @@ AFRAME.registerComponent('evil', {
 			}		
 		}
 	},
-	createAnimation: function(_id,_parent,_attribute,_begin,_end,_to,_dur,_easing){
-		var anim = document.createElement("a-animation");
+	createAnimation: function(_id,_parent,_attribute,_begin,_end,_to,_dur,_easing,_from){
+		/*var anim = document.createElement("a-animation");
 			anim.setAttribute("id",_id);
 			anim.setAttribute("attribute",_attribute); 
 			anim.setAttribute("begin",_begin);
@@ -23,19 +23,18 @@ AFRAME.registerComponent('evil', {
 			anim.setAttribute("to",_to);
 			anim.setAttribute("dur",_dur);
 			if(_easing!==undefined) anim.setAttribute("easing",_easing);
-			_parent.appendChild(anim);	
+			_parent.appendChild(anim);	*/
+			var animOptions={
+				'property': _attribute,
+				'startEvents':_begin,
+				'pauseEvents': _end,
+				'to':_to,
+				'dur': _dur
+			};
+			if(_easing!==undefined) animOptions.easing=_easing;
+			if(_from!==undefined) animOptions.from=_from;
+			_parent.setAttribute("animation__"+_id,animOptions);
 	},	
-	createAnimationFrom: function(_id,_parent,_attribute,_begin,_end,_to,_dur,_from){
-		var anim = document.createElement("a-animation");
-			anim.setAttribute("id",_id);
-			anim.setAttribute("attribute",_attribute); 
-			anim.setAttribute("begin",_begin);
-			anim.setAttribute("end",_end);
-			anim.setAttribute("from",_from);
-			anim.setAttribute("to",_to);
-			anim.setAttribute("dur",_dur);
-			_parent.appendChild(anim);	
-	},
 	createEntityWithComponent: function(_component,_parent,_options){
 		//console.log("creating this: "+_options.id);
 		var someshit = document.createElement("a-entity");
@@ -278,7 +277,7 @@ AFRAME.registerComponent('evil', {
 			setTimeout(evil.waitForProjects,100);
 		}
 	},	
-	stopAnimationEndPropagation: function(event){
+	stopanimationcompletePropagation: function(event){
 		event.stopPropagation();
 	}
 }); 

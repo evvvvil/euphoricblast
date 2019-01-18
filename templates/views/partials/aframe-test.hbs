@@ -14,7 +14,7 @@
 //TODO: check how it works if you select category then while it flies cut off internet so the post fails, it sohuld retry every 10 seconds the post //while in chamber
 var socket,evil,outterRing,player,chamber,projects,projectVideo,numOfProjects,numOfImages,catLoad,projectHasVideo=false,animCounter=0,category=0,projectIndex=-1,categories={{{jsonView data.categoriesNames}}},exiting=false,projectShown=false,
 
-speedMult=0.01;
+speedMult=1;
 
 var socket = io();
 socket.on('news', function (data) {
@@ -41,12 +41,14 @@ function initfunc() {
 	}else{
 		setTimeout(initfunc,200);
 	}
-	player.addEventListener('animationend', handlePlayerAnimations);	
+	player.addEventListener('animationcomplete', handlePlayerAnimations);	
 }
 window.onload = initfunc;
 
 function handlePlayerAnimations(event){
-	var animID=event.target.id,pos;
+	var animID=event.detail.name,pos;
+	animID=animID.substring(11,animID.length);
+	//event.stopPropagation();
 	if(animID=="move-cat-anim"){
 		player.querySelector('#main-camera').setAttribute('near', 0.03);
 	    pos=evil.wrangleDestination(-3.33,4.386,-3.439,-1.156,.426,-4.230);
@@ -154,14 +156,12 @@ function handlePlayerAnimations(event){
 		</a-assets>		
 		<!--CAMERA-->
 		<a-entity position="-1 2.4 3" id="player">
-			<a-camera id="main-camera" wasd-controls-enabled="true" near=".1" fov="70">
+			<a-camera id="main-camera" position="0 0 0" wasd-controls-enabled="true" near=".1" fov="70">
 				<a-entity id="curso" cursor="fuse: true; fuseTimeout: 500" position="0 0 -1"
             	geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
             	material="color: black; shader: flat" 
-            	raycaster="far: 20; interval: 100; objects: .clickable"></a-entity>
-            	<a-ring id="outter-ring" position="0 0 -1" color="white" radius-inner="0.04" radius-outer="0.06" material="shader: flat" theta-length="0">
-            		<a-animation id="circle-reveal" attribute="theta-length" begin="circle-reveal" end="circle-stop" to="360" dur="500" easing="linear"></a-animation>
-            	</a-ring>
+            	raycaster="far: 20; interval: 100; objects: .clickable"></a-entity>            	
+            	<a-ring id="outter-ring" position="0 0 -1" color="white" radius-inner="0.04" radius-outer="0.06" material="side: double;shader: flat" theta-length="0.1" animation="property:theta-length;startEvents:circle-reveal;pauseEvents:circle-stop;to:360;dur:500;easing:linear"></a-ring>
             </a-camera>
 		</a-entity>		
 		<!--CATEGORIES-->	

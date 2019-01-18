@@ -30,12 +30,12 @@ AFRAME.registerComponent('exit_frame', {
 		el.addEventListener('mouseenter',this.handleFrameEnter);
 		el.addEventListener('mouseleave',this.handleFrameLeave);
 
-		this.handleFrameAnimationEnd = eval("this.handle"+data.class+"AnimationEnd");		
-		if(this.handleFrameAnimationEnd!==undefined) {
-			this.handleFrameAnimationEnd = AFRAME.utils.bind(this.handleFrameAnimationEnd, this);
-			el.addEventListener('animationend', this.handleFrameAnimationEnd);	
+		this.handleFrameanimationcomplete = eval("this.handle"+data.class+"animationcomplete");		
+		if(this.handleFrameanimationcomplete!==undefined) {
+			this.handleFrameanimationcomplete = AFRAME.utils.bind(this.handleFrameanimationcomplete, this);
+			el.addEventListener('animationcomplete', this.handleFrameanimationcomplete);	
 		}else{
-			el.addEventListener('animationend', evil.stopAnimationEndPropagation);
+			el.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);
 		}
 
 		this.handleFrameClick =eval("this.handle"+data.class+"Click");
@@ -61,13 +61,15 @@ AFRAME.registerComponent('exit_frame', {
 	},
 	handleFrameEnter: function (){
 		this.background.setAttribute('material','src',this.data.hover);
+		outterRing.object3D.visible=true;		
 		outterRing.emit('circle-reveal',null,false);
 		event.stopPropagation();	
 	},
 	handleFrameLeave: function () {		
 		this.background.setAttribute('material','src',this.data.material);
 		outterRing.emit('circle-stop',null,false);
-		outterRing.setAttribute('theta-length', 0);	
+		outterRing.setAttribute('theta-length', 0.1);			
+		outterRing.object3D.visible=false;
 		event.stopPropagation();
 	},	
 	handleExitsClick: function () {
@@ -114,7 +116,8 @@ AFRAME.registerComponent('exit_frame', {
 		par.querySelector("#chamber-back-background0").emit('fade-out',null,false);
 		par.querySelector("#chamber-back-background1").emit('fade-out',null,false);
 	    outterRing.emit('circle-stop',null,false);
-		outterRing.setAttribute('theta-length', 0);
+		outterRing.setAttribute('theta-length', 0.1);			
+		outterRing.object3D.visible=false;
 		projectHasVideo=false;
 		event.stopPropagation();
 	}

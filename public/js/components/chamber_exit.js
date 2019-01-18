@@ -18,8 +18,8 @@ AFRAME.registerComponent('chamber_exit', {
 	evil.createAnimation("fadeout-chamber-exit",chex,"scale","fade-out","fade-stop","1 0 1","1000");
 	evil.createAnimation("fadeout-pos-chamber-exit",chex,"position","fade-out","fade-stop","0 -1 0","1000");
 	evil.createAnimation("slideout-chamber-exit",chex,"position","slide-out","slide-stop","0 0 -1","1000");
-	this.handleFadeAnimationEnd = AFRAME.utils.bind(this.handleFadeAnimationEnd, this);
-	chex.addEventListener('animationend', this.handleFadeAnimationEnd);	
+	this.handleFadeanimationcomplete = AFRAME.utils.bind(this.handleFadeanimationcomplete, this);
+	chex.addEventListener('animationcomplete', this.handleFadeanimationcomplete);	
 	
 	var exitFrameOptions={
 			'id': 'chamber-exit-frame',
@@ -36,9 +36,10 @@ AFRAME.registerComponent('chamber_exit', {
 	evil.createEntityWithComponent("exit_frame",el,exitFrameOptions);
     
 	},
-	handleFadeAnimationEnd: function () {
-		var data = this.data, el = this.el,evil=this.evil;
-		if(event.target.id.startsWith("fadein-pos")){
+	handleFadeanimationcomplete: function () {
+		var data = this.data, el = this.el,evil=this.evil,
+		animID=event.detail.name;animID=animID.substring(11,animID.length);
+		if(animID.startsWith("fadein-pos")){
 			document.querySelector("#chamber-exit-frame").emit('fade-in',null,false); 		
 		} 		
 		event.stopPropagation();

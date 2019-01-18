@@ -19,7 +19,7 @@ AFRAME.registerComponent('chamber', {
 			'id': 'chamber-sign',
 			'class': 'chamber-signs',			
 			'geometry': 'primitive:plane;width:.66;height:.17',
-			'title':'align:center; value:; width: 1.6; height: auto; color: #333;',
+			'title':'This should be a long text',
 			'position': '0 0.04 -1.45'
 		};
 		evil.createEntityWithComponent("chamber_sign",el,signOptions);
@@ -34,15 +34,15 @@ AFRAME.registerComponent('chamber', {
 	    var sta=evil.createEntity(el,{'id':'chamber-stage','geometry':'#chamber-stage-model'});
 	    evil.createAnimation("slide-out-chamber-stage",sta,"position","slide-out","slide-stop","0 -0.3 0","500");
 	    evil.createAnimation("slide-in-chamber-stage",sta,"position","slide-in","slide-stop","0 0 0","500");
-	    this.handleStageAnimationEnd = AFRAME.utils.bind(this.handleStageAnimationEnd, this);
-	    sta.addEventListener('animationend', this.handleStageAnimationEnd);
+	    this.handleStageanimationcomplete = AFRAME.utils.bind(this.handleStageanimationcomplete, this);
+	    sta.addEventListener('animationcomplete', this.handleStageanimationcomplete);
 	    this.sta=sta;
 
 	    var lede=evil.createEntity(el,{'id':'chamber-left-decor','geometry':'#chamber-stage-model','rotation':'0 0 -90','position':'-1.96 -0.34 0'});
 	    evil.createAnimation("slide-out-chamber-left-decor",lede,"position","slide-out","slide-stop","-2.1 -0.34 0","500");
 	    evil.createAnimation("slide-in-chamber-left-decor",lede,"position","slide-in","slide-stop","-1.96 -0.34 0","500");
-	    this.handleDecorAnimationEnd = AFRAME.utils.bind(this.handleDecorAnimationEnd, this);
-		lede.addEventListener('animationend', this.handleDecorAnimationEnd);
+	    this.handleDecoranimationcomplete = AFRAME.utils.bind(this.handleDecoranimationcomplete, this);
+		lede.addEventListener('animationcomplete', this.handleDecoranimationcomplete);
 	    this.lede=lede;
 	    var ride=evil.createEntity(el,{'id':'chamber-right-decor','geometry':'#chamber-stage-model','rotation':'0 0 90','position':'1.96 -0.34 0'});
 	    evil.createAnimation("slide-out-chamber-right-decor",ride,"position","slide-out","slide-stop","2.1 -0.34 0","500");
@@ -52,18 +52,18 @@ AFRAME.registerComponent('chamber', {
 	    var wal1=evil.createEntity(el,{'id':'chamber-walls1','geometry':'#chamber-walls-model'}),
 	    	wal2=evil.createEntity(el,{'id':'chamber-walls2','geometry':'#chamber-walls-model'});
 	    	//wal3=evil.createEntity(el,{'id':'chamber-walls2','geometry':'#chamber-walls-model','position':'-4 0 0'});
-	    	evil.createAnimationFrom("slide-in-chamber-walls1",wal1,"position","slide-in","slide-stop","-4 0 0","2000","0 0 0");
-	    	evil.createAnimationFrom("slide-in-chamber-walls2",wal2,"position","slide-in","slide-stop","0 0 0","2000","4 0 0");
-	    	evil.createAnimationFrom("exit-chamber-walls1",wal1,"position","exit","exit-stop","4 0 0","2000","0 0 0");
-	    	evil.createAnimationFrom("exit-chamber-walls2",wal2,"position","exit","exit-stop","0.6 0 0","2000","-4 0 0");
+	    	evil.createAnimation("slide-in-chamber-walls1",wal1,"position","slide-in","slide-stop","-4 0 0","2000","easeInQuad","0 0 0");
+	    	evil.createAnimation("slide-in-chamber-walls2",wal2,"position","slide-in","slide-stop","0 0 0","2000","easeInQuad","4 0 0");
+	    	evil.createAnimation("exit-chamber-walls1",wal1,"position","exit","exit-stop","4 0 0","2000","easeInQuad","0 0 0");
+	    	evil.createAnimation("exit-chamber-walls2",wal2,"position","exit","exit-stop","0.6 0 0","2000","easeInQuad","-4 0 0");
 	    	
 	    	//evil.createAnimation("sle-out-chamber-walls1",wal1,"position","exit","exit-stop","4 0 0","2000");
 	    	//evil.createAnimation("sde-out-chamber-walls2",wal2,"position","exit","exit-stop","0 0 0","2000");
 	    evil.createEntity(el,{'id':'chamber-floor','geometry':'primitive:plane;width:12;height:4','position':'0 -0.19 -2','rotation':'-90 0 0','material':'color:#ffffff'});
 		evil.createEntityWithComponent("chamber_exit",el,{'id': 'chamber-exit-group'});
 		this.wal1=wal1;this.wal2=wal2;
-		this.handleWallAnimationEnd = AFRAME.utils.bind(this.handleWallAnimationEnd, this);
-		wal1.addEventListener('animationend', this.handleWallAnimationEnd);
+		this.handleWallanimationcomplete = AFRAME.utils.bind(this.handleWallanimationcomplete, this);
+		wal1.addEventListener('animationcomplete', this.handleWallanimationcomplete);
 		
 		//CHAMBER CATEGORIES WALL
 		var caba = evil.createEntity(el,{'id':'chamber-cat-wall','geometry':'primitive:plane;width:1.08;height:1.4','position':'1.85 .51 -0.66','rotation':'0 -90 0','material':'color:#ffc800','scale':'1 0 1'});
@@ -72,16 +72,16 @@ AFRAME.registerComponent('chamber', {
 		evil.createAnimation("slid-out-chamber-cat-wall",caba,"scale","slide-out","slide-stop",".9 1 1","500");
 		evil.createAnimation("slide-in-chamber-cat-wall",caba,"position","slide-in","slide-stop","1.85 .51 -0.66","500");
 		evil.createAnimation("slid-in-chamber-cat-wall",caba,"scale","slide-in","slide-stop","1 1 1","500");
-		this.handleCatWallAnimationEnd = AFRAME.utils.bind(this.handleCatWallAnimationEnd, this);		
-		caba.addEventListener('animationend', this.handleCatWallAnimationEnd);
+		this.handleCatWallanimationcomplete = AFRAME.utils.bind(this.handleCatWallanimationcomplete, this);		
+		caba.addEventListener('animationcomplete', this.handleCatWallanimationcomplete);
 		this.caba=caba;
 		//CHAMBER SIDE WALLS
 		var chriwa = evil.createBox(el,{'id':'chamber-right-wall','depth':1.0353,'height':1.4,'width':0.1,'position':'2 .4 -0.66','material':'color:#fff'});
 		var chlewa = evil.createBox(el,{'id':'chamber-left-wall','depth':1.0353,'height':1.4,'width':0.1,'position':'-2 .4 -0.66','material':'color:#fff'});
 		this.chriwa=chriwa;this.chlewa=chlewa;
 		evil.createAnimation("move-back-chamber-left-wall",chlewa,"position","move-back","move-stop","-2.6 .4 -0.66","1000");
-		this.handleSideWallAnimationEnd = AFRAME.utils.bind(this.handleSideWallAnimationEnd, this);		
-		chlewa.addEventListener('animationend', this.handleSideWallAnimationEnd);
+		this.handleSideWallanimationcomplete = AFRAME.utils.bind(this.handleSideWallanimationcomplete, this);		
+		chlewa.addEventListener('animationcomplete', this.handleSideWallanimationcomplete);
 
 		/*evil.createAnimation("slide-in-chamber-right-wall",chriwa,"position","slide-in","slide-stop","2 .4 -0.66","1000");
 		evil.createAnimation("slide-out-chamber-right-wall",chriwa,"position","slide-out","slide-stop","2 -1 -0.66","1000");		
@@ -125,7 +125,7 @@ AFRAME.registerComponent('chamber', {
 		evil.createAnimation("fade-in-project-title-background",prtiba,"scale","fade-in","fade-stop","1 1 1","2000");		
 		evil.createAnimation("fade-out-project-title-background",prtiba,"scale","fade-out","fade-stop","0 0 0","1000");		
 		evil.createAnimation("back-project-title-background",prtiba,"scale","back-clicked","back-stop","0 0 0","1000");
-		prtiba.addEventListener('animationend', evil.stopAnimationEndPropagation);
+		prtiba.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);
 
 		//CHAMBER PROJECT TEXT PLANE
 		evil.createEntityWithComponent("text_plane",el,{'padding':0.05,'id':'project-text','wrapCount':34,'width':'0.53','position':'0.95 0.1 -1.32','rotation':'0 -45 0','content':' '});
@@ -181,8 +181,8 @@ AFRAME.registerComponent('chamber', {
 				evil.updateValues(diff,changedKeys,el,'');
 		}		
 	},
-	handleCatWallAnimationEnd: function(event){	
-		var animID=event.target.id;	
+	handleCatWallanimationcomplete: function(event){	
+		var animID=event.detail.name;animID=animID.substring(11,animID.length);	
 
 		if(animID.startsWith("slide-out")){
 			//this.wal1.removeAttribute("position");
@@ -237,8 +237,8 @@ AFRAME.registerComponent('chamber', {
 		event.stopPropagation();
 	},
 	
-	handleStageAnimationEnd: function(event){	
-		var animID=event.target.id;
+	handleStageanimationcomplete: function(event){	
+		var animID=event.detail.name;animID=animID.substring(11,animID.length);
 			event.stopPropagation();
 		if(animID.startsWith("slide-in")){
 			console.log("resetting projects and getting category data");
@@ -248,8 +248,8 @@ AFRAME.registerComponent('chamber', {
 			evil.waitForProjects();					
 		}
 	},	
-	handleWallAnimationEnd: function(event){	
-		var animID=event.target.id;
+	handleWallanimationcomplete: function(event){	
+		var animID=event.detail.name;animID=animID.substring(11,animID.length);
 			event.stopPropagation();
 		if(animID.startsWith("slide-in")){
 			this.sta.emit("slide-in",null,false);
@@ -260,15 +260,15 @@ AFRAME.registerComponent('chamber', {
 			//this.caba.emit("slide-in",null,false);			
 		}
 	},
-	handleSideWallAnimationEnd: function(event){	
-		var animID=event.target.id;
+	handleSideWallanimationcomplete: function(event){	
+			var animID=event.detail.name;animID=animID.substring(11,animID.length);
 			event.stopPropagation();
 		if(animID.startsWith("move-back")){
 			chamber.querySelector("#chamber-exit").emit("slide-out",null,false);	
 		}
 	},
-	handleDecorAnimationEnd: function(event){	
-		var animID=event.target.id;
+	handleDecoranimationcomplete: function(event){	
+		var animID=event.detail.name;animID=animID.substring(11,animID.length);
 			event.stopPropagation();
 		if(animID.startsWith("slide-out")){
 			this.lede.object3D.visible = false;

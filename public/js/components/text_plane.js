@@ -31,7 +31,7 @@ AFRAME.registerComponent('text_plane', {
 		evil.createAnimation("fadein-"+data.id,el,"scale","fade-in","fade-stop","1 1 1","1000");		
 		evil.createAnimation("fadeout-"+data.id,el,"scale","fade-out","fade-stop","0 0 0","1000");	
 		//el.setAttribute("position",data.position.x+" "+(data.position.y+(0.02872+data.padding)/2)+" "+data.position.z);
-		el.addEventListener('animationend', this.handleVideoAnimationEnd);					
+		el.addEventListener('animationcomplete', this.handleVideoanimationcomplete);					
 	},
 	update: function (oldData) {	
 		var data=this.data,el=this.el,evil=this.evil,diff=AFRAME.utils.diff(oldData,data),changedKeys=Object.keys(diff);

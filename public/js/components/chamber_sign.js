@@ -21,20 +21,23 @@ AFRAME.registerComponent('chamber_sign', {
 		if(data.rotation!='') el.setAttribute("rotation",data.rotation);
 		
 		//el.setAttribute("scale","0 0 0");
-		this.handleSignAnimationEnd = AFRAME.utils.bind(this.handleSignAnimationEnd, this);
-		//console.log(data.id+" data.title "+data.title);
+		this.handleSignanimationcomplete = AFRAME.utils.bind(this.handleSignanimationcomplete, this);
+		console.log(data.id+" data.title "+data.title);
 		//console.log(data.id+" data.geometry "+data.geometry);
-		var ti=evil.createEntity(el,{'id':data.id+'-title','geometry':data.title,'scale':'0 0 0'});
-			evil.createAnimation("fadein-"+data.id+'-title',ti,"scale","fade-in","fade-stop","1 1 1",data.speed);
-			evil.createAnimation("fadeout-"+data.id+'-title',ti,"scale","fade-out","fade-stop","0 0 0",data.speed);				
-			ti.addEventListener('animationend', this.handleSignAnimationEnd);
+			
+		var ti=evil.createEntity(el,{'id':data.id+'-title','geometry':"value:"+data.title+"; align:center; width: 1.6; height: auto; color: #333;",'scale':'0 0 0','position':'0 0 0.01','class':data.class+'-titles'});
+			evil.createAnimation("-ti-fadein",ti,"scale","fade-in","fade-stop","1 1 1",data.speed);
+			evil.createAnimation("-ti-fadeout",ti,"scale","fade-out","fade-stop","0 0 0",data.speed);				
+			ti.addEventListener('animationcomplete', this.handleSignanimationcomplete);
+
 			this.titleEl=ti;
+			this.titleEl.object3D.frustumCulled = true;
 
 		var ba=evil.createEntity(el,{'id':data.id+'-back','geometry':data.geometry,'scale':'0 0 0'});
-		ba.setAttribute('material','color',data.material)
-			evil.createAnimation("fadein-"+data.id+'-back',ba,"scale","fade-in","fade-stop","1 1 1",data.speed);
-			evil.createAnimation("fadeout-"+data.id+'-back',ba,"scale","fade-out","fade-stop","0 0 0",data.speed);	
-			ba.addEventListener('animationend', this.handleSignAnimationEnd);
+		ba.setAttribute('material','color',data.material);
+			evil.createAnimation("-ba-fadein",ba,"scale","fade-in","fade-stop","1 1 1",data.speed);
+			evil.createAnimation("-ba-fadeout",ba,"scale","fade-out","fade-stop","0 0 0",data.speed);	
+			ba.addEventListener('animationcomplete', this.handleSignanimationcomplete);
 			this.backgroundEl=ba;
 			if(data.autostart) ba.emit("fade-in",null,false);
 	},
@@ -46,14 +49,15 @@ AFRAME.registerComponent('chamber_sign', {
 				evil.updateValues(diff,changedKeys,el,'');
 			}
 	},
-	handleSignAnimationEnd: function (event){
-		var tar=event.target;
-		if(tar.id.indexOf("-back")>0) {
-			if(tar.getAttribute("begin")=="fade-in") {
+	handleSignanimationcomplete: function (event){
+		var animID=event.detail.name;animID=animID.substring(11,animID.length);
+		
+		if(animID.startsWith("-ba")){
+			if(animID.startsWith("-ba-fadein")){
 				this.titleEl.emit("fade-in",null,false);
 			}			
-		}else if(tar.id.indexOf("-title")>0) {
-			if(tar.getAttribute("begin")=="fade-in") {
+		}else if(animID.startsWith("-ti")){
+			if(animID.startsWith("-ti-fadein")){
 				if(numOfProjects>0){
 					animCounter=0;evil.animateObjects(1,"project",numOfProjects,'A');
 				}else{
