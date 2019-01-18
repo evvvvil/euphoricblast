@@ -72,7 +72,10 @@ AFRAME.registerComponent('evil', {
 			if(_options.position!='') im.setAttribute("position",_options.position);
 			if(_options.rotation!='') im.setAttribute("rotation",_options.rotation);
 			if(_options.side!='') im.setAttribute("side",_options.side);	
-			im.setAttribute("scale","1 1 0");	
+			//This fixes some weird bug where images become cubes, no idea why... brute force it into flat plane
+			im.setAttribute("geometry","primitive: plane;");
+			im.setAttribute("material","shader:flat;");	
+			
 	    	_parent.appendChild(im);
 	    	return im;
 	},

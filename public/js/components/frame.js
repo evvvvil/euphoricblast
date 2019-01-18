@@ -75,10 +75,10 @@ AFRAME.registerComponent('frame', {
 
 			var im=evil.createImage(el,{'id':data.id+'-image','class:':data.class+'-images',
 			'src':data.image,'width':'.39','height':'.18','position':'0 -0.022 0.005'});
-			evil.createAnimation("clicked-im-sca-",im,"scale","project-clicked","project-stop","1.44 1.45 0.0","1500");			
+			evil.createAnimation("clicked-im-sca-",im,"scale","project-clicked","project-stop","1.44 1.45 1.0","1500");			
 			evil.createAnimation("clicked-im-rot-",im,"rotation","project-clicked","project-stop","0 -405 0","2000");
 			evil.createAnimation("back-im-",im,"position","back-clicked","back-stop","0 -0.022 0.005","2000");
-			evil.createAnimation("back-im-sca-",im,"scale","back-clicked","back-stop","1 1 0","2000");
+			evil.createAnimation("back-im-sca-",im,"scale","back-clicked","back-stop","1 1 1","2000");
 			evil.createAnimation("back-im-rot-",im,"rotation","back-clicked","back-stop","0 0 0","2000");	
 			im.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);
 			this.imageEl=im;
