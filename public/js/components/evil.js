@@ -111,7 +111,7 @@ AFRAME.registerComponent('evil', {
 		for(var i=0;i<categories.length;i++){
 			if(i==category-1) continue;	
 			var pos = 1.8+" "+(1.0+Math.floor(posCounter/2)*-0.3)+" "+(-0.9+posCounter%2*0.5),
-				catElAttr=document.querySelector("#cat-"+(i+1)).getAttribute("homecategory"),
+				catElImage=document.querySelector("#cat-"+(i+1)).getAttribute("homecategory").image,
 				categoriesOptions={
 					'id': 'chamber-category'+(i+1),
 					'class': 'Categories',
@@ -123,7 +123,7 @@ AFRAME.registerComponent('evil', {
 					'position': pos,
 					'rotation': '0 -90 0',
 					'title': categories[i],
-					'image':catElImage.image
+					'image':catElImage
 				};
 			posCounter++;
 			evil.createEntityWithComponent("frame",ch,categoriesOptions);
