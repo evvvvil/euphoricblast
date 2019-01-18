@@ -112,7 +112,7 @@ AFRAME.registerComponent('evil', {
 			if(i==category-1) continue;	
 			var pos = 1.8+" "+(1.0+Math.floor(posCounter/2)*-0.3)+" "+(-0.9+posCounter%2*0.5);
 			posCounter++;			
-			
+			var catEl=document.querySelector("#cat-"+(i+1));
 			var categoriesOptions={
 				'id': 'chamber-category'+(i+1),
 				'class': 'Categories',
@@ -123,8 +123,8 @@ AFRAME.registerComponent('evil', {
 				'hover': '#category-background-hover',
 				'position': pos,
 				'rotation': '0 -90 0',
-				'title': categories[i]
-				//'image':evil.wrangleImageSource(projects[i].mainImage)
+				'title': categories[i],
+				'image': catEl.getAttribute("homecategory","image")
 			};
 			evil.createEntityWithComponent("frame",ch,categoriesOptions);
 		}
@@ -254,7 +254,33 @@ AFRAME.registerComponent('evil', {
 		if(videoURL!=''&&videoURL!==null){
 			$.ajax({
 		      type: 'POST',
-		      data: {
+		      data: {
+Framerate
+raf
+16.5
+fps
+59.94
+Three.js - Memory
+Geometries
+479
+Programs
+13
+Textures
+46
+Three.js - Render
+Calls
+1
+Faces
+2
+Points
+0
+Vertices
+6
+A-Frame
+Entities
+661
+Load Time
+
 		       'message':'scrape_the_fuck_outta_vimeo',
 		       'originalVideoURL': videoURL
 		      },
