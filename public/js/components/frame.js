@@ -72,13 +72,14 @@ AFRAME.registerComponent('frame', {
 			
 
 		if(data.image!==''){
+
 			var im=evil.createImage(el,{'id':data.id+'-image','class:':data.class+'-images',
-			'src':data.image,'width':'.39','height':'.18','position':'0 -0.022 0.005','side':'front'});
-			evil.createAnimation("clicked-im-sca-"+data.id,im,"scale","project-clicked","project-stop","1.44 1.45 1.0","1500");			
-			evil.createAnimation("clicked-im-rot-"+data.id,im,"rotation","project-clicked","project-stop","0 -405 0","2000");
-			evil.createAnimation("back-im-"+data.id,im,"position","back-clicked","back-stop","0 -0.022 0.005","2000");
-			evil.createAnimation("back-im-sca-"+data.id,im,"scale","back-clicked","back-stop","1 1 1","2000");
-			evil.createAnimation("back-im-rot-"+data.id,im,"rotation","back-clicked","back-stop","0 0 0","2000");	
+			'src':data.image,'width':'.39','height':'.18','position':'0 -0.022 0.005'});
+			evil.createAnimation("clicked-im-sca-",im,"scale","project-clicked","project-stop","1.44 1.45 0.0","1500");			
+			evil.createAnimation("clicked-im-rot-",im,"rotation","project-clicked","project-stop","0 -405 0","2000");
+			evil.createAnimation("back-im-",im,"position","back-clicked","back-stop","0 -0.022 0.005","2000");
+			evil.createAnimation("back-im-sca-",im,"scale","back-clicked","back-stop","1 1 0","2000");
+			evil.createAnimation("back-im-rot-",im,"rotation","back-clicked","back-stop","0 0 0","2000");	
 			im.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);
 			this.imageEl=im;
 		}
@@ -138,47 +139,6 @@ AFRAME.registerComponent('frame', {
 		this.titleEl.emit('project-clicked',null,false); 	
 		currentBackground.emit('project-clicked',null,false);
 		currentImage.emit('project-clicked',null,false);
-
-		/*console.log("handleProjectclicked");
-	var parent=event.target.parentNode,
-    projectId=parent.id;
-    if(parent.id.length<9) projectIndex=Number(projectId.charAt(7));
-    if(parent.id.length>8) projectIndex=Number(projectId.charAt(7)+projectId.charAt(8));
-    outterRing.emit('circle-stop');
-	outterRing.setAttribute('theta-length', 0);
-	animCounter=0;
-	//animateObjects(-1,"project-background",numOfProjects,projectIndex);
-	var projos=ch.querySelectorAll(".projects");
-		for (var i=0;i<projos.length;i++){
-			projos[i].emit('fade-out',null,false);
-		}
-	var currentProject=projects[projectIndex];
-	getProjectVideo(event,currentProject.video);
-	numOfImages=Math.min(6,currentProject.images.length);
-	for(var i=0;i<numOfImages;i++){
-		ch.querySelector("#project-images-"+i).setAttribute("src",evil.wrangleImageSource(currentProject.images[i]));
-	}	
-	var projectText=ch.querySelector("#project-text");
-	projectText.setAttribute("text_plane","content",strip(currentProject.content.extended));
-	
-	var heighto=projectText.getAttribute("geometry").height,
-	currentImage=parent.querySelector(".project-images"),
-	currentBackground=parent.querySelector(".project-backgrounds"),
-
-	imageAnim=currentImage.querySelector("#pr-im-pos-cli-"+projectIndex);
-	if(imageAnim!==null) currentImage.removeChild(imageAnim);
-	createChamberAnimation("pr-im-pos-cli-"+projectIndex,currentImage,"position","project-clicked","project-stop","0.95 "+(heighto-0.65)+" 0.635","2000",'');	
-	imageAnim=currentBackground.querySelector("#pr-ba-pos-cli-"+projectIndex);
-
-	if(imageAnim!==null) currentBackground.removeChild(imageAnim);
-	createChamberAnimation("pr-ba-pos-cli-"+projectIndex,currentBackground,"position","project-clicked","project-stop","0.95 "+(heighto-0.65)+" 0.63","2000",'');
-	
-	parent.emit('project-clicked',null,false); 
-	projectText.emit('fade-in',null,false);
-	ch.querySelector("#project-title-background").emit('fade-in',null,false);
-	parent.querySelector(".project-titles").emit('project-clicked',null,false); 	
-	parent.querySelector(".project-backgrounds").emit('project-clicked',null,false);
-	currentImage.emit('project-clicked',null,false); */
 	},		
 	handleCategoriesClick: function () {
 		console.log("category clicked!"+this.data.index);
