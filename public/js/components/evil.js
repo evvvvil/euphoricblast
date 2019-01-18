@@ -110,22 +110,22 @@ AFRAME.registerComponent('evil', {
 		posCounter=1;
 		for(var i=0;i<categories.length;i++){
 			if(i==category-1) continue;	
-			var pos = 1.8+" "+(1.0+Math.floor(posCounter/2)*-0.3)+" "+(-0.9+posCounter%2*0.5);
-			posCounter++;			
-			var catEl=document.querySelector("#cat-"+(i+1));
-			var categoriesOptions={
-				'id': 'chamber-category'+(i+1),
-				'class': 'Categories',
-				'index':(i+1),
-				'amount': categories.length,
-				'geometry': 'primitive:plane;width:.46;height:.25875',
-				'material': '#category-background-mat',
-				'hover': '#category-background-hover',
-				'position': pos,
-				'rotation': '0 -90 0',
-				'title': categories[i],
-				'image': catEl.getAttribute("homecategory","image")
-			};
+			var pos = 1.8+" "+(1.0+Math.floor(posCounter/2)*-0.3)+" "+(-0.9+posCounter%2*0.5),
+				catElAttr=document.querySelector("#cat-"+(i+1)).getAttribute("homecategory"),
+				categoriesOptions={
+					'id': 'chamber-category'+(i+1),
+					'class': 'Categories',
+					'index':(i+1),
+					'amount': categories.length,
+					'geometry': 'primitive:plane;width:.46;height:.25875',
+					'material': '#category-background-mat',
+					'hover': '#category-background-hover',
+					'position': pos,
+					'rotation': '0 -90 0',
+					'title': categories[i],
+					'image':catElImage.image
+				};
+			posCounter++;
 			evil.createEntityWithComponent("frame",ch,categoriesOptions);
 		}
 		chamber.setAttribute("chamber","title",categories[category-1]);	
@@ -254,33 +254,7 @@ AFRAME.registerComponent('evil', {
 		if(videoURL!=''&&videoURL!==null){
 			$.ajax({
 		      type: 'POST',
-		      data: {
-Framerate
-raf
-16.5
-fps
-59.94
-Three.js - Memory
-Geometries
-479
-Programs
-13
-Textures
-46
-Three.js - Render
-Calls
-1
-Faces
-2
-Points
-0
-Vertices
-6
-A-Frame
-Entities
-661
-Load Time
-
+		      data: {
 		       'message':'scrape_the_fuck_outta_vimeo',
 		       'originalVideoURL': videoURL
 		      },
