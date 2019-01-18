@@ -63,8 +63,8 @@ AFRAME.registerComponent('frame', {
 			//			'position':'.38 0.1 0.005','class':data.class+'-titles'});
 			evil.createAnimation("reveal-te-"+data.id,te,"position","project-clicked","project-stop","0.45 0.2 0.05","2000");		
 			evil.createAnimation("clicked-te-sca-"+data.id,te,"scale","project-clicked","project-stop","2.0 2.0 1.0","2000");
-			evil.createAnimation("clicked-te-rot-"+data.id,te,"rotation","project-clicked","project-stop","0 360 0","2000");
-			evil.createAnimation("reverse-te-"+data.id,te,"position","back-clicked","back-stop",".38 0.1 0.01","2000");			
+			evil.createAnimation("clicked-te-rot-"+data.id,te,"rotation","project-clicked","project-stop","0 360 0","2000");			
+			evil.createAnimation("reverse-te-"+data.id,te,"position","back-clicked","back-stop",".18 0.1 0.01","2000");			
 			evil.createAnimation("back-te-rot-"+data.id,te,"rotation","back-clicked","back-stop","0 0 0","2000");
 			evil.createAnimation("back-te-sca-"+data.id,te,"scale","back-clicked","back-stop","1 1 1","2000");	
 			te.addEventListener('animationend', evil.stopAnimationEndPropagation);

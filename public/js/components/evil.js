@@ -90,6 +90,8 @@ AFRAME.registerComponent('evil', {
 	    	return bo;
 	},
 	createProjectsAndCategories: function(){
+
+		//TODO: optimize this by having them created on init and ust reset them
 		var ch=document.querySelector("#chamber");
 		for(var i=0;i<projects.length;i++){
 			var pos = (-0.5+i%3*0.5)+" "+(.3+Math.floor(i/3)*0.3)+" "+(-1.95);
