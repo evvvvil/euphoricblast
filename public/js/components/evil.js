@@ -231,7 +231,7 @@ AFRAME.registerComponent('evil', {
 
 		//to:
 		//http://res.cloudinary.com/dtrroywwa/image/upload/c_fill,g_center,h_328,w_auto/v1/euphoricblast/6tutuytutu/euphoricblast-6tutuytutu-mainImage-1523467012837.jpg
-		var result="http://res.cloudinary.com/dtrroywwa/image/upload/c_fit,g_center,h_256,w_512/v"+source.version+"/"+source.public_id+".jpg";
+		var result="http://res.cloudinary.com/dtrroywwa/image/upload/c_limit,g_center,h_256,w_512/v"+source.version+"/"+source.public_id+".jpg";
 		return result;
 	},
 	wrangleAnimNumber: function(animID){
