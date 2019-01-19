@@ -38,11 +38,11 @@ AFRAME.registerComponent('frame', {
 			el.addEventListener('click', this.handleFrameClick);	
 		}
 
-	    evil.createAnimation("H_clicked-"+data.id,el,"position","project-clicked","project-stop","0.0 0.9 -1.95","2000");    	    	
-    	evil.createAnimation("H_goout-"+data.id,el,"position","go-out","go-stop",data.position.x+" "+data.position.y+" 4","1000");
-    	evil.createAnimation("H_fadein-"+data.id,el,"scale","fade-in","fade-stop","1 1 1","500");
-    	evil.createAnimation("H_fadeout-sca-"+data.id,el,"scale","fade-out","fade-stop","0 0 0","500");
-    	evil.createAnimation("H_back-"+data.id,el,"scale","back-clicked","back-stop","1 1 1","2000");
+	    evil.createAnimation("clicked",el,"position","project-clicked","project-stop","0.0 0.9 -1.95","2000");    	    	
+    	evil.createAnimation("goout",el,"position","go-out","go-stop",data.position.x+" "+data.position.y+" 4","1000");
+    	evil.createAnimation("fade-in",el,"scale","fade-in","fade-stop","1 1 1","500");
+    	evil.createAnimation("fade-out-sca",el,"scale","fade-out","fade-stop","0 0 0","500");
+    	evil.createAnimation("back",el,"scale","back-clicked","back-stop","1 1 1","2000");
 
 		var ba=evil.createEntity(el,{'id':data.id+'-background','geometry':data.geometry,
 			'class':data.class+'-backgrounds clickable'});
@@ -170,31 +170,32 @@ AFRAME.registerComponent('frame', {
 		
 	},
 	handleCategoriesanimationcomplete: function (event) {
-		var animStartedBy=event.target.getAttribute("begin"),data = this.data, el = this.el,evil=this.evil;
-		if(animStartedBy=="fade-in"){
-			if(data.index==data.amount-1 || data.index===null){
+		var data = this.data, el = this.el,evil=this.evil,animID=event.detail.name;animID=animID.substring(11,animID.length);		
+		if(animID=="fade-in"){
+			console.log("end of categories animation fade in, index: "+data.index+" amount: "+data.amount);
+			if(data.index<=data.amount-1 || data.index===null){
 				chamber.querySelector("#chamber-exit").emit('fade-in',null,false);
 				/*console.log("end of categories animation project0 scale"+chamber.querySelector("#project0").getAttribute("scale").x);
 				if(chamber.querySelector("#project0").getAttribute("scale").x<0.1){
 					animCounter=0;evil.animateObjects(1,"project",numOfProjects,'A');
-				}	*/			
+				}*/
 			}
 		}
 	},
 	handleProjectsanimationcomplete: function (event) {		
 		var data = this.data, el = this.el,evil=this.evil,par=this.el.parentNode,
 		animID=event.detail.name;animID=animID.substring(11,animID.length);
-		if(animID.startsWith("H_back")){		
+		if(animID.startsWith("back")){		
 			//console.log("handleProjectTitleAnimations reverse");	
 			var projos=par.querySelectorAll(".Projects");
 			for (var i=0;i<projos.length;i++){
 				var pos = (-0.5+i%3*0.5)+" "+(.3+Math.floor(i/3)*0.3)+" "+(-1.95);
-				var moveBackAnim=projos[i].querySelector("#H_reset-"+i);
+				var moveBackAnim=projos[i].querySelector("#reset-"+i);
 				if(moveBackAnim!==null) projos[i].removeChild(moveBackAnim);
-			  	evil.createAnimation("H_reset-"+i,projos[i],"position","move-back","move-stop",pos,"1000");
+			  	evil.createAnimation("reset-"+i,projos[i],"position","move-back","move-stop",pos,"1000");
 				projos[i].emit('move-back',null,false);
 			}
-		}else if(animID.startsWith("H_clic")){
+		}else if(animID.startsWith("clic")){
 			//console.log("handleProjectTitleAnimations reveal clicked project");	
 			if(numOfImages>0){
 				animCounter=0;evil.animateObjects(1,"project-images-",numOfImages,'A');
@@ -203,7 +204,7 @@ AFRAME.registerComponent('frame', {
 			if(projectHasVideo) par.querySelector("#project-video-group").emit("fade-in");
 			par.querySelector("#chamber-back-background0").emit('fade-in',null,false);
 			par.querySelector("#chamber-back-background1").emit('fade-in',null,false);
-		}else if(animID.startsWith("H_fadein")){
+		}else if(animID.startsWith("fade-in")){
 			if(data.index==data.amount-1 || data.index===null){
 				var catWall=chamber.querySelector("#chamber-cat-wall");
 				if(catWall.getAttribute("scale").y<1){
@@ -213,10 +214,10 @@ AFRAME.registerComponent('frame', {
 				}
 							
 			}
-		}else if(animID.startsWith("H_reset")){
+		}else if(animID.startsWith("reset")){
 			$(".Projects-backgrounds").addClass('clickable');	
 			projectShown=false;
-		}else if(animID.startsWith("H_fadeout")){
+		}else if(animID.startsWith("fade-out")){
 			chamber.querySelector("#chamber-cat-wall").emit("slide-out",null,false);
 			chamber.querySelector("#chamber-stage").emit("slide-out",null,false);	
 			chamber.querySelector("#chamber-left-decor").emit("slide-out",null,false);	

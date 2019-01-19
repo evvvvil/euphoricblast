@@ -20,10 +20,7 @@ AFRAME.registerComponent('chamber_sign', {
 		if(data.position!='') el.setAttribute("position",data.position);
 		if(data.rotation!='') el.setAttribute("rotation",data.rotation);
 		
-		//el.setAttribute("scale","0 0 0");
 		this.handleSignanimationcomplete = AFRAME.utils.bind(this.handleSignanimationcomplete, this);
-		console.log(data.id+" data.title "+data.title);
-		//console.log(data.id+" data.geometry "+data.geometry);
 			
 		var ti=evil.createEntity(el,{'id':data.id+'-title','geometry':"value:"+data.title+"; align:center; width: 1.6; height: auto; color: #333;",'scale':'0 0 0','position':'0 0 0.01','class':data.class+'-titles'});
 			evil.createAnimation("-ti-fadein",ti,"scale","fade-in","fade-stop","1 1 1",data.speed);
@@ -31,7 +28,7 @@ AFRAME.registerComponent('chamber_sign', {
 			ti.addEventListener('animationcomplete', this.handleSignanimationcomplete);
 
 			this.titleEl=ti;
-			this.titleEl.object3D.frustumCulled = true;
+			//this.titleEl.object3D.frustumCulled = true;
 
 		var ba=evil.createEntity(el,{'id':data.id+'-back','geometry':data.geometry,'scale':'0 0 0'});
 		ba.setAttribute('material','color',data.material);
