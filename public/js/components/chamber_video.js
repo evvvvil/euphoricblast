@@ -19,8 +19,8 @@ AFRAME.registerComponent('chamber_video', {
 			vi.setAttribute("src","#project-video-file");
 			vi.setAttribute("width",data.width);
 			vi.setAttribute("height",data.height);
-		evil.createAnimation("fade-in-"+data.id,el,"scale","fade-in","fade-stop","1 1 1","2000"); 	
-		evil.createAnimation("fade-out-"+data.id,el,"scale","fade-out","fade-stop","0 0 0","500");		
+		evil.createAnimation("fade-in",el,"scale","fade-in","fade-stop","1 1 1","2000"); 	
+		evil.createAnimation("fade-out",el,"scale","fade-out","fade-stop","0 0 0","500");		
 		el.appendChild(vi);
 
 		//VIDEO OVERLAY
@@ -38,8 +38,9 @@ AFRAME.registerComponent('chamber_video', {
 		//this.handleVideoanimationcomplete = AFRAME.utils.bind(this.handleVideoanimationcomplete, this);
 		el.addEventListener('animationcomplete', this.handleVideoanimationcomplete);			
 	},
-	handleVideoanimationcomplete: function(event){	
-		if(event.target.getAttribute("begin")=="fade-out"){
+	handleVideoanimationcomplete: function(event){
+	var animID=event.detail.name;animID=animID.substring(11,animID.length);	
+		if(animID.startsWith("fade-out")){
 			//console.log("removing project video file as we clicked back");
 			document.querySelector("#project-video-file").pause();
 			document.querySelector("#project-video-overlay").setAttribute("scale","1 1 1");

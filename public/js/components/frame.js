@@ -48,11 +48,11 @@ AFRAME.registerComponent('frame', {
 			'class':data.class+'-backgrounds clickable'});
 			ba.setAttribute("material","src",data.material);
 			ba.setAttribute("material","side","double");
-			evil.createAnimation("clicked-ba-sca-"+data.id,ba,"scale","project-clicked","project-stop","1.26 1.06 1.0","2000");		
-			evil.createAnimation("clicked-ba-rot-"+data.id,ba,"rotation","project-clicked","project-stop","0 -405 0","2000");
-			evil.createAnimation("back-ba-sca-"+data.id,ba,"scale","back-clicked","back-stop","1 1 1","1000");		
-			evil.createAnimation("back-ba-pos-"+data.id,ba,"position","back-clicked","back-stop","0 0 0","2000");
-			evil.createAnimation("back-ba-rot-"+data.id,ba,"rotation","back-clicked","back-stop","0 0 0","2000");
+			evil.createAnimation("clicked-ba-sca",ba,"scale","project-clicked","project-stop","1.26 1.06 1.0","2000");		
+			evil.createAnimation("clicked-ba-rot",ba,"rotation","project-clicked","project-stop","0 -405 0","2000");
+			evil.createAnimation("back-ba-sca",ba,"scale","back-clicked","back-stop","1 1 1","1000");		
+			evil.createAnimation("back-ba-pos",ba,"position","back-clicked","back-stop","0 0 0","2000");
+			evil.createAnimation("back-ba-rot",ba,"rotation","back-clicked","back-stop","0 0 0","2000");
 			ba.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);	
 			this.backgroundEl=ba;
 
@@ -61,12 +61,12 @@ AFRAME.registerComponent('frame', {
 			//TODO: make if else statement with category frame to have these settings:
 			//		var te=evil.createEntity(el,{'id':data.id+'-title','geometry':"value:"+data.title+"; width: 1.2; height: auto; color: white;",
 			//			'position':'.38 0.1 0.005','class':data.class+'-titles'});
-			evil.createAnimation("reveal-te-"+data.id,te,"position","project-clicked","project-stop","0.45 0.2 0.05","2000");		
-			evil.createAnimation("clicked-te-sca-"+data.id,te,"scale","project-clicked","project-stop","2.0 2.0 1.0","2000");
-			evil.createAnimation("clicked-te-rot-"+data.id,te,"rotation","project-clicked","project-stop","0 360 0","2000");			
-			evil.createAnimation("reverse-te-"+data.id,te,"position","back-clicked","back-stop",".18 0.1 0.01","2000");			
-			evil.createAnimation("back-te-rot-"+data.id,te,"rotation","back-clicked","back-stop","0 0 0","2000");
-			evil.createAnimation("back-te-sca-"+data.id,te,"scale","back-clicked","back-stop","1 1 1","2000");	
+			evil.createAnimation("reveal-te",te,"position","project-clicked","project-stop","0.45 0.2 0.05","2000");		
+			evil.createAnimation("clicked-te-sca",te,"scale","project-clicked","project-stop","2.0 2.0 1.0","2000");
+			evil.createAnimation("clicked-te-rot",te,"rotation","project-clicked","project-stop","0 360 0","2000");			
+			evil.createAnimation("reverse-te",te,"position","back-clicked","back-stop",".18 0.1 0.01","2000");			
+			evil.createAnimation("back-te-rot",te,"rotation","back-clicked","back-stop","0 0 0","2000");
+			evil.createAnimation("back-te-sca",te,"scale","back-clicked","back-stop","1 1 1","2000");	
 			te.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);
 			this.titleEl=te;	
 			
@@ -75,11 +75,11 @@ AFRAME.registerComponent('frame', {
 
 			var im=evil.createImage(el,{'id':data.id+'-image','class:':data.class+'-images',
 			'src':data.image,'width':'.39','height':'.18','position':'0 -0.022 0.005'});
-			evil.createAnimation("clicked-im-sca-",im,"scale","project-clicked","project-stop","1.44 1.45 1.0","1500");			
-			evil.createAnimation("clicked-im-rot-",im,"rotation","project-clicked","project-stop","0 -405 0","2000");
-			evil.createAnimation("back-im-",im,"position","back-clicked","back-stop","0 -0.022 0.005","2000");
-			evil.createAnimation("back-im-sca-",im,"scale","back-clicked","back-stop","1 1 1","2000");
-			evil.createAnimation("back-im-rot-",im,"rotation","back-clicked","back-stop","0 0 0","2000");	
+			evil.createAnimation("clicked-im-sca",im,"scale","project-clicked","project-stop","1.44 1.45 1.0","1500");			
+			evil.createAnimation("clicked-im-rot",im,"rotation","project-clicked","project-stop","0 -405 0","2000");
+			evil.createAnimation("back-im",im,"position","back-clicked","back-stop","0 -0.022 0.005","2000");
+			evil.createAnimation("back-im-sca",im,"scale","back-clicked","back-stop","1 1 1","2000");
+			evil.createAnimation("back-im-rot",im,"rotation","back-clicked","back-stop","0 0 0","2000");	
 			im.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);
 			this.imageEl=im;
 		}
@@ -141,7 +141,7 @@ AFRAME.registerComponent('frame', {
 		currentImage.emit('project-clicked',null,false);
 	},		
 	handleCategoriesClick: function () {
-		console.log("category clicked!"+this.data.index);
+		//console.log("category clicked!"+this.data.index);
 		category=this.data.index;
 		exiting=false;
 		var allCats=chamber.querySelectorAll(".Categories");
@@ -160,25 +160,24 @@ AFRAME.registerComponent('frame', {
 			}
 			chamber.querySelector("#project-title-background").emit("fade-out",null,false);
 			chamber.querySelector("#project-text").emit("fade-out",null,false);
-			chamber.querySelector("#project-video").emit("fade-out",null,false);
+			if(projectHasVideo) {
+				var vid=chamber.querySelector("#project-video-group");
+				vid.emit("fade-stop",null,false);
+				vid.setAttribute("scale","1 1 1");
+				vid.emit("fade-out",null,false);
+			}
 			chamber.querySelector("#chamber-back-background0").emit("fade-out",null,false);
 			chamber.querySelector("#chamber-back-background1").emit("fade-out",null,false);
 		}
 		chamber.querySelector("#chamber-sign-title").emit("fade-out",null,false);
 		chamber.querySelector("#chamber-sign-back").emit("fade-out",null,false);
-		chamber.querySelector("#chamber-exit-frame").emit("fade-out",null,false);
-		
+		chamber.querySelector("#chamber-exit-frame").emit("fade-out",null,false);		
 	},
 	handleCategoriesanimationcomplete: function (event) {
 		var data = this.data, el = this.el,evil=this.evil,animID=event.detail.name;animID=animID.substring(11,animID.length);		
 		if(animID=="fade-in"){
-			console.log("end of categories animation fade in, index: "+data.index+" amount: "+data.amount);
 			if(data.index<=data.amount-1 || data.index===null){
 				chamber.querySelector("#chamber-exit").emit('fade-in',null,false);
-				/*console.log("end of categories animation project0 scale"+chamber.querySelector("#project0").getAttribute("scale").x);
-				if(chamber.querySelector("#project0").getAttribute("scale").x<0.1){
-					animCounter=0;evil.animateObjects(1,"project",numOfProjects,'A');
-				}*/
 			}
 		}
 	},
@@ -190,9 +189,11 @@ AFRAME.registerComponent('frame', {
 			var projos=par.querySelectorAll(".Projects");
 			for (var i=0;i<projos.length;i++){
 				var pos = (-0.5+i%3*0.5)+" "+(.3+Math.floor(i/3)*0.3)+" "+(-1.95);
-				var moveBackAnim=projos[i].querySelector("#reset-"+i);
-				if(moveBackAnim!==null) projos[i].removeChild(moveBackAnim);
-			  	evil.createAnimation("reset-"+i,projos[i],"position","move-back","move-stop",pos,"1000");
+				$(projos[i].attributes).each(function() {
+					var shortName=this.name; shortName=shortName.substring(11,shortName.length);
+					if(this.name.startsWith("reset"))	projos[i].removeAttribute(this.name);
+				});				
+			  	evil.createAnimation("reset",projos[i],"position","move-back","move-stop",pos,"1000");
 				projos[i].emit('move-back',null,false);
 			}
 		}else if(animID.startsWith("clic")){
@@ -211,13 +212,13 @@ AFRAME.registerComponent('frame', {
 					catWall.emit("fade-in",null,false);
 				}else{
 					catWall.emit("slide-in",null,false);
-				}
-							
+				}			
 			}
 		}else if(animID.startsWith("reset")){
 			$(".Projects-backgrounds").addClass('clickable');	
 			projectShown=false;
 		}else if(animID.startsWith("fade-out")){
+			console.log("disapraring ");
 			chamber.querySelector("#chamber-cat-wall").emit("slide-out",null,false);
 			chamber.querySelector("#chamber-stage").emit("slide-out",null,false);	
 			chamber.querySelector("#chamber-left-decor").emit("slide-out",null,false);	

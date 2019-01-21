@@ -14,16 +14,8 @@ AFRAME.registerComponent('evil', {
 			}		
 		}
 	},
+	//TODO: rewrite this function to just pass _options like function below it
 	createAnimation: function(_id,_parent,_attribute,_begin,_end,_to,_dur,_easing,_from){
-		/*var anim = document.createElement("a-animation");
-			anim.setAttribute("id",_id);
-			anim.setAttribute("attribute",_attribute); 
-			anim.setAttribute("begin",_begin);
-			anim.setAttribute("end",_end);
-			anim.setAttribute("to",_to);
-			anim.setAttribute("dur",_dur);
-			if(_easing!==undefined) anim.setAttribute("easing",_easing);
-			_parent.appendChild(anim);	*/
 			var animOptions={
 				'property': _attribute,
 				'startEvents':_begin,
@@ -137,25 +129,22 @@ AFRAME.registerComponent('evil', {
 	},
 	removeProjectsAndCategories: function(){
 		projects=undefined;
-
 			var allProjs=chamber.querySelectorAll(".Projects");		
 			for(var i=0;i<allProjs.length;i++){
 				chamber.removeChild(allProjs[i]);
 			}
-
 			var allCats=chamber.querySelectorAll(".Categories");		
 			for(var i=0;i<allCats.length;i++){
 				if(allCats[i].id!="chamber-category0") chamber.removeChild(allCats[i]);
 			}
 	},
 	removePlayerAnimations: function(){
-			var allAnims=player.querySelectorAll("a-animation");
-			for(var i=0;i<allAnims.length;i++){
-				if(allAnims[i].id!="circle-reveal")	allAnims[i].parentNode.removeChild(allAnims[i]);
-			}
+			$(player.attributes).each(function() {
+				if(this.name.startsWith("anim"))player.removeAttribute(this.name);
+			});
 	},
 	resetChamber: function(){
-		console.log("resrting");
+		console.log("reseting");
 		player.querySelector("#main-camera").setAttribute("near", 0.1);
 		chamber.querySelector("#chamber-left-wall").setAttribute("position","-2 .4 -0.66");
 		var catWall=chamber.querySelector("#chamber-cat-wall");
@@ -233,7 +222,6 @@ AFRAME.registerComponent('evil', {
 	wrangleImageSource: function(source){
 		//from:
 		//euphoricblast/6tutuytutu/euphoricblast-6tutuytutu-mainImage-1523467012837
-
 		//to:
 		//http://res.cloudinary.com/dtrroywwa/image/upload/c_fill,g_center,h_328,w_auto/v1/euphoricblast/6tutuytutu/euphoricblast-6tutuytutu-mainImage-1523467012837.jpg
 		var result="http://res.cloudinary.com/dtrroywwa/image/upload/c_fill,g_center,h_256,w_512/v"+source.version+"/"+source.public_id+".jpg";

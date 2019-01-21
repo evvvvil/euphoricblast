@@ -17,8 +17,6 @@ var socket,evil,outterRing,player,chamber,projects,projectVideo,numOfProjects,nu
 speedMult=1;
 
 var socket = io();
-socket.on('news', function (data) {
-console.log("web socket says: "+data);});
 socket.on('projectsData', function (data) {
 	projects=data;
 	chamber.setAttribute("chamber","projects",projects);
@@ -48,7 +46,7 @@ window.onload = initfunc;
 function handlePlayerAnimations(event){
 	var animID=event.detail.name,pos;
 	animID=animID.substring(11,animID.length);
-	//event.stopPropagation();
+	event.stopPropagation();
 	if(animID=="move-cat-anim"){
 		player.querySelector('#main-camera').setAttribute('near', 0.03);
 	    pos=evil.wrangleDestination(-3.33,4.386,-3.439,-1.156,.426,-4.230);
@@ -118,7 +116,7 @@ function handlePlayerAnimations(event){
 		corridorEnd.object3D.visible = true;
 		
 		var cam=player.querySelector('#main-camera');
-		evil.createAnimation("change-near",cam,"near","adjust-near","adjust-near-stop","0.1",2000,'linear');	    
+		evil.createAnimation("change-near",cam,"near","adjust-near","adjust-near-stop","0.1",2000,"linear");	    
 	    cam.emit('adjust-near',null,false);
 		player.emit('move-down',null,false);
 		evil.removeProjectsAndCategories();		
@@ -175,12 +173,8 @@ function handlePlayerAnimations(event){
 		<a-entity id="main-scene" position="0 0 0" gltf-model="#main-scene" material="roughness: 1; metalness: 0"></a-entity>		
 		<!--CORRIDORS-->
 		<a-entity id="corridors" visible="false">
-			<a-entity id="corridor-01" position="0 0 0.375" gltf-model="#corridor" material="roughness: 1; metalness: 0">
-				<a-animation id="corridor-01-anim" attribute="rotation" begin="spin-corridor" end="spin-stop" to="0 0 -180" dur="2000"></a-animation>
-			</a-entity>
-			<a-entity id="corridor-02" position="0 0 1.125" gltf-model="#corridor" material="roughness: 1; metalness: 0">
-				<a-animation id="corridor-02-anim" attribute="rotation" begin="spin-corridor" end="spin-stop" to="0 0 90" dur="1000"></a-animation>
-			</a-entity>				
+			<a-entity id="corridor-01" position="0 0 0.375" gltf-model="#corridor" material="roughness: 1; metalness: 0" animation="property:rotation; startEvents:spin-corridor;to:0 0 -180;dur:1000"></a-entity>
+			<a-entity id="corridor-02" position="0 0 1.125" gltf-model="#corridor" material="roughness: 1; metalness: 0" animation="property:rotation; startEvents:spin-corridor;to:0 0 90;dur:1000"></a-entity>				
 		</a-entity>
 		<!--SKY-->
 		<a-sky color="#ECECEC"></a-sky>		
