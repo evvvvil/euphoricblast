@@ -2,6 +2,9 @@ var keystone = require('keystone');
 var async = require('async');
 var _=require('lodash');
 var request = require("request");
+var fs = require('fs');
+var ytdl=require("ytdl-core");
+ 
 //var MobileDetect = require('mobile-detect');
 
 exports = module.exports = function (req, res) {
@@ -102,6 +105,14 @@ exports = module.exports = function (req, res) {
    					next(error);
    					//console.log("SCRAPPED HIDDEN VIDEO URL IS: "+scrapedUrl);
 				});	
+			}else if(ajaxMessage=="get_from_youtube"){				
+				
+				var videobro=ytdl('http://www.youtube.com/watch?v=hNH4WRVHwz4')				
+				.pipe(fs.createWriteStream('video.mp4'));
+				//console.log("videobro "+JSON.stringify(videobro));
+				locals.io.emit('projectVideo', 'http://localhost:3000/video.mp4');
+				next();
+
 			}else{
 				next();
 			}			

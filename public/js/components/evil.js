@@ -245,6 +245,7 @@ AFRAME.registerComponent('evil', {
 	},
 	getProjectVideo: function(evt,videoURL){		
 		if(videoURL!=''&&videoURL!==null){
+			if(videoURL.indexOf("vimeo") !== -1){
 			$.ajax({
 		      type: 'POST',
 		      data: {
@@ -253,6 +254,16 @@ AFRAME.registerComponent('evil', {
 		      },
 		      dataType: 'json'
 			});	
+		}else{
+			$.ajax({
+		      type: 'POST',
+		      data: {
+		       'message':'get_from_youtube',
+		       'originalVideoURL': videoURL
+		      },
+		      dataType: 'json'
+			});	
+		}
 		}else{
 			projectHasVideo=false;
 		}	

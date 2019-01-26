@@ -87,18 +87,16 @@ AFRAME.registerComponent('homecategory', {
 		animID=event.detail.name;animID=animID.substring(11,animID.length);
 		
 		if(animID.startsWith("ba-")){
-			console.log('homecat animation finished is background: ');
 			this.ti.setAttribute('visible','false');
 			var screensArr=el.querySelectorAll('.category-screens');
-			console.log('we got all the screens at '+ screensArr.length);
-	    	for(var i=0;i<screensArr.length;i++){
+			for(var i=0;i<screensArr.length;i++){
 	    		screensArr[i].emit('clicked',null,false);
 			}			
 		}
 		event.stopPropagation();
 	},
 	handleCatClicked: function(event) {
-	    console.log('I was clicked atttt: ', event.detail.intersection.point);
+	    //console.log('I was clicked atttt: ', event.detail.intersection.point);
 	    //TODO: only works with up to 9 CATEGORIES!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		category=this.data.index;
 		evil.getCategoryData();

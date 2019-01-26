@@ -14,7 +14,7 @@
 //TODO: check how it works if you select category then while it flies cut off internet so the post fails, it sohuld retry every 10 seconds the post //while in chamber
 var socket,evil,outterRing,player,chamber,projects,projectVideo,numOfProjects,numOfImages,catLoad,projectHasVideo=false,animCounter=0,category=0,projectIndex=-1,categories={{{jsonView data.categoriesNames}}},exiting=false,projectShown=false,
 
-speedMult=1;
+speedMult=0.01;
 
 var socket = io();
 socket.on('projectsData', function (data) {
@@ -24,6 +24,7 @@ socket.on('projectsData', function (data) {
 });
 socket.on('projectVideo', function (data) {
 	projectVideo=data.toString();
+	console.log("data from video is:"+data);
 	evil.changeVideo(projectVideo);
 	projectHasVideo=true;
 });

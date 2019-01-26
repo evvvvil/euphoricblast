@@ -218,7 +218,6 @@ AFRAME.registerComponent('frame', {
 			$(".Projects-backgrounds").addClass('clickable');	
 			projectShown=false;
 		}else if(animID.startsWith("fade-out")){
-			console.log("disapraring ");
 			chamber.querySelector("#chamber-cat-wall").emit("slide-out",null,false);
 			chamber.querySelector("#chamber-stage").emit("slide-out",null,false);	
 			chamber.querySelector("#chamber-left-decor").emit("slide-out",null,false);	
