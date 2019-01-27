@@ -36,24 +36,36 @@ exports = module.exports = function (req, res) {
 				return next(err);
 			}
 			locals.data.categories = results;
-			locals.data.categoriesNames=_.map(results, 'name');
-			var filepath = path.resolve(__dirname, 'videooo.mp4');
-/*ytdl.getInfo("http://www.youtube.com/watch?v=hNH4WRVHwz4", function(err, info){
-	console.log("get info "+JSON.stringify(info));
-        //videoName = info.title.replace('|','').toString('ascii');
-        //res.set('Content-Disposition', 'attachment; filename=' +    videoName + '.mp3');    
-        		//next(err);
-   });  */
-			ytdl('http://www.youtube.com/watch?v=hNH4WRVHwz4').pipe(fs.createWriteStream(filepath));
-								
-			//	locals.data.videobr=videobro;
-				//locals.io.emit('projectVideo', 'http://localhost:3000/video.mp4');
-	next(err);
+			locals.data.categoriesNames=_.map(results, 'name');			
+			next(err);
 		});
 	});
 
-
+	view.on('post', function (next,result) {
+ 		var ajaxMessage=req.body.message;
+ 		console.log("got message from client saying: "+ajaxMessage);
+		if(ajaxMessage=="get_from_youtube"){				
+						//path.resolve(__dirname, 'videooo.mp4');
+						/*ytdl.getInfo("http://www.youtube.com/watch?v=hNH4WRVHwz4", function(err, info){
+						console.log("get info "+JSON.stringify(info));
+						//videoName = info.title.replace('|','').toString('ascii');
+						//res.set('Content-Disposition', 'attachment; filename=' +    videoName + '.mp3');    
+						//next(err);
+						});  */
+			var filepath = './public/videos/videooo.mp4';
+			console.log("ok crawling youtube broh, then putting video here"+filepath);
+			var vid=ytdl('http://www.youtube.com/watch?v=hNH4WRVHwz4',{ filter: (format) => format.container === 'mp4' });
+			console.log("ok gotytdl to do the work");
+			vid.pipe(fs.createWriteStream(filepath));
+			console.log("PIPEINF RESULT broh");
+			vid.on('end', function(){locals.io.emit('projectVideo', vid); res.end;});
+			//locals.io.emit('projectVideo', vid);
+			next();
+		}else{
+			next();
+		}			
+	});
 
 	// Render the view
-	view.render('vt', { layout: 'default',bodyId: 'work-page', cloudinaryResponsive: 'whatever'});
+	view.render('vt', { layout: 'layout3d',bodyId: 'work-page', cloudinaryResponsive: 'whatever'});
 };
