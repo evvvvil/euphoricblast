@@ -201,7 +201,7 @@ AFRAME.registerComponent('frame', {
 			if(numOfImages>0){
 				animCounter=0;evil.animateObjects(1,"project-images-",numOfImages,'A');
 			}
-			//console.log("projectHasVideo? "+projectHasVideo);
+			console.log("projectHasVideo? "+projectHasVideo);
 			if(projectHasVideo) par.querySelector("#project-video-group").emit("fade-in");
 			par.querySelector("#chamber-back-background0").emit('fade-in',null,false);
 			par.querySelector("#chamber-back-background1").emit('fade-in',null,false);

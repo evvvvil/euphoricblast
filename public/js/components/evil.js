@@ -246,24 +246,24 @@ AFRAME.registerComponent('evil', {
 	getProjectVideo: function(evt,videoURL){		
 		if(videoURL!=''&&videoURL!==null){
 			if(videoURL.indexOf("vimeo") !== -1){
-			$.ajax({
-		      type: 'POST',
-		      data: {
-		       'message':'scrape_the_fuck_outta_vimeo',
-		       'originalVideoURL': videoURL
-		      },
-		      dataType: 'json'
-			});	
-		}else{
-			$.ajax({
-		      type: 'POST',
-		      data: {
-		       'message':'scrape_the_fuck_outta_youtube',
-		       'originalVideoURL': videoURL
-		      },
-		      dataType: 'json'
-			});	
-		}
+				$.ajax({
+			      type: 'POST',
+			      data: {
+			       'message':'scrape_the_fuck_outta_vimeo',
+			       'originalVideoURL': videoURL
+			      },
+			      dataType: 'json'
+				});	
+			}else{
+				$.ajax({
+			      type: 'POST',
+			      data: {
+			       'message':'scrape_the_fuck_outta_youtube',
+			       'originalVideoURL': videoURL
+			      },
+			      dataType: 'json'
+				});	
+			}
 		}else{
 			projectHasVideo=false;
 		}	
