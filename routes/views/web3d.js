@@ -59,7 +59,7 @@ exports = module.exports = function (req, res) {
 			.populate('categories');		
 		q.exec(function (err, results) {
 			locals.data.featuredPosts = results;
-			console.log("results length"+results.length);
+			//console.log("results length"+results.length);
 			next(err);
 		});
 	});	
@@ -105,9 +105,10 @@ exports = module.exports = function (req, res) {
 					//console.log("SCRAPPED HIDDEN VIDEO URL IS: "+scrapedUrl);
 			});	
 		}else if(ajaxMessage=="scrape_the_fuck_outta_youtube"){								
-			var filepath = './public/videos/project-video.mp4';
+			var url=req.body.originalVideoURL;
+			var filepath = '/videos/project-video-'+url.split("?v=")[1]+'.mp4';
 			var vid=ytdl('http://www.youtube.com/watch?v=hNH4WRVHwz4',{ filter: (format) => format.container === 'mp4' });
-			vid.pipe(fs.createWriteStream(filepath));
+			vid.pipe(fs.createWriteStream('./public'+filepath));
 			vid.on('end', function(){locals.io.emit('projectVideo','/videos/project-video.mp4' ); res.end;});
 			next();
 		}else{
