@@ -258,7 +258,7 @@ AFRAME.registerComponent('evil', {
 			$.ajax({
 		      type: 'POST',
 		      data: {
-		       'message':'get_from_youtube',
+		       'message':'scrape_the_fuck_outta_youtube',
 		       'originalVideoURL': videoURL
 		      },
 		      dataType: 'json'

@@ -24,7 +24,6 @@ socket.on('projectsData', function (data) {
 });
 socket.on('projectVideo', function (data) {
 	projectVideo=data.toString();
-	console.log("data from video is:"+data);
 	evil.changeVideo(projectVideo);
 	projectHasVideo=true;
 });

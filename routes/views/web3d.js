@@ -105,14 +105,12 @@ exports = module.exports = function (req, res) {
    					next(error);
    					//console.log("SCRAPPED HIDDEN VIDEO URL IS: "+scrapedUrl);
 				});	
-			}else if(ajaxMessage=="get_from_youtube"){				
-				
-				var videobro=ytdl('http://www.youtube.com/watch?v=hNH4WRVHwz4')				
-				.pipe(fs.createWriteStream('video.mp4'));
-				//console.log("videobro "+JSON.stringify(videobro));
-				locals.io.emit('projectVideo', 'http://localhost:3000/video.mp4');
+			}else if(ajaxMessage=="scrape_the_fuck_outta_youtube"){								
+				var filepath = './public/videos/project-video.mp4';
+				var vid=ytdl('http://www.youtube.com/watch?v=hNH4WRVHwz4',{ filter: (format) => format.container === 'mp4' });
+				vid.pipe(fs.createWriteStream(filepath));
+				vid.on('end', function(){locals.io.emit('projectVideo','/videos/project-video.mp4' ); res.end;});
 				next();
-
 			}else{
 				next();
 			}			

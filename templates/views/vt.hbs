@@ -27,15 +27,6 @@ function getProjectVideo(){
 var socket = io();
 socket.on('projectVideo', function (data) {
 	projectVideo=data.toString();
-	console.log("data from video is:"+JSON.stringify(data));
-	/*var video = document.createElement('video');
-
-	video.src = '/videos/videooo.mp4';
-	video.autoplay = true;
-	$("#video-container").append(video);*/
-	//evil.changeVideo(projectVideo);
-	//projectHasVideo=true;
-
 	var videoEl=document.querySelector("#project-video-file");
 		videoEl.pause();
 		videoEl.removeAttribute('src');
@@ -43,12 +34,6 @@ socket.on('projectVideo', function (data) {
 		videoEl.setAttribute("src","/videos/videooo.mp4");
 		videoEl.load();
 		videoEl.play();
-
-});
-socket.on('projectVideoEnd', function (data) {
-	console.log("finshed video!!!");
-	
-
 });
 </script>
 <button type="submit" class="btn btn-paragraph" onclick="getProjectVideo()">Get Video</button>
