@@ -40,7 +40,7 @@ exports = module.exports = function (app) {
 	app.all('/work/', routes.views.work);	
 	app.get('/lab/', routes.views.lab);
 	app.all('/3d/', routes.views.web3d);
-	app.all('/vt/', routes.views.vt);
+	//app.all('/vt/', routes.views.vt);
 	app.get('/lab/:post', routes.views.post);	
 	app.all('/contact', routes.views.contact);
 	app.get('/:category?', routes.views.work);

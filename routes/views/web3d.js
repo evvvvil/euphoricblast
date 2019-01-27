@@ -108,7 +108,7 @@ exports = module.exports = function (req, res) {
 			var url=req.body.originalVideoURL;
 			console.log("url: "+url);
 			var filepath = '/videos/project-video-'+url.split("?v=")[1]+'.mp4';
-			console.log("filepath: "+url);
+			console.log("filepath: "+filepath);
 			var vid=ytdl(url,{ filter: (format) => format.container === 'mp4' });
 			console.log("streampath: "+'./public'+filepath);
 			vid.pipe(fs.createWriteStream('./public'+filepath));

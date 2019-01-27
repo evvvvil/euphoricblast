@@ -24,11 +24,10 @@ AFRAME.registerComponent('chamber_video', {
 		el.appendChild(vi);
 
 		//VIDEO OVERLAY
-		var ov = evil.createEntity(el,{'id':data.id+'-overlay','geometry':'primitive:plane;width:'+(data.width)+';height:'+(data.height),
+		/*var ov = evil.createEntity(el,{'id':data.id+'-overlay','geometry':'primitive:plane;width:'+(data.width)+';height:'+(data.height),
 			'position':'0 0 0.002','material':'src:#video-placeholder-image;shader:flat'});
-		//evil.createAnimation("fadein-overlay"+data.id,ov,"scale","fade-in","fade-stop","1 1 1","500");	
-		evil.createAnimation("fadeout-overlay"+data.id,ov,"scale","overlay-out","overlay-stop","1 0 1","500");
-		ov.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);
+			evil.createAnimation("fadeout-overlay",ov,"scale","overlay-out","overlay-stop","1 0 1","500");
+			ov.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);*/
 
 		//VIDEO BACKGROUND
 		evil.createEntity(el,{'id':data.id+'-background',
@@ -43,10 +42,10 @@ AFRAME.registerComponent('chamber_video', {
 		if(animID.startsWith("fade-out")){
 			//console.log("removing project video file as we clicked back");
 			document.querySelector("#project-video-file").pause();
-			document.querySelector("#project-video-overlay").setAttribute("scale","1 1 1");
+			//document.querySelector("#project-video-overlay").setAttribute("scale","1 1 1");
 		}else{
 			document.querySelector("#project-video-file").play();
-			document.querySelector("#project-video-overlay").emit("overlay-out",null,false);
+			//document.querySelector("#project-video-overlay").emit("overlay-out",null,false);
 		}
 		event.stopPropagation();	
 	}
