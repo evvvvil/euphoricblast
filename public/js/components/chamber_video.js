@@ -42,6 +42,8 @@ AFRAME.registerComponent('chamber_video', {
 		if(animID.startsWith("fade-out")){
 			var videoEl=document.querySelector("#project-video-file");
 			videoEl.pause();			
+			videoEl.removeAttribute('src');
+			videoEl.load();
 			videoEl.setAttribute("src","/videos/small_video.mp4");
 			videoEl.load();
 			videoEl.pause();
