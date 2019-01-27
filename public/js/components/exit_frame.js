@@ -96,7 +96,7 @@ AFRAME.registerComponent('exit_frame', {
 		chamber.querySelector("#chamber-sign-back").emit("fade-out",null,false);
 		chamber.querySelector("#chamber-exit-frame").emit("fade-out",null,false);
 		if(projectHasVideo) {
-			var vid=par.querySelector("#project-video-group");
+			var vid=chamber.querySelector("#project-video-group");
 			vid.emit("fade-stop",null,false);
 			vid.setAttribute("scale","1 1 1");
 			vid.emit("fade-out",null,false);
