@@ -176,7 +176,8 @@ AFRAME.registerComponent('evil', {
 		videoEl.load();
 		videoEl.setAttribute("src",projectVideoURL);
 		videoEl.load();
-		videoEl.pause();
+		//videoEl.pause();
+		videoEl.play();
 	},
 	strip: function(html)
 	{
