@@ -118,7 +118,6 @@ AFRAME.registerComponent('exit_frame', {
 	    outterRing.emit('circle-stop',null,false);
 		outterRing.setAttribute('theta-length', 0.1);			
 		outterRing.object3D.visible=false;
-		projectHasVideo=false;
 		event.stopPropagation();
 	}
 }); 

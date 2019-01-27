@@ -26,7 +26,6 @@ socket.on('projectVideo', function (data) {
 	projectVideo=data.toString();
 	console.log("got video!"+projectVideo);
 	evil.changeVideo(projectVideo);
-	projectHasVideo=true;
 });
 
 function initfunc() {	

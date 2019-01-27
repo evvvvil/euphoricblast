@@ -12,7 +12,6 @@ exports = module.exports = function (req, res) {
 	var view = new keystone.View(req, res);
 	var locals = res.locals;
 	//console.log(res.locals.io);
-
 	// Init locals
 	locals.section = '3d VR website';
 	locals.orginalURL="http://www.euphoricblast.com"+req.originalUrl;
@@ -65,56 +64,56 @@ exports = module.exports = function (req, res) {
 		});
 	});	
 
-			view.on('post', function (next,result) {
-	 		var ajaxMessage=req.body.message;
-			if(ajaxMessage=="next_page_yo"){
-				var categoryIndex=Number(req.body.cat)-1;
-				var q= keystone.list('Post').model.find({
-					state: 'published',				
-					type: 'work',
-				}).sort('-publishedDate').populate('categories');
+	view.on('post', function (next,result) {
+ 		var ajaxMessage=req.body.message;
+		if(ajaxMessage=="next_page_yo"){
+			var categoryIndex=Number(req.body.cat)-1;
+			var q= keystone.list('Post').model.find({
+				state: 'published',				
+				type: 'work',
+			}).sort('-publishedDate').populate('categories');
 
-				q.where('categories').in([locals.data.categories[categoryIndex]]);
-				
-				q.exec(function (err, results) {	
-					//remove posts which are already shown as ordered posts			
-					/*var inter = _.intersectionBy(results, locals.data.orderedPosts, "slug");
-					var diff = _.difference(results,inter);				
-					locals.data.posts = diff;*/
-					locals.data.posts = results;
-					locals.io.emit('projectsData', locals.data.posts);				
-					next(err);
-				});
-			}else if(ajaxMessage=="scrape_the_fuck_outta_vimeo"){				
-				var url="https://player.vimeo.com/video/"+req.body.originalVideoURL.split(".com/")[1];
-				console.log("ORIGINAL URL IS:"+url);
-				request({
-				  uri: url,
-				  method: "GET",
-				  timeout: 10000,
-				  headers: {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'},
-				  followRedirect: false,
-				  maxRedirects: 10,
-				}, function (error, response, body) {
-					//console.log("RESPONSE:"+JSON.stringify(response));
-   					var bodyString=body.toString(),
-   					start=bodyString.indexOf('video/mp4')+27,
-   					end=bodyString.indexOf('"cdn"')-2;
-   					var scrapedUrl=bodyString.substring(start,end);
-   					locals.io.emit('projectVideo', scrapedUrl);
-   					next(error);
-   					//console.log("SCRAPPED HIDDEN VIDEO URL IS: "+scrapedUrl);
-				});	
-			}else if(ajaxMessage=="scrape_the_fuck_outta_youtube"){								
-				var filepath = './public/videos/project-video.mp4';
-				var vid=ytdl('http://www.youtube.com/watch?v=hNH4WRVHwz4',{ filter: (format) => format.container === 'mp4' });
-				vid.pipe(fs.createWriteStream(filepath));
-				vid.on('end', function(){locals.io.emit('projectVideo','/videos/project-video.mp4' ); res.end;});
-				next();
-			}else{
-				next();
-			}			
-		});
+			q.where('categories').in([locals.data.categories[categoryIndex]]);
+			
+			q.exec(function (err, results) {	
+				//remove posts which are already shown as ordered posts			
+				/*var inter = _.intersectionBy(results, locals.data.orderedPosts, "slug");
+				var diff = _.difference(results,inter);				
+				locals.data.posts = diff;*/
+				locals.data.posts = results;
+				locals.io.emit('projectsData', locals.data.posts);				
+				next(err);
+			});
+		}else if(ajaxMessage=="scrape_the_fuck_outta_vimeo"){				
+			var url="https://player.vimeo.com/video/"+req.body.originalVideoURL.split(".com/")[1];
+			//console.log("ORIGINAL URL IS:"+url);
+			request({
+			  uri: url,
+			  method: "GET",
+			  timeout: 10000,
+			  headers: {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'},
+			  followRedirect: false,
+			  maxRedirects: 10,
+			}, function (error, response, body) {
+				//console.log("RESPONSE:"+JSON.stringify(response));
+					var bodyString=body.toString(),
+					start=bodyString.indexOf('video/mp4')+27,
+					end=bodyString.indexOf('"cdn"')-2;
+					var scrapedUrl=bodyString.substring(start,end);
+					locals.io.emit('projectVideo', scrapedUrl);
+					next(error);
+					//console.log("SCRAPPED HIDDEN VIDEO URL IS: "+scrapedUrl);
+			});	
+		}else if(ajaxMessage=="scrape_the_fuck_outta_youtube"){								
+			var filepath = './public/videos/project-video.mp4';
+			var vid=ytdl('http://www.youtube.com/watch?v=hNH4WRVHwz4',{ filter: (format) => format.container === 'mp4' });
+			vid.pipe(fs.createWriteStream(filepath));
+			vid.on('end', function(){locals.io.emit('projectVideo','/videos/project-video.mp4' ); res.end;});
+			next();
+		}else{
+			next();
+		}			
+	});
 
 	// Load the page post
 	/*view.on('init', function (next) {

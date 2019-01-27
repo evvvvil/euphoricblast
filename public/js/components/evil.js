@@ -244,7 +244,10 @@ AFRAME.registerComponent('evil', {
 		});
 	},
 	getProjectVideo: function(evt,videoURL){		
-		if(videoURL!=''&&videoURL!==null){
+		if(videoURL==''||videoURL===null||videoURL===undefined||videoURL==" "){
+			projectHasVideo=false;
+		}else{
+			projectHasVideo=true;
 			if(videoURL.indexOf("vimeo") !== -1){
 				$.ajax({
 			      type: 'POST',
@@ -264,9 +267,7 @@ AFRAME.registerComponent('evil', {
 			      dataType: 'json'
 				});	
 			}
-		}else{
-			projectHasVideo=false;
-		}	
+		}
 	},
 	waitForProjects: function(){
 		if(projects!==undefined){
