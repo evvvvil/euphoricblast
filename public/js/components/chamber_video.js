@@ -40,8 +40,11 @@ AFRAME.registerComponent('chamber_video', {
 	handleVideoanimationcomplete: function(event){
 	var animID=event.detail.name;animID=animID.substring(11,animID.length);	
 		if(animID.startsWith("fade-out")){
-			//console.log("removing project video file as we clicked back");
-			document.querySelector("#project-video-file").pause();
+			var videoEl=document.querySelector("#project-video-file");
+			videoEl.pause();			
+			videoEl.setAttribute("src","/videos/small_video.mp4");
+			videoEl.load();
+			videoEl.pause();
 			//document.querySelector("#project-video-overlay").setAttribute("scale","1 1 1");
 		}else{
 			document.querySelector("#project-video-file").play();
