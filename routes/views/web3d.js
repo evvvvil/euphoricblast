@@ -106,10 +106,13 @@ exports = module.exports = function (req, res) {
 			});	
 		}else if(ajaxMessage=="scrape_the_fuck_outta_youtube"){								
 			var url=req.body.originalVideoURL;
+			console.log("url: "+url);
 			var filepath = '/videos/project-video-'+url.split("?v=")[1]+'.mp4';
-			var vid=ytdl('http://www.youtube.com/watch?v=hNH4WRVHwz4',{ filter: (format) => format.container === 'mp4' });
+			console.log("filepath: "+url);
+			var vid=ytdl(url,{ filter: (format) => format.container === 'mp4' });
+			console.log("streampath: "+'./public'+filepath);
 			vid.pipe(fs.createWriteStream('./public'+filepath));
-			vid.on('end', function(){locals.io.emit('projectVideo','/videos/project-video.mp4' ); res.end;});
+			vid.on('end', function(){locals.io.emit('projectVideo',filepath); res.end;});
 			next();
 		}else{
 			next();
