@@ -89,9 +89,18 @@ AFRAME.registerComponent('exit_frame', {
 		for(var i=0;i<allCats.length;i++){
 			allCats[i].emit("fade-out",null,false);
 		}
+		chamber.querySelector("#project-text").emit("fade-out",null,false);
+		chamber.querySelector("#project-title-background").emit("back-clicked",null,false);
+		chamber.querySelector("#project-title-cube").emit("back-clicked",null,false);
 		chamber.querySelector("#chamber-sign-title").emit("fade-out",null,false);
 		chamber.querySelector("#chamber-sign-back").emit("fade-out",null,false);
 		chamber.querySelector("#chamber-exit-frame").emit("fade-out",null,false);
+		if(projectHasVideo) {
+			var vid=par.querySelector("#project-video-group");
+			vid.emit("fade-stop",null,false);
+			vid.setAttribute("scale","1 1 1");
+			vid.emit("fade-out",null,false);
+		}
 	},
 	handleBackClick: function(){
 		var data = this.data, el = this.el,evil=this.evil,par=this.el.parentNode;
@@ -109,10 +118,11 @@ AFRAME.registerComponent('exit_frame', {
 			vid.setAttribute("scale","1 1 1");
 			vid.emit("fade-out",null,false);
 		}
-		par.querySelector("#project"+projectIndex+"-title").emit("back-clicked");
-		par.querySelector("#project-text").emit("fade-out");
-		par.querySelector("#project-title-background").emit("back-clicked");
-		par.querySelector("#project"+projectIndex+"-background").emit("back-clicked");
+		par.querySelector("#project"+projectIndex+"-title").emit("back-clicked",null,false);
+		par.querySelector("#project-text").emit("fade-out",null,false);
+		par.querySelector("#project-title-background").emit("back-clicked",null,false);
+		par.querySelector("#project-title-cube").emit("back-clicked",null,false);
+		par.querySelector("#project"+projectIndex+"-background").emit("back-clicked",null,false);
 		par.querySelector("#chamber-back-background0").emit('fade-out',null,false);
 		par.querySelector("#chamber-back-background1").emit('fade-out',null,false);
 	    outterRing.emit('circle-stop',null,false);

@@ -61,7 +61,7 @@ AFRAME.registerComponent('frame', {
 			//TODO: make if else statement with category frame to have these settings:
 			//		var te=evil.createEntity(el,{'id':data.id+'-title','geometry':"value:"+data.title+"; width: 1.2; height: auto; color: white;",
 			//			'position':'.38 0.1 0.005','class':data.class+'-titles'});
-			evil.createAnimation("reveal-te",te,"position","project-clicked","project-stop","0.45 0.2 0.05","2000");		
+			evil.createAnimation("reveal-te",te,"position","project-clicked","project-stop","0.15 0.2 0.03","2000");		
 			evil.createAnimation("clicked-te-sca",te,"scale","project-clicked","project-stop","2.0 2.0 1.0","2000");
 			evil.createAnimation("clicked-te-rot",te,"rotation","project-clicked","project-stop","0 360 0","2000");			
 			evil.createAnimation("reverse-te",te,"position","back-clicked","back-stop",".18 0.1 0.01","2000");			
@@ -135,6 +135,7 @@ AFRAME.registerComponent('frame', {
 		el.emit('project-clicked',null,false); 
 		projectText.emit('fade-in',null,false);
 		par.querySelector("#project-title-background").emit('fade-in',null,false);
+		par.querySelector("#project-title-cube").emit('fade-in',null,false);
 		
 		this.titleEl.emit('project-clicked',null,false); 	
 		currentBackground.emit('project-clicked',null,false);
@@ -158,7 +159,8 @@ AFRAME.registerComponent('frame', {
 			for(var i=0;i<allImages.length;i++){
 				allImages[i].emit("fade-out",null,false);
 			}
-			chamber.querySelector("#project-title-background").emit("fade-out",null,false);
+			chamber.querySelector("#project-title-background").emit("back-clicked",null,false);
+			chamber.querySelector("#project-title-cube").emit("back-clicked",null,false);
 			chamber.querySelector("#project-text").emit("fade-out",null,false);
 			if(projectHasVideo) {
 				var vid=chamber.querySelector("#project-video-group");
