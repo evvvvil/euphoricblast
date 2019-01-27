@@ -76,7 +76,16 @@ AFRAME.registerComponent('exit_frame', {
 		exiting=true;
 		var allCats=chamber.querySelectorAll(".Categories");
 		var allProjs=chamber.querySelectorAll(".Projects");
-		chamber.querySelector("#project"+projectIndex+"-image").emit("back-clicked");
+		if(projectIndex>=0) {
+			chamber.querySelector("#project"+projectIndex+"-image").emit("back-clicked");			
+			//console.log("projectHasVideo "+projectHasVideo);
+			if(projectHasVideo) {
+				var vid=chamber.querySelector("#project-video-group");
+				vid.emit("fade-stop",null,false);
+				vid.setAttribute("scale","1 1 1");
+				vid.emit("fade-out",null,false);
+			}
+		}
 		var imagesArr=chamber.querySelectorAll(".project-images");
 			for (var i=0;i<numOfImages;i++){
 				//console.log("fading out image");
@@ -103,12 +112,6 @@ AFRAME.registerComponent('exit_frame', {
 		chamber.querySelector("#chamber-sign-title").emit("fade-out",null,false);
 		chamber.querySelector("#chamber-sign-back").emit("fade-out",null,false);
 		chamber.querySelector("#chamber-exit-frame").emit("fade-out",null,false);
-		if(projectHasVideo) {
-			var vid=chamber.querySelector("#project-video-group");
-			vid.emit("fade-stop",null,false);
-			vid.setAttribute("scale","1 1 1");
-			vid.emit("fade-out",null,false);
-		}
 		chamber.querySelector("#chamber-back-background0").emit('fade-out',null,false);
 		chamber.querySelector("#chamber-back-background1").emit('fade-out',null,false);
 	},
