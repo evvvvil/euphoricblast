@@ -133,8 +133,8 @@ AFRAME.registerComponent('chamber', {
 		//CHAMBER PROJECT VIDEO
 		var vifi=document.createElement("video");
 		vifi.setAttribute("id","project-video-file");
-		vifi.setAttribute("autoplay","");
-		vifi.setAttribute("mute","");
+		vifi.setAttribute("autoplay","true");
+		vifi.setAttribute("mute","true");
 		vifi.setAttribute("loop","true");
 		vifi.setAttribute("src","/videos/small_video.mp4");
 		document.querySelector("a-assets").appendChild(vifi);
