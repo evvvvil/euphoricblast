@@ -76,6 +76,14 @@ AFRAME.registerComponent('exit_frame', {
 		exiting=true;
 		var allCats=chamber.querySelectorAll(".Categories");
 		var allProjs=chamber.querySelectorAll(".Projects");
+		chamber.querySelector("#project"+projectIndex+"-image").emit("back-clicked");
+		var imagesArr=chamber.querySelectorAll(".project-images");
+			for (var i=0;i<numOfImages;i++){
+				//console.log("fading out image");
+				imagesArr[i].emit('fade-stop',null,false);				
+				imagesArr[i].setAttribute("scale","1 1 1");
+				imagesArr[i].emit('fade-out',null,false);
+			}
 		if(numOfProjects>0){
 			for(var i=0;i<allProjs.length;i++){
 				allProjs[i].emit("fade-out",null,false);
@@ -101,6 +109,8 @@ AFRAME.registerComponent('exit_frame', {
 			vid.setAttribute("scale","1 1 1");
 			vid.emit("fade-out",null,false);
 		}
+		chamber.querySelector("#chamber-back-background0").emit('fade-out',null,false);
+		chamber.querySelector("#chamber-back-background1").emit('fade-out',null,false);
 	},
 	handleBackClick: function(){
 		var data = this.data, el = this.el,evil=this.evil,par=this.el.parentNode;
