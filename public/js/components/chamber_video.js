@@ -19,7 +19,7 @@ AFRAME.registerComponent('chamber_video', {
 			vi.setAttribute("src","#project-video-file");
 			vi.setAttribute("width",data.width);
 			vi.setAttribute("height",data.height);
-		evil.createAnimation("fade-in",el,"scale","fade-in","fade-stop","1 1 1","2000"); 	
+		evil.createAnimation("fade-in",el,"scale","fade-in","fade-stop","1 1 1","1000"); 	
 		evil.createAnimation("fade-out",el,"scale","fade-out","fade-stop","0 0 0","500");		
 		el.appendChild(vi);
 

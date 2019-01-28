@@ -167,7 +167,7 @@ AFRAME.registerComponent('evil', {
 		chamber.querySelector("#chamber-walls2").setAttribute("position","0 0 0");	
 		document.querySelector('#box-corridor-0'+category).object3D.visible=true;
 		chamber.object3D.visible=false;
-
+		projectHasVideo=false;
 	},
 	changeVideo: function(projectVideoURL){
 		var videoEl=document.querySelector("#project-video-file");
