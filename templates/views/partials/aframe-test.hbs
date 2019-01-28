@@ -127,7 +127,8 @@ function handlePlayerAnimations(event){
 </script>
 <section id="a-frame">
 	<a-scene stats light="defaultLightsEnabled: false" effects="ssao,fxaa" 
-			ssao="samples:32;rings:7;radius:.03; ratio:1; intensity: 0.5; maxDepth:.99;bias:.05;scale:1; blurRadius:5;depthCutoff: 1000"
+			ssao="samples:16;rings:5;radius:0.05; ratio:0.5; intensity: 0.3; bias:0.5;scale:0.5; blurRadius:10;depthCutoff: 10"
+			
 			fxaa="true"	film="sIntensity: 0.3; nIntensity: 0.1"
 			fog="type:linear; color:#ECECEC; near:0; far:8;">
 		<a-assets>
