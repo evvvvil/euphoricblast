@@ -14,7 +14,7 @@
 //TODO: check how it works if you select category then while it flies cut off internet so the post fails, it sohuld retry every 10 seconds the post //while in chamber
 var socket,evil,outterRing,player,chamber,projects,projectVideo,numOfProjects,numOfImages,catLoad,projectHasVideo=false,animCounter=0,category=0,projectIndex=-1,categories={{{jsonView data.categoriesNames}}},exiting=false,projectShown=false,
 
-speedMult=0.01;
+speedMult=1.0;
 
 var socket = io();
 socket.on('projectsData', function (data) {
@@ -154,11 +154,11 @@ function handlePlayerAnimations(event){
 		<!--CAMERA-->
 		<a-entity position="-1 2.4 3" id="player">
 			<a-camera id="main-camera" position="0 0 0" wasd-controls-enabled="true" near=".1" fov="70">
-				<a-entity id="curso" cursor="fuse: true; fuseTimeout: 500" position="0 0 -1"
+				<a-entity id="curso" cursor="fuse: true; fuseTimeout: 3000" position="0 0 -1"
             	geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
             	material="color: black; shader: flat" 
             	raycaster="far: 20; interval: 100; objects: .clickable"></a-entity>            	
-            	<a-ring id="outter-ring" position="0 0 -1" color="white" radius-inner="0.04" radius-outer="0.06" material="side: double;shader: flat" theta-length="0.1" animation="property:theta-length;startEvents:circle-reveal;pauseEvents:circle-stop;to:360;dur:500;easing:linear"></a-ring>
+            	<a-ring id="outter-ring" position="0 0 -1" color="white" radius-inner="0.04" radius-outer="0.06" material="side: double;shader: flat" theta-length="0.1" animation="property:theta-length;startEvents:circle-reveal;pauseEvents:circle-stop;to:360;dur:3000;easing:linear"></a-ring>
             </a-camera>
 		</a-entity>		
 		<!--CATEGORIES-->	
