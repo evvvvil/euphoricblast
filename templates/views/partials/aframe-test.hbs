@@ -48,6 +48,8 @@ function handlePlayerAnimations(event){
 	event.stopPropagation();
 	if(animID=="move-cat-anim"){
 		player.querySelector('#main-camera').setAttribute('near', 0.03);
+		document.querySelector("#ambient-light").emit('fade-in',null,false);
+		document.querySelector("#directional-light").emit('fade-out',null,false);
 	    pos=evil.wrangleDestination(-3.33,4.386,-3.439,-1.156,.426,-4.230);
 	    evil.createAnimation("move-tunnel-anim",player,"position","move-tunnel","move-tunnel-stop",pos,2000*speedMult,'linear');			
 	    //Create Corridors
@@ -63,14 +65,24 @@ function handlePlayerAnimations(event){
 
 	    player.emit('move-tunnel',null,false);
 	}else if(animID=="move-tunnel-anim"){
+
 		pos=evil.wrangleDestination(-4.525,4.386,-5.508,-1.571,.426,-6.581);
 		evil.createAnimation("move-corridor-anim",player,"position","move-corridor","move-corridor-stop",pos,3000*speedMult,'linear');	    
 	    var pos=evil.wrangleDestination(-4.22,3.95,-4.97,-1.46,0.0,-5.95),
 			rot=evil.wrangleRotation(0,0);
 			chamber.object3D.visible = true;
+			chamber.querySelector("#point-light").emit('fade-in',null,false);
 			///chamber.setAttribute("chamber","title",categories[category-1]);			
 			chamber.setAttribute("chamber","position",pos);
 			chamber.setAttribute("chamber","rotation",rot);	
+			/*var chamberPos=chamber.getAttribute("position"),
+			lightPos=chamberPos.x+" "+chamberPos.y+2+" "+chamberPos.z;
+			var pointLight=document.querySelector('#point-light');
+			pointLight.object3D.visible = true;
+			pointLight.object3D.position.set(chamberPos.x,chamberPos.y+2,chamberPos.z-1.5);
+			var pointLightS=document.querySelector('#point-light-sphere');
+			pointLightS.object3D.visible = true;
+			pointLightS.object3D.position.set(chamberPos.x,chamberPos.y+2,chamberPos.z-1.5);*/
 			player.emit('move-corridor',null,false);
 			document.querySelector('#corridor-01').emit('spin-corridor',null,false);
 			document.querySelector('#corridor-02').emit('spin-corridor',null,false);
@@ -126,11 +138,13 @@ function handlePlayerAnimations(event){
 }
 </script>
 <section id="a-frame">
-	<a-scene stats light="defaultLightsEnabled: false" effects="ssao,fxaa" 
+	<a-scene stats fog="type:linear; color:#ECECEC; near:0; far:8;">
+			<!-- aframe-effects seems to be broken so for now this is removed:
+			effects="ssao,fxaa" 
 			ssao="samples:64;rings:5;radius:0.1; ratio:0.5; intensity: 1; bias:0.5;scale:1; blurRadius:2.5;depthCutoff: 15"
 			
 			fxaa="true"	film="sIntensity: 0.3; nIntensity: 0.1"
-			fog="type:linear; color:#ECECEC; near:0; far:8;">
+			fog="type:linear; color:#ECECEC; near:0; far:8;">-->
 		<a-assets>
 	    	<a-asset-item id="main-scene" src="/models/EB_main_scene.glb"></a-asset-item>
 	    	<a-asset-item id="screen" src="/models/EB_screen.glb"></a-asset-item>	    	
@@ -154,7 +168,7 @@ function handlePlayerAnimations(event){
 		</a-assets>		
 		<!--CAMERA-->
 		<a-entity position="-1 2.4 3" id="player">
-			<a-camera id="main-camera" position="0 0 0" wasd-controls-enabled="true" near=".1" fov="50">
+			<a-camera id="main-camera" position="0 0 0" wasd-controls-enabled="true" near=".1" fov="60">
 				<a-entity id="curso" cursor="fuse: true; fuseTimeout: 3000" position="0 0 -1"
             	geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
             	material="color: black; shader: flat" 
@@ -179,16 +193,23 @@ function handlePlayerAnimations(event){
 		<!--SKY-->
 		<a-sky color="#ECECEC"></a-sky>		
 		<!--LIGHTS-->
-		<a-entity light="type: ambient; color: #BBB; intensity: 0.6"></a-entity>
-		<a-entity light="type: directional; color: #FFF; intensity: 0.6" position="-0.5 1 1"></a-entity>
-
+		<a-light id="ambient-light" type="ambient" color="#BBB" intensity="0.3" 
+		animation="property:intensity;startEvents:fade-out;to:0.3;dur:2000;easing:linear"
+		animation__2="property:intensity;startEvents:fade-in;to:0.5;dur:1000;easing:linear"></a-light>
+		<a-light id="directional-light" color="#FFF" intensity="0.6" position="-0.5 1 1"
+		animation="property:intensity;startEvents:fade-out;to:0.0;dur:2000;easing:linear"
+		animation__2="property:intensity;startEvents:fade-in;to:0.6;dur:1000;easing:linear"></a-light>
 		<!--CHAMBER-->
-		<a-entity chamber="id:chamber" id="chamber" visible="false"></a-entity>
+		<a-entity chamber="id:chamber" id="chamber" visible="false">
+			<!--<a-sphere radius="0.05" id="point-light-sphere" color="#fff" position="0 1 -1"></a-sphere>-->
+			<a-light type="point" id="point-light" color="#FFF" intensity="0" position="0 1.5 -2.0" distance="3" 
+			animation="property:intensity;startEvents:fade-out;to:0.0;dur:2000;easing:linear" 
+			animation__2="property:intensity;startEvents:fade-in;to:1.0;dur:1000;easing:linear"></a-light>
+		</a-entity>
 		<a-entity id="kink" position="-1 5.4 3" gltf-model="#kink-model" material="roughness: 1; metalness: 0" visible="false">
 			<a-entity id="poster" position="0 0 0.12" rotation ="0 180 0" geometry="primitive:plane;width:0.2;height:0.2;" material="src:#eb-logo;shader:flat"></a-entity>
 		</a-entity>	
 		<a-entity id="corridor-end" position="-1 4.876 3" rotation="0 0 0" gltf-model="#corridor" material="roughness: 1; metalness: 0" visible="false"></a-entity>
-
 		<a-box id="floor" depth="40" width="40" height=".4" position="0 -0.25 0" material="color: #666666;roughness: 1; metalness: 0"></a-box>
 
 		<!-- RENDER HTML AS TEXTURE EXAMPLE
