@@ -20,7 +20,7 @@ AFRAME.registerComponent('chamber', {
 			'class': 'chamber-signs',			
 			'geometry': 'primitive:plane;width:.66;height:.17',
 			'title':'This should be a long text',
-			'position': '0 0.04 -1.45',
+			'position': '0 0.04 -1.60',
 			'material': '#333',
 		};
 		evil.createEntityWithComponent("chamber_sign",el,signOptions);
@@ -32,7 +32,7 @@ AFRAME.registerComponent('chamber', {
 
 		//CHAMBER MODELS
 	    evil.createEntity(el,{'id':'chamber-door','geometry':'#chamber-door-model'});
-	    var sta=evil.createEntity(el,{'id':'chamber-stage','geometry':'#chamber-stage-model'});
+	    var sta=evil.createEntity(el,{'id':'chamber-stage','geometry':'#chamber-stage-model','position':'0 0 -0.15'});
 	    evil.createAnimation("slide-out-chamber-stage",sta,"position","slide-out","slide-stop","0 -0.3 0","500");
 	    evil.createAnimation("slide-in-chamber-stage",sta,"position","slide-in","slide-stop","0 0 0","500");
 	    this.handleStageanimationcomplete = AFRAME.utils.bind(this.handleStageanimationcomplete, this);
@@ -122,7 +122,7 @@ AFRAME.registerComponent('chamber', {
 
 		//CHAMBER PROJECT TITLE BACKGROUND
 		var prtiba= evil.createEntity(el,{'id':'project-title-background','geometry':'primitive:plane;width:1.6;height:.17','position':'0.0 1.1 -4.0','material':'color:#000','scale':'0 0 1'});
-		evil.createAnimation("fade-in-pos-project-title-background",prtiba,"position","fade-in","fade-stop","0.0 1.1 -1.92","2000");		
+		evil.createAnimation("fade-in-pos-project-title-background",prtiba,"position","fade-in","fade-stop","0.0 1.1 -2.17","2000");		
 		evil.createAnimation("fade-in-project-title-background",prtiba,"scale","fade-in","fade-stop","1 1 1","2000");		
 		//evil.createAnimation("fade-out-project-title-background",prtiba,"scale","fade-out","fade-stop","0 0 0","1000");		
 		evil.createAnimation("back-project-title-background",prtiba,"scale","back-clicked","back-stop","0 0 0","1000");
@@ -130,16 +130,16 @@ AFRAME.registerComponent('chamber', {
 		prtiba.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);
 
 		//CHAMBER PROJECT TITLE CUBE
-		var prticu= evil.createEntity(el,{'id':'project-title-cube','geometry':'primitive:plane;width:0.1;height:0.1','position':'-0.72 1.1 1.91','material':'color:#ffc800','scale':'0 0 1'});
-		evil.createAnimation("fade-in-pos-project-title-cube",prticu,"position","fade-in","fade-stop","-0.72 1.1 -1.91","2000");		
+		var prticu= evil.createEntity(el,{'id':'project-title-cube','geometry':'primitive:plane;width:0.1;height:0.1','position':'-0.72 1.1 2.165','material':'color:#ffc800','scale':'0 0 1'});
+		evil.createAnimation("fade-in-pos-project-title-cube",prticu,"position","fade-in","fade-stop","-0.72 1.1 -2.165","2000");		
 		evil.createAnimation("fade-in-project-title-cube",prticu,"scale","fade-in","fade-stop","1 1 1","2000");		
 		//evil.createAnimation("fade-out-project-title-cube",prticu,"scale","fade-out","fade-stop","0 0 0","1000");		
 		evil.createAnimation("back-project-title-cube",prticu,"scale","back-clicked","back-stop","0 0 0","1000");
-		evil.createAnimation("back-pos-project-title-cube",prticu,"position","back-clicked","back-stop","-0.72 1.1 1.91","1000");
+		evil.createAnimation("back-pos-project-title-cube",prticu,"position","back-clicked","back-stop","-0.72 1.1 2.165","1000");
 		prticu.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);
 
 		//CHAMBER PROJECT TEXT PLANE
-		evil.createEntityWithComponent("text_plane",el,{'padding':0.05,'id':'project-text','wrapCount':34,'width':'0.53','position':'0.95 0.1 -1.32','rotation':'0 -45 0','content':' '});
+		evil.createEntityWithComponent("text_plane",el,{'padding':0.05,'id':'project-text','wrapCount':34,'width':'0.53','position':'0.95 0.1 -2.17','rotation':'0 -45 0','content':' '});
 
 		//CHAMBER PROJECT VIDEO
 		var vifi=document.createElement("video");

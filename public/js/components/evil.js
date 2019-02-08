@@ -89,7 +89,7 @@ AFRAME.registerComponent('evil', {
 		//TODO: optimize this by having them created on init and ust reset them
 		var ch=document.querySelector("#chamber");
 		for(var i=0;i<projects.length;i++){
-			var pos = (-0.5+i%3*0.5)+" "+(.3+Math.floor(i/3)*0.3)+" "+(-1.95);
+			var pos = (-0.5+i%3*0.5)+" "+(.3+Math.floor(i/3)*0.3)+" "+(-2.1);
 			var projectOptions={
 				'id':'project'+i,
 				'class':'Projects',

@@ -22,7 +22,7 @@ AFRAME.registerComponent('text_plane', {
 		el.setAttribute("text","height",data.height);
 		el.setAttribute("text","wrapCount",data.wrapCount);
 		el.setAttribute("text","color",data.color);
-		el.setAttribute("material","color",data.material);
+		el.setAttribute("material","color","#FFF");
 		el.setAttribute("position",data.position);
 		el.setAttribute("rotation",data.rotation);
 		//el.setAttribute("geometry","primitive:plane;width:.53;height:0.02872");
