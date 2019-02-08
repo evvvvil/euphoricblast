@@ -130,12 +130,12 @@ AFRAME.registerComponent('chamber', {
 		prtiba.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);
 
 		//CHAMBER PROJECT TITLE CUBE
-		var prticu= evil.createEntity(el,{'id':'project-title-cube','geometry':'primitive:plane;width:0.1;height:0.1','position':'-0.72 1.1 1.92','material':'color:#ffc800','scale':'0 0 1'});
-		evil.createAnimation("fade-in-pos-project-title-cube",prticu,"position","fade-in","fade-stop","-0.72 1.1 -1.92","2000");		
+		var prticu= evil.createEntity(el,{'id':'project-title-cube','geometry':'primitive:plane;width:0.1;height:0.1','position':'-0.72 1.1 1.91','material':'color:#ffc800','scale':'0 0 1'});
+		evil.createAnimation("fade-in-pos-project-title-cube",prticu,"position","fade-in","fade-stop","-0.72 1.1 -1.91","2000");		
 		evil.createAnimation("fade-in-project-title-cube",prticu,"scale","fade-in","fade-stop","1 1 1","2000");		
 		//evil.createAnimation("fade-out-project-title-cube",prticu,"scale","fade-out","fade-stop","0 0 0","1000");		
 		evil.createAnimation("back-project-title-cube",prticu,"scale","back-clicked","back-stop","0 0 0","1000");
-		evil.createAnimation("back-pos-project-title-cube",prticu,"position","back-clicked","back-stop","-0.72 1.1 1.92","1000");
+		evil.createAnimation("back-pos-project-title-cube",prticu,"position","back-clicked","back-stop","-0.72 1.1 1.91","1000");
 		prticu.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);
 
 		//CHAMBER PROJECT TEXT PLANE

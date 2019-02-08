@@ -9,7 +9,7 @@ AFRAME.registerComponent('text_plane', {
 		width: {type: 'string'},
 		height: {type: 'string',default:'auto'},
 		color: {type: 'color',default:'#333'},
-		material: {type: 'string'},
+		material: {type: 'color',default:'#FFF'},
 		position: {type:'vec3'},
 		rotation: {type:'vec3'}
 	},
