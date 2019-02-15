@@ -71,7 +71,6 @@ AFRAME.registerComponent('frame', {
 			this.titleEl=te;	
 			
 
-		if(data.image!==''){
 
 			var im=evil.createImage(el,{'id':data.id+'-image','class:':data.class+'-images',
 			'src':data.image,'width':'.39','height':'.18','position':'0 -0.022 0.005'});
@@ -82,6 +81,18 @@ AFRAME.registerComponent('frame', {
 			evil.createAnimation("back-im-rot",im,"rotation","back-clicked","back-stop","0 0 0","2000");	
 			im.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);
 			this.imageEl=im;
+	
+	},
+	update: function (oldData) {	
+		var data=this.data,el=this.el,evil=this.evil,diff=AFRAME.utils.diff(oldData,data),changedKeys=Object.keys(diff);
+		//console.log("stringy "+JSON.stringify(changedKeys)+"no stringy "+changedKeys);
+		if(changedKeys=="title"){
+			el.querySelector('#'+data.id+'-title').setAttribute('text','value',data.title);
+		}else if(changedKeys=="image"){
+			el.querySelector('#'+data.id+'-image').setAttribute('src',data.image);
+		}else if(changedKeys=="position"){
+			console.log("changing pos of frame");
+			el.setAttribute("position",data.position);
 		}
 	},
 	handleFrameEnter: function (){
@@ -208,6 +219,7 @@ AFRAME.registerComponent('frame', {
 			par.querySelector("#chamber-back-background0").emit('fade-in',null,false);
 			par.querySelector("#chamber-back-background1").emit('fade-in',null,false);
 		}else if(animID.startsWith("fade-in")){
+			console.log("project appaered data.amount "+data.amount);
 			if(data.index==data.amount-1 || data.index===null){
 				var catWall=chamber.querySelector("#chamber-cat-wall");
 				if(catWall.getAttribute("scale").y<1){

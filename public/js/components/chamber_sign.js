@@ -26,7 +26,6 @@ AFRAME.registerComponent('chamber_sign', {
 			evil.createAnimation("-ti-fadein",ti,"scale","fade-in","fade-stop","1 1 1",data.speed);
 			evil.createAnimation("-ti-fadeout",ti,"scale","fade-out","fade-stop","0 0 0",data.speed);				
 			ti.addEventListener('animationcomplete', this.handleSignanimationcomplete);
-
 			this.titleEl=ti;
 			//this.titleEl.object3D.frustumCulled = true;
 
@@ -42,8 +41,6 @@ AFRAME.registerComponent('chamber_sign', {
 		var data=this.data,el=this.el,evil=this.evil,diff=AFRAME.utils.diff(oldData,data),changedKeys=Object.keys(diff);
 			if(changedKeys[0]=="text"){
 				this.titleEl.setAttribute('text','value',data.text);	
-			}else{
-				evil.updateValues(diff,changedKeys,el,'');
 			}
 	},
 	handleSignanimationcomplete: function (event){

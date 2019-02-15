@@ -70,8 +70,8 @@ function handlePlayerAnimations(event){
 		evil.createAnimation("move-corridor-anim",player,"position","move-corridor","move-corridor-stop",pos,3000*speedMult,'linear');	    
 	    var pos=evil.wrangleDestination(-4.22,3.95,-4.97,-1.46,0.0,-5.95),
 			rot=evil.wrangleRotation(0,0);
-			chamber.object3D.visible = true;
-			chamber.querySelector("#point-light").emit('fade-in',null,false);
+			//chamber.object3D.visible = true;
+			//chamber.querySelector("#point-light").emit('fade-in',null,false);
 			///chamber.setAttribute("chamber","title",categories[category-1]);			
 			chamber.setAttribute("chamber","position",pos);
 			chamber.setAttribute("chamber","rotation",rot);	
@@ -200,9 +200,9 @@ function handlePlayerAnimations(event){
 		animation="property:intensity;startEvents:fade-out;to:0.0;dur:2000;easing:linear"
 		animation__2="property:intensity;startEvents:fade-in;to:0.6;dur:1000;easing:linear"></a-light>
 		<!--CHAMBER-->
-		<a-entity chamber="id:chamber" id="chamber" visible="false">
+		<a-entity chamber="id:chamber;position:0 100 0" id="chamber">
 			<!--<a-sphere radius="0.05" id="point-light-sphere" color="#fff" position="0 1 -1"></a-sphere>-->
-			<a-light type="point" id="point-light" color="#FFF" intensity="0" position="0 1.5 -2.0" distance="3" 
+			<a-light type="point" id="point-light" color="#FFF" intensity="1.0" position="0 1.5 -2.0" distance="3" 
 			animation="property:intensity;startEvents:fade-out;to:0.0;dur:2000;easing:linear" 
 			animation__2="property:intensity;startEvents:fade-in;to:1.0;dur:1000;easing:linear"></a-light>
 		</a-entity>

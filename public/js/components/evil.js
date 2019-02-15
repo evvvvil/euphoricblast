@@ -1,19 +1,4 @@
 AFRAME.registerComponent('evil', {
-	updateValues:function(diff,changedKeys,el,secondTry){
-		var values=Object.values(diff);
-		for(var i=0;i<changedKeys.length;i++){
-			//console.log("changing: "+changedKeys[i]+" for "+values[i]);
-			if(el.getAttribute(changedKeys[i])!=null) {
-				el.setAttribute(changedKeys[i],values[i]);
-			}else{
-				if(secondTry!==''&&el.getAttribute(secondTry)!==undefined){
-					if(el.getAttribute(secondTry).hasOwnProperty(changedKeys[i])) {
-						el.setAttribute(secondTry,changedKeys[i],values[i]);
-					}
-				}
-			}		
-		}
-	},
 	//TODO: rewrite this function to just pass _options like function below it
 	createAnimation: function(_id,_parent,_attribute,_begin,_end,_to,_dur,_easing,_from){
 			var animOptions={
@@ -87,7 +72,6 @@ AFRAME.registerComponent('evil', {
 	createProjectsAndCategories: function(){
 
 		//TODO: optimize this by having them created on init and ust reset them
-		var ch=document.querySelector("#chamber");
 		for(var i=0;i<projects.length;i++){
 			var pos = (-0.5+i%3*0.5)+" "+(.3+Math.floor(i/3)*0.3)+" "+(-2.1);
 			var projectOptions={
@@ -102,7 +86,7 @@ AFRAME.registerComponent('evil', {
 				'title':projects[i].title,
 				'image':evil.wrangleImageSource(projects[i].mainImage)
 			};
-			evil.createEntityWithComponent("frame",ch,projectOptions);
+			evil.createEntityWithComponent("frame",chamber,projectOptions);
 		}	
 		posCounter=1;
 		for(var i=0;i<categories.length;i++){
@@ -123,21 +107,35 @@ AFRAME.registerComponent('evil', {
 					'image':catElImage
 				};
 			posCounter++;
-			evil.createEntityWithComponent("frame",ch,categoriesOptions);
+			evil.createEntityWithComponent("frame",chamber,categoriesOptions);
 		}
 		chamber.setAttribute("chamber","title",categories[category-1]);	
 	},
-	removeProjectsAndCategories: function(){
-		projects=undefined;
-			var allProjs=chamber.querySelectorAll(".Projects");		
-			for(var i=0;i<allProjs.length;i++){
-				chamber.removeChild(allProjs[i]);
+	updateProjectsAndCategories: function(){
+		for(var i=0;i<12;i++){
+			var curProj=chamber.querySelector('#project'+i);
+			if(i<projects.length){
+				curProj.setAttribute("frame","amount",projects.length);
+				curProj.setAttribute("frame","title",projects[i].title);
+				curProj.setAttribute("frame","image",evil.wrangleImageSource(projects[i].mainImage));				
+				continue;
 			}
-			var allCats=chamber.querySelectorAll(".Categories");		
-			for(var i=0;i<allCats.length;i++){
-				if(allCats[i].id!="chamber-category0") chamber.removeChild(allCats[i]);
-			}
-	},
+			chamber.querySelector('#project'+i).object3D.visible=false;			
+		}	
+		posCounter=1;
+		console.log("current category is"+category);
+		for(var i=0;i<categories.length;i++){
+			var curCat=chamber.querySelector('#chamber-category'+(i+1));
+			curCat.object3D.visible=true;
+			if(i==category-1) {
+				curCat.object3D.visible=false;				
+			}else{
+				var pos = 1.8+" "+(1.0+Math.floor(posCounter/2)*-0.3)+" "+(-0.9+posCounter%2*0.5);
+				chamber.querySelector('#chamber-category'+(i+1)).setAttribute("frame","position",pos);					
+				posCounter++;				
+			}			
+		}		
+	},	
 	removePlayerAnimations: function(){
 			$(player.attributes).each(function() {
 				if(this.name.startsWith("anim"))player.removeAttribute(this.name);
@@ -277,7 +275,9 @@ AFRAME.registerComponent('evil', {
 				catLoad=undefined;
 			}	
 			document.querySelector("#chamber-sign-back").emit("fade-in");	
-			evil.createProjectsAndCategories();
+			//evil.createProjectsAndCategories();
+			evil.updateProjectsAndCategories();
+			chamber.setAttribute("chamber","title",categories[category-1]);	
 		}else{
 			setTimeout(evil.waitForProjects,100);
 		}

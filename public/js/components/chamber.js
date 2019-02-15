@@ -175,21 +175,59 @@ AFRAME.registerComponent('chamber', {
 	    var tr=evil.createEntity(ki2,{'id':'chamber-poster','geometry':'primitive:plane;width:.2;height:.2','position':'0 0 0.12','rotation':'0 180 0','scale':'1 1 1','material':'src:#eb-logo'});
 	    //tr.setAttribute("material","src:#eb-logo");
 	    tr.setAttribute("material","shader","flat");
-	    this.ki1=ki1;this.ki2=ki2;	    
+	    this.ki1=ki1;this.ki2=ki2;    
+
+	    for(var i=0;i<12;i++){
+			var pos = (-0.5+i%3*0.5)+" "+(.3+Math.floor(i/3)*0.3)+" "+(-2.1);
+			var projectOptions={
+				'id':'project'+i,
+				'class':'Projects',
+				'index':i,
+				'amount': 12,
+				'geometry':'primitive:plane;width:.46;height:.25875',
+				'material':'#category-background-mat',
+				'hover':'#category-background-hover',
+				'position':pos,
+				'title':'nada',
+				'image':''
+			};
+			evil.createEntityWithComponent("frame",el,projectOptions);
+		}	
+		posCounter=1;
+		for(var i=0;i<categories.length;i++){
+			if(i==category-1) continue;	
+			var pos = 1.8+" "+(1.0+Math.floor(posCounter/2)*-0.3)+" "+(-0.9+posCounter%2*0.5),
+				catElImage=document.querySelector("#cat-"+(i+1)).getAttribute("homecategory").image,
+				categoriesOptions={
+					'id': 'chamber-category'+(i+1),
+					'class': 'Categories',
+					'index':(i+1),
+					'amount': categories.length,
+					'geometry': 'primitive:plane;width:.46;height:.25875',
+					'material': '#category-background-mat',
+					'hover': '#category-background-hover',
+					'position': pos,
+					'rotation': '0 -90 0',
+					'title': categories[i],
+					'image':catElImage
+				};
+			posCounter++;
+			evil.createEntityWithComponent("frame",el,categoriesOptions);
+		}
 	},
 	update: function (oldData) {			
 		var data=this.data,el=this.el,evil=this.evil,diff=AFRAME.utils.diff(oldData,data),changedKeys=Object.keys(diff);
-		//console.log("we updated chamber - changedkeys are:"+JSON.stringify(changedKeys));
+		//console.log("we updated chamber - changedkeys are:"+changedKeys);
 		//this next line is useful to ignore the very first update call happening just after init is called
 		///5 is the number of total fields in the schema for this component
 		if(changedKeys.length<5){			
-			if(changedKeys.indexOf("title")>0){
-				this.el.querySelector('#chamber-sign').setAttribute('chamber_sign','text',data.title);	
-			}else{
-				evil.updateValues(diff,changedKeys,el,'');
+			if(changedKeys.indexOf("title")>=0){
+				el.querySelector('#chamber-sign').setAttribute('chamber_sign','text',data.title);	
+			}else if(changedKeys.indexOf("position")>=0){
+				el.setAttribute("position",data.position);								
+			}else if(changedKeys.indexOf("rotation")>=0){								
+				el.setAttribute("rotation",data.rotation);				
 			}
-		}else{
-				evil.updateValues(diff,changedKeys,el,'');
 		}		
 	},
 	handleCatWallanimationcomplete: function(event){	
@@ -253,8 +291,8 @@ AFRAME.registerComponent('chamber', {
 			event.stopPropagation();
 		if(animID.startsWith("slide-in")){
 			console.log("resetting projects and getting category data");
-			evil.removeProjectsAndCategories();
-
+			//evil.removeProjectsAndCategories();
+			projects=undefined;
 			evil.getCategoryData();
 			evil.waitForProjects();					
 		}

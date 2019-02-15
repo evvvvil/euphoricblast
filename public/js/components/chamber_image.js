@@ -31,8 +31,6 @@ AFRAME.registerComponent('chamber_image', {
 		var data=this.data,el=this.el,evil=this.evil,diff=AFRAME.utils.diff(oldData,data),changedKeys=Object.keys(diff);
 		if(changedKeys[0]=="source"){
 			this.imageEl.setAttribute("src",data.source);
-		}else{
-			evil.updateValues(diff,changedKeys,el,'');
 		}
 	}
 }); 

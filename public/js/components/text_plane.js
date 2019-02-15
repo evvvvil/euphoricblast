@@ -22,12 +22,13 @@ AFRAME.registerComponent('text_plane', {
 		el.setAttribute("text","height",data.height);
 		el.setAttribute("text","wrapCount",data.wrapCount);
 		el.setAttribute("text","color",data.color);
-		el.setAttribute("material","color","#FFF");
+
+		//TODO: change this
+		//el.setAttribute("material","color","#FFF");
 		el.setAttribute("position",data.position);
 		el.setAttribute("rotation",data.rotation);
 		//el.setAttribute("geometry","primitive:plane;width:.53;height:0.02872");
-		//	el.setAttribute("text","value",data.content);	
-
+		//el.setAttribute("text","value",data.content);
 		evil.createAnimation("fadein-"+data.id,el,"scale","fade-in","fade-stop","1 1 1","1000");		
 		evil.createAnimation("fadeout-"+data.id,el,"scale","fade-out","fade-stop","0 0 0","1000");	
 		//el.setAttribute("position",data.position.x+" "+(data.position.y+(0.02872+data.padding)/2)+" "+data.position.z);
@@ -44,8 +45,6 @@ AFRAME.registerComponent('text_plane', {
 			el.setAttribute("geometry","height",heighto+data.padding);	
 			el.setAttribute("geometry","width",widtho+data.padding);
 			el.setAttribute("position",data.position.x+" "+(data.position.y+(heighto+data.padding)/2)+" "+data.position.z);
-		}else{
-			evil.updateValues(diff,changedKeys,el,"text");
 		}
 	},
 	remove: function () {
