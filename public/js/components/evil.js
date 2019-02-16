@@ -17,6 +17,7 @@ AFRAME.registerComponent('evil', {
 		var someshit = document.createElement("a-entity");
 			someshit.setAttribute(_component,_options);
 			_parent.appendChild(someshit);
+			return someshit;
 	},
 	createEntity: function(_parent,_options){
 		var someshit = document.createElement("a-entity");
@@ -113,11 +114,31 @@ AFRAME.registerComponent('evil', {
 	},
 	updateProjectsAndCategories: function(){
 		for(var i=0;i<12;i++){
-			var curProj=chamber.querySelector('#project'+i);
+			
 			if(i<projects.length){
+				var pos = (-0.5+i%3*0.5)+" "+(.3+Math.floor(i/3)*0.3)+" "+(-2.1);
+				var curProj=chamber.querySelector('#project'+i),
+				curProjImg=chamber.querySelector("#project"+i+"-image"),
+				curProjTi=chamber.querySelector("#project"+i+"-title");
+				curProjBa=chamber.querySelector("#project"+i+"-background");
+			
 				curProj.setAttribute("frame","amount",projects.length);
 				curProj.setAttribute("frame","title",projects[i].title);
 				curProj.setAttribute("frame","image",evil.wrangleImageSource(projects[i].mainImage));				
+				curProj.setAttribute("position",pos);
+
+				curProjImg.setAttribute("position","0 -0.022 0.005");
+				curProjImg.setAttribute("rotation","0 0 0");
+				curProjImg.setAttribute("scale","1 1 1");
+				
+				curProjTi.setAttribute("position","0.18 0.1 0.01");
+				curProjTi.setAttribute("rotation","0 0 0");
+				curProjTi.setAttribute("scale","1 1 1");
+
+				curProjBa.setAttribute("position","0 0 0");
+				curProjBa.setAttribute("rotation","0 0 0");
+				curProjBa.setAttribute("scale","1 1 1");				
+			
 				continue;
 			}
 			chamber.querySelector('#project'+i).object3D.visible=false;			
@@ -160,11 +181,12 @@ AFRAME.registerComponent('evil', {
 		var cor01=chamber.querySelector("#chamber-corridor-01");
 		cor01.setAttribute("scale","1 1 0");
 		cor01.setAttribute("position","-1.92 2 -0.66");
-		chamber.querySelector("#chamber-stage").setAttribute("position","0 0 0");
+		chamber.querySelector("#chamber-stage").setAttribute("position","0 0 -0.15");
 		chamber.querySelector("#chamber-walls1").setAttribute("position","0 0 0");	
 		chamber.querySelector("#chamber-walls2").setAttribute("position","0 0 0");	
 		document.querySelector('#box-corridor-0'+category).object3D.visible=true;
-		chamber.object3D.visible=false;
+		//chamber.object3D.visible=false;
+		chamber.setAttribute("position","0 100 0");
 		projectHasVideo=false;
 	},
 	changeVideo: function(projectVideoURL){
@@ -174,6 +196,7 @@ AFRAME.registerComponent('evil', {
 		videoEl.load();
 		videoEl.setAttribute("src",projectVideoURL);
 		videoEl.load();
+		videoEl.volume=0;
 		//videoEl.pause();
 		videoEl.play();
 	},

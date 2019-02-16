@@ -24,9 +24,10 @@ AFRAME.registerComponent('text_plane', {
 		el.setAttribute("text","color",data.color);
 
 		//TODO: change this
-		//el.setAttribute("material","color","#FFF");
+		el.setAttribute("material","color","#DDD");
 		el.setAttribute("position",data.position);
 		el.setAttribute("rotation",data.rotation);
+		el.setAttribute("material","shader","flat");
 		//el.setAttribute("geometry","primitive:plane;width:.53;height:0.02872");
 		//el.setAttribute("text","value",data.content);
 		evil.createAnimation("fadein-"+data.id,el,"scale","fade-in","fade-stop","1 1 1","1000");		

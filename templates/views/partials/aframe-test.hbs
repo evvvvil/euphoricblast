@@ -52,29 +52,8 @@ function handlePlayerAnimations(event){
 		document.querySelector("#directional-light").emit('fade-out',null,false);
 	    pos=evil.wrangleDestination(-3.33,4.386,-3.439,-1.156,.426,-4.230);
 	    evil.createAnimation("move-tunnel-anim",player,"position","move-tunnel","move-tunnel-stop",pos,2000*speedMult,'linear');			
-	    //Create Corridors
-	    var sce=document.querySelector('a-scene');
-		sce.querySelector('#box-corridor-0'+category).object3D.visible=false;
-
-		var cors = document.querySelector("#corridors");
-			var pos=evil.wrangleDestination(-4.16,4.386,-4.877,-1.445,.426,-5.865),
-			rot=evil.wrangleRotation(-135,-135);		
-	    	cors.setAttribute("position",pos);
-	    	cors.setAttribute("rotation",rot);
-			cors.object3D.visible = true;
-
-	    player.emit('move-tunnel',null,false);
+	    player.emit('move-tunnel',null,false);	    
 	}else if(animID=="move-tunnel-anim"){
-
-		pos=evil.wrangleDestination(-4.525,4.386,-5.508,-1.571,.426,-6.581);
-		evil.createAnimation("move-corridor-anim",player,"position","move-corridor","move-corridor-stop",pos,3000*speedMult,'linear');	    
-	    var pos=evil.wrangleDestination(-4.22,3.95,-4.97,-1.46,0.0,-5.95),
-			rot=evil.wrangleRotation(0,0);
-			//chamber.object3D.visible = true;
-			//chamber.querySelector("#point-light").emit('fade-in',null,false);
-			///chamber.setAttribute("chamber","title",categories[category-1]);			
-			chamber.setAttribute("chamber","position",pos);
-			chamber.setAttribute("chamber","rotation",rot);	
 			/*var chamberPos=chamber.getAttribute("position"),
 			lightPos=chamberPos.x+" "+chamberPos.y+2+" "+chamberPos.z;
 			var pointLight=document.querySelector('#point-light');
@@ -129,8 +108,7 @@ function handlePlayerAnimations(event){
 		var cam=player.querySelector('#main-camera');
 		evil.createAnimation("change-near",cam,"near","adjust-near","adjust-near-stop","0.1",2000,"linear");	    
 	    cam.emit('adjust-near',null,false);
-		player.emit('move-down',null,false);
-		evil.removeProjectsAndCategories();		
+		player.emit('move-down',null,false);	
 	}else if(animID=="move-co-down-anim"){
 		evil.removePlayerAnimations();
 		evil.resetChamber();
@@ -193,12 +171,12 @@ function handlePlayerAnimations(event){
 		<!--SKY-->
 		<a-sky color="#ECECEC"></a-sky>		
 		<!--LIGHTS-->
-		<a-light id="ambient-light" type="ambient" color="#BBB" intensity="0.3" 
-		animation="property:intensity;startEvents:fade-out;to:0.3;dur:2000;easing:linear"
-		animation__2="property:intensity;startEvents:fade-in;to:0.5;dur:1000;easing:linear"></a-light>
+		<a-light id="ambient-light" type="ambient" color="#FFF" intensity="0.2" 
+		animation="property:intensity;startEvents:fade-out;to:0.2;dur:2000;easing:linear"
+		animation__2="property:intensity;startEvents:fade-in;to:0.4;dur:2000;easing:linear"></a-light>
 		<a-light id="directional-light" color="#FFF" intensity="0.6" position="-0.5 1 1"
 		animation="property:intensity;startEvents:fade-out;to:0.0;dur:2000;easing:linear"
-		animation__2="property:intensity;startEvents:fade-in;to:0.6;dur:1000;easing:linear"></a-light>
+		animation__2="property:intensity;startEvents:fade-in;to:0.6;dur:2000;easing:linear"></a-light>
 		<!--CHAMBER-->
 		<a-entity chamber="id:chamber;position:0 100 0" id="chamber">
 			<!--<a-sphere radius="0.05" id="point-light-sphere" color="#fff" position="0 1 -1"></a-sphere>-->

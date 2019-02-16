@@ -96,7 +96,7 @@ AFRAME.registerComponent('homecategory', {
 		event.stopPropagation();
 	},
 	handleCatClicked: function(event) {
-	    //console.log('I was clicked atttt: ', event.detail.intersection.point);
+	    console.log('I was clicked atttt: ', event.detail.intersection.point);
 	    //TODO: only works with up to 9 CATEGORIES!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		category=this.data.index;
 		evil.getCategoryData();
@@ -110,7 +110,23 @@ AFRAME.registerComponent('homecategory', {
 		var playerTo=this.el.getAttribute('position'),
 		pos=playerTo.x+" "+playerTo.y+" "+playerTo.z;		
 		evil.createAnimation('move-cat-anim',player,'position','move-cat','move-cat-stop',pos,2000*speedMult,'linear');
-	
+
+		//Create Corridors
+	    var sce=document.querySelector('a-scene');
+		sce.querySelector('#box-corridor-0'+category).object3D.visible=false;
+
+		var cors = document.querySelector("#corridors");
+			pos=evil.wrangleDestination(-4.16,4.386,-4.877,-1.445,.426,-5.865),
+			rot=evil.wrangleRotation(-135,-135);		
+	    	cors.setAttribute("position",pos);
+	    	cors.setAttribute("rotation",rot);
+			cors.object3D.visible = true;
+	    pos=evil.wrangleDestination(-4.525,4.386,-5.508,-1.571,.426,-6.581);
+		evil.createAnimation("move-corridor-anim",player,"position","move-corridor","move-corridor-stop",pos,3000*speedMult,'linear');	    
+    	pos=evil.wrangleDestination(-4.22,3.95,-4.97,-1.46,0.0,-5.95),
+		rot=evil.wrangleRotation(0,0);
+		chamber.setAttribute("position",pos);
+		chamber.setAttribute("rotation",rot);	
 		player.emit('move-cat');
 		event.stopPropagation();
 	}

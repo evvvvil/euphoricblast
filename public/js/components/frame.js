@@ -38,7 +38,7 @@ AFRAME.registerComponent('frame', {
 			el.addEventListener('click', this.handleFrameClick);	
 		}
 
-	    evil.createAnimation("clicked",el,"position","project-clicked","project-stop","0.0 0.9 -1.95","2000");    	    	
+	    evil.createAnimation("clicked",el,"position","project-clicked","project-stop","0.0 0.9 -2.1","2000");    	    	
     	evil.createAnimation("goout",el,"position","go-out","go-stop",data.position.x+" "+data.position.y+" 4","1000");
     	evil.createAnimation("fade-in",el,"scale","fade-in","fade-stop","1 1 1","500");
     	evil.createAnimation("fade-out-sca",el,"scale","fade-out","fade-stop","0 0 0","500");
@@ -53,20 +53,22 @@ AFRAME.registerComponent('frame', {
 			evil.createAnimation("back-ba-sca",ba,"scale","back-clicked","back-stop","1 1 1","1000");		
 			evil.createAnimation("back-ba-pos",ba,"position","back-clicked","back-stop","0 0 0","2000");
 			evil.createAnimation("back-ba-rot",ba,"rotation","back-clicked","back-stop","0 0 0","2000");
+			evil.createAnimation("fade-ba-sca",ba,"scale","fade-out","fade-stop","0 0 0","1000");
 			ba.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);	
 			this.backgroundEl=ba;
 
 		var te=evil.createEntity(el,{'id':data.id+'-title','geometry':"value:"+data.title+"; width: .8; height: auto; color: white;",
-			'position':'.18 0.1 0.01','class':data.class+'-titles'});
+			'position':'0.18 0.1 0.01','class':data.class+'-titles'});
 			//TODO: make if else statement with category frame to have these settings:
 			//		var te=evil.createEntity(el,{'id':data.id+'-title','geometry':"value:"+data.title+"; width: 1.2; height: auto; color: white;",
 			//			'position':'.38 0.1 0.005','class':data.class+'-titles'});
-			evil.createAnimation("reveal-te",te,"position","project-clicked","project-stop","0.15 0.2 -0.12","2000");		
+			evil.createAnimation("reveal-te",te,"position","project-clicked","project-stop","0.15 0.2 -0.06","2000");		
 			evil.createAnimation("clicked-te-sca",te,"scale","project-clicked","project-stop","2.0 2.0 1.0","2000");
 			evil.createAnimation("clicked-te-rot",te,"rotation","project-clicked","project-stop","0 360 0","2000");			
-			evil.createAnimation("reverse-te",te,"position","back-clicked","back-stop",".18 0.1 0.01","2000");			
+			evil.createAnimation("reverse-te",te,"position","back-clicked","back-stop","0.18 0.1 0.01","2000");			
 			evil.createAnimation("back-te-rot",te,"rotation","back-clicked","back-stop","0 0 0","2000");
 			evil.createAnimation("back-te-sca",te,"scale","back-clicked","back-stop","1 1 1","2000");	
+			evil.createAnimation("fade-te-sca",ba,"scale","fade-out","fade-stop","0 0 0","1000");
 			te.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);
 			this.titleEl=te;	
 			
@@ -79,6 +81,7 @@ AFRAME.registerComponent('frame', {
 			evil.createAnimation("back-im",im,"position","back-clicked","back-stop","0 -0.022 0.005","2000");
 			evil.createAnimation("back-im-sca",im,"scale","back-clicked","back-stop","1 1 1","2000");
 			evil.createAnimation("back-im-rot",im,"rotation","back-clicked","back-stop","0 0 0","2000");	
+			evil.createAnimation("fade-im-sca",ba,"scale","fade-out","fade-stop","0 0 0","1000");
 			im.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);
 			this.imageEl=im;
 	
@@ -134,11 +137,11 @@ AFRAME.registerComponent('frame', {
 		imageAnim=currentImage.querySelector("#clicked-im-pos-"+currentId);
 
 		if(imageAnim!==null) currentImage.removeChild(imageAnim);
-		evil.createAnimation("clicked-im-pos-"+currentId,currentImage,"position","project-clicked","project-stop","0.95 "+(heighto-0.65)+" 0.635","2000");	
+		evil.createAnimation("clicked-im-pos-"+currentId,currentImage,"position","project-clicked","project-stop","0.9 "+(heighto-0.65)+" 0.585","2000");	
 		
 		imageAnim=currentBackground.querySelector("#clicked-ba-pos-"+currentId);
 		if(imageAnim!==null) currentBackground.removeChild(imageAnim);	
-		evil.createAnimation("clicked-ba-pos-"+currentId,currentBackground,"position","project-clicked","project-stop","0.95 "+(heighto-0.65)+" 0.63","2000");	
+		evil.createAnimation("clicked-ba-pos-"+currentId,currentBackground,"position","project-clicked","project-stop","0.9 "+(heighto-0.65)+" 0.58","2000");	
 		
 		currentBackground.setAttribute('material','src',data.material);
 		$(".Projects-backgrounds").removeClass('clickable');
@@ -181,6 +184,9 @@ AFRAME.registerComponent('frame', {
 			}
 			chamber.querySelector("#chamber-back-background0").emit("fade-out",null,false);
 			chamber.querySelector("#chamber-back-background1").emit("fade-out",null,false);
+			chamber.querySelector("#project"+projectIndex+"-image").emit("fade-out",null,false);
+			chamber.querySelector("#project"+projectIndex+"-title").emit("fade-out",null,false);
+			chamber.querySelector("#project"+projectIndex+"-background").emit("fade-out",null,false);				
 		}
 		chamber.querySelector("#chamber-sign-title").emit("fade-out",null,false);
 		chamber.querySelector("#chamber-sign-back").emit("fade-out",null,false);
