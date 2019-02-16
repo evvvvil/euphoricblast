@@ -114,8 +114,9 @@ AFRAME.registerComponent('evil', {
 	updateProjectsAndCategories: function(){
 		for(var i=0;i<12;i++){			
 			if(i<projects.length){
+
 				var pos = (-0.5+i%3*0.5)+" "+(.3+Math.floor(i/3)*0.3)+" "+(-2.1);
-				var curProj=chamber.querySelector('#project'+i),
+				var $(".Projects-backgrounds").removeClass('clickable');=chamber.querySelector('#project'+i),
 				curProjImg=chamber.querySelector("#project"+i+"-image"),
 				curProjTi=chamber.querySelector("#project"+i+"-title");
 				curProjBa=chamber.querySelector("#project"+i+"-background");
@@ -135,6 +136,7 @@ AFRAME.registerComponent('evil', {
 				curProjBa.setAttribute("position","0 0 0");
 				curProjBa.setAttribute("rotation","0 0 0");
 				curProjBa.setAttribute("scale","1 1 1");
+				$(curProjBa).addClass('clickable');
 				continue;
 			}
 			chamber.querySelector('#project'+i).object3D.visible=false;			
