@@ -68,7 +68,7 @@ AFRAME.registerComponent('frame', {
 			evil.createAnimation("reverse-te",te,"position","back-clicked","back-stop","0.18 0.1 0.01","2000");			
 			evil.createAnimation("back-te-rot",te,"rotation","back-clicked","back-stop","0 0 0","2000");
 			evil.createAnimation("back-te-sca",te,"scale","back-clicked","back-stop","1 1 1","2000");	
-			evil.createAnimation("fade-te-sca",ba,"scale","fade-out","fade-stop","0 0 0","1000");
+			evil.createAnimation("fade-te-sca",te,"scale","fade-out","fade-stop","0 0 0","1000");
 			te.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);
 			this.titleEl=te;	
 			
@@ -81,7 +81,7 @@ AFRAME.registerComponent('frame', {
 			evil.createAnimation("back-im",im,"position","back-clicked","back-stop","0 -0.022 0.005","2000");
 			evil.createAnimation("back-im-sca",im,"scale","back-clicked","back-stop","1 1 1","2000");
 			evil.createAnimation("back-im-rot",im,"rotation","back-clicked","back-stop","0 0 0","2000");	
-			evil.createAnimation("fade-im-sca",ba,"scale","fade-out","fade-stop","0 0 0","1000");
+			evil.createAnimation("fade-im-sca",im,"scale","fade-out","fade-stop","0 0 0","1000");
 			im.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);
 			this.imageEl=im;
 	
@@ -163,7 +163,7 @@ AFRAME.registerComponent('frame', {
 		var allProjs=chamber.querySelectorAll(".Projects");
 		
 		for(var i=0;i<allProjs.length;i++){
-			allProjs[i].emit("fade-out",null,false);
+			if(i!=projectIndex)allProjs[i].emit("fade-out",null,false);
 		}
 		for(var i=0;i<allCats.length;i++){
 			allCats[i].emit("fade-out",null,false);

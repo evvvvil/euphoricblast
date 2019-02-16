@@ -71,7 +71,6 @@ AFRAME.registerComponent('evil', {
 	    	return bo;
 	},
 	createProjectsAndCategories: function(){
-
 		//TODO: optimize this by having them created on init and ust reset them
 		for(var i=0;i<projects.length;i++){
 			var pos = (-0.5+i%3*0.5)+" "+(.3+Math.floor(i/3)*0.3)+" "+(-2.1);
@@ -113,8 +112,7 @@ AFRAME.registerComponent('evil', {
 		chamber.setAttribute("chamber","title",categories[category-1]);	
 	},
 	updateProjectsAndCategories: function(){
-		for(var i=0;i<12;i++){
-			
+		for(var i=0;i<12;i++){			
 			if(i<projects.length){
 				var pos = (-0.5+i%3*0.5)+" "+(.3+Math.floor(i/3)*0.3)+" "+(-2.1);
 				var curProj=chamber.querySelector('#project'+i),
@@ -126,24 +124,22 @@ AFRAME.registerComponent('evil', {
 				curProj.setAttribute("frame","title",projects[i].title);
 				curProj.setAttribute("frame","image",evil.wrangleImageSource(projects[i].mainImage));				
 				curProj.setAttribute("position",pos);
+				curProj.setAttribute("scale","0 0 0");
 
 				curProjImg.setAttribute("position","0 -0.022 0.005");
 				curProjImg.setAttribute("rotation","0 0 0");
-				curProjImg.setAttribute("scale","1 1 1");
-				
+				curProjImg.setAttribute("scale","1 1 1");				
 				curProjTi.setAttribute("position","0.18 0.1 0.01");
 				curProjTi.setAttribute("rotation","0 0 0");
 				curProjTi.setAttribute("scale","1 1 1");
-
 				curProjBa.setAttribute("position","0 0 0");
 				curProjBa.setAttribute("rotation","0 0 0");
-				curProjBa.setAttribute("scale","1 1 1");				
-			
+				curProjBa.setAttribute("scale","1 1 1");
 				continue;
 			}
 			chamber.querySelector('#project'+i).object3D.visible=false;			
 		}	
-		posCounter=1;
+		var posCounter=1;
 		console.log("current category is"+category);
 		for(var i=0;i<categories.length;i++){
 			var curCat=chamber.querySelector('#chamber-category'+(i+1));
@@ -158,9 +154,9 @@ AFRAME.registerComponent('evil', {
 		}		
 	},	
 	removePlayerAnimations: function(){
-			$(player.attributes).each(function() {
-				if(this.name.startsWith("anim"))player.removeAttribute(this.name);
-			});
+		$(player.attributes).each(function() {
+			if(this.name.startsWith("anim"))player.removeAttribute(this.name);
+		});
 	},
 	resetChamber: function(){
 		console.log("reseting");
