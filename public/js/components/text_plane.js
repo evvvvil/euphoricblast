@@ -4,7 +4,7 @@ AFRAME.registerComponent('text_plane', {
 		padding: {type: 'number'},
 		id: {type: 'string'},
     	align: {type: 'string',default:'left'},
-    	content: {type: 'string',default: ''},
+    	content: {type: 'string',default: 'Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet'},
 		wrapCount: {type: 'number'},
 		width: {type: 'string'},
 		height: {type: 'string',default:'auto'},
