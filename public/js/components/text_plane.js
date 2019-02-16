@@ -4,7 +4,8 @@ AFRAME.registerComponent('text_plane', {
 		padding: {type: 'number'},
 		id: {type: 'string'},
     	align: {type: 'string',default:'left'},
-    	content: {type: 'string',default: 'Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet'},
+    	content: {type: 'string',default: 'Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet
+    	Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet '},
 		wrapCount: {type: 'number'},
 		width: {type: 'string'},
 		height: {type: 'string',default:'auto'},
@@ -29,7 +30,7 @@ AFRAME.registerComponent('text_plane', {
 		el.setAttribute("rotation",data.rotation);
 		el.setAttribute("material","shader","flat");
 		//el.setAttribute("geometry","primitive:plane;width:.53;height:0.02872");
-		//el.setAttribute("text","value",data.content);
+		el.setAttribute("text","value",data.content);
 		evil.createAnimation("fadein-"+data.id,el,"scale","fade-in","fade-stop","1 1 1","1000");		
 		evil.createAnimation("fadeout-"+data.id,el,"scale","fade-out","fade-stop","0 0 0","1000");	
 		//el.setAttribute("position",data.position.x+" "+(data.position.y+(0.02872+data.padding)/2)+" "+data.position.z);
