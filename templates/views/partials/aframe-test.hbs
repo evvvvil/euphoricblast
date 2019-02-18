@@ -49,10 +49,11 @@ window.onload = initfunc;
 window.onresize = function() {
   var hi = window.innerHeight,wi = window.innerWidth;
   if (wi>hi){
-  	if(wi<1280)
+  	if(wi<768)
   	{
   		cam.setAttribute("fov","40");
   	}else{
+  		console.log("width more than 768 and more than height");
   		cam.setAttribute("fov","70");
   	}
   }else{
