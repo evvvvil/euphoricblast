@@ -10,57 +10,8 @@
 <script src="/js/components/chamber_video.js" type="text/javascript"></script>
 <script src="/js/components/chamber_image.js" type="text/javascript"></script>
 <script src="/js/components/text_plane.js" type="text/javascript"></script>
+<script src="/js/aframe-globals.js" type="text/javascript"></script>
 <script>
-//TODO: check how it works if you select category then while it flies cut off internet so the post fails, it sohuld retry every 10 seconds the post //while in chamber
-var socket,evil,outterRing,player,assets,cam,arrows,floor,chamber,projects,projectVideo,numOfProjects,numOfImages,catLoad,projectHasVideo=false,animCounter=0,category=0,projectIndex=-1,categories={{{jsonView data.categoriesNames}}},exiting=false,projectShown=false,originalPosition="-0.8 1.8 2.5",
-
-speedMult=1.0;
-
-var socket = io();
-socket.on('projectsData', function (data) {
-	projects=data;
-	chamber.setAttribute("chamber","projects",projects);
-	numOfProjects=projects.length;	
-});
-socket.on('projectVideo', function (data) {
-	projectVideo=data.toString();
-	evil.changeVideo(projectVideo);
-});
-
-function initfunc() {	
-	outterRing=document.querySelector('#outter-ring');
-	player=document.querySelector('#player');
-	player.setAttribute("position",originalPosition);
-	cam=player.querySelector('#main-camera');
-	assets=document.querySelector('a-assets');
-	evil=document.querySelector('[evil]');
-	chamber=document.querySelector("#chamber");
-	arrows=document.querySelector("#main-scene-arrows");
-	floor=document.querySelector("#floor");
-	if(evil!==null){
-		evil=document.querySelector('[evil]').components.evil;	
-	}else{
-		setTimeout(initfunc,200);
-	}
-	player.addEventListener('animationcomplete', handlePlayerAnimations);	
-	resize();
-}
-window.onload = initfunc;
-function resize() {
-  var hi=window.innerHeight,wi=window.innerWidth;
-  if (wi>hi){
-  	if(wi<768)
-  	{
-  		cam.setAttribute("fov","40");
-  	}else{  		
-  		cam.setAttribute("fov","70");
-  	}
-  }else{
-  		cam.setAttribute("fov","80");
-  }
-}
-window.onresize = resize;
-
 function handlePlayerAnimations(event){
 	var animID=event.detail.name,pos;
 	animID=animID.substring(11,animID.length);
@@ -129,7 +80,7 @@ function handlePlayerAnimations(event){
 	}
 }
 </script>
-<section id="aframe">
+<section id="vr-website">
 	<div id="aframe-container">
 	<a-scene fog="type:linear; color:#ECECEC; near:0; far:8;">
 			<!-- aframe-effects seems to be broken so for now this is removed:
@@ -200,7 +151,6 @@ function handlePlayerAnimations(event){
 		animation__2="property:intensity;startEvents:fade-in;to:0.6;dur:2000;easing:linear"></a-light>
 		<!--CHAMBER-->
 		<a-entity chamber="id:chamber;position:0 100 0" id="chamber">
-			<!--<a-sphere radius="0.05" id="point-light-sphere" color="#fff" position="0 1 -1"></a-sphere>-->
 			<a-light type="point" id="point-light" color="#FFF" intensity="1.0" position="0 1.5 -2.0" distance="3" 
 			animation="property:intensity;startEvents:fade-out;to:0.0;dur:2000;easing:linear" 
 			animation__2="property:intensity;startEvents:fade-in;to:1.0;dur:1000;easing:linear"></a-light>
