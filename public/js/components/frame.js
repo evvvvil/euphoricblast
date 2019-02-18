@@ -167,7 +167,7 @@ AFRAME.registerComponent('frame', {
 		var allProjs=chamber.querySelectorAll(".Projects");
 		
 		for(var i=0;i<allProjs.length;i++){
-			if(i!=projectIndex)allProjs[i].emit("fade-out",null,false);
+			if(!projectShown||i!=projectIndex)allProjs[i].emit("fade-out",null,false);
 		}
 		for(var i=0;i<allCats.length;i++){
 			allCats[i].emit("fade-out",null,false);
