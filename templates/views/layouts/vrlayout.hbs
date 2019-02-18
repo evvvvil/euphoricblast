@@ -17,12 +17,12 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<!--<meta http-equiv="Cache-control" content="max-age=86400, public">-->
 		
-		<meta name="description" content="Welcome to our 3d website, which also works in VR." />
-		<meta name="keywords" content="3d,website,aframe,a,frame,london,creative,studio,vr,virtual,reality,virtual reality,on,the,web" />
+		<meta name="description" content="Experience our website in virtual reality. Browse all our projects in an interactive 3d world. Works on mobiles and all other platforms. Yeah, we're amazing and we never spill our tea." />
+		<meta name="keywords" content="vr,website,virtual,reality,london,creative,studio,3d,webgl,aframe" />
 		<meta name="author" content="Mangosh Prunier">
 		<meta name="robots" content="index, follow">
 		<meta name="revisit-after" content="7 days">
-		<title>Euphoric Blast - 3D VR Website</title>
+		<title>VR Website by Euphoric Blast</title>
 		<!-- interactive design,virtual reality,3d -->
 
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=wAOJMa9XLG">
@@ -36,35 +36,16 @@
 
 		<meta property="og:image:width" content="1200">
 		<meta property="og:image:height" content="628">
-		<meta property="og:title" content="Euphoric Blast{{{pageTitle section filters.category data.post.title data.post.type}}}">
-		<meta property="og:description" content="{{{getMetaDescription section filters.category data.post.title data.post.type data.post.content.brief}}}">
+		<meta property="og:title" content="VR Website by Euphoric Blast">
+		<meta property="og:description" content="Experience our website in virtual reality. Browse all our projects in an interactive 3d world. Works on mobiles and all other platforms. Yeah, we're amazing and we never spill our tea.">
 		<meta property="og:url" content="{{orginalURL}}">
+		<meta property="og:image" content="http://www.euphoricblast.com/images/Euphoric_Blast-vr-project628.jpg">
 		<meta name="twitter:card" content="summary_large_image">
 		<meta name="twitter:site" content="@euphoric_blast">
 		<meta name="twitter:creator" content="@euphoric_blast">
-		<meta name="twitter:title" content="Euphoric Blast{{{pageTitle section filters.category data.post.title data.post.type}}}">
-		<meta name="twitter:description" content="{{{getMetaDescription section filters.category data.post.title data.post.type data.post.content.brief}}}">
-		{{#if filters.category}}
-			{{#ifgt data.featuredPosts.length 0}}
-				{{#each data.featuredPosts}}
-					{{#ifPostIsInCategoryKey categories ../filters.category}}
-						{{#if mainImage.exists}}			
-		<meta property="og:image" content="{{{cloudinaryUrl mainImage width='1200' height='628' q='70' crop='fill' gravity=mainImageCrop}}}">
-		<meta name="twitter:image" content="{{{cloudinaryUrl mainImage width='1200' height='600' q='70' crop='fill' gravity=mainImageCrop}}}">
-						{{else}}
-		<meta property="og:image" content="http://www.euphoricblast.com/images/Euphoric_Blast-project628.jpg">
-		<meta name="twitter:image" content="http://www.euphoricblast.com/images/Euphoric_Blast-project600.jpg">
-						{{/if}}	
-					{{/ifPostIsInCategoryKey}}
-				{{/each}}
-			{{else}}
-		<meta property="og:image" content="{{{getFacebookOGImage data.post.type (cloudinaryUrl data.post.mainImage width='1200' height='628' q='70' crop='fill' gravity=data.post.mainImageCrop)}}}">			
-		<meta name="twitter:image" content="{{{getFacebookOGImage data.post.type (cloudinaryUrl data.post.mainImage width='1200' height='600' q='70' crop='fill' gravity=data.post.mainImageCrop)}}}">
-			{{/ifgt}}
-		{{else}}
-		<meta property="og:image" content="{{{getFacebookOGImage data.post.type (cloudinaryUrl data.post.mainImage width='1200' height='628' q='70' crop='fill' gravity=data.post.mainImageCrop)}}}">
-		<meta name="twitter:image" content="{{{getFacebookOGImage data.post.type (cloudinaryUrl data.post.mainImage width='1200' height='600' q='70' crop='fill' gravity=data.post.mainImageCrop)}}}">
-		{{/if}}
+		<meta name="twitter:title" content="VR Website by Euphoric Blast">
+		<meta name="twitter:description" content="Experience our website in virtual reality. Browse all our projects in an interactive 3d world. Works on mobiles and all other platforms. Yeah, we're amazing and we never spill our tea.">
+		<meta name="twitter:image" content="http://www.euphoricblast.com/images/Euphoric_Blast-vr-project600.jpg">		
 		<link href="/styles/site.min.css" rel="stylesheet">
 		{{!-- This file provides the default styling for the KeystoneJS Content Editor
 			- only renders when user is logged in and admin--}}
@@ -76,9 +57,6 @@
 			<script src="//cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 		<link href="/styles/font-awesome.min.css" rel="stylesheet">	
-		{{#if lightbox}}
-		<link href="/styles/ekko-lightbox.min.css" rel="stylesheet">
-		{{/if}}		
 	</head>
 	<body>
 		<header></header>
@@ -87,21 +65,8 @@
 		</div>
 		<script src="/js/jquery/jquery-3.3.1.min.js"></script>		
 		<script async src="/js/bootstrap/bootstrap-3.3.5.min.js"></script>
-		{{#if cloudinaryResponsive}}
-			<!--/////////////////////-->
-			<!--CLOUDINARY RESPONSIVE-->
-			<!--/////////////////////-->
-			<script src="/js/cloudinary-core-shrinkwrap.min.js" type="text/javascript"></script>
-			<script src="/js/cloudinary-responsive.js" type="text/javascript"></script>
-		{{/if}}				
-		
-		{{#if lightbox}}
-			<!--////////-->
-			<!--LIGHTBOX-->
-			<!--////////-->
-			<script async src="/js/ekko-lightbox.min.js" type="text/javascript"></script>		
-			<script async src="/js/lightbox-control.js" type="text/javascript"></script>
-		{{/if}}
+		<script src="/js/cloudinary-core-shrinkwrap.min.js" type="text/javascript"></script>
+		<script src="/js/cloudinary-responsive.js" type="text/javascript"></script>
 		{{{isAdminEditorJS user}}}
 	</body>
 </html>

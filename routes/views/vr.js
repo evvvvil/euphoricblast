@@ -13,8 +13,8 @@ exports = module.exports = function (req, res) {
 	var locals = res.locals;
 	//console.log(res.locals.io);
 	// Init locals
-	locals.section = '3d VR website';
-	locals.orginalURL="http://www.euphoricblast.com"+req.originalUrl;
+	locals.section = 'VR website';
+	locals.orginalURL="http://www.euphoricblast.com/vr";
 	locals.filters = {
 		category: req.params.category,
 	};
@@ -173,5 +173,5 @@ exports = module.exports = function (req, res) {
 		});*/
 	
 	// Render the view
-	view.render('vr',{ layout:'vrlayout',bodyId:'vr-website',cloudinaryResponsive:'whatever'});
+	view.render('vr',{ layout:'vrlayout',bodyId:'vr-website'});
 };
