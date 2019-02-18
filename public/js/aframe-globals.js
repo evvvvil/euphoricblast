@@ -29,6 +29,7 @@ function initfunc() {
 }
 function resize() {
   var hi=window.innerHeight,wi=window.innerWidth;
+  if(cam!==undefined){
   if (wi>hi){
   	if(wi<768)
   	{
@@ -39,6 +40,7 @@ function resize() {
   }else{
   		cam.setAttribute("fov","80");
   }
+}
 }
 window.onload = initfunc;
 window.onresize = resize;
