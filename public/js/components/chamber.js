@@ -187,9 +187,7 @@ AFRAME.registerComponent('chamber', {
 				'geometry':'primitive:plane;width:.46;height:.25875',
 				'material':'#category-background-mat',
 				'hover':'#category-background-hover',
-				'position':pos,
-				'title':'nada',
-				'image':''
+				'position':pos
 			};
 			evil.createEntityWithComponent("frame",el,projectOptions);
 		}	

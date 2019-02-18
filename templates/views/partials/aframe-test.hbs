@@ -21,6 +21,7 @@ socket.on('projectsData', function (data) {
 	projects=data;
 	chamber.setAttribute("chamber","projects",projects);
 	numOfProjects=projects.length;	
+	console.log("numofprojects "+numOfProjects);
 });
 socket.on('projectVideo', function (data) {
 	projectVideo=data.toString();

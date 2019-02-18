@@ -53,6 +53,7 @@ AFRAME.registerComponent('chamber_sign', {
 		}else if(animID.startsWith("-ti")){
 			if(animID.startsWith("-ti-fadein")){
 				if(numOfProjects>0){
+					console.log("animating projects ");
 					animCounter=0;evil.animateObjects(1,"project",numOfProjects,'A');
 				}else{
 					var catWall=chamber.querySelector("#chamber-cat-wall");

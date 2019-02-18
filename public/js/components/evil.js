@@ -139,7 +139,7 @@ AFRAME.registerComponent('evil', {
 				$(curProjBa).addClass('clickable');
 				continue;
 			}
-			chamber.querySelector('#project'+i).object3D.visible=false;			
+			//chamber.querySelector('#project'+i).object3D.visible=false;			
 		}	
 		var posCounter=1;
 		console.log("current category is"+category);

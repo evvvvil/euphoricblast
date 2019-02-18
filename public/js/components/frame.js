@@ -10,7 +10,7 @@ AFRAME.registerComponent('frame', {
 		hover: {type: 'string'},
 		position: {type:'vec3'},
 		rotation: {type:'vec3'},
-		title: {type:'string',default:' broh '},
+		title: {type:'string',default:''},
 		image: {type:'string',default:''}
 	},	
 	init: function () {		
@@ -57,8 +57,14 @@ AFRAME.registerComponent('frame', {
 			ba.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);	
 			this.backgroundEl=ba;
 
-		var te=evil.createEntity(el,{'id':data.id+'-title','geometry':"value:"+data.title+"; width: .8; height: auto; color: white;",
-			'position':'0.18 0.1 0.01','class':data.class+'-titles'});
+		var te=evil.createEntity(el,{'id':data.id+'-title','geometry':"value:"+data.title+"; width: 1.1; height: auto; color: white;",
+			'position':'0.345 0.1 0.005','class':data.class+'-titles'});
+			if(data.title==''){
+				var dummyText='Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet';
+				te.setAttribute("text","value",dummyText);
+				te.setAttribute("text","width","0.8");
+				te.setAttribute("position","0.18 0.1 0.005");
+			}
 			//TODO: make if else statement with category frame to have these settings:
 			//		var te=evil.createEntity(el,{'id':data.id+'-title','geometry':"value:"+data.title+"; width: 1.2; height: auto; color: white;",
 			//			'position':'.38 0.1 0.005','class':data.class+'-titles'});
@@ -69,6 +75,7 @@ AFRAME.registerComponent('frame', {
 			evil.createAnimation("back-te-rot",te,"rotation","back-clicked","back-stop","0 0 0","2000");
 			evil.createAnimation("back-te-sca",te,"scale","back-clicked","back-stop","1 1 1","2000");	
 			evil.createAnimation("fade-te-sca",te,"scale","fade-out","fade-stop","0 0 0","1000");
+
 			te.addEventListener('animationcomplete', evil.stopanimationcompletePropagation);
 			this.titleEl=te;	
 			
