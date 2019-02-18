@@ -133,6 +133,7 @@ function handlePlayerAnimations(event){
 	    	<a-asset-item id="chamber-door-model" src="/models/EB_chamber_door.glb"></a-asset-item>
 	    	<a-asset-item id="corridor" src="/models/EB_corridor.glb"></a-asset-item>
 	    	<a-asset-item id="kink-model" src="/models/EB_kink.glb"></a-asset-item>
+	    	<a-asset-item id="lecturn-model" src="/models/EB_lecturn.glb"></a-asset-item>
 	    	<img id="category-background-mat" src="/images/category_back.jpg">    	
 	    	<img id="category-background-hover" src="/images/category_back_hover.jpg">
 	    	<img id="images-background-mat" src="/images/images_back_512x256.jpg">
@@ -160,8 +161,10 @@ function handlePlayerAnimations(event){
 		<a-entity class="category-container" homecategory="id:cat-{{add @index 1}};position:{{AFgetCategoriesPos @index 0 0}};rotation:{{AFgetCategoriesRot @index 0 0}};width:.69;height:.5;title:{{name}};index:{{add @index 1}};image:{{cloudinaryUrl (AFgetCategoriesImage ../data.featuredPosts name) width='512' height='256' q='70' crop='fill' gravity='center'}}"></a-entity>
 		<a-box id="box-corridor-0{{add @index 1}}" class="box-corridors" depth="3" width=".4" height=".4" position="{{AFgetCorridorsPos @index -4.16 4.386 -4.877 -1.445 0.426 -5.865}}" rotation="{{AFgetCategoriesRot @index -144 -126}}" material="color: white"></a-box>
 		{{/each}}
-		<!--SECTION TITLES-->
-		<a-entity rotation="-45 0 0" position=".89 .99 1.365" text="value: Work; width: 2; height: auto"></a-entity>
+		<!--LECTURN-->
+		<a-entity id="main-scene" position="0 0 1.3" gltf-model="#lecturn-model" material="roughness: 1; metalness: 0"></a-entity>		
+		<!--LECTURN TITLE-->
+		<a-entity rotation="-45 0 0" position="0.89 1.09 1.38" text="value: Work; width: 2; height: auto"></a-entity>
 		<!--MAIN SCENE-->
 		<a-entity id="main-scene" position="0 0 0" gltf-model="#main-scene" material="roughness: 1; metalness: 0"></a-entity>		
 		<!--CORRIDORS-->
