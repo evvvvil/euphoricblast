@@ -96,7 +96,7 @@ AFRAME.registerComponent('homecategory', {
 		event.stopPropagation();
 	},
 	handleCatClicked: function(event) {
-	    //console.log('I was clicked atttt: ', event.detail.intersection.point);
+	    //console.log('I was clicked at: ', event.detail.intersection.point);
 	    //TODO: only works with up to 9 CATEGORIES!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		category=this.data.index;
 		evil.getCategoryData();

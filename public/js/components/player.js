@@ -10,7 +10,6 @@ AFRAME.registerComponent('player', {
 	},
 	handlePlayerAnimationsComplete: function (event){
 		var animID=event.detail.name,pos;
-		console.log("eventdetail is: "+animID);
 		animID=animID.substring(11,animID.length);
 		event.stopPropagation();
 		if(animID=="move-cat-anim"){

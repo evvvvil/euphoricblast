@@ -88,7 +88,6 @@ AFRAME.registerComponent('exit_frame', {
 		}
 		var imagesArr=chamber.querySelectorAll(".project-images");
 			for (var i=0;i<numOfImages;i++){
-				//console.log("fading out image");
 				imagesArr[i].emit('fade-stop',null,false);				
 				imagesArr[i].setAttribute("scale","1 1 1");
 				imagesArr[i].emit('fade-out',null,false);
@@ -120,7 +119,6 @@ AFRAME.registerComponent('exit_frame', {
 		par.querySelector("#project"+projectIndex+"-image").emit("back-clicked");
 		var imagesArr=par.querySelectorAll(".project-images");
 			for (var i=0;i<numOfImages;i++){
-				//console.log("fading out image");
 				imagesArr[i].emit('fade-stop',null,false);				
 				imagesArr[i].setAttribute("scale","1 1 1");
 				imagesArr[i].emit('fade-out',null,false);

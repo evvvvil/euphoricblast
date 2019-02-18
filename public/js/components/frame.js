@@ -95,13 +95,11 @@ AFRAME.registerComponent('frame', {
 	},
 	update: function (oldData) {	
 		var data=this.data,el=this.el,evil=this.evil,diff=AFRAME.utils.diff(oldData,data),changedKeys=Object.keys(diff);
-		//console.log("stringy "+JSON.stringify(changedKeys)+"no stringy "+changedKeys);
 		if(changedKeys=="title"){
 			el.querySelector('#'+data.id+'-title').setAttribute('text','value',data.title);
 		}else if(changedKeys=="image"){
 			el.querySelector('#'+data.id+'-image').setAttribute('src',data.image);
 		}else if(changedKeys=="position"){
-			console.log("changing pos of frame");
 			el.setAttribute("position",data.position);
 		}
 	},
@@ -128,7 +126,6 @@ AFRAME.registerComponent('frame', {
 				if(i!=projectIndex) projos[i].emit('go-out',null,false);
 			}
 		var currentProject=projects[projectIndex];
-		//console.log("video orginal:"+currentProject.video);
 		evil.getProjectVideo(event,currentProject.video); 
 		numOfImages=Math.min(6,currentProject.images.length);
 		for(var i=0;i<numOfImages;i++){
@@ -211,7 +208,6 @@ AFRAME.registerComponent('frame', {
 		var data = this.data, el = this.el,evil=this.evil,par=this.el.parentNode,
 		animID=event.detail.name;animID=animID.substring(11,animID.length);
 		if(animID.startsWith("back")){		
-			//console.log("handleProjectTitleAnimations reverse");	
 			var projos=par.querySelectorAll(".Projects");
 			for (var i=0;i<projos.length;i++){
 				var pos = (-0.5+i%3*0.5)+" "+(.3+Math.floor(i/3)*0.3)+" "+(-1.95);
@@ -223,16 +219,13 @@ AFRAME.registerComponent('frame', {
 				projos[i].emit('move-back',null,false);
 			}
 		}else if(animID.startsWith("clic")){
-			//console.log("handleProjectTitleAnimations reveal clicked project");	
 			if(numOfImages>0){
 				animCounter=0;evil.animateObjects(1,"project-images-",numOfImages,'A');
 			}
-			console.log("projectHasVideo? "+projectHasVideo);
 			if(projectHasVideo) par.querySelector("#project-video-group").emit("fade-in");
 			par.querySelector("#chamber-back-background0").emit('fade-in',null,false);
 			par.querySelector("#chamber-back-background1").emit('fade-in',null,false);
 		}else if(animID.startsWith("fade-in")){
-			console.log("project appaered data.amount "+data.amount);
 			if(data.index==data.amount-1 || data.index===null){
 				var catWall=chamber.querySelector("#chamber-cat-wall");
 				if(catWall.getAttribute("scale").y<1){

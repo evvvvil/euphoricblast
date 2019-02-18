@@ -239,44 +239,38 @@ AFRAME.registerComponent('chamber', {
 				this.wal2.emit("exit",null,false);
 
 				var exitFrameWordlPos = new THREE.Vector3(),
-			exitKink1WordlPos = new THREE.Vector3(),
-			exitKink2WordlPos = new THREE.Vector3();
-			exitFrameWordlPos.setFromMatrixPosition(chamber.querySelector("#chamber-exit-frame").object3D.matrixWorld);
-			exitKink1WordlPos.setFromMatrixPosition(this.ki1.object3D.matrixWorld);
-			exitKink2WordlPos.setFromMatrixPosition(this.ki2.object3D.matrixWorld);
-			document.querySelector("#ambient-light").emit('fade-out',null,false);
-			document.querySelector("#directional-light").emit('fade-in',null,false);
-			document.querySelector('#corridor-01').setAttribute("rotation","0 0 0");
-			document.querySelector('#corridor-02').setAttribute("rotation","0 0 0");
-			evil.createAnimation("move-exit-anim",player,"position","move-exit","move-exit-stop",exitFrameWordlPos.x+" "+exitFrameWordlPos.y+" "+exitFrameWordlPos.z,"2000",'linear');
-			evil.createAnimation("move-co-vert-anim",player,"position","move-vert","move-vert-stop",exitKink1WordlPos.x+" "+exitKink1WordlPos.y+" "+exitKink1WordlPos.z,"2000",'linear');
-			evil.createAnimation("move-co-horz-anim",player,"position","move-horz","move-horz-stop",exitKink2WordlPos.x+" "+exitKink2WordlPos.y+" "+exitKink2WordlPos.z,"2000",'linear');
-			evil.createAnimation("move-co-down-anim",player,"position","move-down","move-down-stop",originalPosition,"2000");
-			player.emit("move-exit",null,false);
-			this.chlewa.emit("move-back",null,false);
-			this.co1.emit("fade-in",null,false);
-			var allCats=document.querySelectorAll(".category-screens");
-			for(var i=0;i<allCats.length;i++){
-				allCats[i].setAttribute("scale","1 1 1");
-			}
-			var allTitles=document.querySelectorAll(".category-title");
-			for(var i=0;i<allTitles.length;i++){
-				allTitles[i].setAttribute("visible","true");
-			}
-			var allImages=document.querySelectorAll(".image-group");
-			for(var i=0;i<allImages.length;i++){
-				allImages[i].setAttribute("scale","1 1 1");
-			}
-			var allBacks=document.querySelectorAll(".category-backgrounds");
-			for(var i=0;i<allBacks.length;i++){
-				allBacks[i].setAttribute("scale","1 1 1");
-			}			
-			/*var allCorridors=document.querySelectorAll(".box-corridors");
-			for(var i=0;i<allCorridors.length;i++){
-				console.log("category: "+category);
-				if(i==category-1) continue;
-				allCorridors[i].object3D.visible=true;
-			}*/
+				exitKink1WordlPos = new THREE.Vector3(),
+				exitKink2WordlPos = new THREE.Vector3();
+				exitFrameWordlPos.setFromMatrixPosition(chamber.querySelector("#chamber-exit-frame").object3D.matrixWorld);
+				exitKink1WordlPos.setFromMatrixPosition(this.ki1.object3D.matrixWorld);
+				exitKink2WordlPos.setFromMatrixPosition(this.ki2.object3D.matrixWorld);
+				document.querySelector("#ambient-light").emit('fade-out',null,false);
+				document.querySelector("#directional-light").emit('fade-in',null,false);
+				document.querySelector('#corridor-01').setAttribute("rotation","0 0 0");
+				document.querySelector('#corridor-02').setAttribute("rotation","0 0 0");
+				evil.createAnimation("move-exit-anim",player,"position","move-exit","move-exit-stop",exitFrameWordlPos.x+" "+exitFrameWordlPos.y+" "+exitFrameWordlPos.z,"2000",'linear');
+				evil.createAnimation("move-co-vert-anim",player,"position","move-vert","move-vert-stop",exitKink1WordlPos.x+" "+exitKink1WordlPos.y+" "+exitKink1WordlPos.z,"2000",'linear');
+				evil.createAnimation("move-co-horz-anim",player,"position","move-horz","move-horz-stop",exitKink2WordlPos.x+" "+exitKink2WordlPos.y+" "+exitKink2WordlPos.z,"2000",'linear');
+				evil.createAnimation("move-co-down-anim",player,"position","move-down","move-down-stop",originalPosition,"2000");
+				player.emit("move-exit",null,false);
+				this.chlewa.emit("move-back",null,false);
+				this.co1.emit("fade-in",null,false);
+				var allCats=document.querySelectorAll(".category-screens");
+				for(var i=0;i<allCats.length;i++){
+					allCats[i].setAttribute("scale","1 1 1");
+				}
+				var allTitles=document.querySelectorAll(".category-title");
+				for(var i=0;i<allTitles.length;i++){
+					allTitles[i].setAttribute("visible","true");
+				}
+				var allImages=document.querySelectorAll(".image-group");
+				for(var i=0;i<allImages.length;i++){
+					allImages[i].setAttribute("scale","1 1 1");
+				}
+				var allBacks=document.querySelectorAll(".category-backgrounds");
+				for(var i=0;i<allBacks.length;i++){
+					allBacks[i].setAttribute("scale","1 1 1");
+				}			
 			}else{
 				this.wal1.emit("slide-in",null,false);
 				this.wal2.emit("slide-in",null,false);
@@ -292,8 +286,7 @@ AFRAME.registerComponent('chamber', {
 		var animID=event.detail.name;animID=animID.substring(11,animID.length);
 			event.stopPropagation();
 		if(animID.startsWith("slide-in")){
-			console.log("resetting projects and getting category data");
-			//evil.removeProjectsAndCategories();
+			//console.log("resetting projects and getting category data");
 			projects=undefined;
 			evil.getCategoryData();
 			evil.waitForProjects();					

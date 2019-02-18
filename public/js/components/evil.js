@@ -1,16 +1,16 @@
 AFRAME.registerComponent('evil', {
 	//TODO: rewrite this function to just pass _options like function below it
 	createAnimation: function(_id,_parent,_attribute,_begin,_end,_to,_dur,_easing,_from){
-			var animOptions={
-				'property': _attribute,
-				'startEvents':_begin,
-				'pauseEvents': _end,
-				'to':_to,
-				'dur': _dur
-			};
-			if(_easing!==undefined) animOptions.easing=_easing;
-			if(_from!==undefined) animOptions.from=_from;
-			_parent.setAttribute("animation__"+_id,animOptions);
+		var animOptions={
+			'property': _attribute,
+			'startEvents':_begin,
+			'pauseEvents': _end,
+			'to':_to,
+			'dur': _dur
+		};
+		if(_easing!==undefined) animOptions.easing=_easing;
+		if(_from!==undefined) animOptions.from=_from;
+		_parent.setAttribute("animation__"+_id,animOptions);
 	},	
 	createEntityWithComponent: function(_component,_parent,_options){
 		//console.log("creating this: "+_options.id);
@@ -70,47 +70,6 @@ AFRAME.registerComponent('evil', {
 	    	_parent.appendChild(bo);
 	    	return bo;
 	},
-	createProjectsAndCategories: function(){
-		//TODO: optimize this by having them created on init and ust reset them
-		for(var i=0;i<projects.length;i++){
-			var pos = (-0.5+i%3*0.5)+" "+(.3+Math.floor(i/3)*0.3)+" "+(-2.1);
-			var projectOptions={
-				'id':'project'+i,
-				'class':'Projects',
-				'index':i,
-				'amount': projects.length,
-				'geometry':'primitive:plane;width:.46;height:.25875',
-				'material':'#category-background-mat',
-				'hover':'#category-background-hover',
-				'position':pos,
-				'title':projects[i].title,
-				'image':evil.wrangleImageSource(projects[i].mainImage)
-			};
-			evil.createEntityWithComponent("frame",chamber,projectOptions);
-		}	
-		posCounter=1;
-		for(var i=0;i<categories.length;i++){
-			if(i==category-1) continue;	
-			var pos = 1.8+" "+(1.0+Math.floor(posCounter/2)*-0.3)+" "+(-0.9+posCounter%2*0.5),
-				catElImage=document.querySelector("#cat-"+(i+1)).getAttribute("homecategory").image,
-				categoriesOptions={
-					'id': 'chamber-category'+(i+1),
-					'class': 'Categories',
-					'index':(i+1),
-					'amount': categories.length,
-					'geometry': 'primitive:plane;width:.46;height:.25875',
-					'material': '#category-background-mat',
-					'hover': '#category-background-hover',
-					'position': pos,
-					'rotation': '0 -90 0',
-					'title': categories[i],
-					'image':catElImage
-				};
-			posCounter++;
-			evil.createEntityWithComponent("frame",chamber,categoriesOptions);
-		}
-		chamber.setAttribute("chamber","title",categories[category-1]);	
-	},
 	updateProjectsAndCategories: function(){
 		for(var i=0;i<12;i++){			
 			if(i<projects.length){
@@ -141,8 +100,7 @@ AFRAME.registerComponent('evil', {
 			}
 			//chamber.querySelector('#project'+i).object3D.visible=false;			
 		}	
-		var posCounter=1;
-		console.log("current category is"+category);
+		var posCounter=1;		
 		for(var i=0;i<categories.length;i++){
 			var curCat=chamber.querySelector('#chamber-category'+(i+1));
 			curCat.object3D.visible=true;
@@ -161,7 +119,6 @@ AFRAME.registerComponent('evil', {
 		});
 	},
 	resetChamber: function(){
-		console.log("reseting");
 		player.querySelector("#main-camera").setAttribute("near", 0.1);
 		chamber.querySelector("#chamber-left-wall").setAttribute("position","-2 .4 -0.66");
 		var catWall=chamber.querySelector("#chamber-cat-wall");

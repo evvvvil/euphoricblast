@@ -24,8 +24,6 @@ AFRAME.registerComponent('chamber_title', {
 			//this.handleTitleanimationcomplete = AFRAME.utils.bind(this.handleTitleanimationcomplete, this);
 			el.addEventListener('animationcomplete',this.handleTitleanimationcomplete);
 			if(data.autostart) el.emit("fade-in",null,false);
-			
-		//console.log("after ");
 	},
 	handleTitleanimationcomplete: function (event){
 		event.stopPropagation();	
