@@ -1,9 +1,6 @@
 //TODO: check how it works if you select category then while it flies cut off internet so the post fails, it sohuld retry every 10 seconds the post //while in chamber
-var socket,evil,outterRing,player,assets,cam,arrows,floor,chamber,projects,projectVideo,numOfProjects,numOfImages,catLoad,projectHasVideo=false,animCounter=0,category=0,projectIndex=-1,exiting=false,projectShown=false,originalPosition="-0.8 1.8 2.5",
-
-speedMult=1.0;
-
-var socket = io();
+var socket,evil,outterRing,player,assets,cam,arrows,floor,chamber,projects,projectVideo,numOfProjects,numOfImages,catLoad,projectHasVideo=false,animCounter=0,category=0,projectIndex=-1,exiting=false,projectShown=false,originalPosition="-0.8 1.8 2.5";
+socket = io();
 socket.on('projectsData', function (data) {
 	projects=data;
 	chamber.setAttribute("chamber","projects",projects);
@@ -13,7 +10,6 @@ socket.on('projectVideo', function (data) {
 	projectVideo=data.toString();
 	evil.changeVideo(projectVideo);
 });
-
 function initfunc() {	
 	outterRing=document.querySelector('#outter-ring');
 	player=document.querySelector('#player');

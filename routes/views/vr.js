@@ -173,5 +173,5 @@ exports = module.exports = function (req, res) {
 		});*/
 	
 	// Render the view
-	view.render('web3d', { layout: 'layout3d',bodyId: 'work-page', cloudinaryResponsive: 'whatever'});
+	view.render('vr',{ layout:'vrlayout',bodyId:'vr-website',cloudinaryResponsive:'whatever'});
 };

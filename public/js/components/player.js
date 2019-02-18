@@ -18,7 +18,7 @@ AFRAME.registerComponent('player', {
 			document.querySelector("#ambient-light").emit('fade-in',null,false);
 			document.querySelector("#directional-light").emit('fade-out',null,false);
 		    pos=evil.wrangleDestination(-3.33,4.386,-3.439,-1.156,.426,-4.230);
-		    evil.createAnimation("move-tunnel-anim",player,"position","move-tunnel","move-tunnel-stop",pos,2000*speedMult,'linear');			
+		    evil.createAnimation("move-tunnel-anim",player,"position","move-tunnel","move-tunnel-stop",pos,2000,'linear');			
 		    player.emit('move-tunnel',null,false);	    
 		}else if(animID=="move-tunnel-anim"){
 				arrows.object3D.visible=false;
