@@ -60,7 +60,7 @@ AFRAME.registerComponent('chamber', {
 	    	
 	    	//evil.createAnimation("sle-out-chamber-walls1",wal1,"position","exit","exit-stop","4 0 0","2000");
 	    	//evil.createAnimation("sde-out-chamber-walls2",wal2,"position","exit","exit-stop","0 0 0","2000");
-	    evil.createEntity(el,{'id':'chamber-floor','geometry':'primitive:plane;width:12;height:4','position':'0 -0.19 -2','rotation':'-90 0 0','material':'color:#333333'});
+	    evil.createEntity(el,{'id':'chamber-floor','geometry':'primitive:plane;width:12;height:4','position':'0 -0.19 -2','rotation':'-90 0 0','material':'color:#777'});
 		evil.createEntityWithComponent("chamber_exit",el,{'id': 'chamber-exit-group'});
 		this.wal1=wal1;this.wal2=wal2;
 		this.handleWallanimationcomplete = AFRAME.utils.bind(this.handleWallanimationcomplete, this);
