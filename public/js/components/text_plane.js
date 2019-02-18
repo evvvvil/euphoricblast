@@ -36,8 +36,7 @@ AFRAME.registerComponent('text_plane', {
 			
 		el.setAttribute("text","value",dummyText);
 		el.setAttribute("scale","0 0 0");
-		//el.setAttribute("position",data.position.x+" "+(data.position.y+(0.02872+data.padding)/2)+" "+data.position.z);
-		el.addEventListener('animationcomplete', this.handleVideoanimationcomplete);					
+		//el.setAttribute("position",data.position.x+" "+(data.position.y+(0.02872+data.padding)/2)+" "+data.position.z);					
 	},
 	update: function (oldData) {	
 		var data=this.data,el=this.el,evil=this.evil,diff=AFRAME.utils.diff(oldData,data),changedKeys=Object.keys(diff);
