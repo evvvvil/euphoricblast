@@ -42,7 +42,7 @@ AFRAME.registerComponent('text_plane', {
 	update: function (oldData) {	
 		var data=this.data,el=this.el,evil=this.evil,diff=AFRAME.utils.diff(oldData,data),changedKeys=Object.keys(diff);
 		if(changedKeys[0]=="content"){
-			el.setAttribute("scale","1 1 1");
+			//el.setAttribute("scale","1 1 1");
 			el.setAttribute("geometry","primitive:plane;width:auto;height:auto");
 			el.setAttribute("text","value",data.content);	
 			var geomAtt=el.getAttribute("geometry"),
