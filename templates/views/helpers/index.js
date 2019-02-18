@@ -148,7 +148,7 @@ module.exports = function () {
 	};
 
 	_helpers.getMetaDescription = function (section, category, postTitle, postType, postContentBrief) {	
-		var intro="We're amazing and we never spill our tea. We laugh at rocket science.";	
+		var intro="We're amazing and we never spill our tea.";	
 		var whatWeDo="Interactive design, virtual reality, 3d VFX, video games, motion graphics, web development, projection, VJing, graphic design.";	
 			if(section=="Home"){
 				return intro+" "+whatWeDo;
