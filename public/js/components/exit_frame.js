@@ -76,9 +76,9 @@ AFRAME.registerComponent('exit_frame', {
 		exiting=true;
 		var allCats=chamber.querySelectorAll(".Categories");
 		var allProjs=chamber.querySelectorAll(".Projects");
-		if(projectIndex>=0) {
+		if(projectShown) {
 			chamber.querySelector("#project"+projectIndex+"-image").emit("back-clicked");			
-			//console.log("projectHasVideo "+projectHasVideo);
+			console.log("projectHasVideo "+projectHasVideo);
 			if(projectHasVideo) {
 				var vid=chamber.querySelector("#project-video-group");
 				vid.emit("fade-stop",null,false);
