@@ -43,23 +43,24 @@ function initfunc() {
 		setTimeout(initfunc,200);
 	}
 	player.addEventListener('animationcomplete', handlePlayerAnimations);	
+	resize();
 }
 window.onload = initfunc;
-
-window.onresize = function() {
-  var hi = window.innerHeight,wi = window.innerWidth;
+function resize() {
+  var hi=window.innerHeight,wi=window.innerWidth;
   if (wi>hi){
   	if(wi<768)
   	{
   		cam.setAttribute("fov","40");
-  	}else{
-  		console.log("width more than 768 and more than height");
+  	}else{  		
   		cam.setAttribute("fov","70");
   	}
   }else{
   		cam.setAttribute("fov","60");
   }
 }
+window.onresize = resize;
+
 function handlePlayerAnimations(event){
 	var animID=event.detail.name,pos;
 	animID=animID.substring(11,animID.length);
