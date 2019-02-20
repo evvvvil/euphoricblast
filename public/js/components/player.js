@@ -13,7 +13,7 @@ AFRAME.registerComponent('player', {
 		animID=animID.substring(11,animID.length);
 		event.stopPropagation();
 		if(animID=="move-cat-anim"){
-			player.querySelector('#main-camera').setAttribute('near', 0.03);
+			//player.querySelector('#main-camera').setAttribute('near', 0.03);
 			document.querySelector("#ambient-light").emit('fade-in',null,false);
 			document.querySelector("#directional-light").emit('fade-out',null,false);
 		    pos=evil.wrangleDestination(-3.33,4.386,-3.439,-1.156,.426,-4.230);
@@ -66,8 +66,8 @@ AFRAME.registerComponent('player', {
 			kink.object3D.visible = true;
 			corridorEnd.object3D.visible = true;
 
-			evil.createAnimation("change-near",cam,"near","adjust-near","adjust-near-stop","0.1",2000,"linear");	    
-		    cam.emit('adjust-near',null,false);
+			//evil.createAnimation("change-near",cam,"near","adjust-near","adjust-near-stop","0.1",2000,"linear");	    
+		    //cam.emit('adjust-near',null,false);
 			player.emit('move-down',null,false);	
 		}else if(animID=="move-co-down-anim"){
 			evil.removePlayerAnimations();

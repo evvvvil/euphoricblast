@@ -119,7 +119,7 @@ AFRAME.registerComponent('evil', {
 		});
 	},
 	resetChamber: function(){
-		player.querySelector("#main-camera").setAttribute("near", 0.1);
+		//player.querySelector("#main-camera").setAttribute("near", 0.1);
 		chamber.querySelector("#chamber-left-wall").setAttribute("position","-2 .4 -0.66");
 		var catWall=chamber.querySelector("#chamber-cat-wall");
 		catWall.setAttribute("position","1.85 .51 -0.66");
