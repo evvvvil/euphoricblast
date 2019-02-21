@@ -38,7 +38,7 @@ AFRAME.registerComponent('player', {
 		}else if(animID=="move-co-horz-anim"){
 			arrows.object3D.visible=true;
 			floor.object3D.visible=true;
-			player.object3D.position.set(-1, 3.8, 3);
+			player.object3D.position.set(-0.8, 3.8, 2.5);
 			var kink=document.querySelector("#kink"),
 			corridorEnd=document.querySelector("#corridor-end"),
 			kink2=chamber.querySelector("#chamber-kink-02"),
