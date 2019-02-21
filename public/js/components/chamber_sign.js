@@ -15,7 +15,8 @@ AFRAME.registerComponent('chamber_sign', {
 	init: function () {		
 		var data = this.data, el = this.el,evil=this.evil=document.querySelector('[evil]').components.evil;
 
-		el.setAttribute("id",data.id);		
+		el.setAttribute("id",data.id);	
+		evil.createAnimation("fade-out",el,"scale","fade-out","fade-stop","0 0 0",data.speed);	
 		if(data.class!='') el.setAttribute("class",data.class);
 		if(data.position!='') el.setAttribute("position",data.position);
 		if(data.rotation!='') el.setAttribute("rotation",data.rotation);
@@ -23,8 +24,7 @@ AFRAME.registerComponent('chamber_sign', {
 		this.handleSignanimationcomplete = AFRAME.utils.bind(this.handleSignanimationcomplete, this);
 			
 		var ti=evil.createEntity(el,{'id':data.id+'-title','geometry':"value:"+data.title+"; align:center; width: 1.6; height: auto; color: #fff;",'scale':'0 0 0','position':'0 0 0.001','class':data.class+'-titles'});
-			evil.createAnimation("-ti-fadein",ti,"scale","fade-in","fade-stop","1 1 1",data.speed);
-			evil.createAnimation("-ti-fadeout",ti,"scale","fade-out","fade-stop","0 0 0",data.speed);				
+			evil.createAnimation("-ti-fadein",ti,"scale","fade-in","fade-stop","1 1 1",data.speed);				
 			ti.addEventListener('animationcomplete', this.handleSignanimationcomplete);
 			this.titleEl=ti;
 			//this.titleEl.object3D.frustumCulled = true;
@@ -32,13 +32,11 @@ AFRAME.registerComponent('chamber_sign', {
 		var ba=evil.createEntity(el,{'id':data.id+'-back','geometry':data.geometry,'scale':'0 0 0'});
 		ba.setAttribute('material','color',data.material);
 			evil.createAnimation("-ba-fadein",ba,"scale","fade-in","fade-stop","1 1 1",data.speed);
-			evil.createAnimation("-ba-fadeout",ba,"scale","fade-out","fade-stop","0 0 0",data.speed);	
 			ba.addEventListener('animationcomplete', this.handleSignanimationcomplete);
 			this.backgroundEl=ba;
 			if(data.autostart) ba.emit("fade-in",null,false);
 		var ye1=evil.createEntity(el,{'id':data.id+'-ye1','geometry':'primitive:plane;width:0.03;height:0.08','position':'-0.28 0 0.001','material':'color:#e0b716','scale':'0 0 1'});		
-			evil.createAnimation("-ba-fadein",ye1,"scale","fade-in","fade-stop","1 1 1",data.speed);
-			evil.createAnimation("-ba-fadeout",ye1,"scale","fade-out","fade-stop","0 0 1",data.speed);				
+			evil.createAnimation("-ba-fadein",ye1,"scale","fade-in","fade-stop","1 1 1",data.speed);			
 			ye1.setAttribute("material","shader","flat");
 			this.ye1=ye1;
 		var ye2=evil.createEntity(el,{'id':data.id+'-ye2','geometry':'primitive:plane;width:0.03;height:0.08','position':'0.28 0 0.001','material':'color:#e0b716','scale':'0 0 1'});		

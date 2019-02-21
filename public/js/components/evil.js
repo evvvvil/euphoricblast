@@ -252,7 +252,13 @@ AFRAME.registerComponent('evil', {
 				catLoad.emit("fade-out");
 				catLoad=undefined;
 			}	
-			document.querySelector("#chamber-sign-back").emit("fade-in");	
+			var sign=document.querySelector("#chamber-sign");			
+			sign.querySelector("#chamber-sign-title").setAttribute("scale","0 0 1");
+			sign.querySelector("#chamber-sign-back").setAttribute("scale","0 0 1");
+			sign.querySelector("#chamber-sign-ye1").setAttribute("scale","0 0 1");
+			sign.querySelector("#chamber-sign-ye2").setAttribute("scale","0 0 1");
+			sign.setAttribute("scale","1 1 1");
+			sign.querySelector("#chamber-sign-back").emit("fade-in");	
 			//evil.createProjectsAndCategories();
 			evil.updateProjectsAndCategories();
 			chamber.setAttribute("chamber","title",categories[category-1]);	

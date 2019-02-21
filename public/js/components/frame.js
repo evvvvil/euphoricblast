@@ -192,8 +192,7 @@ AFRAME.registerComponent('frame', {
 			chamber.querySelector("#project"+projectIndex+"-title").emit("fade-out",null,false);
 			chamber.querySelector("#project"+projectIndex+"-background").emit("fade-out",null,false);				
 		}
-		chamber.querySelector("#chamber-sign-title").emit("fade-out",null,false);
-		chamber.querySelector("#chamber-sign-back").emit("fade-out",null,false);
+		chamber.querySelector("#chamber-sign").emit("fade-out",null,false);
 		chamber.querySelector("#chamber-exit-frame").emit("fade-out",null,false);		
 	},
 	handleCategoriesanimationcomplete: function (event) {

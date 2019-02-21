@@ -108,8 +108,7 @@ AFRAME.registerComponent('exit_frame', {
 		chamber.querySelector("#project-text").emit("fade-out",null,false);
 		chamber.querySelector("#project-title-background").emit("back-clicked",null,false);
 		chamber.querySelector("#project-title-cube").emit("back-clicked",null,false);
-		chamber.querySelector("#chamber-sign-title").emit("fade-out",null,false);
-		chamber.querySelector("#chamber-sign-back").emit("fade-out",null,false);
+		chamber.querySelector("#chamber-sign").emit("fade-out",null,false);
 		chamber.querySelector("#chamber-exit-frame").emit("fade-out",null,false);
 		chamber.querySelector("#chamber-back-background0").emit('fade-out',null,false);
 		chamber.querySelector("#chamber-back-background1").emit('fade-out',null,false);
