@@ -27,6 +27,7 @@ function exitingVR(){
 	cam.setAttribute("position","0 1.6 0");
 }
 function initfunc() {	
+	resize();
 	outterRing=document.querySelector('#outter-ring');
 	player=document.querySelector('#player');
 	cam=document.querySelector('#main-camera');
@@ -34,13 +35,9 @@ function initfunc() {
 	chamber=document.querySelector("#chamber");
 	arrows=document.querySelector("#main-scene-arrows");
 	floor=document.querySelector("#floor");		
-	scene=document.querySelector("a-scene"); 	
-	resize();
-	player.setAttribute("position",originalPosition);
-	scene.addEventListener('enter-vr',enteringVR);
-	scene.addEventListener('exit-vr',exitingVR);		
+	scene=document.querySelector("a-scene"); 		
+	player.setAttribute("position",originalPosition);	
 	getEvil();
-
 }
 function resize() {
   var hi=window.innerHeight,wi=window.innerWidth;  
@@ -57,3 +54,7 @@ function resize() {
 }
 window.onload = initfunc;
 window.onresize = resize;
+scene=document.querySelector("a-scene"); 	
+	scene.addEventListener('enter-vr',enteringVR);
+	scene.addEventListener('exit-vr',exitingVR);	
+	scene.addEventListener('loaded',initfunc);	
