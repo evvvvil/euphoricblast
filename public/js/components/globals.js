@@ -35,7 +35,7 @@ function initfunc() {
 	chamber=document.querySelector("#chamber");
 	arrows=document.querySelector("#main-scene-arrows");
 	floor=document.querySelector("#floor");		
-	scene=document.querySelector("a-scene"); 		
+	//scene=document.querySelector("a-scene"); 		
 	player.setAttribute("position",originalPosition);	
 	getEvil();
 }
@@ -54,9 +54,11 @@ function resize() {
 }
 window.onload = initfunc;
 window.onresize = resize;
-scene=document.querySelector("a-scene"); 	
+scene=document.querySelector("#main-scene"); 
+var ne=document.querySelector("#aframe-container"); 	
 console.log("doc "+document);
 console.log("sce "+scene);
+console.log("ne "+ne);
 	scene.addEventListener('enter-vr',enteringVR);
 	scene.addEventListener('exit-vr',exitingVR);	
 	scene.addEventListener('loaded',initfunc);	
