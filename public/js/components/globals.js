@@ -19,9 +19,14 @@ function exitingVR(){
 	cam.setAttribute("position","0 1.6 0");
 }
 function setupfunc(){
+	evil=document.querySelector('[evil]');	
+	if(evil!==null){
+		evil=document.querySelector('[evil]').components.evil;	
+	}else{
+		setTimeout(setupfunc,200);
+	}
 	cam=document.querySelector('#main-camera');
 	resize();	
-	evil=document.querySelector('[evil]').components.evil;	
 	outterRing=document.querySelector('#outter-ring');
 	player=document.querySelector('#player');	
 	assets=document.querySelector('a-assets');

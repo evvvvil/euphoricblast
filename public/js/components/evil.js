@@ -185,7 +185,7 @@ AFRAME.registerComponent('evil', {
 	},
 	wrangleDestination: function(x1,y1,z1,x2,y2,z2){
 		var x=x1,y=y1,z=z1,modCat=(category-1)%4;
-		if(category>5) y=y2;
+		if(category>=5) y=y2;
 		if(modCat>0&&modCat<3) {x=x2;z=z2;}
 		if(modCat>1)x*=-1;
 		return x+" "+y+" "+z+" ";
