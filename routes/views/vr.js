@@ -82,7 +82,7 @@ exports = module.exports = function (req, res) {
 				locals.data.posts = diff;*/
 
 				locals.data.posts = results;
-				for(int i=0;i<locals.data.posts.length){
+				for(int i=0;i<locals.data.posts.length;i++){
 				local.data.posts[i].content.extended=AFstrip(local.data.posts[i].content.extended);		
 				}
 				
