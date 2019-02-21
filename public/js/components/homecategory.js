@@ -109,7 +109,7 @@ AFRAME.registerComponent('homecategory', {
 		this.ti.setAttribute('visible','false');
 		var playerTo=this.el.getAttribute('position'),
 		pos=playerTo.x+" "+(playerTo.y-1.6)+" "+playerTo.z;		
-		evil.createAnimation('move-cat-anim',player,'position','move-cat','move-cat-stop',pos,2000,'linear');
+		evil.createAnimation('move-cat-anim',player,'position','move-cat','move-cat-stop',pos,1500,'linear');
 
 		//Create Corridors
 	    scene.querySelector('#box-corridor-0'+category).object3D.visible=false;

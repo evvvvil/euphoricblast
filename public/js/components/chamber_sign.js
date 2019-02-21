@@ -22,7 +22,7 @@ AFRAME.registerComponent('chamber_sign', {
 		
 		this.handleSignanimationcomplete = AFRAME.utils.bind(this.handleSignanimationcomplete, this);
 			
-		var ti=evil.createEntity(el,{'id':data.id+'-title','geometry':"value:"+data.title+"; align:center; width: 1.6; height: auto; color: #fff;",'scale':'0 0 0','position':'0 0 0.01','class':data.class+'-titles'});
+		var ti=evil.createEntity(el,{'id':data.id+'-title','geometry':"value:"+data.title+"; align:center; width: 1.6; height: auto; color: #fff;",'scale':'0 0 0','position':'0 0 0.001','class':data.class+'-titles'});
 			evil.createAnimation("-ti-fadein",ti,"scale","fade-in","fade-stop","1 1 1",data.speed);
 			evil.createAnimation("-ti-fadeout",ti,"scale","fade-out","fade-stop","0 0 0",data.speed);				
 			ti.addEventListener('animationcomplete', this.handleSignanimationcomplete);
@@ -36,14 +36,14 @@ AFRAME.registerComponent('chamber_sign', {
 			ba.addEventListener('animationcomplete', this.handleSignanimationcomplete);
 			this.backgroundEl=ba;
 			if(data.autostart) ba.emit("fade-in",null,false);
-		var ye1=evil.createEntity(el,{'id':data.id+'-ye1','geometry':'primitive:plane;width:0.1;height:0.1','position':'-0.1 0 0.01','material':'color:#e0b716','scale':'0 0 1'});		
-			evil.createAnimation("-ba-fadein",ba,"scale","fade-in","fade-stop","1 1 1",data.speed);
-			evil.createAnimation("-ba-fadeout",ba,"scale","fade-out","fade-stop","0 0 1",data.speed);				
+		var ye1=evil.createEntity(el,{'id':data.id+'-ye1','geometry':'primitive:plane;width:0.03;height:0.08','position':'-0.28 0 0.001','material':'color:#e0b716','scale':'0 0 1'});		
+			evil.createAnimation("-ba-fadein",ye1"scale","fade-in","fade-stop","1 1 1",data.speed);
+			evil.createAnimation("-ba-fadeout",ye1,"scale","fade-out","fade-stop","0 0 1",data.speed);				
 			ye1.setAttribute("material","shader","flat");
 			this.ye1=ye1;
-		var ye2=evil.createEntity(el,{'id':data.id+'-ye2','geometry':'primitive:plane;width:0.1;height:0.1','position':'0.1 0 0.01','material':'color:#e0b716','scale':'0 0 1'});		
-			evil.createAnimation("-ba-fadein",ba,"scale","fade-in","fade-stop","1 1 1",data.speed);
-			evil.createAnimation("-ba-fadeout",ba,"scale","fade-out","fade-stop","0 0 1",data.speed);				
+		var ye2=evil.createEntity(el,{'id':data.id+'-ye2','geometry':'primitive:plane;width:0.03;height:0.08','position':'0.28 0 0.001','material':'color:#e0b716','scale':'0 0 1'});		
+			evil.createAnimation("-ba-fadein",ye2,"scale","fade-in","fade-stop","1 1 1",data.speed);
+			evil.createAnimation("-ba-fadeout",ye2 ,"scale","fade-out","fade-stop","0 0 1",data.speed);				
 			ye2.setAttribute("material","shader","flat");
 			this.ye2=ye2;
 	},	
