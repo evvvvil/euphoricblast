@@ -17,7 +17,7 @@ function enteringVR(){
 }
 function exitingVR(){
 	//console.log("exiting vr");
-	cam.setAttribute("position","0 1.6 0");
+	//cam.setAttribute("position","0 1.6 0");
 }
 
 function initfunc() {	

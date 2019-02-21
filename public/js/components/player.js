@@ -16,7 +16,7 @@ AFRAME.registerComponent('player', {
 			//player.querySelector('#main-camera').setAttribute('near', 0.03);
 			document.querySelector("#ambient-light").emit('fade-in',null,false);
 			document.querySelector("#directional-light").emit('fade-out',null,false);
-		    pos=evil.wrangleDestination(-3.33,2.786,-3.439,-1.156,-1.174,-4.230);
+		    pos=evil.wrangleDestination(-3.33,4.386,-3.439,-1.156,.426,-4.230);
 		    evil.createAnimation("move-tunnel-anim",player,"position","move-tunnel","move-tunnel-stop",pos,2000,'linear');			
 		    player.emit('move-tunnel',null,false);	    
 		}else if(animID=="move-tunnel-anim"){
@@ -38,7 +38,7 @@ AFRAME.registerComponent('player', {
 		}else if(animID=="move-co-horz-anim"){
 			arrows.object3D.visible=true;
 			floor.object3D.visible=true;
-			player.object3D.position.set(-0.8, 3.8, 2.5);
+			player.object3D.position.set(-0.8, 5.4, 2.5);
 			var kink=document.querySelector("#kink"),
 			corridorEnd=document.querySelector("#corridor-end"),
 			kink2=chamber.querySelector("#chamber-kink-02"),

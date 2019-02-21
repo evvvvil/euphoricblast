@@ -115,12 +115,12 @@ AFRAME.registerComponent('homecategory', {
 	    scene.querySelector('#box-corridor-0'+category).object3D.visible=false;
 
 		var cors = document.querySelector("#corridors");
-			pos=evil.wrangleDestination(-4.16,4.386,-4.877,-1.445,.426,-5.865),
+			pos=evil.wrangleDestination(-4.16,4.386,-4.877,-1.445,0.426,-5.865),
 			rot=evil.wrangleRotation(-135,-135);		
 	    	cors.setAttribute("position",pos);
 	    	cors.setAttribute("rotation",rot);
 			cors.object3D.visible = true;
-	    pos=evil.wrangleDestination(-4.525,2.786,-5.508,-1.571,-1.174,-6.581);
+	    pos=evil.wrangleDestination(-4.525,4.386,-5.508,-1.571,0.426,-6.581);
 		evil.createAnimation("move-corridor-anim",player,"position","move-corridor","move-corridor-stop",pos,3000,'linear');	    
     	pos=evil.wrangleDestination(-4.22,3.95,-4.97,-1.46,0.0,-5.95),
 		rot=evil.wrangleRotation(0,0);
