@@ -36,7 +36,17 @@ AFRAME.registerComponent('chamber_sign', {
 			ba.addEventListener('animationcomplete', this.handleSignanimationcomplete);
 			this.backgroundEl=ba;
 			if(data.autostart) ba.emit("fade-in",null,false);
-	},
+		var ye1=evil.createEntity(el,{'id':data.id+'-ye1','geometry':'primitive:plane;width:0.1;height:0.1','position':'-0.1 0 0.01','material':'color:#e0b716','scale':'0 0 1'});		
+			evil.createAnimation("-ba-fadein",ba,"scale","fade-in","fade-stop","1 1 1",data.speed);
+			evil.createAnimation("-ba-fadeout",ba,"scale","fade-out","fade-stop","0 0 1",data.speed);				
+			ye1.setAttribute("material","shader","flat");
+			this.ye1=ye1;
+	},	
+		var ye2.evil.createEntity(el,{'id':data.id+'-ye2','geometry':'primitive:plane;width:0.1;height:0.1','position':'0.1 0 0.01','material':'color:#e0b716','scale':'0 0 1'});		
+			evil.createAnimation("-ba-fadein",ba,"scale","fade-in","fade-stop","1 1 1",data.speed);
+			evil.createAnimation("-ba-fadeout",ba,"scale","fade-out","fade-stop","0 0 1",data.speed);				
+			ye2.setAttribute("material","shader","flat");
+			this.ye2=ye2;
 	update: function (oldData) {	
 		var data=this.data,el=this.el,evil=this.evil,diff=AFRAME.utils.diff(oldData,data),changedKeys=Object.keys(diff);
 			if(changedKeys[0]=="text"){
@@ -49,6 +59,8 @@ AFRAME.registerComponent('chamber_sign', {
 		if(animID.startsWith("-ba")){
 			if(animID.startsWith("-ba-fadein")){
 				this.titleEl.emit("fade-in",null,false);
+				this.ye1.emit("fade-in",null,false);
+				this.ye2.emit("fade-in",null,false);
 			}			
 		}else if(animID.startsWith("-ti")){
 			if(animID.startsWith("-ti-fadein")){
