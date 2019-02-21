@@ -22,6 +22,7 @@ function enteringVR(){
 //we entering VR
 }
 function exitingVR(){
+	console.log("exiting vr");
 	cam.setAttribute("position","0 1.6 0");
 }
 function initfunc() {	
@@ -46,7 +47,7 @@ function resize() {
   if (wi>hi){
   	if(wi<768)
   	{
-  		cam.setAttribute("fov","30");
+  		cam.setAttribute("fov","40");
   	}else{  		
   		cam.setAttribute("fov","30");
   	}
