@@ -157,6 +157,7 @@ AFRAME.registerComponent('evil', {
 	},
 	strip: function(html)
 	{
+		html=html.replace("&nbsp;"," ");
 	   var tmp = document.createElement("DIV"),
 	   reducedHTML=html.replace(/<\/p>/gm, "\n");   
 	   if(reducedHTML.length>592){
