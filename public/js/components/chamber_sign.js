@@ -41,7 +41,7 @@ AFRAME.registerComponent('chamber_sign', {
 			evil.createAnimation("-ba-fadeout",ba,"scale","fade-out","fade-stop","0 0 1",data.speed);				
 			ye1.setAttribute("material","shader","flat");
 			this.ye1=ye1;
-		var ye2.evil.createEntity(el,{'id':data.id+'-ye2','geometry':'primitive:plane;width:0.1;height:0.1','position':'0.1 0 0.01','material':'color:#e0b716','scale':'0 0 1'});		
+		var ye2=evil.createEntity(el,{'id':data.id+'-ye2','geometry':'primitive:plane;width:0.1;height:0.1','position':'0.1 0 0.01','material':'color:#e0b716','scale':'0 0 1'});		
 			evil.createAnimation("-ba-fadein",ba,"scale","fade-in","fade-stop","1 1 1",data.speed);
 			evil.createAnimation("-ba-fadeout",ba,"scale","fade-out","fade-stop","0 0 1",data.speed);				
 			ye2.setAttribute("material","shader","flat");
