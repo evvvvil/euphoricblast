@@ -112,8 +112,7 @@ AFRAME.registerComponent('homecategory', {
 		evil.createAnimation('move-cat-anim',player,'position','move-cat','move-cat-stop',pos,2000,'linear');
 
 		//Create Corridors
-	    var sce=document.querySelector('a-scene');
-		sce.querySelector('#box-corridor-0'+category).object3D.visible=false;
+	    scene.querySelector('#box-corridor-0'+category).object3D.visible=false;
 
 		var cors = document.querySelector("#corridors");
 			pos=evil.wrangleDestination(-4.16,4.386,-4.877,-1.445,.426,-5.865),
