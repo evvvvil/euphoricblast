@@ -32,7 +32,7 @@
 	    	<a-asset-item id="chamber-door-model" src="/models/EB_chamber_door.glb"></a-asset-item>
 	    	<a-asset-item id="corridor" src="/models/EB_corridor.glb"></a-asset-item>
 	    	<a-asset-item id="kink-model" src="/models/EB_kink.glb"></a-asset-item>
-	    	<a-asset-item id="lecturn-model" src="/models/EB_lecturn.glb"></a-asset-item>
+	    	<a-asset-item id="lecturn-model" src="/models/EB_lecturn02.glb"></a-asset-item>
 	    	<img id="category-background-mat" src="/images/category_back.jpg">    	
 	    	<img id="category-background-hover" src="/images/category_back_hover.jpg">
 	    	<img id="images-background-mat" src="/images/images_back_512x256.jpg">
@@ -84,7 +84,7 @@
 		<!--PEDESTAL-->
 		<a-box id="pedestal" position="0 3 -2.75" depth="0.25" width="0.25" height="5" rotation="0 0 0" material="roughness: 1; metalness: 0; color: #ffffff"></a-box>
 		<a-box id="pedestal-top" position="0 6 -2.75" depth="0.5" width="1" height="1" rotation="0 0 45" material="roughness: 1; metalness: 0; color: #ffc800"
-		animation="property: rotation; to: 0 360 45; loop: true; dur: 10000"></a-box>
+		animation="property: rotation; to: 0 360 45; loop: true; dur: 10000;easing:linear"></a-box>
 		<!--CHAMBER-->
 		<a-entity chamber="id:chamber;position:0 100 0">
 			<a-light type="point" id="point-light" color="#FFF" intensity="1.0" position="0 1.5 -2.0" distance="3" 
