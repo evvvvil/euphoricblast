@@ -41,6 +41,10 @@ module.exports = function () {
 		return x+" "+y+" "+z;		
 	};
 
+	_helpers.AFstrip = function (what) {		
+		return new Handlebars.SafeString(what);
+	};   
+
 	_helpers.AFgetCategoriesImage = function (featuredProj,catName) {
 		var res;
 		for(var i=0;i<featuredProj.length;i++){
