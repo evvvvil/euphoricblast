@@ -23,7 +23,7 @@ AFRAME.registerComponent('chamber_sign', {
 		
 		this.handleSignanimationcomplete = AFRAME.utils.bind(this.handleSignanimationcomplete, this);
 			
-		var ti=evil.createEntity(el,{'id':data.id+'-title','geometry':"value:"+data.title+"; align:center; width: 1.5; height: auto; color: #fff;",'scale':'0 0 0','position':'0 0 0.001','class':data.class+'-titles'});
+		var ti=evil.createEntity(el,{'id':data.id+'-title','geometry':"value:"+data.title+"; align:center; width: 1.45; height: auto; color: #fff;",'scale':'0 0 0','position':'0 0 0.001','class':data.class+'-titles'});
 			evil.createAnimation("-ti-fadein",ti,"scale","fade-in","fade-stop","1 1 1",data.speed);				
 			ti.addEventListener('animationcomplete', this.handleSignanimationcomplete);
 			this.titleEl=ti;
