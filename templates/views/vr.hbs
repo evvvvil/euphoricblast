@@ -83,7 +83,8 @@
 		animation__2="property:intensity;startEvents:fade-in;to:0.6;dur:2000;easing:linear"></a-light>
 		<!--PEDESTAL-->
 		<a-box id="pedestal" position="0 3 -2.75" depth="0.25" width="0.25" height="5" rotation="0 0 0" material="roughness: 1; metalness: 0; color: #ffffff"></a-box>
-		<a-box id="pedestal-top" position="0 5 -2.75" depth="0.5" width="1" height="1" rotation="0 0 0" material="roughness: 1; metalness: 0; color: #ffc800"></a-box>
+		<a-box id="pedestal-top" position="0 6 -2.75" depth="0.5" width="1" height="1" rotation="0 0 45" material="roughness: 1; metalness: 0; color: #ffc800"
+		animation="property: rotation; to: 0 360 45; loop: true; dur: 10000"></a-box>
 		<!--CHAMBER-->
 		<a-entity chamber="id:chamber;position:0 100 0">
 			<a-light type="point" id="point-light" color="#FFF" intensity="1.0" position="0 1.5 -2.0" distance="3" 
