@@ -133,7 +133,7 @@ AFRAME.registerComponent('frame', {
 		}	
 		var projectText=par.querySelector("#project-text");
 		projectText.setAttribute("scale","0 0 0");
-		projectText.setAttribute("text_plane","content",evil.strip(currentProject.content.extended));
+		projectText.setAttribute("text_plane","content",currentProject.content.extended);
 		projectText.emit("fade-in",null,false);
 		var heighto=projectText.getAttribute("geometry").height,
 		currentImage=this.imageEl,
