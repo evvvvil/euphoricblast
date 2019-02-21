@@ -16,8 +16,8 @@ function enteringVR(){
 //we entering VR
 }
 function exitingVR(){
-	console.log("exiting vr");
-	cam.setAttribute("position","0 1.6 0");
+	//console.log("exiting vr");
+	//cam.setAttribute("position","0 1.6 0");
 }
 
 function initfunc() {	
@@ -30,7 +30,7 @@ function initfunc() {
 		assets=document.querySelector('a-assets');
 		scene=document.querySelector('a-scene');
 		scene.addEventListener('enter-vr',enteringVR);
-		scene.addEventListener('exiting-vr',exitingVR);		
+		scene.addEventListener('exit-vr',exitingVR);		
 		chamber=document.querySelector("#chamber");
 		arrows=document.querySelector("#main-scene-arrows");
 		floor=document.querySelector("#floor");
