@@ -108,7 +108,7 @@ AFRAME.registerComponent('homecategory', {
 		}
 		this.ti.setAttribute('visible','false');
 		var playerTo=this.el.getAttribute('position'),
-		pos=playerTo.x+" "+(playerTo.y-1.6)+" "+playerTo.z;		
+		pos=playerTo.x+" "+playerTo.y+" "+playerTo.z;		
 		evil.createAnimation('move-cat-anim',player,'position','move-cat','move-cat-stop',pos,2000,'linear');
 
 		//Create Corridors
