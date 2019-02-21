@@ -15,7 +15,7 @@ function getEvil(){
 	if(evil!==null){
 		evil=document.querySelector('[evil]').components.evil;	
 	}else{
-		setTimeout(initfunc,200);
+		setTimeout(getEvil,200);
 	}
 }
 function enteringVR(){
@@ -25,10 +25,21 @@ function exitingVR(){
 	cam.setAttribute("position","0 1.6 0");
 }
 function initfunc() {	
+	outterRing=document.querySelector('#outter-ring');
+	player=document.querySelector('#player');
+	cam=document.querySelector('#main-camera');
+	assets=document.querySelector('a-assets');
+	evil=document.querySelector('[evil]');
+	chamber=document.querySelector("#chamber");
+	arrows=document.querySelector("#main-scene-arrows");
+	floor=document.querySelector("#floor");		
+	scene=document.querySelector("a-scene"); 	
+	resize();
 	player.setAttribute("position",originalPosition);
 	scene.addEventListener('enter-vr',enteringVR);
 	scene.addEventListener('exit-vr',exitingVR);		
 	getEvil();
+
 }
 function resize() {
   var hi=window.innerHeight,wi=window.innerWidth;  
@@ -45,13 +56,3 @@ function resize() {
 }
 window.onload = initfunc;
 window.onresize = resize;
-outterRing=document.querySelector('#outter-ring');
-player=document.querySelector('#player');
-cam=document.querySelector('#main-camera');
-assets=document.querySelector('a-assets');
-evil=document.querySelector('[evil]');
-chamber=document.querySelector("#chamber");
-arrows=document.querySelector("#main-scene-arrows");
-floor=document.querySelector("#floor");		
-scene=document.querySelector("a-scene"); 	
-resize();
