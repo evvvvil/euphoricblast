@@ -11,14 +11,6 @@ socket.on('projectVideo', function (data) {
 	projectVideo=data.toString();
 	evil.changeVideo(projectVideo);
 });
-function getEvil(){
-	evil=document.querySelector('[evil]');	
-	if(evil!==null){
-		evil=document.querySelector('[evil]').components.evil;	
-	}else{
-		setTimeout(getEvil,200);
-	}
-}
 function enteringVR(){
 //we entering VR
 }
@@ -28,8 +20,7 @@ function exitingVR(){
 }
 function setupfunc(){
 	cam=document.querySelector('#main-camera');
-	resize();
-	evil=document.querySelector('[evil]');	
+	resize();	
 	evil=document.querySelector('[evil]').components.evil;	
 	outterRing=document.querySelector('#outter-ring');
 	player=document.querySelector('#player');	
@@ -37,8 +28,7 @@ function setupfunc(){
 	chamber=document.querySelector("#chamber");
 	arrows=document.querySelector("#main-scene-arrows");
 	floor=document.querySelector("#floor");
-	player.setAttribute("position",originalPosition);	
-	//getEvil();
+	player.setAttribute("position",originalPosition);
 }
 function initfunc() {		
 	scene=document.querySelector("a-scene");
