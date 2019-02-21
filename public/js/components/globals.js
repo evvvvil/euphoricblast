@@ -27,21 +27,20 @@ function exitingVR(){
 	cam.setAttribute("position","0 1.6 0");
 }
 function setupfunc(){
+	cam=document.querySelector('#main-camera');
+	resize();
 	evil=document.querySelector('[evil]');	
 	evil=document.querySelector('[evil]').components.evil;	
 	outterRing=document.querySelector('#outter-ring');
-	player=document.querySelector('#player');
-	cam=document.querySelector('#main-camera');
+	player=document.querySelector('#player');	
 	assets=document.querySelector('a-assets');
 	chamber=document.querySelector("#chamber");
 	arrows=document.querySelector("#main-scene-arrows");
-	floor=document.querySelector("#floor");		
-	//scene=document.querySelector("a-scene"); 		
+	floor=document.querySelector("#floor");
 	player.setAttribute("position",originalPosition);	
 	//getEvil();
 }
-function initfunc() {	
-	resize();
+function initfunc() {		
 	scene=document.querySelector("a-scene");
 	scene.addEventListener('enter-vr',enteringVR);
 	scene.addEventListener('exit-vr',exitingVR);	
