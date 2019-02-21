@@ -121,7 +121,7 @@ AFRAME.registerComponent('homecategory', {
 	    	cors.setAttribute("position",pos);
 	    	cors.setAttribute("rotation",rot);
 			cors.object3D.visible = true;
-	    pos=evil.wrangleDestination(-4.525,4.386,-5.508,-1.571,.426,-6.581);
+	    pos=evil.wrangleDestination(-4.525,2.786,-5.508,-1.571,-1.174,-6.581);
 		evil.createAnimation("move-corridor-anim",player,"position","move-corridor","move-corridor-stop",pos,3000,'linear');	    
     	pos=evil.wrangleDestination(-4.22,3.95,-4.97,-1.46,0.0,-5.95),
 		rot=evil.wrangleRotation(0,0);
