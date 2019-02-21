@@ -23,7 +23,7 @@ function setupfunc(){
 	if(evil!==null){
 		evil=document.querySelector('[evil]').components.evil;	
 	}else{
-		setTimeout(setupfunc,200);
+		setTimeout(setupfunc,20);
 	}
 	cam=document.querySelector('#main-camera');
 	resize();	
