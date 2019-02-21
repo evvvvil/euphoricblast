@@ -43,17 +43,15 @@ function resize() {
   		cam.setAttribute("fov","80");
   }
 }
-$(document).ready(function(){	
-	outterRing=document.querySelector('#outter-ring');
-	player=document.querySelector('#player');
-	cam=player.querySelector('#main-camera');
-	assets=document.querySelector('a-assets');
-	evil=document.querySelector('[evil]');
-	chamber=document.querySelector("#chamber");
-	arrows=document.querySelector("#main-scene-arrows");
-	floor=document.querySelector("#floor");		
-	scene=document.querySelector("a-scene"); 	
-	resize();
-});
 window.onload = initfunc;
 window.onresize = resize;
+outterRing=document.querySelector('#outter-ring');
+player=document.querySelector('#player');
+cam=player.querySelector('#main-camera');
+assets=document.querySelector('a-assets');
+evil=document.querySelector('[evil]');
+chamber=document.querySelector("#chamber");
+arrows=document.querySelector("#main-scene-arrows");
+floor=document.querySelector("#floor");		
+scene=document.querySelector("a-scene"); 	
+resize();
