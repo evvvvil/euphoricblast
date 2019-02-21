@@ -26,8 +26,9 @@ function exitingVR(){
 	console.log("exiting vr");
 	cam.setAttribute("position","0 1.6 0");
 }
-function initfunc() {	
-	resize();
+function setupfunc(){
+	evil=document.querySelector('[evil]');	
+	evil=document.querySelector('[evil]').components.evil;	
 	outterRing=document.querySelector('#outter-ring');
 	player=document.querySelector('#player');
 	cam=document.querySelector('#main-camera');
@@ -37,7 +38,14 @@ function initfunc() {
 	floor=document.querySelector("#floor");		
 	//scene=document.querySelector("a-scene"); 		
 	player.setAttribute("position",originalPosition);	
-	getEvil();
+	//getEvil();
+}
+function initfunc() {	
+	resize();
+	scene=document.querySelector("a-scene");
+	scene.addEventListener('enter-vr',enteringVR);
+	scene.addEventListener('exit-vr',exitingVR);	
+	scene.addEventListener('loaded',setupfunc);	
 }
 function resize() {
   var hi=window.innerHeight,wi=window.innerWidth;  
@@ -54,11 +62,3 @@ function resize() {
 }
 window.onload = initfunc;
 window.onresize = resize;
-scene=document.querySelector("#main-scene"); 
-var ne=document.querySelector("#aframe-container"); 	
-console.log("doc "+document);
-console.log("sce "+scene);
-console.log("ne "+ne);
-	scene.addEventListener('enter-vr',enteringVR);
-	scene.addEventListener('exit-vr',exitingVR);	
-	scene.addEventListener('loaded',initfunc);	
