@@ -12,6 +12,7 @@ socket.on('projectVideo', function (data) {
 	evil.changeVideo(projectVideo);
 });
 function getEvil(){
+	evil=document.querySelector('[evil]');	
 	if(evil!==null){
 		evil=document.querySelector('[evil]').components.evil;	
 	}else{
@@ -30,7 +31,6 @@ function initfunc() {
 	player=document.querySelector('#player');
 	cam=document.querySelector('#main-camera');
 	assets=document.querySelector('a-assets');
-	evil=document.querySelector('[evil]');
 	chamber=document.querySelector("#chamber");
 	arrows=document.querySelector("#main-scene-arrows");
 	floor=document.querySelector("#floor");		
