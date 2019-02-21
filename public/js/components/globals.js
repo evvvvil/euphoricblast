@@ -55,6 +55,8 @@ function resize() {
 window.onload = initfunc;
 window.onresize = resize;
 scene=document.querySelector("a-scene"); 	
+console.log("doc "+document);
+console.log("sce "+scene);
 	scene.addEventListener('enter-vr',enteringVR);
 	scene.addEventListener('exit-vr',exitingVR);	
 	scene.addEventListener('loaded',initfunc);	
