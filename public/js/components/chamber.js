@@ -248,9 +248,9 @@ AFRAME.registerComponent('chamber', {
 				document.querySelector("#directional-light").emit('fade-in',null,false);
 				document.querySelector('#corridor-01').setAttribute("rotation","0 0 0");
 				document.querySelector('#corridor-02').setAttribute("rotation","0 0 0");
-				evil.createAnimation("move-exit-anim",player,"position","move-exit","move-exit-stop",exitFrameWordlPos.x+" "+exitFrameWordlPos.y+" "+exitFrameWordlPos.z,"2000",'linear');
-				evil.createAnimation("move-co-vert-anim",player,"position","move-vert","move-vert-stop",exitKink1WordlPos.x+" "+exitKink1WordlPos.y+" "+exitKink1WordlPos.z,"2000",'linear');
-				evil.createAnimation("move-co-horz-anim",player,"position","move-horz","move-horz-stop",exitKink2WordlPos.x+" "+exitKink2WordlPos.y+" "+exitKink2WordlPos.z,"2000",'linear');
+				evil.createAnimation("move-exit-anim",player,"position","move-exit","move-exit-stop",exitFrameWordlPos.x+" "+(exitFrameWordlPos.y-1.6)+" "+exitFrameWordlPos.z,"2000",'linear');
+				evil.createAnimation("move-co-vert-anim",player,"position","move-vert","move-vert-stop",exitKink1WordlPos.x+" "+(exitKink1WordlPos.y-1.6)+" "+exitKink1WordlPos.z,"2000",'linear');
+				evil.createAnimation("move-co-horz-anim",player,"position","move-horz","move-horz-stop",exitKink2WordlPos.x+" "+(exitKink2WordlPos.y-1.6)+" "+exitKink2WordlPos.z,"2000",'linear');
 				evil.createAnimation("move-co-down-anim",player,"position","move-down","move-down-stop",originalPosition,"2000");
 				player.emit("move-exit",null,false);
 				this.chlewa.emit("move-back",null,false);

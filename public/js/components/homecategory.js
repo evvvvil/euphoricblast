@@ -108,14 +108,14 @@ AFRAME.registerComponent('homecategory', {
 		}
 		this.ti.setAttribute('visible','false');
 		var playerTo=this.el.getAttribute('position'),
-		pos=playerTo.x+" "+playerTo.y+" "+playerTo.z;		
+		pos=playerTo.x+" "+(playerTo.y-1.6)+" "+playerTo.z;		
 		evil.createAnimation('move-cat-anim',player,'position','move-cat','move-cat-stop',pos,2000,'linear');
 
 		//Create Corridors
 	    scene.querySelector('#box-corridor-0'+category).object3D.visible=false;
 
 		var cors = document.querySelector("#corridors");
-			pos=evil.wrangleDestination(-4.16,2.786,-4.877,-1.445,-1.174,-5.865),
+			pos=evil.wrangleDestination(-4.16,4.386,-4.877,-1.445,.426,-5.865),
 			rot=evil.wrangleRotation(-135,-135);		
 	    	cors.setAttribute("position",pos);
 	    	cors.setAttribute("rotation",rot);
