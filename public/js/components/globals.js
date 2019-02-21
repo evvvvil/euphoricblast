@@ -46,9 +46,9 @@ function resize() {
   if (wi>hi){
   	if(wi<768)
   	{
-  		cam.setAttribute("fov","40");
+  		cam.setAttribute("fov","30");
   	}else{  		
-  		cam.setAttribute("fov","70");
+  		cam.setAttribute("fov","30");
   	}
   }else{
   		cam.setAttribute("fov","80");
