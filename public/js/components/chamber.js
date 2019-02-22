@@ -108,7 +108,7 @@ AFRAME.registerComponent('chamber', {
 
 		//CHAMBER PROJECT IMAGES
 		for(var i=0;i<9;i++){
-			var imgPos = (-0.5+i%3*0.5)+" "+(.27+Math.floor(i/3)*0.27)+" "+(-2.1),
+			var imgPos = (-0.5+i%3*0.5)+" "+(0.81-Math.floor(i/3)*0.27)+" "+(-2.1),
 			imageOptions={
 				'id': 'project-images-'+i,
 				'class': 'project-images',
