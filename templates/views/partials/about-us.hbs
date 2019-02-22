@@ -2,17 +2,34 @@
 <!--ABOUT US-->
 <!--||||||||-->
 <section id="section-about-us">
-<div class="container-fluid background grey">
-	<div class="row">
-		<div class="container text-container">
-			<div class="row page-header-row">
-				<div class="col-sm-12 col-md-12 text-col">
-				{{#if data.post2.content.brief}}<h3>{{{data.post2.content.brief}}}</h3>{{/if}}
-				{{#if data.post2.content.extended}}{{{data.post2.content.extended}}}{{/if}}
-				{{#and data.post2.mainImage.exists data.post2.mainImageShow}}<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post2.mainImage width='auto' height=202 q='70' crop='fill' gravity='center'}}"/>{{/and}}				
-				</div>				
+{{#or data.post.content.extended data.post.content.more}}
+<div class="container-fluid background light-grey">
+		<div class="row">
+			<div class="container text-container">
+				<div class="row">
+					{{#and data.post.content.extended data.post.content.more}}
+					<div class="col-sm-8 col-md-8 text-col content-extended">
+						{{{data.post.content.extended}}}
+					</div>
+					<div class="col-sm-4 col-md-4 text-col content-more">
+						{{{data.post.content.more}}}
+						{{>read-more}}
+					</div>
+					{{else}}
+						{{#if data.post.content.extended}}
+							<div class="col-sm-12 col-md-12 text-col content-extended">
+								{{{data.post.content.extended}}}
+							</div>
+						{{else}}
+							<div class="col-sm-12 col-md-12 text-col content-more">
+								{{{data.post.content.more}}}
+								{{>read-more}}
+							</div>
+						{{/if}}
+					{{/and}}					
+				</div>
 			</div>
 		</div>
 	</div>
-</div>	
+{{/or}}
 </section>
