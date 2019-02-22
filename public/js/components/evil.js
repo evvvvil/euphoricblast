@@ -162,6 +162,9 @@ AFRAME.registerComponent('evil', {
 		console.log(html);
 		html=html.replace( /<\/p>/g,'\n');
 		console.log(html);
+		var tmp = document.createElement("DIV");
+		tmp.innerHTML = html;
+		html= tmp.textContent || tmp.innerText;
 	   if(html.length>650){
 	   	html=html.substring(0,650);
 	   	console.log(html);
@@ -170,9 +173,7 @@ AFRAME.registerComponent('evil', {
 	   	html+="...";
 	   	console.log(html);
 	   }
-	   var tmp = document.createElement("DIV");
-		tmp.innerHTML = html;
-		return tmp.textContent || tmp.innerText;
+		return html;
 	},
 	animateObjects: function(direction,stringo,lengtho,indexToAvoid) {
 		//console.log("animating this: "+stringo+" counter: "+animCounter+" lengtho: "+lengtho+" avoiding: "+indexToAvoid);
