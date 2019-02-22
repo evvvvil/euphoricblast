@@ -160,7 +160,7 @@ AFRAME.registerComponent('evil', {
 		console.log(html);
 		html=html.replace(/&nbsp;/g,' ');
 		console.log(html);
-		html=html.replace('/p>','\n');
+		html=html.replace( /<\/p>/g,'\n');
 		console.log(html);
 	   if(html.length>650){
 	   	html=html.substring(0,650);
