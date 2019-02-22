@@ -157,21 +157,17 @@ AFRAME.registerComponent('evil', {
 	},
 	strip: function(html)
 	{
-		console.log(html);
-		html=html.replace(/&nbsp;/g,' ');
-		console.log(html);
+		html=html.replace(/<\/br><\/br ><br>&nbsp;/g,' ');
 		html=html.replace( /<\/p>/g,'\n');
-		console.log(html);
 		var tmp = document.createElement("DIV");
 		tmp.innerHTML = html;
 		html= tmp.textContent || tmp.innerText;
 	   if(html.length>666){
 	   	html=html.substring(0,666);
-	   	console.log(html);
 	   	var finalSpace=html.lastIndexOf(' ');
-	   	html=html.substring(0,finalSpace-1);
+	   	html=html.substring(0,finalSpace);
 	   	html+="...";	   	
-	   	console.log(html);
+	   	//console.log(html);
 	   }
 		return html;
 	},
