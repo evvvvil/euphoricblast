@@ -159,10 +159,11 @@ AFRAME.registerComponent('evil', {
 	{
 		console.log(html);
 		html=html.replace(/&nbsp;/g,' ');
-		
-		//console.log(html);
-	   if(html.length>592){
-	   	html=html.substring(0,592);
+		console.log(html);
+		html=html.replace('/p>','\n');
+		console.log(html);
+	   if(html.length>650){
+	   	html=html.substring(0,650);
 	   	console.log(html);
 	   	var finalSpace=html.lastIndexOf(' ');
 	   	html=html.substring(0,finalSpace-1);
