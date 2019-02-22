@@ -28,8 +28,8 @@ exports = module.exports = function (req, res) {
 		
 		
 		q.exec(function (err, results) {
-			if(results[0]!==undefined)	locals.data.post = results[0];
-			if(results[1]!==undefined) locals.data.post2 = results[1];
+			if(results[0]!==undefined)	locals.data.post = results[1];
+			if(results[1]!==undefined) locals.data.post2 = results[0];
 			next(err);
 		});
 	});
