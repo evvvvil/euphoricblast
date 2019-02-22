@@ -164,7 +164,7 @@ AFRAME.registerComponent('evil', {
 	   if(html.length>592){
 	   	html=html.substring(0,592);
 	   	console.log(html);
-	   	var finalSpace=hmtl.lastIndexOf(' ');
+	   	var finalSpace=html.lastIndexOf(' ');
 	   	html=html.substring(0,finalSpace-1);
 	   	html+="...";
 	   	console.log(html);
