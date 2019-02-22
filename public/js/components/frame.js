@@ -127,7 +127,7 @@ AFRAME.registerComponent('frame', {
 			}
 		var currentProject=projects[projectIndex];
 		evil.getProjectVideo(event,currentProject.video); 
-		numOfImages=Math.min(6,currentProject.images.length);
+		numOfImages=Math.min(9,currentProject.images.length);
 		for(var i=0;i<numOfImages;i++){
 			par.querySelector("#project-images-"+i).setAttribute("chamber_image","source",evil.wrangleImageSource(currentProject.images[i]));
 		}	
