@@ -17,17 +17,19 @@ exports = module.exports = function (req, res) {
 	locals.enquiryFailed = false;
 	locals.data = {
 		post: "",
+		post2: "",
 	};
 	// Load the page post
 	view.on('init', function (next) {
-		var q = keystone.list('Post').model.findOne({
+		var q = keystone.list('Post').model.find({
 				type: 'page content',
 				whichMainPage: locals.section.toLowerCase(),				
 			});			
 		
 		
-		q.exec(function (err, result) {
-			locals.data.post = result;
+		q.exec(function (err, results) {
+			if(results[0]!==undefined)	locals.data.post = results[0];
+			if(results[1]!==undefined) locals.data.post2 = results[1];
 			next(err);
 		});
 	});

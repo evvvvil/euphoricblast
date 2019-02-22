@@ -1,0 +1,18 @@
+<section id="section-page-header-about">
+{{#or data.post2.content.brief (and data.post2.mainImage.exists data.post2.mainImageShow)}}
+<div class="container-fluid background grey">
+	<div class="row">
+		<div class="container text-container">
+			<div class="row page-header-row">
+				<div class="col-sm-12 col-md-12 text-col">
+				{{#if data.post2.content.brief}}<h3>{{{data.post2.content.brief}}}</h3>{{/if}}
+				{{#if data.post2.content.extended}}{{{data.post2.content.extended}}}{{/if}}
+				{{#and data.post2.mainImage.exists data.post2.mainImageShow}}<img class="cld-responsive img-responsive" data-src="{{cloudinaryUrl data.post2.mainImage width='auto' height=202 q='70' crop='fill' gravity='center'}}"/>{{/and}}
+				</div>				
+			</div>
+		</div>
+	</div>
+</div>	
+{{/or}}
+{{/if}}
+</section>
