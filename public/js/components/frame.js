@@ -105,11 +105,13 @@ AFRAME.registerComponent('frame', {
 	},
 	handleFrameEnter: function (){
 		this.backgroundEl.setAttribute('material','src',this.data.hover);
+		this.titleEl.setAttribute('text','color','black');
 		outterRing.object3D.visible=true;
 		outterRing.emit('circle-reveal',null,false);
 	},
 	handleFrameLeave: function () {		
 		this.backgroundEl.setAttribute('material','src',this.data.material);
+		this.titleEl.setAttribute('text','color','white');
 		outterRing.emit('circle-stop',null,false);
 		outterRing.setAttribute('theta-length', 0.1);			
 		outterRing.object3D.visible=false;
