@@ -115,7 +115,7 @@ AFRAME.registerComponent('chamber', {
 				'geometry':'primitive:plane;width:.46;height:.23',
 				'width': 0.43,
 				'height': 0.21,
-				'position': imgPos
+				'position': imgPos,
 			};
 			evil.createEntityWithComponent("chamber_image",el,imageOptions);					
 		}
