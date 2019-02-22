@@ -179,6 +179,7 @@ AFRAME.registerComponent('chamber', {
 
 	    for(var i=0;i<12;i++){
 			var pos = (-0.5+i%3*0.5)+" "+(.3+Math.floor(i/3)*0.3)+" "+(-2.1);
+			var rot = "0 "+(.2-Math.floor(i/3)*0.2)+" 0";
 			var projectOptions={
 				'id':'project'+i,
 				'class':'Projects',
@@ -187,7 +188,8 @@ AFRAME.registerComponent('chamber', {
 				'geometry':'primitive:plane;width:.46;height:.25875',
 				'material':'#category-background-mat',
 				'hover':'#category-background-hover',
-				'position':pos
+				'position':pos,
+				'rotation':rot,
 			};
 			evil.createEntityWithComponent("frame",el,projectOptions);
 		}	

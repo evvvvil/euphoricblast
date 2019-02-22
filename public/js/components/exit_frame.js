@@ -78,7 +78,6 @@ AFRAME.registerComponent('exit_frame', {
 		var allProjs=chamber.querySelectorAll(".Projects");
 		if(projectShown) {
 			chamber.querySelector("#project"+projectIndex+"-image").emit("back-clicked");			
-			console.log("projectHasVideo "+projectHasVideo);
 			if(projectHasVideo) {
 				var vid=chamber.querySelector("#project-video-group");
 				vid.emit("fade-stop",null,false);
