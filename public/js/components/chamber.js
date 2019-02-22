@@ -107,8 +107,8 @@ AFRAME.registerComponent('chamber', {
 		evil.createEntityWithComponent("exit_frame",el,backFrameOptions);
 
 		//CHAMBER PROJECT IMAGES
-		for(var i=0;i<6;i++){
-			var imgPos = (-0.5+i%3*0.5)+" "+(.3+Math.floor(i/3)*0.3)+" "+(-2.1),
+		for(var i=0;i<9;i++){
+			var imgPos = (-0.5+i%3*0.5)+" "+(.27+Math.floor(i/3)*0.27)+" "+(-2.1),
 			imageOptions={
 				'id': 'project-images-'+i,
 				'class': 'project-images',
