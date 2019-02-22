@@ -159,14 +159,19 @@ AFRAME.registerComponent('evil', {
 	{
 		console.log(html);
 		html=html.replace(/&nbsp;/g,' ');
-		console.log(html);
+		
 		//console.log(html);
-	   /*if(reducedHTML.length>592){
-	   	reducedHTML=reducedHTML.substring(0,592)+"...";	
-	   }*/
+	   if(html.length>592){
+	   	html=html.substring(0,592);
+	   	console.log(html);
+	   	var finalSpace=hmtl.lastIndexOf(' ');
+	   	html=html.substring(0,finalSpace-1);
+	   	html+="...";
+	   	console.log(html);
+	   }
 	   var tmp = document.createElement("DIV");
-tmp.innerHTML = html;
-return tmp.textContent || tmp.innerText;
+		tmp.innerHTML = html;
+		return tmp.textContent || tmp.innerText;
 	},
 	animateObjects: function(direction,stringo,lengtho,indexToAvoid) {
 		//console.log("animating this: "+stringo+" counter: "+animCounter+" lengtho: "+lengtho+" avoiding: "+indexToAvoid);
