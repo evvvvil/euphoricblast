@@ -158,7 +158,7 @@ AFRAME.registerComponent('evil', {
 	strip: function(html)
 	{
 		console.log(html);
-		html=html.replace("&nbsp;"," ");
+		html=html.replace(/&nbsp;/g,' ');
 		console.log(html);
 		//console.log(html);
 	   /*if(reducedHTML.length>592){
