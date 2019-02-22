@@ -56,17 +56,19 @@ AFRAME.registerComponent('exit_frame', {
 		if(data.textflip) {rott="0 180 0";shiftt.x=0.035;};
 		var te=evil.createEntity(el,{'id':data.id+'-title','geometry':"align:"+data.align+"; value:"+data.title+"; width:"+data.width+"; height: +"+data.height+"+; color: white;",
 			'position':data.textshift.x+' '+data.textshift.y+' 0','rotation':rott,'class':data.class+'-titles'});
-
 		if(data.vertical) te.setAttribute('rotation',"0 0 90");
+		this.te=te;
 	},
 	handleFrameEnter: function (){
 		this.background.setAttribute('material','src',this.data.hover);
+		this.te.setAttribute('text','color','black');
 		outterRing.object3D.visible=true;		
 		outterRing.emit('circle-reveal',null,false);
 		event.stopPropagation();	
 	},
 	handleFrameLeave: function () {		
 		this.background.setAttribute('material','src',this.data.material);
+		this.te.setAttribute('text','color','white');
 		outterRing.emit('circle-stop',null,false);
 		outterRing.setAttribute('theta-length', 0.1);			
 		outterRing.object3D.visible=false;
