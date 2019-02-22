@@ -156,8 +156,8 @@ module.exports = function () {
 		var whatWeDo="Interactive design, virtual reality, 3d VFX, video games, motion graphics, web development, projection, VJing, graphic design.";	
 			if(section=="Home"){
 				return intro+" "+whatWeDo;
-			}else if(section=="Contact"){
-				return "Euphoric Blast contact page. Faster than drones & pigeon mail. "+intro;
+			}else if(section=="About"){
+				return "Euphoric Blast is a new London creative studio. "+intro;
 			}else{
 				var description;
 				section=_.startCase(section);
@@ -193,8 +193,6 @@ module.exports = function () {
 		var generalKeywords="interactive design,virtual reality,3d,vfx,motion graphics,projection mapping,graphic design,web development,video games,vjing,london,projection,motion,virtual,reality,design,interactive";	
 		if(section=="Home"){
 			return "euphoric,blast,"+generalKeywords;
-		}else if(section=="Contact"){
-			return "contact,form,"+generalKeywords;
 		}else{
 			var keywords;
 			section=section.toLowerCase();
