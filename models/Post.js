@@ -19,7 +19,7 @@ Post.add({
 	state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true, dependsOn: { type: ['work','lab','blog','page paragraph'] }  },	
 	publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } },	
 	pageType: { type: Types.Select, options: 'main page, sub page', index: true, dependsOn: { type: ['page content','page paragraph'] }},
-	whichMainPage: { type: Types.Select, options: 'home, work, lab, blog, contact', index: true, dependsOn: {pageType: 'main page' } },
+	whichMainPage: { type: Types.Select, options: 'home, work, lab, blog, contact, about', index: true, dependsOn: {pageType: 'main page' } },
 	whichSubPage: { type: Types.Relationship, ref: 'PostCategory', index: true, dependsOn: {pageType: 'sub page' }, note: 'SAVE and REFRESH if you change this field to get correct filtered posts in "Posts Order"'},
 	backgroundColor: { type: Types.Select, options: 'black, dark-grey, grey, light-grey, white', dependsOn: {type: 'page paragraph' } },
 	categories: { type: Types.Relationship, ref: 'PostCategory', index: true, many: true, dependsOn: {type: ['work','lab'] }},

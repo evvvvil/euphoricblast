@@ -24,7 +24,7 @@ exports.initLocals = function (req, res, next) {
 		{ label: 'Lab', key: 'Lab', href: '/lab' },
 		//{ label: 'Blog', key: 'Blog', href: '/blog' },
 		//{ label: 'Gallery', key: 'gallery', href: '/gallery' },
-		{ label: 'Contact', key: 'Contact', href: '/contact' },
+		{ label: 'About', key: 'About', href: '/about' },
 	];
 	res.locals.io=keystone.get('io');
 	res.locals.user = req.user;
