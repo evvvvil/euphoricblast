@@ -165,12 +165,12 @@ AFRAME.registerComponent('evil', {
 		var tmp = document.createElement("DIV");
 		tmp.innerHTML = html;
 		html= tmp.textContent || tmp.innerText;
-	   if(html.length>650){
-	   	html=html.substring(0,650);
+	   if(html.length>666){
+	   	html=html.substring(0,666);
 	   	console.log(html);
 	   	var finalSpace=html.lastIndexOf(' ');
 	   	html=html.substring(0,finalSpace-1);
-	   	html+="...";
+	   	html+="...";	   	
 	   	console.log(html);
 	   }
 		return html;
