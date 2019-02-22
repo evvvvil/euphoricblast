@@ -80,12 +80,7 @@ exports = module.exports = function (req, res) {
 				/*var inter = _.intersectionBy(results, locals.data.orderedPosts, "slug");
 				var diff = _.difference(results,inter);				
 				locals.data.posts = diff;*/
-
 				locals.data.posts = results;
-				for(int i=0;i<locals.data.posts.length;i++){
-				local.data.posts[i].content.extended=AFstrip(local.data.posts[i].content.extended);		
-				}
-				
 				locals.io.emit('projectsData', locals.data.posts);				
 				next(err);
 			});

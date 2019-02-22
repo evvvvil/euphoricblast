@@ -157,15 +157,13 @@ AFRAME.registerComponent('evil', {
 	},
 	strip: function(html)
 	{
-		html=html.replace("&nbsp;"," ");
-	   var tmp = document.createElement("DIV"),
-	   reducedHTML=html.replace(/<\/p>/gm, "\n");   
-	   if(reducedHTML.length>592){
+		//html=html.replace("&nbsp;"," ");
+	   /*if(reducedHTML.length>592){
 	   	reducedHTML=reducedHTML.substring(0,592)+"...";	
-	   }
-	   //reducedHTML="\n"+reducedHTML+"\n";   
-	   tmp.innerHTML = reducedHTML;
-	   return tmp.textContent||tmp.innerText;
+	   }*/
+	   var tmp = document.createElement("DIV");
+tmp.innerHTML = html;
+return tmp.textContent || tmp.innerText;
 	},
 	animateObjects: function(direction,stringo,lengtho,indexToAvoid) {
 		//console.log("animating this: "+stringo+" counter: "+animCounter+" lengtho: "+lengtho+" avoiding: "+indexToAvoid);
