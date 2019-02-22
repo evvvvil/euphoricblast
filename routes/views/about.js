@@ -8,7 +8,7 @@ exports = module.exports = function (req, res) {
 	var locals = res.locals;
 
 	// Set locals
-	locals.section = 'Contact';
+	locals.section = 'About';
 	locals.orginalURL="http://www.euphoricblast.com"+req.originalUrl;
 	//locals.enquiryTypes = Enquiry.fields.enquiryType.ops;
 	locals.formData = req.body || {};
@@ -88,5 +88,5 @@ new Email('./templates/views/partials/email-enquiry.hbs', {
 	});
 });		
 
-	view.render('contact', { bodyId: 'contact-page', carousel:'whatever', cloudinaryResponsive: 'whatever'});
+	view.render('about', { bodyId: 'contact-page', carousel:'whatever', cloudinaryResponsive: 'whatever'});
 };

@@ -42,7 +42,7 @@ exports = module.exports = function (app) {
 	app.all('/vr/', routes.views.vr);
 	//app.all('/vt/', routes.views.vt);
 	app.get('/lab/:post', routes.views.post);	
-	app.all('/contact', routes.views.contact);
+	app.all('/about', routes.views.about);
 	app.get('/:category?', routes.views.work);
 	app.get('/:category?/:post', routes.views.post);
 	//app.get('/blog/', routes.views.blog);
