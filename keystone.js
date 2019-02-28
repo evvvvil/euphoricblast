@@ -61,7 +61,7 @@ keystone.set('nav', {
 
 //ADD NEW MODEL LIKE THIS:
 //posts: ['posts', 'post-categories', 'PostPageContent'],
-
+keystone.set('cloudinary secure', true);
 
 
 // Start Keystone to connect to your database and initialise the web server

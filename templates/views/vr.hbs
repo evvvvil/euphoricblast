@@ -57,7 +57,7 @@
 		</a-entity>		
 		<!--CATEGORIES-->	
 		{{#each data.categories}}
-		<a-entity class="category-container" homecategory="id:cat-{{add @index 1}};position:{{AFgetCategoriesPos @index 0 0}};rotation:{{AFgetCategoriesRot @index 0 0}};width:.69;height:.5;title:{{name}};index:{{add @index 1}};image:{{cloudinaryUrl (AFgetCategoriesImage ../data.featuredPosts name) width='512' height='256' q='70' crop='fill' gravity='center' secure='true'}}"></a-entity>
+		<a-entity class="category-container" homecategory="id:cat-{{add @index 1}};position:{{AFgetCategoriesPos @index 0 0}};rotation:{{AFgetCategoriesRot @index 0 0}};width:.69;height:.5;title:{{name}};index:{{add @index 1}};image:{{cloudinaryUrl (AFgetCategoriesImage ../data.featuredPosts name) width='512' height='256' q='70' crop='fill' gravity='center' secure=true}}"></a-entity>
 		<a-box id="box-corridor-0{{add @index 1}}" class="box-corridors" depth="3" width=".4" height=".4" position="{{AFgetCorridorsPos @index -4.16 4.386 -4.877 -1.445 0.426 -5.865}}" rotation="{{AFgetCategoriesRot @index -144 -126}}" material="color: white"></a-box>
 		{{/each}}
 		<!--LECTURN-->
