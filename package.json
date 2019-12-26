@@ -9,7 +9,7 @@
     "compression": "^1.7.2",
     "dotenv": "4.0.0",
     "express-handlebars": "3.0.0",
-    "handlebars": "4.0.6",
+    "handlebars": "4.3.0",
     "handlebars-utils": "^1.0.6",
     "keystone": "https://github.com/evvvvil/keystone/tarball/cloudinaryimages-support-folders",
     "keystone-email": "^1.0.5",
