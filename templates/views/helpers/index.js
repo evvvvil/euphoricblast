@@ -18,8 +18,8 @@ function tidyShitUp(toTidy,lower){
 	if(lower>0){
 		return _.replace(_.replace(_.replace(_.replace(toTidy.toLowerCase(),'-and-', ' & '),'-',' '),'vfx','VFX'),'vjin','VJin');
 	}else{
-		return _.replace(_.replace(_.replace(_.replace(_.capitalize(toTidy),'-and-', ' & '),'-',' '),'vfx','VFX'),'vjin','VJin');	
-	}	
+		return _.replace(_.replace(_.replace(_.replace(_.capitalize(toTidy),'-and-', ' & '),'-',' '),'vfx','VFX'),'vjin','VJin');
+	}
 }
 
 module.exports = function () {
@@ -31,19 +31,19 @@ module.exports = function () {
 	 * ===================
 	 */
 
-	_helpers.AFgetCategoriesPos = function (index,yOffset,zOffset) {		
-		var modIndex=index%4,x=-1.14,y=2.706,z=.355;		
+	_helpers.AFgetCategoriesPos = function (index,yOffset,zOffset) {
+		var modIndex=index%4,x=-1.14,y=2.706,z=.355;
 		if(modIndex>0&&modIndex<3) {x=-.397;z=.085;}
 		if(modIndex>1) x*=-1;
 		if(index>3) y-=.6;
 		y+=yOffset;
 		z+=zOffset;
-		return x+" "+y+" "+z;		
+		return x+" "+y+" "+z;
 	};
 
-	_helpers.AFstrip = function (what) {		
+	_helpers.AFstrip = function (what) {
 		return new Handlebars.SafeString(what);
-	};   
+	};
 
 	_helpers.AFgetCategoriesImage = function (featuredProj,catName) {
 		var res;
@@ -60,35 +60,35 @@ module.exports = function () {
 				if(found.mainImage!==null&&found.mainImage!==undefined){
 					res= found.mainImage; break;
 				}else{
-					res=''; 
+					res='';
 				}
 			}else{
 				res= '';
-			}			
+			}
 		}
 		return res;
 	};
 
-	_helpers.AFgetCorridorsPos = function (index,x1,y1,z1,x2,y2,z2) {		
-		var modIndex=index%4,x=x1,y=y1,z=z1;		
+	_helpers.AFgetCorridorsPos = function (index,x1,y1,z1,x2,y2,z2) {
+		var modIndex=index%4,x=x1,y=y1,z=z1;
 		if(modIndex>0&&modIndex<3) {x=x2;z=z2;}
 		if(modIndex>1) x*=-1;
 		if(index>3) y=y2;
-		return x+" "+y+" "+z;		
+		return x+" "+y+" "+z;
 	};
 
-	_helpers.AFgetCategoriesRot = function (index,z1,z2) {		
+	_helpers.AFgetCategoriesRot = function (index,z1,z2) {
 		var modIndex=index%4,y=30,z=z1;
 		if(modIndex>0&&modIndex<3) y=10;
 		if(modIndex>1){ y*=-1;z=z2;}
-		return 0+" "+y+" "+z;		
-	};
-	
-	_helpers.printName = function (a) {		
-			return a["name.full"];		
+		return 0+" "+y+" "+z;
 	};
 
-	_helpers.jsonView = function (a) {		
+	_helpers.printName = function (a) {
+			return a["name.full"];
+	};
+
+	_helpers.jsonView = function (a) {
 		//console.log(_.map(a, 'name'));
 			return JSON.stringify(a);
 			//_.map(a, 'name');
@@ -119,8 +119,8 @@ module.exports = function () {
 		}
 	};
 
-	_helpers.pageTitle = function (section, category, postTitle, postType) {	
-		var intro=" - London Creative Studio";	
+	_helpers.pageTitle = function (section, category, postTitle, postType) {
+		var intro=" - London Creative Studio";
 			if(section=="Home"){
 				return intro;
 			}else{
@@ -131,29 +131,29 @@ module.exports = function () {
 						description=" - "+postTitle;
 					}else{
 						description=" - "+tidyShitUp(category,0);
-					}					
+					}
 				}else{
 					if(section=="Lab"){
 						if(postType=="work"||postType=="lab"||postType=="blog"){
 							description=" - "+postTitle;
 						}else{
 							description=" - Lab";
-						}						
+						}
 					}else{
-						description=" - "+section;						
-					}					
-				}						
+						description=" - "+section;
+					}
+				}
 				return description;
 			}
 	};
 
-	_helpers.add = function (a, b) {		
-			return  (a+b);		
+	_helpers.add = function (a, b) {
+			return  (a+b);
 	};
 
-	_helpers.getMetaDescription = function (section, category, postTitle, postType, postContentBrief) {	
-		var intro="We're amazing and we never spill our tea.";	
-		var whatWeDo="Interactive design, virtual reality, 3d VFX, video games, motion graphics, web development, projection, VJing, graphic design.";	
+	_helpers.getMetaDescription = function (section, category, postTitle, postType, postContentBrief) {
+		var intro="We're amazing and we never spill our tea.";
+		var whatWeDo="Interactive design, virtual reality, 3d VFX, video games, motion graphics, web development, projection, VJing, graphic design.";
 			if(section=="Home"){
 				return intro+" "+whatWeDo;
 			}else if(section=="About"){
@@ -169,28 +169,28 @@ module.exports = function () {
 						}
 					}else{
 						description="Euphoric Blast "+tidyShitUp(category,1)+" projects.";
-					}					
+					}
 				}else{
 					if(section=="Lab"){
 						description="Euphoric Blast digital experiments.";
 					}else{
-						description=section+" page. "+whatWeDo+" "+intro;	
+						description=section+" page. "+whatWeDo+" "+intro;
 					}
-				}						
+				}
 				return description;
 			}
 	};
 
 	_helpers.getFacebookOGImage = function (postType, image) {
 		if(postType=="work"||postType=="lab"||postType=="blog"){
-			return image;				
+			return image;
 		}else{
 			return "http://www.euphoricblast.com/images/og-image.jpg";
 		}
 	};
 
-	_helpers.getMetaKeywords = function (section, category, postTitle, postType, postContentBrief) {	
-		var generalKeywords="interactive design,virtual reality,3d,vfx,motion graphics,projection mapping,graphic design,web development,video games,vjing,london,projection,motion,virtual,reality,design,interactive";	
+	_helpers.getMetaKeywords = function (section, category, postTitle, postType, postContentBrief) {
+		var generalKeywords="interactive design,virtual reality,3d,vfx,motion graphics,projection mapping,graphic design,web development,video games,vjing,london,projection,motion,virtual,reality,design,interactive";
 		if(section=="Home"){
 			return "euphoric,blast,"+generalKeywords;
 		}else{
@@ -199,34 +199,34 @@ module.exports = function () {
 			keywords=section;
 			if(category!==undefined){
 				category=tidyShitUp(category,1)
-				keywords+=","+category+","+category.replace("&","").replace(/[\s,]+/g,",");				
+				keywords+=","+category+","+category.replace("&","").replace(/[\s,]+/g,",");
 			}
 			if(postType=="work"||postType=="lab"||postType=="blog"){
 				keywords+=","+postTitle.replace(/[\s,]+/g,",").toLowerCase();
 			}else{
 				if(category==undefined){
-					keywords+=","+generalKeywords;				
+					keywords+=","+generalKeywords;
 				}
 			}
 			return keywords;
 		}
-	};	
+	};
 
 	_helpers.addLength = function (a, b) {
 		var countA=0;var countB=0;
 		if(a!==undefined) countA=a.length;
 		if(b!==undefined) countB=b.length;
-			return  (countA+countB);		
+			return  (countA+countB);
 	};
 
 	_helpers.getLength = function (a) {
 		var countA=0;
 		if(a!==undefined) countA=a.length;
-			return  (countA);		
-	};	
+			return  (countA);
+	};
 
 	_helpers.ifeq = function (a, b, options) {
-		if (a == b) { 
+		if (a == b) {
 			return options.fn(this);
 		} else {
 			return options.inverse(this);
@@ -234,7 +234,7 @@ module.exports = function () {
 	};
 
 	_helpers.ifcontains = function (a, b, options) {
-		if (a.includes(b)) { 
+		if (a.includes(b)) {
 			return options.fn(this);
 		} else {
 			return options.inverse(this);
@@ -242,7 +242,7 @@ module.exports = function () {
 	};
 
 	_helpers.iflt = function (a, b, options) {
-		if (a < b) { 
+		if (a < b) {
 			return options.fn(this);
 		} else {
 			return options.inverse(this);
@@ -273,7 +273,7 @@ module.exports = function () {
 		}
 	};
 
-	_helpers.ifundefined = function (a, options) {		
+	_helpers.ifundefined = function (a, options) {
 		if (a == undefined) { // eslint-disable-line eqeqeq
 			return options.fn(this);
 		} else {
@@ -281,7 +281,7 @@ module.exports = function () {
 		}
 	};
 
-	_helpers.ifdefined = function (a, options) {		
+	_helpers.ifdefined = function (a, options) {
 		if (a !== undefined) { // eslint-disable-line eqeqeq
 			return options.fn(this);
 		} else {
@@ -289,7 +289,7 @@ module.exports = function () {
 		}
 	};
 
-	_helpers.ifdefined = function (a, options) {		
+	_helpers.ifdefined = function (a, options) {
 		if (a !== undefined) { // eslint-disable-line eqeqeq
 			return options.fn(this);
 		} else {
@@ -341,37 +341,37 @@ module.exports = function () {
 
 	_helpers.ifCropLeftOvers = function (a,numOfProjects,offset, options) {
 
-	a+=offset;	
+	a+=offset;
 		if(numOfProjects==1){
 				return options.fn(this);
-		}else{			
+		}else{
 			if(numOfProjects%5==4||numOfProjects%5==1){
 
 				if(numOfProjects-a<2|| numOfProjects==4){
 					return options.fn(this);
-				}				
-			}			
+				}
+			}
 		}
-		return options.inverse(this);				
+		return options.inverse(this);
 	};
 
 	_helpers.ifSmallDevice = function (a, options) {
 		if(a<=768){
 				return options.fn(this);
-		}else{			
-			return options.inverse(this);				
+		}else{
+			return options.inverse(this);
 		}
 	};
 
-	_helpers.ifSectionOrProject = function (a,b,c,options) {		
+	_helpers.ifSectionOrProject = function (a,b,c,options) {
 		if(a==b||(a=="Project" && _.lowerCase(b)==c)){
 				return options.fn(this);
-		}else{			
-		return options.inverse(this);									
+		}else{
+		return options.inverse(this);
 		}
 	};
 
-	_helpers.getColAdvanced = function (a,numOfProjects,offset) {	
+	_helpers.getColAdvanced = function (a,numOfProjects,offset) {
 		a+=offset;
 		if(numOfProjects<5){
 			if(numOfProjects==2||numOfProjects==4){
@@ -379,12 +379,12 @@ module.exports = function () {
 			}else{
 				if(numOfProjects==3) return ("col-md-4");
 				return ("col-md-12");
-			}			
-		}else{			
-			if(numOfProjects%5==1||numOfProjects%5==4){				
+			}
+		}else{
+			if(numOfProjects%5==1||numOfProjects%5==4){
 				if(a==(numOfProjects-1)){
 					return ("col-md-12");
-				}				
+				}
 			}else if(numOfProjects>6 && (numOfProjects-7)%5==0){
 				if(numOfProjects-a<3){
 					return ("col-md-6");
@@ -395,7 +395,7 @@ module.exports = function () {
 			}else{
 				return("col-md-6");
 			}
-		}					
+		}
 	};
 
 	_helpers.getVideoURL = function (a,b) {
@@ -420,13 +420,13 @@ module.exports = function () {
 		}
 	};
 	_helpers.ifLocationIsWeb = function (a,options) {
-		if(a.includes("www")){
+		if(a.includes("www")|| a.includes("https")|| a.includes("http")){
 			return options.fn(this);
 		} else {
 			return options.inverse(this);
 		}
-		
-		
+
+
 	};
 
 
@@ -597,10 +597,10 @@ module.exports = function () {
 	_helpers.postUrl = function (postSlug, category, section, options) {
 		if(category===undefined) {
 			if(section=='Lab'){
-				category='lab/';	
+				category='lab/';
 			}else{
-				category='';	
-			}			
+				category='';
+			}
 		}else{
 			category+='/';
 		}
@@ -621,7 +621,7 @@ module.exports = function () {
 	_helpers.capitalise = function (a) {
 		return _.capitalize(a);
 	};
-	_helpers.tidyAndCapitalise = function (a) {		
+	_helpers.tidyAndCapitalise = function (a) {
 		return tidyShitUp(a,0);
 	};
 
@@ -747,28 +747,28 @@ module.exports = function () {
 	};
 	_helpers.ifPostIsInCategory = function (categories, category, options) {
 		var found=false;
-	
+
 			if(categories[0].name==category){
 				found=true;
 			}
 		if(found){
 			return options.fn(this);
 		}else{
-			return options.inverse(this);	
+			return options.inverse(this);
 		}
-		
+
 	};
 	_helpers.ifPostIsInCategoryKey = function (categories, category, options) {
-		var found=false;	
+		var found=false;
 			if(categories[0].key==category){
 				found=true;
 			}
 		if(found){
 			return options.fn(this);
 		}else{
-			return options.inverse(this);	
+			return options.inverse(this);
 		}
-		
+
 	};
 
 
