@@ -12,6 +12,7 @@ var cssLinkTemplate = _.template('<link href="<%= href %>" rel="stylesheet">');
 
 var toTidy, lower;
 function tidyShitUp(toTidy,lower){
+	//TODO: FIX THIS MESS!!! should do direct if toTidy.startsWith("vr")-> return "VR & AR"
 	//This is a messy but any other way lodash falls over with category starting with numbers like "3d graphics"
 	//also i have to make special case for VFX and VJing to be in caps, not elegant but easy,
 	//make your use case here if you want caps
