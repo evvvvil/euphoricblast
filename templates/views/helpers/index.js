@@ -16,9 +16,9 @@ function tidyShitUp(toTidy,lower){
 	//also i have to make special case for VFX and VJing to be in caps, not elegant but easy,
 	//make your use case here if you want caps
 	if(lower>0){
-		return _.replace(_.replace(_.replace(_.replace(toTidy.toLowerCase(),'-and-', ' & '),'-',' '),'vfx','VFX'),'vjin','VJin');
+		return _.replace(_.replace(toTidy.toLowerCase(),'-and-', ' & '),'-',' ');
 	}else{
-		return _.replace(_.replace(_.replace(_.replace(_.capitalize(toTidy),'-and-', ' & '),'-',' '),'vfx','VFX'),'vjin','VJin');
+		return _.replace(_.replace(_.replace(_.replace(_.replace(_.replace(_.capitalize(toTidy),'-and-', ' & '),'-',' '),'vfx','VFX'),'vjin','VJin'),'vr','VR'),'ar','AR');
 	}
 }
 
