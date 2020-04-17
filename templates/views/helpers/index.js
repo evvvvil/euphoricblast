@@ -19,7 +19,7 @@ function tidyShitUp(toTidy,lower){
 	if(lower>0){
 		return _.replace(_.replace(toTidy.toLowerCase(),'-and-', ' & '),'-',' ');
 	}else{
-		return _.replace(_.replace(_.replace(_.replace(_.replace(_.replace(_.capitalize(toTidy),'-and-', ' & '),'-',' '),'vfx','VFX'),'vjin','VJin'),'vr','VR'),'ar','AR');
+		return _.replace(_.replace(_.replace(_.replace(_.replace(_.replace(_.capitalize(toTidy),'-and-', ' & '),'-',' '),'vfx','VFX'),'vjin','VJin'),'Vr','VR'),'ar','AR');
 	}
 }
 
