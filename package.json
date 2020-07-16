@@ -13,7 +13,7 @@
     "handlebars-utils": "^1.0.6",
     "keystone": "https://github.com/evvvvil/keystone/tarball/cloudinaryimages-support-folders",
     "keystone-email": "^1.0.5",
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.19",
     "moment": "2.17.1",
     "mongodb": "^3.0.2",
     "request": "^2.88.0",
