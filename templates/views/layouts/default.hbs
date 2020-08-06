@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-	<head>		
+	<head>
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118755208-2"></script>
 		<script>
 		  window.dataLayer = window.dataLayer || [];
@@ -13,7 +13,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<!--<meta http-equiv="Cache-control" content="max-age=86400, public">-->
-		
+
 		<meta name="description" content="{{{getMetaDescription section filters.category data.post.title data.post.type data.post.content.brief}}}" />
 		<meta name="keywords" content="{{{getMetaKeywords section filters.category data.post.title data.post.type data.post.content.brief}}}" />
 		<meta name="author" content="Mangosh Prunier">
@@ -45,17 +45,17 @@
 			{{#ifgt data.featuredPosts.length 0}}
 				{{#each data.featuredPosts}}
 					{{#ifPostIsInCategoryKey categories ../filters.category}}
-						{{#if mainImage.exists}}			
+						{{#if mainImage.exists}}
 		<meta property="og:image" content="{{{cloudinaryUrl mainImage width='1200' height='628' q='70' crop='fill' gravity=mainImageCrop}}}">
 		<meta property="twitter:image" content="{{{cloudinaryUrl mainImage width='1200' height='600' q='70' crop='fill' gravity=mainImageCrop}}}">
 						{{else}}
 		<meta property="og:image" content="http://www.euphoricblast.com/images/Euphoric_Blast-project628.jpg">
 		<meta property="twitter:image" content="http://www.euphoricblast.com/images/Euphoric_Blast-project600.jpg">
-						{{/if}}	
+						{{/if}}
 					{{/ifPostIsInCategoryKey}}
 				{{/each}}
 			{{else}}
-		<meta property="og:image" content="{{{getFacebookOGImage data.post.type (cloudinaryUrl data.post.mainImage width='1200' height='628' q='70' crop='fill' gravity=data.post.mainImageCrop)}}}">			
+		<meta property="og:image" content="{{{getFacebookOGImage data.post.type (cloudinaryUrl data.post.mainImage width='1200' height='628' q='70' crop='fill' gravity=data.post.mainImageCrop)}}}">
 		<meta property="twitter:image" content="{{{getFacebookOGImage data.post.type (cloudinaryUrl data.post.mainImage width='1200' height='600' q='70' crop='fill' gravity=data.post.mainImageCrop)}}}">
 			{{/ifgt}}
 		{{else}}
@@ -73,15 +73,15 @@
 			<script src="//cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.js"></script>
 			<script src="//cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
-		<link href="/styles/font-awesome.min.css" rel="stylesheet">	
+		<link href="/styles/font-awesome.min.css" rel="stylesheet">
 		{{#if lightbox}}
 			<link href="/styles/ekko-lightbox.min.css" rel="stylesheet">
-		{{/if}}		
+		{{/if}}
 	</head>
 	<body>
 		<header>
 		<div id="header">
-			
+
 			<div class="container-fluid">
 				<div class="row">
 					<div role="navigation" class="navbar navbar-default navbar-polygon">
@@ -97,7 +97,7 @@
 								</a>
 								<a href="http://www.euphoricblast.com/vr" class="vr-link"><button type="button" class="btn btn-vr mobile">View in VR</button></a>
 							</div>
-						
+
 							<div class="collapse navbar-collapse">
 								<nav>
 								<ul class="nav navbar-nav navbar-left">
@@ -106,15 +106,15 @@
 											<a href="{{ href }}">{{ label }}</a>
 										</li>
 										{{/each}}
-										<li><a href="http://www.euphoricblast.com/vr" class="vr-link"><button type="button" class="btn btn-vr desktop">View in VR/3D</button></a>
+										<li><a href="https://www.euphoricblast.com/vr" class="vr-link"><button type="button" class="btn btn-vr desktop">View in VR/3D</button></a>
 								</ul>
-								</nav>								
+								</nav>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		
+
 	</div>
 	</header>
 		<div id="{{bodyId}}">
@@ -144,11 +144,11 @@
 				</div>
 			</section>
 			{{/if}}
-			
+
 			{{{body}}}
 		</div>
 			{{>footer}}
-		<script src="/js/jquery/jquery-3.3.1.slim.min.js"></script>		
+		<script src="/js/jquery/jquery-3.3.1.slim.min.js"></script>
 		<script async src="/js/bootstrap/bootstrap-3.3.5.min.js"></script>
 		{{#if cloudinaryResponsive}}
 			<!--/////////////////////-->
@@ -156,13 +156,13 @@
 			<!--/////////////////////-->
 			<script src="/js/cloudinary-core-shrinkwrap.min.js" type="text/javascript"></script>
 			<script src="/js/cloudinary-responsive.js" type="text/javascript"></script>
-		{{/if}}				
-		
+		{{/if}}
+
 		{{#if lightbox}}
 			<!--////////-->
 			<!--LIGHTBOX-->
 			<!--////////-->
-			<script async src="/js/ekko-lightbox.min.js" type="text/javascript"></script>		
+			<script async src="/js/ekko-lightbox.min.js" type="text/javascript"></script>
 			<script async src="/js/lightbox-control.js" type="text/javascript"></script>
 		{{/if}}
 
@@ -188,11 +188,11 @@
 				{{#ifcontains data.post.video 'vimeo'}}
 				<!--////////////////-->
 				<!--VIMEO AUTOPLAYER-->
-				<!--////////////////-->			
+				<!--////////////////-->
 				<script async src="/js/vimeo-player.js"></script>
 				<script async src="/js/vimeo-control.js"></script>
 				{{/ifcontains}}
-			{{/ifcontains}}	
+			{{/ifcontains}}
 			<script>var aspect="{{data.post.videoAspectRatio}}";</script>
 			<script async src="/js/video-player-resizer.js" type="text/javascript"></script>
 		{{/if}}
