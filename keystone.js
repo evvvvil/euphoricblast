@@ -75,7 +75,7 @@ keystone.start({
             // Socket function
             io.on('connection', function (socket) {
                 console.log('Socket connected.')
-                socket.emit('news', 'Socket connected!');
+                socket.emit('news', 'Socket connected bro!');
 			  	socket.on('fromClient', function (data) {
 			    console.log(data);
 			  });
