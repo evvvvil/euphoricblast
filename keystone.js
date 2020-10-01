@@ -66,11 +66,11 @@ keystone.set('cloudinary secure', true);
 
 // Start Keystone to connect to your database and initialise the web server
 
-var sock = require('socket.io'); 
+var sock = require('socket.io');
 
 keystone.start({
         onStart: function() {
-            var hserver = keystone.httpServer;                 
+            var hserver = keystone.httpServer;
             var io = keystone.set('io', sock.listen(hserver)).get('io');
             // Socket function
             io.on('connection', function (socket) {
@@ -79,6 +79,9 @@ keystone.start({
 			  	socket.on('fromClient', function (data) {
 			    console.log(data);
 			  });
+				socket.on('*', function (data) {
+				socket.broadcast.emit(data);
+			});
             });
         }
     });
